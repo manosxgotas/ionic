@@ -1,0 +1,29 @@
+{
+  "name": "donacion-sangre",
+  "description": "donacion-ionic: An Ionic project",
+  "main": "",
+  "authors": [
+    "rmanganiello <renzo@fmanganiello.com.ar>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "www/bower_components",
+    "www/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-jwt": "^0.0.9",
+    "angular-local-storage": "^0.2.7",
+    "angular-sanitize": "1.5.3",
+    "angular-ui-router": "0.2.13",
+    "angular-animate": "1.5.3",
+    "ngstorage": "^0.3.10",
+    "bootstrap": "^3.3.6",
+    "bootstrap-datepicker": "1.6.1",
+    "font-awesome": "4.6.3"
+  }
+}

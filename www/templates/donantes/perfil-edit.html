@@ -1,0 +1,158 @@
+    <div class="content">
+      <div class="container">
+        <form name="formRegistro" class="form-horizontal" ng-submit="updateProfile()" novalidate>
+
+          <div class="header" style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;' >
+            <h4 class='title'>
+              <span class='fa fa-user'></span>
+              &nbsp; Editar Perfil
+            </h4>
+          </div>
+
+          <div class="form-group">
+            <label for="nombre" class="col-sm-3 control-label">Nombre</label>
+            <div class="col-sm-7">
+              <input type="text" id="nombre" name="nombre" ng-model="datosDonante.usuario.first_name" class="form-control"
+                     placeholder="Ingresa tu nombre" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="apellido" class="col-sm-3 control-label">Apellido</label>
+            <div class="col-sm-7">
+              <input type="text" id="apellido" name="apellido" ng-model="datosDonante.usuario.last_name" class="form-control"
+                     placeholder="Ingresa tu apellido" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="nacimiento" class="col-sm-3 control-label">Fecha de nacimiento</label>
+            <div class="col-sm-7">
+              <input type="text" name="nacimiento" class="input-append date form-control" id="nacimiento" ng-model="datosDonante.nacimiento"
+                     placeholder="Ingresa tu fecha de nacimiento" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="telefono" class="col-sm-3 control-label">Teléfono</label>
+            <div class="col-sm-7">
+              <input type="text" id="telefono" name="telefono" ng-model="datosDonante.telefono" class="form-control"
+                     placeholder="Ingresa tu número de teléfono" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Grupo sanguíneo</label>
+            <div class="col-sm-7">
+              <select class="form-control" ng-model="datosDonante.grupoSanguineo.id">
+                <option value="1">O+</option>
+                <option value="2">A+</option>
+                <option value="3">B+</option>
+                <option value="4">AB+</option>
+                <option value="5">O-</option>
+                <option value="6">A-</option>
+                <option value="7">B-</option>
+                <option value="8">AB-</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="peso" class="col-sm-3 control-label">Peso</label>
+            <div class="col-sm-7">
+              <input type="number" id="peso" name="peso" ng-model="datosDonante.peso" class="form-control"
+                     placeholder="Ingresa tu peso (en Kg.)" min="0" max="300" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="altura" class="col-sm-3 control-label">Altura</label>
+            <div class="col-sm-7">
+              <input type="number" id="altura" name="altura" ng-model="datosDonante.altura" class="form-control"
+                     placeholder="Ingresa tu altura (en centímetros)" ng-minlength="3" ng-maxlength="3" min="100" max="350" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Sexo</label>
+            <div class="col-sm-7">
+              <label class="col-sm-3 radio-inline">
+                <input type="radio" name="optionsGenero" id="masculino" value="1" ng-model="datosDonante.genero">
+                <i class="fa fa-male"></i> Hombre
+              </label>
+              <label class="col-sm-3 radio-inline">
+                <input type="radio" name="optionsGenero" id="femenino" value="2" ng-model="datosDonante.genero">
+                <i class="fa fa-female"></i> Mujer
+              </label>
+            </div>
+          </div>
+
+          <div class="header" style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;' >
+            <h4 class='title'>
+              <span class='fa fa-map-marker'></span>
+              &nbsp; Dirección
+            </h4>
+          </div>
+
+          <div class="form-group">
+            <label for="provincia" class="col-sm-3 control-label">Provincia</label>
+            <div class="col-sm-7">
+              <select class="form-control" id="provincia" ng-model="datosDonante.direccion.provincia" ng-change="obtenerLocalidades(datosDonante.direccion.provincia)">
+                <option ng-repeat="provincia in provincias" value="{{provincia.id}}"> {{provincia.nombre}} </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="localidad" class="col-sm-3 control-label">Localidad</label>
+            <div class="col-sm-7">
+              <select class="form-control" id="localidad" ng-model="datosDonante.direccion.localidad">
+                <option ng-repeat="localidad in localidades" value="{{localidad.id}}"> {{localidad.nombre}} </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="calle" class="col-sm-3 control-label">Calle</label>
+            <div class="col-sm-7">
+              <input type="text" id="calle" name="calle" ng-model="datosDonante.direccion.calle" class="form-control"
+                     placeholder="Ingrese el nombre de la calle de su domicilio" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="numero" class="col-sm-3 control-label">Número</label>
+            <div class="col-sm-7">
+              <input type="number" id="numero" name="numero" ng-model="datosDonante.direccion.numero" class="form-control"
+                     placeholder="Ingrese el número de la calle de su domicilio" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="piso" class="col-sm-3 control-label">Piso</label>
+            <div class="col-sm-7">
+              <input type="number" id="piso" name="piso" ng-model="datosDonante.direccion.piso" class="form-control"
+                     placeholder="Ingrese el número de piso de su domicilio">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="numeroDepartamento" class="col-sm-3 control-label">Número de departamento</label>
+            <div class="col-sm-7">
+              <input type="number" id="numeroDepartamento" name="numeroDepartamento" ng-model="datosDonante.direccion.numeroDepartamento" class="form-control"
+                     placeholder="Ingrese el número de departamento de su domicilio">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10">
+              <div class="pull-right">
+                <button type="submit" class="btn btn-success" ng-disabled="formRegistro.$invalid">
+                  <i class="fa fa-user-plus"></i> Registrarse
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+  </div>
+</div>

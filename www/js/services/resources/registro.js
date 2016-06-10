@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('RegistroService', function (global, $http) {
+  .factory('RegistroService', function (global, $http, $filter) {
     var url = global.getApiUrl() + "/cuentas/registro/";
 
     function registrarse(datosDonante){
@@ -12,7 +12,7 @@ angular.module('donacion')
         data: {
           usuario: datosDonante.usuario,
           telefono: datosDonante.donante.telefono,
-          nacimiento: datosDonante.donante.nacimiento,
+          nacimiento: $filter('date')(datosDonante.donante.nacimiento, 'dd/MM/yyyy'),
           grupoSanguineo: datosDonante.donante.gs,
           peso: datosDonante.donante.peso,
           altura: datosDonante.donante.altura,

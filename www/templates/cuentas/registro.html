@@ -29,29 +29,33 @@
         </div>
       </div>
 
-      <div class="form-group" ng-class="{'has-error': formRegistro.confirmCorreo.$invalid && !formRegistro.confirmCorreo.$pristine,
-                                         'has-success has-feedback': formRegistro.confirmCorreo.$valid && formRegistro.confirmCorreo === formRegistro.correo}">
+      <div class="form-group" ng-class="{'has-error': formRegistro.confirmCorreo.$invalid && !formRegistro.confirmCorreo.$pristine || !formRegistro.confirmCorreo.$pristine && !correoCheck,
+                                         'has-success has-feedback': formRegistro.confirmCorreo.$valid && correoCheck}">
         <label for="confirmCorreo" class="col-sm-3 control-label">Confirmar correo electrónico</label>
         <div class="col-sm-7">
-          <input type="email" id="confirmCorreo" name="confirmCorreo" class="form-control"
-                 placeholder="Confirme su correo electrónico"  ng-disabled="formRegistro.correo.$invalid || formRegistro.correo.$pristine">
-          <span ng-show="formRegistro.correo.$valid && formRegistro.confirmCorreo === formRegistro.correo" class="glyphicon glyphicon-ok form-control-feedback"></span>
+          <input type="email" id="confirmCorreo" name="confirmCorreo" ng-model="confirmCorreo" class="form-control"
+                 placeholder="Confirme su correo electrónico" ng-change="confirmarCorreo(formRegistro, confirmCorreo)" ng-disabled="formRegistro.correo.$invalid || formRegistro.correo.$pristine" required>
+          <span ng-show="formRegistro.correo.$valid && correoCheck" class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" ng-class="{'has-error': formRegistro.contrasenia.$invalid && !formRegistro.contrasenia.$pristine,
+                                         'has-success has-feedback': formRegistro.contrasenia.$valid}">
         <label for="contrasenia" class="col-sm-3 control-label">Contraseña</label>
         <div class="col-sm-7">
         <input type="password" id="contrasenia" name="contrasenia" ng-model="datosDonante.usuario.password" class="form-control"
                placeholder="Ingrese una contraseña con la que desee identificarse" required>
+          <span ng-show="formRegistro.contrasenia.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" ng-class="{'has-error': formRegistro.confirmContrasenia.$invalid && !formRegistro.confirmContrasenia.$pristine || !formRegistro.confirmContrasenia.$pristine && !passwordCheck,
+                                         'has-success has-feedback': formRegistro.confirmContrasenia.$valid && passwordCheck}">
         <label for="confirmContrasenia" class="col-sm-3 control-label">Confirmar contraseña</label>
         <div class="col-sm-7">
-        <input type="password" id="confirmContrasenia" name="confirmContraseña" class="form-control"
-               placeholder="Confirme su contraseña" ng-disabled="formRegistro.contrasenia.$invalid || formRegistro.contrasenia.$pristine">
+        <input type="password" id="confirmContrasenia" name="confirmContrasenia" ng-model="confirmContrasenia" class="form-control"
+               placeholder="Confirme su contraseña" ng-change="confirmarContrasenia(formRegistro, confirmContrasenia)" ng-disabled="formRegistro.contrasenia.$invalid || formRegistro.contrasenia.$pristine" required>
+          <span ng-show="formRegistro.confirmContrasenia.$valid && passwordCheck" class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
       </div>
 

@@ -8,6 +8,9 @@ angular.module('donacion', [
   'ngResource',
   'LocalStorageModule',
   'angular-jwt',
+  'ngTouch',
+  'ngAnimate',
+  'ui.bootstrap'
   ])
 
   .config(function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {

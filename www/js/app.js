@@ -10,14 +10,16 @@ angular.module('donacion', [
   'angular-jwt',
   'ngTouch',
   'ngAnimate',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'file-model',
+  'base64',
   ])
 
-  .config(function($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $httpProvider, $resourceProvider) {
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
-    $httpProvider.defaults.headers.put['Content-Type'] = 'application/json';
-    $httpProvider.defaults.headers.post['Content-Type'] =  'application/json';
+
+    $resourceProvider.defaults.stripTrailingSlashes = false;
     $urlRouterProvider.otherwise("/");
 
     $stateProvider

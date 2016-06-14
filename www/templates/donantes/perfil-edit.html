@@ -1,8 +1,8 @@
     <div class="content">
       <div class="container">
-        <form name="formRegistro" class="form-horizontal" ng-submit="updateProfile()" novalidate>
+        <form name="formEditarPerfil" class="form-horizontal" ng-submit="update()" novalidate>
 
-          <div class="header" style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;' >
+          <div class="header" style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;'>
             <h4 class='title'>
               <span class='fa fa-user'></span>
               &nbsp; Editar Perfil
@@ -25,6 +25,13 @@
             </div>
           </div>
 
+          <!--<div class="form-group">
+            <label for="foto" class="col-sm-3 control-label">Foto</label>
+            <div class="col-sm-7">
+              <input type="file" id="foto" name="foto" file-model="datosDonante.foto">
+            </div>
+          </div>-->
+
           <div class="form-group">
             <label for="nacimiento" class="col-sm-3 control-label">Fecha de nacimiento</label>
             <div class="col-sm-7">
@@ -42,9 +49,9 @@
           </div>
 
           <div class="form-group">
-            <label class="col-sm-3 control-label">Grupo sanguíneo</label>
+            <label for="gs" class="col-sm-3 control-label">Grupo sanguíneo</label>
             <div class="col-sm-7">
-              <select class="form-control" ng-model="datosDonante.grupoSanguineo.id">
+              <select name="gs" id="gs" class="form-control" ng-model="datosDonante.grupoSanguineo.id" convert-to-number>
                 <option value="1">O+</option>
                 <option value="2">A+</option>
                 <option value="3">B+</option>
@@ -97,7 +104,7 @@
           <div class="form-group">
             <label for="provincia" class="col-sm-3 control-label">Provincia</label>
             <div class="col-sm-7">
-              <select class="form-control" id="provincia" ng-model="datosDonante.direccion.provincia" ng-change="obtenerLocalidades(datosDonante.direccion.provincia)">
+              <select class="form-control" id="provincia" ng-model="datosDonante.direccion.localidad.provincia" convert-to-number ng-change="obtenerLocalidades(datosDonante.direccion.localidad.provincia)">
                 <option ng-repeat="provincia in provincias" value="{{provincia.id}}"> {{provincia.nombre}} </option>
               </select>
             </div>
@@ -106,7 +113,7 @@
           <div class="form-group">
             <label for="localidad" class="col-sm-3 control-label">Localidad</label>
             <div class="col-sm-7">
-              <select class="form-control" id="localidad" ng-model="datosDonante.direccion.localidad">
+              <select class="form-control" id="localidad" ng-model="datosDonante.direccion.localidad.id" convert-to-number>
                 <option ng-repeat="localidad in localidades" value="{{localidad.id}}"> {{localidad.nombre}} </option>
               </select>
             </div>
@@ -148,7 +155,7 @@
             <div class="col-sm-10">
               <div class="pull-right">
                 <button type="submit" class="btn btn-success" ng-disabled="formRegistro.$invalid">
-                  <i class="fa fa-user-plus"></i> Registrarse
+                  <i class="fa fa-save"></i> Guardar
                 </button>
               </div>
             </div>

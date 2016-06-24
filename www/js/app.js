@@ -23,41 +23,31 @@ angular.module('donacion', [
     $urlRouterProvider.otherwise("/");
 
     $stateProvider
-    .state('grupos', {
-      url: "/grupos",
-      templateUrl: "templates/grupos.html",
-      controller: "GruposController"
-    }),
-
-    $stateProvider
       .state('login', {
         cache: false,
         url: "/login",
         templateUrl: "templates/cuentas/login.html",
         controller: "LoginController"
-      }),
+      })
 
-    $stateProvider
       .state('registro', {
         cache: false,
         url: "/registro",
         templateUrl: "templates/cuentas/registro.html",
         controller: "RegistroController"
-      }),
+      })
 
-    $stateProvider
       .state('perfil', {
         cache: false,
         url: "/perfil",
         templateUrl: "templates/donantes/perfil.html",
         controller: "ProfileController"
-      }),
+      })
 
-      $stateProvider
-        .state('perfil-edit', {
-          cache: false,
-          url: "/perfil/edit",
-          templateUrl: "templates/donantes/perfil-edit.html",
-          controller: "ProfileEditController",
-        })
+      .state('perfil-edit', {
+        cache: false,
+        url: "/perfil/edit",
+        templateUrl: "templates/donantes/perfil-edit.html",
+        controller: "ProfileEditController",
+      })
   });

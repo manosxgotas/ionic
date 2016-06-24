@@ -87,13 +87,41 @@
       </div>
 
       <div class="form-group">
+        <label for="tipoDocumento" class="col-sm-3 control-label">Tipo de documento</label>
+        <div class="col-sm-7">
+          <select class="form-control" id="tipoDocumento" ng-model="datosDonante.donante.tipoDocumento">
+            <option ng-repeat="tipo in tiposDocumentos" value="{{tipo.id}}"> {{tipo.siglas}} </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': formRegistro.numeroDocumento.$invalid && !formRegistro.numeroDocumento.$pristine,
+                                         'has-success has-feedback': formRegistro.numeroDocumento.$valid}">
+        <label for="numeroDocumento" class="col-sm-3 control-label">Número de documento</label>
+        <div class="col-sm-7">
+          <input type="number" id="numeroDocumento" name="numeroDocumento" ng-model="datosDonante.donante.numeroDocumento" class="form-control"
+                 placeholder="Ingresa tu número de documento" required>
+          <span ng-show="formRegistro.numeroDocumento.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="nacionalidad" class="col-sm-3 control-label">Nacionalidad</label>
+        <div class="col-sm-7">
+          <select class="form-control" id="nacionalidad" ng-model="datosDonante.donante.nacionalidad">
+            <option ng-repeat="nacionalidad in nacionalidades" value="{{nacionalidad.id}}"> {{nacionalidad.nombre}} </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
         <label for="nacimiento" class="col-sm-3 control-label">Fecha de nacimiento</label>
         <div class="col-sm-7">
           <p class="input-group">
           <input uib-datepicker-popup="{{format}}" is-open="nacimientoDP.opened" type="text" name="nacimiento" class="form-control" id="nacimiento" ng-model="datosDonante.donante.nacimiento"
                  datepicker-options="nacimientoDPOptions" placeholder="Ingresa tu fecha de nacimiento" required>
             <span class="input-group-btn">
-              <button type="button" class="btn btn-default" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+              <button type="button" class="btn btn-primary" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
           </p>
         </div>
@@ -112,14 +140,8 @@
         <label for="grupoSanguineo" class="col-sm-3 control-label">Grupo sanguíneo</label>
           <div class="col-sm-7">
           <select id="grupoSanguineo" class="form-control" ng-model="datosDonante.donante.gs">
-            <option value="1">O+</option>
-            <option value="2">A+</option>
-            <option value="3">B+</option>
-            <option value="4">AB+</option>
-            <option value="5">O-</option>
-            <option value="6">A-</option>
-            <option value="7">B-</option>
-            <option value="8">AB-</option>
+            <option value=""></option>
+            <option ng-repeat="grupo in gruposSanguineos" value="{{grupo.id}}">{{grupo.nombre}}</option>
           </select>
           </div>
       </div>
@@ -222,7 +244,7 @@
       <div class="form-group">
         <div class="col-sm-10">
           <div class="pull-right">
-            <button type="submit" class="btn btn-success" ng-disabled="formRegistro.$invalid">
+            <button type="submit" class="btn btn-primary" ng-disabled="formRegistro.$invalid">
               <i class="fa fa-user-plus"></i> Registrarse
             </button>
           </div>

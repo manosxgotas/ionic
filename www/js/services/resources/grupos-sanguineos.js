@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('GruposService', function (global, $resource) {
+  .factory('GruposSanguineosService', function (global, $resource) {
 
     var url = global.getApiUrl() + '/listado-grupos-sanguineos/';
 

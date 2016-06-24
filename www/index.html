@@ -12,9 +12,8 @@
 
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link href="bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
-    <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
-
-
+    <link href="bower_components/bootswatch/simplex/bootstrap.min.css" rel="stylesheet">
+    
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
@@ -41,7 +40,7 @@
           <li><a ui-sref="registro">Registrarse</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" ng-show="is_logged">
-          <li><a ui-sref="perfil"><img src="{{fotoUsuario}}" width="30" height="30">{{nombreUsuario}}</a></li>
+          <li><a ui-sref="perfil"><img ng-src="{{fotoUsuario}}" width="30" height="30">{{nombreUsuario}}</a></li>
           <li><a ng-click="logoff()">Cerrar sesión</a></li>
         </ul>
       </div>

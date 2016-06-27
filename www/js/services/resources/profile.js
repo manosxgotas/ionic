@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('ProfileService', function (global, jwtHelper, localStorageService, $resource, $http, $location) {
+  .factory('ProfileService', function (global, $rootScope, jwtHelper, localStorageService, $resource, $http, $location, $filter) {
 
     // URL para obtener (GET) el perfil del donante.
     var getProfileUrl = global.getApiUrl() + '/donantes/perfil/';
@@ -43,7 +43,10 @@ angular.module('donacion')
             first_name: datosDonante.usuario.first_name,
             last_name: datosDonante.usuario.last_name
           },
-          nacimiento: datosDonante.nacimiento,
+          tipoDocumento: datosDonante.tipoDocumento,
+          numeroDocumento: datosDonante.numeroDocumento,
+          nacionalidad: datosDonante.nacionalidad,
+          nacimiento: $filter('date')(datosDonante.nacimiento, 'dd/MM/yyyy'),
           telefono: datosDonante.telefono,
           peso: datosDonante.peso,
           altura: datosDonante.altura,
@@ -57,54 +60,62 @@ angular.module('donacion')
             localidad: datosDonante.direccion.localidad
           }
         }
-        /*transformRequest: function(data, headersGetter) {
-          if (data === undefined) return data;
-          var fd = new FormData();
-          angular.forEach(data, function(value, key) {
-            /* Si es archivo
-            if (value instanceof File) {
-              /* Si es un solo archivo
-                fd.append(key, value);
-
-              /* Si no es archivo, se convierte a string y se manda la
-               * clave:valor
-            } else {
-              if (value !== null && typeof value === 'object'){
-                fd.append(key, angular.toJson(value));
-
-                /*  angular.forEach(value, function (valueV, keyV) {
-                  fd.append(key + '.' + keyV, angular.toJson(valueV));
-                  if (valueV !== null && typeof valueV === 'object') {
-                    angular.forEach(valueV, function (valueVV, keyVV) {
-                      fd.append(key + '.' + keyV + '.' + keyVV, angular.toJson(valueVV));
-                    })
-                  }
-                });
-              } else {
-                fd.append(key, value);
-              }
-            }
-          });
-          return fd;
-        }*/
       }).success(function (response) {
+        $rootScope.nombre = datosDonante.usuario.first_name;
+        $rootScope.apellido = datosDonante.usuario.last_name;
         console.log('Update realizado con éxito');
         $location.path('/perfil')
-      }).error(function(response, data) {
+      }).error(function (response, data) {
         console.log(response)
         console.log(data)
       });
-
     }
 
-    return {
-      getProfile: function() {
-        return getProfile();
-      },
+      function updateAvatar(avatar) {
+        var userid = getUserId();
 
-      updateProfile: function (datosDonante) {
-        return updateProfile(datosDonante);
+        $http({
+          url: updateProfileUrl + userid,
+          method: "PUT",
+          data: {
+            foto: avatar
+          },
+          headers: {'Content-Type': undefined},
+
+          transformRequest: function (data) {
+            if (data === undefined) return data;
+            var fd = new FormData();
+            angular.forEach(data, function (value, key) {
+              /* Si es archivo */
+              if (value instanceof File) {
+                fd.append(key, value);
+              }
+            });
+            return fd;
+          }
+
+        }).success(function (response) {
+          console.log('Cambio de avatar realizado con éxito');
+          $location.path('/perfil')
+        }).error(function (response, data) {
+          console.log(response)
+          console.log(data)
+        });
       }
-    }
+
+      return {
+        getProfile: function() {
+          return getProfile();
+        },
+
+        updateProfile: function(datosDonante) {
+          return updateProfile(datosDonante);
+        },
+
+        updateAvatar : function(avatar) {
+          return updateAvatar(avatar);
+        }
+
+      }
 
   });

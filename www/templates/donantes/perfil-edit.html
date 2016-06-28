@@ -9,76 +9,115 @@
             </h4>
           </div>
 
-          <div class="form-group">
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.nombre.$invalid && !formEditarPerfil.nombre.$pristine,
+                                             'has-success has-feedback': formEditarPerfil.nombre.$valid}">
             <label for="nombre" class="col-sm-3 control-label">Nombre</label>
             <div class="col-sm-7">
               <input type="text" id="nombre" name="nombre" ng-model="datosDonante.usuario.first_name" class="form-control"
-                     placeholder="Ingresa tu nombre" required>
+                     placeholder="Ingresa tu nombre" ng-pattern="/^([a-z ñáéíóú]{1,60})$/i" required>
+              <span ng-show="formEditarPerfil.nombre.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
             </div>
           </div>
 
-          <div class="form-group">
+
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.apellido.$invalid && !formEditarPerfil.apellido.$pristine,
+                                             'has-success has-feedback': formEditarPerfil.apellido.$valid}">
             <label for="apellido" class="col-sm-3 control-label">Apellido</label>
             <div class="col-sm-7">
               <input type="text" id="apellido" name="apellido" ng-model="datosDonante.usuario.last_name" class="form-control"
-                     placeholder="Ingresa tu apellido" required>
-            </div>
-          </div>
-
-          <!--<div class="form-group">
-            <label for="foto" class="col-sm-3 control-label">Foto</label>
-            <div class="col-sm-7">
-              <input type="file" id="foto" name="foto" file-model="datosDonante.foto">
-            </div>
-          </div>-->
-
-          <div class="form-group">
-            <label for="nacimiento" class="col-sm-3 control-label">Fecha de nacimiento</label>
-            <div class="col-sm-7">
-              <input type="text" name="nacimiento" class="input-append date form-control" id="nacimiento" ng-model="datosDonante.nacimiento"
-                     placeholder="Ingresa tu fecha de nacimiento" required>
+                     placeholder="Ingresa tu apellido" ng-pattern="/^([a-z ñáéíóú]{1,60})$/i" required>
+              <span ng-show="formEditarPerfil.apellido.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="telefono" class="col-sm-3 control-label">Teléfono</label>
+            <label for="tipoDocumento" class="col-sm-3 control-label">Tipo de documento</label>
             <div class="col-sm-7">
-              <input type="text" id="telefono" name="telefono" ng-model="datosDonante.telefono" class="form-control"
-                     placeholder="Ingresa tu número de teléfono" required>
+              <select class="form-control" id="tipoDocumento" ng-model="datosDonante.tipoDocumento" convert-to-number required>
+                <option ng-repeat="tipo in tiposDocumentos" value="{{tipo.id}}"> {{tipo.siglas}} </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.numeroDocumento.$invalid && !formRegistro.numeroDocumento.$pristine,
+                                         'has-success has-feedback': formEditarPerfil.numeroDocumento.$valid}">
+            <label for="numeroDocumento" class="col-sm-3 control-label">Número de documento</label>
+            <div class="col-sm-7">
+              <input type="number" id="numeroDocumento" name="numeroDocumento" ng-model="datosDonante.numeroDocumento" class="form-control"
+                     placeholder="Ingresa tu número de documento" required>
+              <span ng-show="formEditarPerfil.numeroDocumento.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="gs" class="col-sm-3 control-label">Grupo sanguíneo</label>
+            <label for="nacionalidad" class="col-sm-3 control-label">Nacionalidad</label>
             <div class="col-sm-7">
-              <select name="gs" id="gs" class="form-control" ng-model="datosDonante.grupoSanguineo.id" convert-to-number>
-                <option value="1">O+</option>
-                <option value="2">A+</option>
-                <option value="3">B+</option>
-                <option value="4">AB+</option>
-                <option value="5">O-</option>
-                <option value="6">A-</option>
-                <option value="7">B-</option>
-                <option value="8">AB-</option>
+              <select class="form-control" id="nacionalidad" ng-model="datosDonante.nacionalidad" convert-to-number required>
+                <option ng-repeat="nacionalidad in nacionalidades" value="{{nacionalidad.id}}"> {{nacionalidad.nombre}} </option>
               </select>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="peso" class="col-sm-3 control-label">Peso</label>
+            <label for="foto" class="col-sm-3 control-label">Foto</label>
             <div class="col-sm-7">
-              <input type="number" id="peso" name="peso" ng-model="datosDonante.peso" class="form-control"
-                     placeholder="Ingresa tu peso (en Kg.)" min="0" max="300" required>
+              <input type="file" id="foto" name="foto" file-model="avatar">
             </div>
           </div>
 
           <div class="form-group">
+            <label for="nacimiento" class="col-sm-3 control-label">Fecha de nacimiento</label>
+            <div class="col-sm-7">
+              <p class="input-group">
+                <input uib-datepicker-popup="{{format}}" is-open="nacimientoDP.opened" type="text" name="nacimiento" class="nacimiento form-control" id="nacimiento" ng-model="datosDonante.nacimiento"
+                       datepicker-options="nacimientoDPOptions" show-button-bar="false" placeholder="Ingresa tu fecha de nacimiento" ng-required="true">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-primary" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.telefono.$invalid && !formEditarPerfil.telefono.$pristine,
+                                         'has-success has-feedback': formEditarPerfil.telefono.$valid}">
+            <label for="telefono" class="col-sm-3 control-label">Teléfono</label>
+            <div class="col-sm-7">
+              <input type="text" id="telefono" name="telefono" ng-model="datosDonante.telefono" class="form-control"
+                     placeholder="Ingresa tu número de teléfono" maxlength="20" required>
+              <span ng-show="formEditarPerfil.telefono.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="grupoSanguineo" class="col-sm-3 control-label">Grupo sanguíneo</label>
+            <div class="col-sm-7">
+              <select id="grupoSanguineo" class="form-control" ng-model="datosDonante.grupoSanguineo.id" convert-to-number>
+                <option value=""></option>
+                <option ng-repeat="grupo in gruposSanguineos" value="{{grupo.id}}">{{grupo.nombre}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.peso.$invalid && !formEditarPerfil.peso.$pristine,
+                                         'has-success has-feedback': formEditarPerfil.peso.$valid}">
+          <label for="peso" class="col-sm-3 control-label">Peso</label>
+          <div class="col-sm-7">
+            <input type="number" id="peso" name="peso" ng-model="datosDonante.peso" class="form-control"
+                   placeholder="Ingresa tu peso (en Kg.)" min="0" max="300" ng-pattern="/^[0-9]+(\.[0-9]{1})?$/" step="0.5" required>
+            <span ng-show="formEditarPerfil.peso.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+          </div>
+        </div>
+
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.altura.$invalid && !formRegistro.altura.$pristine,
+                                         'has-success has-feedback': formEditarPerfil.altura.$valid}">
             <label for="altura" class="col-sm-3 control-label">Altura</label>
             <div class="col-sm-7">
               <input type="number" id="altura" name="altura" ng-model="datosDonante.altura" class="form-control"
-                     placeholder="Ingresa tu altura (en centímetros)" ng-minlength="3" ng-maxlength="3" min="100" max="350" required>
+                     placeholder="Ingresa tu altura (en centímetros)" minlength="3" maxlength="3" min="100" max="350" required>
+              <span ng-show="formEditarPerfil.altura.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
             </div>
           </div>
+
 
           <div class="form-group">
             <label class="col-sm-3 control-label">Sexo</label>
@@ -119,19 +158,23 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.calle.$invalid && !formEditarPerfil.calle.$pristine,
+                                         'has-success has-feedback': formEditarPerfil.calle.$valid}">
             <label for="calle" class="col-sm-3 control-label">Calle</label>
             <div class="col-sm-7">
               <input type="text" id="calle" name="calle" ng-model="datosDonante.direccion.calle" class="form-control"
                      placeholder="Ingrese el nombre de la calle de su domicilio" required>
+              <span ng-show="formEditarPerfil.calle.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.numero.$invalid && !formEditarPerfil.numero.$pristine,
+                                         'has-success has-feedback': formEditarPerfil.numero.$valid}">
             <label for="numero" class="col-sm-3 control-label">Número</label>
             <div class="col-sm-7">
               <input type="number" id="numero" name="numero" ng-model="datosDonante.direccion.numero" class="form-control"
-                     placeholder="Ingrese el número de la calle de su domicilio" required>
+                     placeholder="Ingrese el número de la calle de su domicilio" min="0" required>
+              <span ng-show="formEditarPerfil.numero.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
             </div>
           </div>
 
@@ -154,7 +197,7 @@
           <div class="form-group">
             <div class="col-sm-10">
               <div class="pull-right">
-                <button type="submit" class="btn btn-success" ng-disabled="formRegistro.$invalid">
+                <button type="submit" class="btn btn-primary" ng-disabled="formEditarPerfil.$invalid">
                   <i class="fa fa-save"></i> Guardar
                 </button>
               </div>

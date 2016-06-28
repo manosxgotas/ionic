@@ -8,6 +8,10 @@ angular.module('donacion')
     // URL para actualizar (PUT) el perfil del donante.
     var updateProfileUrl = global.getApiUrl() + '/donantes/perfil/edit/';
 
+    // URL para actualizar (PUT) la foto de perfil del donante.
+    var updateAvatarUrl = global.getApiUrl() + '/donantes/perfil/edit/avatar/';
+
+
     // Función que obtiene el id del usuario mediante la decodificación
     // del token almacenado en el LocalStorage.
     function getUserId() {
@@ -71,11 +75,12 @@ angular.module('donacion')
       });
     }
 
-      function updateAvatar(avatar) {
+    // Función que actualiza la foto de perfil del donante.
+    function updateAvatar(avatar) {
         var userid = getUserId();
 
         $http({
-          url: updateProfileUrl + userid,
+          url: updateAvatarUrl + userid,
           method: "PUT",
           data: {
             foto: avatar
@@ -96,10 +101,11 @@ angular.module('donacion')
 
         }).success(function (response) {
           console.log('Cambio de avatar realizado con éxito');
+          $rootScope.foto = response.foto;
           $location.path('/perfil')
         }).error(function (response, data) {
-          console.log(response)
-          console.log(data)
+          console.log(response);
+          console.log(data);
         });
       }
 

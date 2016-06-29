@@ -68,7 +68,8 @@ angular.module('donacion')
       $scope.nacimientoDPOptions = {
         initDate: new Date(1950, 0, 1),
         minDate: new Date(1900, 0, 1),
-        maxDate: new Date(2010, 0, 1)
+        maxDate: new Date(2010, 0, 1),
+        datepickerMode: 'year'
       };
 
       $scope.nacimientoDP = {
@@ -80,6 +81,8 @@ angular.module('donacion')
       $scope.openDatePicker = function() {
         $scope.nacimientoDP.opened = true;
       };
+
+
       // DatePicker fecha de nacimiento ---->
 
 

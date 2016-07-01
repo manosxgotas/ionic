@@ -6,13 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
 
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/sidebar.css" rel="stylesheet">
+    <link href="css/uib-angular.css" rel="stylesheet">
 
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
     <link href="bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
-    <link href="bower_components/bootswatch/simplex/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/robotodraft/robotodraft.css" rel="stylesheet">
+
+    <!-- Animation library for notifications   -->
+    <link href="components/light-bootstrap-dashboard/assets/css/animate.min.css" rel="stylesheet"/>
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="components/light-bootstrap-dashboard/assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+
+    <!--     Fonts and icons     -->
+    <link href="components/light-bootstrap-dashboard/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -21,39 +30,110 @@
   </head>
 
   <body ng-app="donacion">
-  <nav class="navbar navbar-default" ng-controller="NavController">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Donación de sangre</a>
+
+    <div class="wrapper" ng-controller="NavController">
+      <div class="sidebar" data-color="red">
+
+        <div class="sidebar-wrapper">
+          <div class="logo">
+            <a href="http://www.creative-tim.com" class="simple-text">
+              Manos por gotas
+            </a>
+          </div>
+
+          <div class="avatar-container" ng-show="is_logged">
+            <img class="avatar-sidebar" ng-src="{{fotoUsuario}}">
+            <div class="title">
+              <a data-toggle="collapse" href="#collapseAvatar">
+                <p>
+                  {{nombreUsuario}}
+                  <b class="caret"></b>
+                </p>
+              </a>
+
+              <div class="collapse" id="collapseAvatar">
+                <ul class="nav">
+                  <li>
+                    <a ui-sref="perfil">Mi perfil</a>
+                  </li>
+                  <li>
+                    <a ui-sref="perfil-edit">Editar perfil</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <ul class="nav">
+            <li ng-show="is_logged">
+              <a ui-sref="libreta">
+                <i class="pe-7s-notebook"></i>
+                <p>Libreta de donación</p>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right" ng-hide="is_logged">
-          <li><a ui-sref="login">Iniciar sesión</a></li>
-          <li><a ui-sref="registro">Registrarse</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right" ng-show="is_logged">
-          <li><a ui-sref="perfil"><img ng-src="{{fotoUsuario}}" width="30" height="30">{{nombreUsuario}}</a></li>
-          <li><a ng-click="logoff()">Cerrar sesión</a></li>
-        </ul>
+      <div class="main-panel">
+          <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                 <span class="sr-only">Toggle navigation</span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" href="#">Donación de sangre</a>
+             </div>
+
+             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+               <ul class="nav navbar-nav navbar-right" ng-hide="is_logged">
+                 <li><a ui-sref="login">Iniciar sesión</a></li>
+                 <li><a ui-sref="registro">Registrarse</a></li>
+               </ul>
+
+               <ul class="nav navbar-nav navbar-right" ng-show="is_logged">
+                 <li><a ng-click="logoff()">Cerrar sesión</a></li>
+               </ul>
+             </div>
+           </div>
+         </nav>
+
+        <div class="content">
+          <div class="container-fluid">
+            <div id="contents">
+              <ion-nav-view></ion-nav-view>
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="container-fluid">
+            <nav class="pull-left">
+              <ul>
+                <li>
+                  <a href="#">
+                    Home
+                  </a>
+                </li>
+
+              </ul>
+            </nav>
+            <p class="copyright pull-right">
+              MANOS POR GOTAS 2016. Sistema de donación de sangre.
+            </p>
+          </div>
+        </footer>
+
       </div>
     </div>
-  </nav>
-  <div class="container has-header">
-    <ion-nav-view></ion-nav-view>
-  </div>
 
 
   <!-- ionic/angularjs js -->
   <script src="lib/ionic/js/ionic.bundle.js"></script>
-
 
   <!-- cordova script (this will be a 404 during development) -->
 
@@ -93,9 +173,6 @@
   <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
 
-  <script src="bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-  <script src="bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.es.js"></script>
-
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-touch/angular-touch.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
@@ -105,6 +182,20 @@
   <script src="bower_components/angular-base64/angular-base64.js"></script>
 
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+  <!-- Light Bootstrap Dashboard -->
+
+    <script src="components/light-bootstrap-dashboard/assets/js/light-bootstrap-dashboard.js"></script>
+
+    <!--  Checkbox, Radio & Switch Plugins -->
+    <script src="components/light-bootstrap-dashboard/assets/js/bootstrap-checkbox-radio-switch.js"></script>
+
+    <!--  Charts Plugin -->
+    <script src="components/light-bootstrap-dashboard/assets/js/chartist.min.js"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="components/light-bootstrap-dashboard/assets/js/bootstrap-notify.js"></script>
 
   </body>
 </html>

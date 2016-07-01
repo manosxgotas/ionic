@@ -1,21 +1,23 @@
 <ion-view>
   <ion-content>
     <form name="formRegistro" class="form-horizontal" ng-submit="signup()" novalidate>
-          <div class="header" style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;' >
+
+      <div class='col-sm-12'>
+        <div class="card">
+          <div class='header' style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;'>
             <h4 class='title'>
-              <span class='fa fa-user-secret'></span>
-              &nbsp; Datos de usuario
+              <span class="fa fa-user-plus fa-lg" aria-hidden="true"></span>
+              &nbsp;&nbsp; Nuevo donante
             </h4>
           </div>
+
+          <div class="content">
 
       <div class="form-group" ng-class="{'has-error': formRegistro.username.$invalid && !formRegistro.username.$pristine}">
         <label for="username" class="col-sm-3 control-label">Nombre de usuario</label>
         <div class="col-sm-7">
           <input type="text" id="username" name="username" ng-model="datosDonante.usuario.username" class="form-control"
                  placeholder="Ingrese un nombre de usuario con el que desee identificarse" required>
-
-          <p ng-show="formRegistro.username.$invalid && formRegistro.username.$touched"
-             class="help-block"> Debe ingresar un nombre de usuario. </p>
         </div>
       </div>
 
@@ -25,7 +27,6 @@
         <div class="col-sm-7">
           <input type="email" id="correo" name="correo" ng-model="datosDonante.usuario.email" class="form-control"
                  placeholder="Ingrese un correo electrónico" required>
-          <span ng-show="formRegistro.correo.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
       </div>
 
@@ -35,7 +36,6 @@
         <div class="col-sm-7">
           <input type="email" id="confirmCorreo" name="confirmCorreo" ng-model="confirmCorreo" class="form-control"
                  placeholder="Confirme su correo electrónico" ng-change="confirmarCorreo(formRegistro, confirmCorreo)" ng-disabled="formRegistro.correo.$invalid || formRegistro.correo.$pristine" required>
-          <span ng-show="formRegistro.correo.$valid && correoCheck" class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
       </div>
 
@@ -45,7 +45,6 @@
         <div class="col-sm-7">
         <input type="password" id="contrasenia" name="contrasenia" ng-model="datosDonante.usuario.password" class="form-control"
                placeholder="Ingrese una contraseña con la que desee identificarse" required>
-          <span ng-show="formRegistro.contrasenia.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
       </div>
 
@@ -55,16 +54,10 @@
         <div class="col-sm-7">
         <input type="password" id="confirmContrasenia" name="confirmContrasenia" ng-model="confirmContrasenia" class="form-control"
                placeholder="Confirme su contraseña" ng-change="confirmarContrasenia(formRegistro, confirmContrasenia)" ng-disabled="formRegistro.contrasenia.$invalid || formRegistro.contrasenia.$pristine" required>
-          <span ng-show="formRegistro.confirmContrasenia.$valid && passwordCheck" class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
       </div>
 
-      <div class="header" style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;' >
-        <h4 class='title'>
-          <span class='fa fa-user'></span>
-          &nbsp; Datos personales
-        </h4>
-      </div>
+          <hr>
 
       <div class="form-group" ng-class="{'has-error': formRegistro.nombre.$invalid && !formRegistro.nombre.$pristine,
                                          'has-success has-feedback': formRegistro.nombre.$valid}">
@@ -72,7 +65,6 @@
         <div class="col-sm-7">
         <input type="text" id="nombre" name="nombre" ng-model="datosDonante.usuario.first_name" class="form-control"
                placeholder="Ingresa tu nombre" ng-pattern="/^([a-z ñáéíóú]{1,60})$/i" required>
-          <span ng-show="formRegistro.nombre.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
       </div>
 
@@ -82,7 +74,6 @@
         <div class="col-sm-7">
         <input type="text" id="apellido" name="apellido" ng-model="datosDonante.usuario.last_name" class="form-control"
                placeholder="Ingresa tu apellido" ng-pattern="/^([a-z ñáéíóú]{1,60})$/i" required>
-          <span ng-show="formRegistro.apellido.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
       </div>
 
@@ -101,7 +92,6 @@
         <div class="col-sm-7">
           <input type="number" id="numeroDocumento" name="numeroDocumento" ng-model="datosDonante.donante.numeroDocumento" class="form-control"
                  placeholder="Ingresa tu número de documento" required>
-          <span ng-show="formRegistro.numeroDocumento.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
       </div>
 
@@ -121,7 +111,7 @@
           <input uib-datepicker-popup="{{format}}" is-open="nacimientoDP.opened" type="text" name="nacimiento" class="form-control" id="nacimiento" ng-model="datosDonante.donante.nacimiento"
                  datepicker-options="nacimientoDPOptions" show-button-bar="false" placeholder="Ingresa tu fecha de nacimiento" ng-required="true">
             <span class="input-group-btn">
-              <button type="button" class="btn btn-primary" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+              <button type="button" class="btn btn-default" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
           </p>
         </div>
@@ -133,7 +123,6 @@
         <div class="col-sm-7">
         <input type="text" id="telefono" name="telefono" ng-model="datosDonante.donante.telefono" class="form-control"
                placeholder="Ingresa tu número de teléfono" maxlength="20" required>
-          <span ng-show="formRegistro.telefono.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
       </div>
 
@@ -149,44 +138,46 @@
 
       <div class="form-group" ng-class="{'has-error': formRegistro.peso.$invalid && !formRegistro.peso.$pristine,
                                          'has-success has-feedback': formRegistro.peso.$valid}">
-        <label for="peso" class="col-sm-3 control-label">Peso</label>
+        <label for="peso" class="col-sm-3 control-label">Peso (en kg.)</label>
         <div class="col-sm-7">
           <input type="number" id="peso" name="peso" ng-model="datosDonante.donante.peso" class="form-control"
                  placeholder="Ingresa tu peso (en Kg.)" min="0" max="300" ng-pattern="/^[0-9]+(\.[0-9]{1})?$/" step="0.5" required>
-          <span ng-show="formRegistro.peso.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
       </div>
 
       <div class="form-group" ng-class="{'has-error': formRegistro.altura.$invalid && !formRegistro.altura.$pristine,
                                          'has-success has-feedback': formRegistro.altura.$valid}">
-        <label for="altura" class="col-sm-3 control-label">Altura</label>
+        <label for="altura" class="col-sm-3 control-label">Altura (en cm.)</label>
         <div class="col-sm-7">
           <input type="number" id="altura" name="altura" ng-model="datosDonante.donante.altura" class="form-control"
                  placeholder="Ingresa tu altura (en centímetros)" minlength="3" maxlength="3" min="100" max="350" required>
-          <span ng-show="formRegistro.altura.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
       </div>
 
-      <div class="form-group">
-        <label class="col-sm-3 control-label">Sexo</label>
-        <div class="col-sm-7">
-        <label class="col-sm-3 radio-inline">
-          <input type="radio" name="optionsGenero" id="masculino" value="1" ng-model="datosDonante.donante.genero">
-          <i class="fa fa-male"></i> Hombre
-        </label>
-        <label class="col-sm-3 radio-inline">
-          <input type="radio" name="optionsGenero" id="femenino" value="2" ng-model="datosDonante.donante.genero">
-          <i class="fa fa-female"></i> Mujer
-        </label>
-        </div>
-      </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Sexo</label>
 
-      <div class="header" style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;' >
-        <h4 class='title'>
-          <span class='fa fa-map-marker'></span>
-          &nbsp; Dirección
-        </h4>
-      </div>
+              <div class="col-sm-5">
+                <label class="radio" style="padding-top: 0; padding-left: 20px">
+                  <span class="icons">
+                    <span class="first-icon fa fa-circle-o"></span>
+                    <span class="second-icon fa fa-dot-circle-o"></span>
+                  </span>
+                  <input type="radio" name="optionsGenero" id="masculino" value="1" ng-model="datosDonante.genero">
+                  <span class="fa fa-male"></span> Hombre
+                </label>
+                <label class="radio" style="padding-top: 0; padding-left: 20px">
+                  <span class="icons">
+                    <span class="first-icon fa fa-circle-o"></span>
+                    <span class="second-icon fa fa-dot-circle-o"></span>
+                  </span>
+                  <input type="radio" data-toggle="radio" name="optionsGenero" id="femenino" value="2" ng-model="datosDonante.genero">
+                  <span class="fa fa-female"></span> Mujer
+                </label>
+              </div>
+            </div>
+
+     <hr>
 
       <div class="form-group">
         <label for="provincia" class="col-sm-3 control-label">Provincia</label>
@@ -212,7 +203,6 @@
         <div class="col-sm-7">
           <input type="text" id="calle" name="calle" ng-model="datosDonante.direccion.calle" class="form-control"
                  placeholder="Ingrese el nombre de la calle de su domicilio" required>
-          <span ng-show="formRegistro.calle.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
       </div>
 
@@ -222,7 +212,6 @@
         <div class="col-sm-7">
           <input type="number" id="numero" name="numero" ng-model="datosDonante.direccion.numero" class="form-control"
                  placeholder="Ingrese el número de la calle de su domicilio" min="0" required>
-          <span ng-show="formRegistro.numero.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
       </div>
 
@@ -245,13 +234,15 @@
       <div class="form-group">
         <div class="col-sm-10">
           <div class="pull-right">
-            <button type="submit" class="btn btn-primary" ng-disabled="formRegistro.$invalid">
+            <button type="submit" class="btn btn-success" ng-disabled="formRegistro.$invalid">
               <i class="fa fa-user-plus"></i> Registrarse
             </button>
           </div>
         </div>
       </div>
-
+</div>
+          </div>
+        </div>
     </form>
 
   </ion-content>

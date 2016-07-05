@@ -1,108 +1,106 @@
-<ion-view>
-  <ion-content>
-    <div class='col-md-6'>
-      <div class="card card-user">
-        <div class="header" style='margin-bottom:15px;' >
-          <h4 class='title'>
-            <span class='fa fa-user fa-lg'></span>
-            &nbsp; Información Personal
-            <div class="pull-right">
-              <a class="btn btn-fill btn-default btn-sm" ui-sref="perfil-edit" ng-cloak>
-                <span class="fa fa-edit" aria-hidden="true"></span>
-                <span class='hidden-xs'>Editar</span>
-              </a>
-            </div>
-            <span class="clearfix"></span>
+<div class="container">
+  <div class='col-md-6'>
+    <div class="card card-user">
+      <div class="header" style='margin-bottom:15px;' >
+        <h4 class='title'>
+          <span class='fa fa-user fa-lg'></span>
+          &nbsp; Información Personal
+          <div class="pull-right">
+            <a class="btn btn-fill btn-default btn-sm" ui-sref="perfil-edit" ng-cloak>
+              <span class="fa fa-edit" aria-hidden="true"></span>
+              <span class='hidden-xs'>Editar</span>
+            </a>
+          </div>
+          <span class="clearfix"></span>
+        </h4>
+      </div>
+
+      <div class="image">
+        <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
+      </div>
+
+      <div class="content">
+
+        <div class="author">
+          <img ng-src="{{perfil.foto}}" alt="" class="avatar border-gray">
+          <h4 class="title">{{perfil.nombre}} {{perfil.apellido}}<br />
+            <small>{{perfil.username}}</small>
           </h4>
         </div>
 
-        <div class="image">
-          <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
+        <div class='visible-lg'>
+          <div class="row ">
+            <div class="col-md-6 text-right">Correo electrónico:</div>
+            <div style='padding-left:0px' class="col-md-6">{{perfil.correo}}</div>
+          </div>
+          <div class="row ">
+            <div class="col-md-6 text-right">Sexo:</div>
+            <div style='padding-left:0px' class="col-md-6">{{perfil.sexo}}</div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 text-right">Peso:</div>
+            <div style='padding-left:0px' class="col-md-6">{{perfil.peso}} kg.</div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 text-right">Altura:</div>
+            <div style='padding-left:0px' class="col-md-6">{{perfil.altura}} cm.</div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 text-right">Nacimiento:</div>
+            <div style='padding-left:0px' class="col-md-6">{{perfil.nacimiento | date:'dd/MM/yyyy'}}</div>
+          </div>
+          <div class="row" ng-show="perfil.gs != null">
+            <div class="col-md-6 text-right">Grupo sanguíneo:</div>
+            <div style='padding-left:0px' class="col-md-6">{{perfil.gs}}</div>
+          </div>
         </div>
 
-        <div class="content">
-
-          <div class="author">
-            <img ng-src="{{perfil.foto}}" alt="" class="avatar border-gray">
-            <h4 class="title">{{perfil.nombre}} {{perfil.apellido}}<br />
-              <small>{{perfil.username}}</small>
-            </h4>
-          </div>
-
-          <div class='visible-lg'>
-            <div class="row ">
-              <div class="col-md-6 text-right">Correo electrónico:</div>
-              <div style='padding-left:0px' class="col-md-6">{{perfil.correo}}</div>
-            </div>
-            <div class="row ">
-              <div class="col-md-6 text-right">Sexo:</div>
-              <div style='padding-left:0px' class="col-md-6">{{perfil.sexo}}</div>
-            </div>
-            <div class="row">
-              <div class="col-md-6 text-right">Peso:</div>
-              <div style='padding-left:0px' class="col-md-6">{{perfil.peso}} kg.</div>
-            </div>
-            <div class="row">
-              <div class="col-md-6 text-right">Altura:</div>
-              <div style='padding-left:0px' class="col-md-6">{{perfil.altura}} cm.</div>
-            </div>
-            <div class="row">
-              <div class="col-md-6 text-right">Nacimiento:</div>
-              <div style='padding-left:0px' class="col-md-6">{{perfil.nacimiento | date:'dd/MM/yyyy'}}</div>
-            </div>
-            <div class="row" ng-show="perfil.gs != null">
-              <div class="col-md-6 text-right">Grupo sanguíneo:</div>
-              <div style='padding-left:0px' class="col-md-6">{{perfil.gs}}</div>
+        <div class='hidden-lg'>
+          <div class="row">
+          <div class="col-md-6">
+            <div class='text-center'>
+              {{perfil.correo}}
             </div>
           </div>
-
-          <div class='hidden-lg'>
-            <div class="row">
+        </div>
+          <div class="row">
             <div class="col-md-6">
               <div class='text-center'>
-                {{perfil.correo}}
+                {{perfil.sexo}}
               </div>
             </div>
           </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class='text-center'>
-                  {{perfil.sexo}}
-                </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class='text-center'>
+                {{perfil.peso}} kg.
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class='text-center'>
-                  {{perfil.peso}} kg.
-                </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class='text-center'>
+                {{perfil.altura}} cm.
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class='text-center'>
-                  {{perfil.altura}} cm.
-                </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class='text-center'>
+                {{perfil.nacimiento | date:'dd/MM/yyyy'}}
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class='text-center'>
-                  {{perfil.nacimiento | date:'dd/MM/yyyy'}}
-                </div>
-              </div>
-            </div>
-            <div class="row" ng-show="perfil.gs != null">
-              <div class="col-md-6">
-                <div class='text-center'>
-                  {{perfil.gs}}
-                </div>
+          </div>
+          <div class="row" ng-show="perfil.gs != null">
+            <div class="col-md-6">
+              <div class='text-center'>
+                {{perfil.gs}}
               </div>
             </div>
           </div>
         </div>
-
       </div>
+
     </div>
-  </ion-content>
-</ion-view>
+  </div>
+</div>

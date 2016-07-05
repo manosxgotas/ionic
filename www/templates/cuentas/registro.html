@@ -1,249 +1,246 @@
-<ion-view>
-  <ion-content>
-    <form name="formRegistro" class="form-horizontal" ng-submit="signup()" novalidate>
+<div class="container">
+  <form name="formRegistro" class="form-horizontal" ng-submit="signup()" novalidate>
 
-      <div class='col-sm-12'>
-        <div class="card">
-          <div class='header' style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;'>
-            <h4 class='title'>
-              <span class="fa fa-user-plus fa-lg" aria-hidden="true"></span>
-              &nbsp;&nbsp; Nuevo donante
-            </h4>
+    <div class='col-sm-12'>
+      <div class="card">
+        <div class='header' style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;'>
+          <h4 class='title'>
+            <span class="fa fa-user-plus fa-lg" aria-hidden="true"></span>
+            &nbsp;&nbsp; Nuevo donante
+          </h4>
+        </div>
+
+        <div class="content">
+
+          <div class="form-group" ng-class="{'has-error': formRegistro.username.$invalid && !formRegistro.username.$pristine}">
+            <label for="username" class="col-sm-3 control-label">Nombre de usuario</label>
+            <div class="col-sm-7">
+              <input type="text" id="username" name="username" ng-model="datosDonante.usuario.username" class="form-control"
+                     placeholder="Ingrese un nombre de usuario con el que desee identificarse" required>
+            </div>
           </div>
 
-          <div class="content">
-
-      <div class="form-group" ng-class="{'has-error': formRegistro.username.$invalid && !formRegistro.username.$pristine}">
-        <label for="username" class="col-sm-3 control-label">Nombre de usuario</label>
-        <div class="col-sm-7">
-          <input type="text" id="username" name="username" ng-model="datosDonante.usuario.username" class="form-control"
-                 placeholder="Ingrese un nombre de usuario con el que desee identificarse" required>
-        </div>
-      </div>
-
-      <div class="form-group" ng-class="{'has-error': formRegistro.correo.$invalid && !formRegistro.correo.$pristine,
-                                         'has-success has-feedback': formRegistro.correo.$valid}">
-        <label for="correo" class="col-sm-3 control-label">Correo electrónico</label>
-        <div class="col-sm-7">
-          <input type="email" id="correo" name="correo" ng-model="datosDonante.usuario.email" class="form-control"
-                 placeholder="Ingrese un correo electrónico" required>
-        </div>
-      </div>
-
-      <div class="form-group" ng-class="{'has-error': formRegistro.confirmCorreo.$invalid && !formRegistro.confirmCorreo.$pristine || !formRegistro.confirmCorreo.$pristine && !correoCheck,
-                                         'has-success has-feedback': formRegistro.confirmCorreo.$valid && correoCheck}">
-        <label for="confirmCorreo" class="col-sm-3 control-label">Confirmar correo electrónico</label>
-        <div class="col-sm-7">
-          <input type="email" id="confirmCorreo" name="confirmCorreo" ng-model="confirmCorreo" class="form-control"
-                 placeholder="Confirme su correo electrónico" ng-change="confirmarCorreo(formRegistro, confirmCorreo)" ng-disabled="formRegistro.correo.$invalid || formRegistro.correo.$pristine" required>
-        </div>
-      </div>
-
-      <div class="form-group" ng-class="{'has-error': formRegistro.contrasenia.$invalid && !formRegistro.contrasenia.$pristine,
-                                         'has-success has-feedback': formRegistro.contrasenia.$valid}">
-        <label for="contrasenia" class="col-sm-3 control-label">Contraseña</label>
-        <div class="col-sm-7">
-        <input type="password" id="contrasenia" name="contrasenia" ng-model="datosDonante.usuario.password" class="form-control"
-               placeholder="Ingrese una contraseña con la que desee identificarse" required>
-        </div>
-      </div>
-
-      <div class="form-group" ng-class="{'has-error': formRegistro.confirmContrasenia.$invalid && !formRegistro.confirmContrasenia.$pristine || !formRegistro.confirmContrasenia.$pristine && !passwordCheck,
-                                         'has-success has-feedback': formRegistro.confirmContrasenia.$valid && passwordCheck}">
-        <label for="confirmContrasenia" class="col-sm-3 control-label">Confirmar contraseña</label>
-        <div class="col-sm-7">
-        <input type="password" id="confirmContrasenia" name="confirmContrasenia" ng-model="confirmContrasenia" class="form-control"
-               placeholder="Confirme su contraseña" ng-change="confirmarContrasenia(formRegistro, confirmContrasenia)" ng-disabled="formRegistro.contrasenia.$invalid || formRegistro.contrasenia.$pristine" required>
-        </div>
-      </div>
-
-          <hr>
-
-      <div class="form-group" ng-class="{'has-error': formRegistro.nombre.$invalid && !formRegistro.nombre.$pristine,
-                                         'has-success has-feedback': formRegistro.nombre.$valid}">
-        <label for="nombre" class="col-sm-3 control-label">Nombre</label>
-        <div class="col-sm-7">
-        <input type="text" id="nombre" name="nombre" ng-model="datosDonante.usuario.first_name" class="form-control"
-               placeholder="Ingresa tu nombre" ng-pattern="/^([a-z ñáéíóú]{1,60})$/i" required>
-        </div>
-      </div>
-
-      <div class="form-group" ng-class="{'has-error': formRegistro.apellido.$invalid && !formRegistro.apellido.$pristine,
-                                         'has-success has-feedback': formRegistro.apellido.$valid}">
-        <label for="apellido" class="col-sm-3 control-label">Apellido</label>
-        <div class="col-sm-7">
-        <input type="text" id="apellido" name="apellido" ng-model="datosDonante.usuario.last_name" class="form-control"
-               placeholder="Ingresa tu apellido" ng-pattern="/^([a-z ñáéíóú]{1,60})$/i" required>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="tipoDocumento" class="col-sm-3 control-label">Tipo de documento</label>
-        <div class="col-sm-7">
-          <select class="form-control" id="tipoDocumento" ng-model="datosDonante.donante.tipoDocumento" required>
-            <option ng-repeat="tipo in tiposDocumentos" value="{{tipo.id}}"> {{tipo.siglas}} </option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group" ng-class="{'has-error': formRegistro.numeroDocumento.$invalid && !formRegistro.numeroDocumento.$pristine,
-                                         'has-success has-feedback': formRegistro.numeroDocumento.$valid}">
-        <label for="numeroDocumento" class="col-sm-3 control-label">Número de documento</label>
-        <div class="col-sm-7">
-          <input type="number" id="numeroDocumento" name="numeroDocumento" ng-model="datosDonante.donante.numeroDocumento" class="form-control"
-                 placeholder="Ingresa tu número de documento" required>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="nacionalidad" class="col-sm-3 control-label">Nacionalidad</label>
-        <div class="col-sm-7">
-          <select class="form-control" id="nacionalidad" ng-model="datosDonante.donante.nacionalidad" required>
-            <option ng-repeat="nacionalidad in nacionalidades" value="{{nacionalidad.id}}"> {{nacionalidad.nombre}} </option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="nacimiento" class="col-sm-3 control-label">Fecha de nacimiento</label>
-        <div class="col-sm-7">
-          <p class="input-group">
-          <input uib-datepicker-popup="{{format}}" is-open="nacimientoDP.opened" type="text" name="nacimiento" class="form-control" id="nacimiento" ng-model="datosDonante.donante.nacimiento"
-                 datepicker-options="nacimientoDPOptions" show-button-bar="false" placeholder="Ingresa tu fecha de nacimiento" ng-required="true">
-            <span class="input-group-btn">
-              <button type="button" class="btn btn-default" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-          </p>
-        </div>
-      </div>
-
-      <div class="form-group" ng-class="{'has-error': formRegistro.telefono.$invalid && !formRegistro.telefono.$pristine,
-                                         'has-success has-feedback': formRegistro.telefono.$valid}">
-        <label for="telefono" class="col-sm-3 control-label">Teléfono</label>
-        <div class="col-sm-7">
-        <input type="text" id="telefono" name="telefono" ng-model="datosDonante.donante.telefono" class="form-control"
-               placeholder="Ingresa tu número de teléfono" maxlength="20" required>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="grupoSanguineo" class="col-sm-3 control-label">Grupo sanguíneo</label>
-          <div class="col-sm-7">
-          <select id="grupoSanguineo" class="form-control" ng-model="datosDonante.donante.gs">
-            <option value=""></option>
-            <option ng-repeat="grupo in gruposSanguineos" value="{{grupo.id}}">{{grupo.nombre}}</option>
-          </select>
+          <div class="form-group" ng-class="{'has-error': formRegistro.correo.$invalid && !formRegistro.correo.$pristine,
+                                             'has-success has-feedback': formRegistro.correo.$valid}">
+            <label for="correo" class="col-sm-3 control-label">Correo electrónico</label>
+            <div class="col-sm-7">
+              <input type="email" id="correo" name="correo" ng-model="datosDonante.usuario.email" class="form-control"
+                     placeholder="Ingrese un correo electrónico" required>
+            </div>
           </div>
-      </div>
 
-      <div class="form-group" ng-class="{'has-error': formRegistro.peso.$invalid && !formRegistro.peso.$pristine,
-                                         'has-success has-feedback': formRegistro.peso.$valid}">
-        <label for="peso" class="col-sm-3 control-label">Peso (en kg.)</label>
-        <div class="col-sm-7">
-          <input type="number" id="peso" name="peso" ng-model="datosDonante.donante.peso" class="form-control"
-                 placeholder="Ingresa tu peso (en Kg.)" min="0" max="300" ng-pattern="/^[0-9]+(\.[0-9]{1})?$/" step="0.5" required>
-        </div>
-      </div>
+          <div class="form-group" ng-class="{'has-error': formRegistro.confirmCorreo.$invalid && !formRegistro.confirmCorreo.$pristine || !formRegistro.confirmCorreo.$pristine && !correoCheck,
+                                             'has-success has-feedback': formRegistro.confirmCorreo.$valid && correoCheck}">
+            <label for="confirmCorreo" class="col-sm-3 control-label">Confirmar correo electrónico</label>
+            <div class="col-sm-7">
+              <input type="email" id="confirmCorreo" name="confirmCorreo" ng-model="confirmCorreo" class="form-control"
+                     placeholder="Confirme su correo electrónico" ng-change="confirmarCorreo(formRegistro, confirmCorreo)" ng-disabled="formRegistro.correo.$invalid || formRegistro.correo.$pristine" required>
+            </div>
+          </div>
 
-      <div class="form-group" ng-class="{'has-error': formRegistro.altura.$invalid && !formRegistro.altura.$pristine,
-                                         'has-success has-feedback': formRegistro.altura.$valid}">
-        <label for="altura" class="col-sm-3 control-label">Altura (en cm.)</label>
-        <div class="col-sm-7">
-          <input type="number" id="altura" name="altura" ng-model="datosDonante.donante.altura" class="form-control"
-                 placeholder="Ingresa tu altura (en centímetros)" minlength="3" maxlength="3" min="100" max="350" required>
-        </div>
-      </div>
+          <div class="form-group" ng-class="{'has-error': formRegistro.contrasenia.$invalid && !formRegistro.contrasenia.$pristine,
+                                             'has-success has-feedback': formRegistro.contrasenia.$valid}">
+            <label for="contrasenia" class="col-sm-3 control-label">Contraseña</label>
+            <div class="col-sm-7">
+            <input type="password" id="contrasenia" name="contrasenia" ng-model="datosDonante.usuario.password" class="form-control"
+                   placeholder="Ingrese una contraseña con la que desee identificarse" required>
+            </div>
+          </div>
 
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Sexo</label>
+          <div class="form-group" ng-class="{'has-error': formRegistro.confirmContrasenia.$invalid && !formRegistro.confirmContrasenia.$pristine || !formRegistro.confirmContrasenia.$pristine && !passwordCheck,
+                                             'has-success has-feedback': formRegistro.confirmContrasenia.$valid && passwordCheck}">
+            <label for="confirmContrasenia" class="col-sm-3 control-label">Confirmar contraseña</label>
+            <div class="col-sm-7">
+            <input type="password" id="confirmContrasenia" name="confirmContrasenia" ng-model="confirmContrasenia" class="form-control"
+                   placeholder="Confirme su contraseña" ng-change="confirmarContrasenia(formRegistro, confirmContrasenia)" ng-disabled="formRegistro.contrasenia.$invalid || formRegistro.contrasenia.$pristine" required>
+            </div>
+          </div>
 
-              <div class="col-sm-5">
-                <label class="radio" style="padding-top: 0; padding-left: 20px">
-                  <span class="icons">
-                    <span class="first-icon fa fa-circle-o"></span>
-                    <span class="second-icon fa fa-dot-circle-o"></span>
-                  </span>
-                  <input type="radio" name="optionsGenero" id="masculino" value="1" ng-model="datosDonante.genero">
-                  <span class="fa fa-male"></span> Hombre
-                </label>
-                <label class="radio" style="padding-top: 0; padding-left: 20px">
-                  <span class="icons">
-                    <span class="first-icon fa fa-circle-o"></span>
-                    <span class="second-icon fa fa-dot-circle-o"></span>
-                  </span>
-                  <input type="radio" data-toggle="radio" name="optionsGenero" id="femenino" value="2" ng-model="datosDonante.genero">
-                  <span class="fa fa-female"></span> Mujer
-                </label>
+              <hr>
+
+          <div class="form-group" ng-class="{'has-error': formRegistro.nombre.$invalid && !formRegistro.nombre.$pristine,
+                                             'has-success has-feedback': formRegistro.nombre.$valid}">
+            <label for="nombre" class="col-sm-3 control-label">Nombre</label>
+            <div class="col-sm-7">
+            <input type="text" id="nombre" name="nombre" ng-model="datosDonante.usuario.first_name" class="form-control"
+                   placeholder="Ingresa tu nombre" ng-pattern="/^([a-z ñáéíóú]{1,60})$/i" required>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formRegistro.apellido.$invalid && !formRegistro.apellido.$pristine,
+                                             'has-success has-feedback': formRegistro.apellido.$valid}">
+            <label for="apellido" class="col-sm-3 control-label">Apellido</label>
+            <div class="col-sm-7">
+            <input type="text" id="apellido" name="apellido" ng-model="datosDonante.usuario.last_name" class="form-control"
+                   placeholder="Ingresa tu apellido" ng-pattern="/^([a-z ñáéíóú]{1,60})$/i" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="tipoDocumento" class="col-sm-3 control-label">Tipo de documento</label>
+            <div class="col-sm-7">
+              <select class="form-control" id="tipoDocumento" ng-model="datosDonante.donante.tipoDocumento" required>
+                <option ng-repeat="tipo in tiposDocumentos" value="{{tipo.id}}"> {{tipo.siglas}} </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formRegistro.numeroDocumento.$invalid && !formRegistro.numeroDocumento.$pristine,
+                                             'has-success has-feedback': formRegistro.numeroDocumento.$valid}">
+            <label for="numeroDocumento" class="col-sm-3 control-label">Número de documento</label>
+            <div class="col-sm-7">
+              <input type="number" id="numeroDocumento" name="numeroDocumento" ng-model="datosDonante.donante.numeroDocumento" class="form-control"
+                     placeholder="Ingresa tu número de documento" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="nacionalidad" class="col-sm-3 control-label">Nacionalidad</label>
+            <div class="col-sm-7">
+              <select class="form-control" id="nacionalidad" ng-model="datosDonante.donante.nacionalidad" required>
+                <option ng-repeat="nacionalidad in nacionalidades" value="{{nacionalidad.id}}"> {{nacionalidad.nombre}} </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="nacimiento" class="col-sm-3 control-label">Fecha de nacimiento</label>
+            <div class="col-sm-7">
+              <p class="input-group">
+              <input uib-datepicker-popup="{{format}}" is-open="nacimientoDP.opened" type="text" name="nacimiento" class="form-control" id="nacimiento" ng-model="datosDonante.donante.nacimiento"
+                     datepicker-options="nacimientoDPOptions" show-button-bar="false" placeholder="Ingresa tu fecha de nacimiento" ng-required="true">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formRegistro.telefono.$invalid && !formRegistro.telefono.$pristine,
+                                             'has-success has-feedback': formRegistro.telefono.$valid}">
+            <label for="telefono" class="col-sm-3 control-label">Teléfono</label>
+            <div class="col-sm-7">
+            <input type="text" id="telefono" name="telefono" ng-model="datosDonante.donante.telefono" class="form-control"
+                   placeholder="Ingresa tu número de teléfono" maxlength="20" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="grupoSanguineo" class="col-sm-3 control-label">Grupo sanguíneo</label>
+              <div class="col-sm-7">
+              <select id="grupoSanguineo" class="form-control" ng-model="datosDonante.donante.gs">
+                <option value=""></option>
+                <option ng-repeat="grupo in gruposSanguineos" value="{{grupo.id}}">{{grupo.nombre}}</option>
+              </select>
+              </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formRegistro.peso.$invalid && !formRegistro.peso.$pristine,
+                                             'has-success has-feedback': formRegistro.peso.$valid}">
+            <label for="peso" class="col-sm-3 control-label">Peso (en kg.)</label>
+            <div class="col-sm-7">
+              <input type="number" id="peso" name="peso" ng-model="datosDonante.donante.peso" class="form-control"
+                     placeholder="Ingresa tu peso (en Kg.)" min="0" max="300" ng-pattern="/^[0-9]+(\.[0-9]{1})?$/" step="0.5" required>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formRegistro.altura.$invalid && !formRegistro.altura.$pristine,
+                                             'has-success has-feedback': formRegistro.altura.$valid}">
+            <label for="altura" class="col-sm-3 control-label">Altura (en cm.)</label>
+            <div class="col-sm-7">
+              <input type="number" id="altura" name="altura" ng-model="datosDonante.donante.altura" class="form-control"
+                     placeholder="Ingresa tu altura (en centímetros)" minlength="3" maxlength="3" min="100" max="350" required>
+            </div>
+          </div>
+
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Sexo</label>
+
+                  <div class="col-sm-5">
+                    <label class="radio" style="padding-top: 0; padding-left: 20px">
+                      <span class="icons">
+                        <span class="first-icon fa fa-circle-o"></span>
+                        <span class="second-icon fa fa-dot-circle-o"></span>
+                      </span>
+                      <input type="radio" name="optionsGenero" id="masculino" value="1" ng-model="datosDonante.genero">
+                      <span class="fa fa-male"></span> Hombre
+                    </label>
+                    <label class="radio" style="padding-top: 0; padding-left: 20px">
+                      <span class="icons">
+                        <span class="first-icon fa fa-circle-o"></span>
+                        <span class="second-icon fa fa-dot-circle-o"></span>
+                      </span>
+                      <input type="radio" data-toggle="radio" name="optionsGenero" id="femenino" value="2" ng-model="datosDonante.genero">
+                      <span class="fa fa-female"></span> Mujer
+                    </label>
+                  </div>
+                </div>
+
+         <hr>
+
+          <div class="form-group">
+            <label for="provincia" class="col-sm-3 control-label">Provincia</label>
+            <div class="col-sm-7">
+              <select class="form-control" id="provincia" ng-model="datosDonante.direccion.provincia" ng-change="obtenerLocalidades(datosDonante.direccion.provincia)">
+                <option ng-repeat="provincia in provincias" value="{{provincia.id}}"> {{provincia.nombre}} </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="localidad" class="col-sm-3 control-label">Localidad</label>
+            <div class="col-sm-7">
+              <select class="form-control" id="localidad" ng-model="datosDonante.direccion.localidad">
+                <option ng-repeat="localidad in localidades" value="{{localidad.id}}"> {{localidad.nombre}} </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formRegistro.calle.$invalid && !formRegistro.calle.$pristine,
+                                             'has-success has-feedback': formRegistro.calle.$valid}">
+            <label for="calle" class="col-sm-3 control-label">Calle</label>
+            <div class="col-sm-7">
+              <input type="text" id="calle" name="calle" ng-model="datosDonante.direccion.calle" class="form-control"
+                     placeholder="Ingrese el nombre de la calle de su domicilio" required>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formRegistro.numero.$invalid && !formRegistro.numero.$pristine,
+                                             'has-success has-feedback': formRegistro.numero.$valid}">
+            <label for="numero" class="col-sm-3 control-label">Número</label>
+            <div class="col-sm-7">
+              <input type="number" id="numero" name="numero" ng-model="datosDonante.direccion.numero" class="form-control"
+                     placeholder="Ingrese el número de la calle de su domicilio" min="0" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="piso" class="col-sm-3 control-label">Piso</label>
+            <div class="col-sm-7">
+              <input type="number" id="piso" name="piso" ng-model="datosDonante.direccion.piso" class="form-control"
+                     placeholder="Ingrese el número de piso de su domicilio">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="numeroDepartamento" class="col-sm-3 control-label">Número de departamento</label>
+            <div class="col-sm-7">
+            <input type="number" id="numeroDepartamento" name="numeroDepartamento" ng-model="datosDonante.direccion.numeroDepartamento" class="form-control"
+                   placeholder="Ingrese el número de departamento de su domicilio">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10">
+              <div class="pull-right">
+                <button type="submit" class="btn btn-success" ng-disabled="formRegistro.$invalid">
+                  <i class="fa fa-user-plus"></i> Registrarse
+                </button>
               </div>
             </div>
-
-     <hr>
-
-      <div class="form-group">
-        <label for="provincia" class="col-sm-3 control-label">Provincia</label>
-        <div class="col-sm-7">
-          <select class="form-control" id="provincia" ng-model="datosDonante.direccion.provincia" ng-change="obtenerLocalidades(datosDonante.direccion.provincia)">
-            <option ng-repeat="provincia in provincias" value="{{provincia.id}}"> {{provincia.nombre}} </option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="localidad" class="col-sm-3 control-label">Localidad</label>
-        <div class="col-sm-7">
-          <select class="form-control" id="localidad" ng-model="datosDonante.direccion.localidad">
-            <option ng-repeat="localidad in localidades" value="{{localidad.id}}"> {{localidad.nombre}} </option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group" ng-class="{'has-error': formRegistro.calle.$invalid && !formRegistro.calle.$pristine,
-                                         'has-success has-feedback': formRegistro.calle.$valid}">
-        <label for="calle" class="col-sm-3 control-label">Calle</label>
-        <div class="col-sm-7">
-          <input type="text" id="calle" name="calle" ng-model="datosDonante.direccion.calle" class="form-control"
-                 placeholder="Ingrese el nombre de la calle de su domicilio" required>
-        </div>
-      </div>
-
-      <div class="form-group" ng-class="{'has-error': formRegistro.numero.$invalid && !formRegistro.numero.$pristine,
-                                         'has-success has-feedback': formRegistro.numero.$valid}">
-        <label for="numero" class="col-sm-3 control-label">Número</label>
-        <div class="col-sm-7">
-          <input type="number" id="numero" name="numero" ng-model="datosDonante.direccion.numero" class="form-control"
-                 placeholder="Ingrese el número de la calle de su domicilio" min="0" required>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="piso" class="col-sm-3 control-label">Piso</label>
-        <div class="col-sm-7">
-          <input type="number" id="piso" name="piso" ng-model="datosDonante.direccion.piso" class="form-control"
-                 placeholder="Ingrese el número de piso de su domicilio">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="numeroDepartamento" class="col-sm-3 control-label">Número de departamento</label>
-        <div class="col-sm-7">
-        <input type="number" id="numeroDepartamento" name="numeroDepartamento" ng-model="datosDonante.direccion.numeroDepartamento" class="form-control"
-               placeholder="Ingrese el número de departamento de su domicilio">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-10">
-          <div class="pull-right">
-            <button type="submit" class="btn btn-success" ng-disabled="formRegistro.$invalid">
-              <i class="fa fa-user-plus"></i> Registrarse
-            </button>
           </div>
         </div>
       </div>
+    </div>
+  </form>
 </div>
-          </div>
-        </div>
-    </form>
-
-  </ion-content>
-</ion-view>

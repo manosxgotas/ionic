@@ -1,54 +1,52 @@
-<ion-view>
-  <ion-content>
-    <div class='col-md-10 col-md-offset-1'>
-      <div class="card">
-        <div class='header' style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;'>
-          <h4 class='title'>
-            <span class="fa fa-user-secret fa-lg" aria-hidden="true"></span>
-            &nbsp;&nbsp; Credenciales
-          </h4>
-        </div>
-        <form name="validateLogin" role="form" class="form-horizontal" ng-submit="login()" novalidate>
-
-          <div class="form-group">
-
-            <label for="username" class="col-sm-2 control-label">Nombre de usuario</label>
-
-            <div class="col-sm-9" required>
-              <input type="text" class="form-control" ng-model="credentials.username"
-                     id="username" required>
-
-              <p ng-show="validateLogin.username.$invalid && validateLogin.username.$touched"
-                 class="help-block"> Debe ingresar un nombre de usuario. </p>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="password" class="col-sm-2 control-label">Contraseña</label>
-
-            <div class="col-sm-9" required>
-              <input type="password" class="form-control" ng-model="credentials.password"
-                     id="password" required>
-
-              <p ng-show="validateLogin.password.$invalid && validateLogin.password.$touched"
-                 class="help-block"> Debe ingresar una contraseña. </p>
-            </div>
-          </div>
-
-          <div class="form-group">
-
-            <div class="col-sm-offset-2 col-sm-9">
-              <div class="pull-right">
-
-                <button type="submit" class="btn btn-success" ng-disabled="validateLogin.$invalid">
-                  <i class="fa fa-sign-in"></i>Iniciar sesión
-                </button>
-
-              </div>
-            </div>
-          </div>
-        </form>
+<div class="container">
+  <div class='col-md-10 col-md-offset-1'>
+    <div class="card">
+      <div class='header' style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;'>
+        <h4 class='title'>
+          <span class="fa fa-user-secret fa-lg" aria-hidden="true"></span>
+          &nbsp;&nbsp; Credenciales
+        </h4>
       </div>
+      <form name="validateLogin" role="form" class="form-horizontal" ng-submit="login()" novalidate>
+
+        <div class="form-group">
+
+          <label for="username" class="col-sm-2 control-label">Nombre de usuario</label>
+
+          <div class="col-sm-9" required>
+            <input type="text" class="form-control" ng-model="credentials.username"
+                   id="username" required>
+
+            <p ng-show="validateLogin.username.$invalid && validateLogin.username.$touched"
+               class="help-block"> Debe ingresar un nombre de usuario. </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="col-sm-2 control-label">Contraseña</label>
+
+          <div class="col-sm-9" required>
+            <input type="password" class="form-control" ng-model="credentials.password"
+                   id="password" required>
+
+            <p ng-show="validateLogin.password.$invalid && validateLogin.password.$touched"
+               class="help-block"> Debe ingresar una contraseña. </p>
+          </div>
+        </div>
+
+        <div class="form-group">
+
+          <div class="col-sm-offset-2 col-sm-9">
+            <div class="pull-right">
+
+              <button type="submit" class="btn btn-success" ng-disabled="validateLogin.$invalid">
+                <i class="fa fa-sign-in"></i>Iniciar sesión
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-  </ion-content>
-</ion-view>
+  </div>
+</div>

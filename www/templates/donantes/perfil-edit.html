@@ -1,210 +1,208 @@
-<ion-view>
-  <ion-content>
-    <div class='col-sm-12'>
-      <div class="card">
-        <div class='header'>
-          <h4 class='title'>
-            <span class="fa fa-edit fa-lg" aria-hidden="true"></span>
-            &nbsp;&nbsp; Editar perfil
-          </h4>
-        </div>
-
-        <form name="formEditarPerfil" class="form-horizontal" ng-submit="update()" novalidate>
-          <div class="content">
-
-            <div class="form-group" ng-class="{'has-error': formEditarPerfil.nombre.$invalid && !formEditarPerfil.nombre.$pristine,
-                                               'has-success has-feedback': formEditarPerfil.nombre.$valid}">
-              <label for="nombre" class="col-sm-3 control-label">Nombre</label>
-              <div class="col-sm-7">
-                <input type="text" id="nombre" name="nombre" ng-model="datosDonante.usuario.first_name" class="form-control"
-                       placeholder="Ingresa tu nombre" ng-pattern="/^([a-z ñáéíóú]{1,60})$/i" required>
-              </div>
-            </div>
-
-
-            <div class="form-group" ng-class="{'has-error': formEditarPerfil.apellido.$invalid && !formEditarPerfil.apellido.$pristine,
-                                               'has-success has-feedback': formEditarPerfil.apellido.$valid}">
-              <label for="apellido" class="col-sm-3 control-label">Apellido</label>
-              <div class="col-sm-7">
-                <input type="text" id="apellido" name="apellido" ng-model="datosDonante.usuario.last_name" class="form-control"
-                       placeholder="Ingresa tu apellido" ng-pattern="/^([a-z ñáéíóú]{1,60})$/i" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="tipoDocumento" class="col-sm-3 control-label">Tipo de documento</label>
-              <div class="col-sm-7">
-                <select class="form-control" id="tipoDocumento" ng-model="datosDonante.tipoDocumento" convert-to-number required>
-                  <option ng-repeat="tipo in tiposDocumentos" value="{{tipo.id}}"> {{tipo.siglas}} </option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': formEditarPerfil.numeroDocumento.$invalid && !formRegistro.numeroDocumento.$pristine,
-                                           'has-success has-feedback': formEditarPerfil.numeroDocumento.$valid}">
-              <label for="numeroDocumento" class="col-sm-3 control-label">Número de documento</label>
-              <div class="col-sm-7">
-                <input type="number" id="numeroDocumento" name="numeroDocumento" ng-model="datosDonante.numeroDocumento" class="form-control"
-                       placeholder="Ingresa tu número de documento" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="nacionalidad" class="col-sm-3 control-label">Nacionalidad</label>
-              <div class="col-sm-7">
-                <select class="form-control" id="nacionalidad" ng-model="datosDonante.nacionalidad" convert-to-number required>
-                  <option ng-repeat="nacionalidad in nacionalidades" value="{{nacionalidad.id}}"> {{nacionalidad.nombre}} </option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="foto" class="col-sm-3 control-label">Foto</label>
-              <div class="col-sm-7">
-                <input type="file" id="foto" name="foto" file-model="avatar">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="nacimiento" class="col-sm-3 control-label">Fecha de nacimiento</label>
-              <div class="col-sm-7">
-                <p class="input-group">
-                  <input uib-datepicker-popup="{{format}}" is-open="nacimientoDP.opened" type="text" name="nacimiento" class="form-control" id="nacimiento" ng-model="datosDonante.nacimiento"
-                         datepicker-options="nacimientoDPOptions" show-button-bar="false" placeholder="Ingresa tu fecha de nacimiento" ng-required="true">
-                  <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
-                  </span>
-                </p>
-              </div>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': formEditarPerfil.telefono.$invalid && !formEditarPerfil.telefono.$pristine,
-                                           'has-success has-feedback': formEditarPerfil.telefono.$valid}">
-              <label for="telefono" class="col-sm-3 control-label">Teléfono</label>
-              <div class="col-sm-7">
-                <input type="text" id="telefono" name="telefono" ng-model="datosDonante.telefono" class="form-control"
-                       placeholder="Ingresa tu número de teléfono" maxlength="20" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="grupoSanguineo" class="col-sm-3 control-label">Grupo sanguíneo</label>
-              <div class="col-sm-7">
-                <select id="grupoSanguineo" class="form-control" ng-model="datosDonante.grupoSanguineo.id" convert-to-number>
-                  <option value=""></option>
-                  <option ng-repeat="grupo in gruposSanguineos" value="{{grupo.id}}">{{grupo.nombre}}</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': formEditarPerfil.peso.$invalid && !formEditarPerfil.peso.$pristine,
-                                           'has-success has-feedback': formEditarPerfil.peso.$valid}">
-              <label for="peso" class="col-sm-3 control-label">Peso</label>
-              <div class="col-sm-7">
-                <input type="number" id="peso" name="peso" ng-model="datosDonante.peso" class="form-control"
-                       placeholder="Ingresa tu peso (en Kg.)" min="0" max="300" ng-pattern="/^[0-9]+(\.[0-9]{1})?$/" step="0.5" required>
-              </div>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': formEditarPerfil.altura.$invalid && !formRegistro.altura.$pristine,
-                                           'has-success has-feedback': formEditarPerfil.altura.$valid}">
-              <label for="altura" class="col-sm-3 control-label">Altura</label>
-              <div class="col-sm-7">
-                <input type="number" id="altura" name="altura" ng-model="datosDonante.altura" class="form-control"
-                       placeholder="Ingresa tu altura (en centímetros)" minlength="3" maxlength="3" min="100" max="350" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Sexo</label>
-
-              <div class="col-sm-5">
-                <label class="radio {{datosDonante.genero == '1' ? 'checked' : ''}}" style="padding-top: 0; padding-left: 20px">
-                  <span class="icons">
-                    <span class="first-icon fa fa-circle-o"></span>
-                    <span class="second-icon fa fa-dot-circle-o"></span>
-                  </span>
-                  <input type="radio" name="optionsGenero" id="masculino" value="1" ng-model="datosDonante.genero">
-                  <span class="fa fa-male"></span> Hombre
-                </label>
-                <label class="radio {{datosDonante.genero == '2' ? 'checked' : ''}}" style="padding-top: 0; padding-left: 20px">
-                  <span class="icons">
-                    <span class="first-icon fa fa-circle-o"></span>
-                    <span class="second-icon fa fa-dot-circle-o"></span>
-                  </span>
-                  <input type="radio" data-toggle="radio" name="optionsGenero" id="femenino" value="2" ng-model="datosDonante.genero">
-                  <span class="fa fa-female"></span> Mujer
-                </label>
-              </div>
-            </div>
-
-            <hr>
-
-            <div class="form-group">
-              <label for="provincia" class="col-sm-3 control-label">Provincia</label>
-              <div class="col-sm-7">
-                <select class="form-control" id="provincia" ng-model="datosDonante.direccion.localidad.provincia" convert-to-number ng-change="obtenerLocalidades(datosDonante.direccion.localidad.provincia)">
-                  <option ng-repeat="provincia in provincias" value="{{provincia.id}}"> {{provincia.nombre}} </option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="localidad" class="col-sm-3 control-label">Localidad</label>
-              <div class="col-sm-7">
-                <select class="form-control" id="localidad" ng-model="datosDonante.direccion.localidad.id" convert-to-number>
-                  <option ng-repeat="localidad in localidades" value="{{localidad.id}}"> {{localidad.nombre}} </option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': formEditarPerfil.calle.$invalid && !formEditarPerfil.calle.$pristine,
-                                           'has-success has-feedback': formEditarPerfil.calle.$valid}">
-              <label for="calle" class="col-sm-3 control-label">Calle</label>
-              <div class="col-sm-7">
-                <input type="text" id="calle" name="calle" ng-model="datosDonante.direccion.calle" class="form-control"
-                       placeholder="Ingrese el nombre de la calle de su domicilio" required>
-              </div>
-            </div>
-
-            <div class="form-group" ng-class="{'has-error': formEditarPerfil.numero.$invalid && !formEditarPerfil.numero.$pristine,
-                                           'has-success has-feedback': formEditarPerfil.numero.$valid}">
-              <label for="numero" class="col-sm-3 control-label">Número</label>
-              <div class="col-sm-7">
-                <input type="number" id="numero" name="numero" ng-model="datosDonante.direccion.numero" class="form-control"
-                       placeholder="Ingrese el número de la calle de su domicilio" min="0" required>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="piso" class="col-sm-3 control-label">Piso</label>
-              <div class="col-sm-7">
-                <input type="number" id="piso" name="piso" ng-model="datosDonante.direccion.piso" class="form-control"
-                       placeholder="Ingrese el número de piso de su domicilio">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="numeroDepartamento" class="col-sm-3 control-label">Número de departamento</label>
-              <div class="col-sm-7">
-                <input type="number" id="numeroDepartamento" name="numeroDepartamento" ng-model="datosDonante.direccion.numeroDepartamento" class="form-control"
-                       placeholder="Ingrese el número de departamento de su domicilio">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="col-sm-10">
-                <div class="pull-right">
-                  <button type="submit" class="btn btn-success" ng-disabled="formEditarPerfil.$invalid">
-                    <i class="fa fa-save"></i> Guardar
-                  </button>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </form>
+<div class="container">
+  <div class='col-sm-12'>
+    <div class="card">
+      <div class='header'>
+        <h4 class='title'>
+          <span class="fa fa-edit fa-lg" aria-hidden="true"></span>
+          &nbsp;&nbsp; Editar perfil
+        </h4>
       </div>
+
+      <form name="formEditarPerfil" class="form-horizontal" ng-submit="update()" novalidate>
+        <div class="content">
+
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.nombre.$invalid && !formEditarPerfil.nombre.$pristine,
+                                             'has-success has-feedback': formEditarPerfil.nombre.$valid}">
+            <label for="nombre" class="col-sm-3 control-label">Nombre</label>
+            <div class="col-sm-7">
+              <input type="text" id="nombre" name="nombre" ng-model="datosDonante.usuario.first_name" class="form-control"
+                     placeholder="Ingresa tu nombre" ng-pattern="/^([a-z ñáéíóú]{1,60})$/i" required>
+            </div>
+          </div>
+
+
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.apellido.$invalid && !formEditarPerfil.apellido.$pristine,
+                                             'has-success has-feedback': formEditarPerfil.apellido.$valid}">
+            <label for="apellido" class="col-sm-3 control-label">Apellido</label>
+            <div class="col-sm-7">
+              <input type="text" id="apellido" name="apellido" ng-model="datosDonante.usuario.last_name" class="form-control"
+                     placeholder="Ingresa tu apellido" ng-pattern="/^([a-z ñáéíóú]{1,60})$/i" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="tipoDocumento" class="col-sm-3 control-label">Tipo de documento</label>
+            <div class="col-sm-7">
+              <select class="form-control" id="tipoDocumento" ng-model="datosDonante.tipoDocumento" convert-to-number required>
+                <option ng-repeat="tipo in tiposDocumentos" value="{{tipo.id}}"> {{tipo.siglas}} </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.numeroDocumento.$invalid && !formRegistro.numeroDocumento.$pristine,
+                                         'has-success has-feedback': formEditarPerfil.numeroDocumento.$valid}">
+            <label for="numeroDocumento" class="col-sm-3 control-label">Número de documento</label>
+            <div class="col-sm-7">
+              <input type="number" id="numeroDocumento" name="numeroDocumento" ng-model="datosDonante.numeroDocumento" class="form-control"
+                     placeholder="Ingresa tu número de documento" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="nacionalidad" class="col-sm-3 control-label">Nacionalidad</label>
+            <div class="col-sm-7">
+              <select class="form-control" id="nacionalidad" ng-model="datosDonante.nacionalidad" convert-to-number required>
+                <option ng-repeat="nacionalidad in nacionalidades" value="{{nacionalidad.id}}"> {{nacionalidad.nombre}} </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="foto" class="col-sm-3 control-label">Foto</label>
+            <div class="col-sm-7">
+              <input type="file" id="foto" name="foto" file-model="avatar">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="nacimiento" class="col-sm-3 control-label">Fecha de nacimiento</label>
+            <div class="col-sm-7">
+              <p class="input-group">
+                <input uib-datepicker-popup="{{format}}" is-open="nacimientoDP.opened" type="text" name="nacimiento" class="form-control" id="nacimiento" ng-model="datosDonante.nacimiento"
+                       datepicker-options="nacimientoDPOptions" show-button-bar="false" placeholder="Ingresa tu fecha de nacimiento" ng-required="true">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.telefono.$invalid && !formEditarPerfil.telefono.$pristine,
+                                         'has-success has-feedback': formEditarPerfil.telefono.$valid}">
+            <label for="telefono" class="col-sm-3 control-label">Teléfono</label>
+            <div class="col-sm-7">
+              <input type="text" id="telefono" name="telefono" ng-model="datosDonante.telefono" class="form-control"
+                     placeholder="Ingresa tu número de teléfono" maxlength="20" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="grupoSanguineo" class="col-sm-3 control-label">Grupo sanguíneo</label>
+            <div class="col-sm-7">
+              <select id="grupoSanguineo" class="form-control" ng-model="datosDonante.grupoSanguineo.id" convert-to-number>
+                <option value=""></option>
+                <option ng-repeat="grupo in gruposSanguineos" value="{{grupo.id}}">{{grupo.nombre}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.peso.$invalid && !formEditarPerfil.peso.$pristine,
+                                         'has-success has-feedback': formEditarPerfil.peso.$valid}">
+            <label for="peso" class="col-sm-3 control-label">Peso</label>
+            <div class="col-sm-7">
+              <input type="number" id="peso" name="peso" ng-model="datosDonante.peso" class="form-control"
+                     placeholder="Ingresa tu peso (en Kg.)" min="0" max="300" ng-pattern="/^[0-9]+(\.[0-9]{1})?$/" step="0.5" required>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.altura.$invalid && !formRegistro.altura.$pristine,
+                                         'has-success has-feedback': formEditarPerfil.altura.$valid}">
+            <label for="altura" class="col-sm-3 control-label">Altura</label>
+            <div class="col-sm-7">
+              <input type="number" id="altura" name="altura" ng-model="datosDonante.altura" class="form-control"
+                     placeholder="Ingresa tu altura (en centímetros)" minlength="3" maxlength="3" min="100" max="350" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Sexo</label>
+
+            <div class="col-sm-5">
+              <label class="radio {{datosDonante.genero == '1' ? 'checked' : ''}}" style="padding-top: 0; padding-left: 20px">
+                <span class="icons">
+                  <span class="first-icon fa fa-circle-o"></span>
+                  <span class="second-icon fa fa-dot-circle-o"></span>
+                </span>
+                <input type="radio" name="optionsGenero" id="masculino" value="1" ng-model="datosDonante.genero">
+                <span class="fa fa-male"></span> Hombre
+              </label>
+              <label class="radio {{datosDonante.genero == '2' ? 'checked' : ''}}" style="padding-top: 0; padding-left: 20px">
+                <span class="icons">
+                  <span class="first-icon fa fa-circle-o"></span>
+                  <span class="second-icon fa fa-dot-circle-o"></span>
+                </span>
+                <input type="radio" data-toggle="radio" name="optionsGenero" id="femenino" value="2" ng-model="datosDonante.genero">
+                <span class="fa fa-female"></span> Mujer
+              </label>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="form-group">
+            <label for="provincia" class="col-sm-3 control-label">Provincia</label>
+            <div class="col-sm-7">
+              <select class="form-control" id="provincia" ng-model="datosDonante.direccion.localidad.provincia" convert-to-number ng-change="obtenerLocalidades(datosDonante.direccion.localidad.provincia)">
+                <option ng-repeat="provincia in provincias" value="{{provincia.id}}"> {{provincia.nombre}} </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="localidad" class="col-sm-3 control-label">Localidad</label>
+            <div class="col-sm-7">
+              <select class="form-control" id="localidad" ng-model="datosDonante.direccion.localidad.id" convert-to-number>
+                <option ng-repeat="localidad in localidades" value="{{localidad.id}}"> {{localidad.nombre}} </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.calle.$invalid && !formEditarPerfil.calle.$pristine,
+                                         'has-success has-feedback': formEditarPerfil.calle.$valid}">
+            <label for="calle" class="col-sm-3 control-label">Calle</label>
+            <div class="col-sm-7">
+              <input type="text" id="calle" name="calle" ng-model="datosDonante.direccion.calle" class="form-control"
+                     placeholder="Ingrese el nombre de la calle de su domicilio" required>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{'has-error': formEditarPerfil.numero.$invalid && !formEditarPerfil.numero.$pristine,
+                                         'has-success has-feedback': formEditarPerfil.numero.$valid}">
+            <label for="numero" class="col-sm-3 control-label">Número</label>
+            <div class="col-sm-7">
+              <input type="number" id="numero" name="numero" ng-model="datosDonante.direccion.numero" class="form-control"
+                     placeholder="Ingrese el número de la calle de su domicilio" min="0" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="piso" class="col-sm-3 control-label">Piso</label>
+            <div class="col-sm-7">
+              <input type="number" id="piso" name="piso" ng-model="datosDonante.direccion.piso" class="form-control"
+                     placeholder="Ingrese el número de piso de su domicilio">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="numeroDepartamento" class="col-sm-3 control-label">Número de departamento</label>
+            <div class="col-sm-7">
+              <input type="number" id="numeroDepartamento" name="numeroDepartamento" ng-model="datosDonante.direccion.numeroDepartamento" class="form-control"
+                     placeholder="Ingrese el número de departamento de su domicilio">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-10">
+              <div class="pull-right">
+                <button type="submit" class="btn btn-success" ng-disabled="formEditarPerfil.$invalid">
+                  <i class="fa fa-save"></i> Guardar
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </form>
     </div>
-  </ion-content>
-</ion-view>
+  </div>
+</div>

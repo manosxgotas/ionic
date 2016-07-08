@@ -29,6 +29,8 @@
     "angular-i18n": "^1.5.6",
     "angular-file-model": "^0.3.1",
     "angular-base64": "^2.0.5",
-    "robotodraft": "^1.1.0"
+    "robotodraft": "^1.1.0",
+    "ng-flow": "~2",
+    "moment": "^2.14.1"
   }
 }

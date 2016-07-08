@@ -13,6 +13,7 @@ angular.module('donacion', [
   'ui.bootstrap',
   'file-model',
   'base64',
+  'flow'
   ])
 
   .config(function($stateProvider, $urlRouterProvider, $httpProvider, $resourceProvider) {
@@ -49,5 +50,19 @@ angular.module('donacion', [
         url: "/perfil/edit",
         templateUrl: "templates/donantes/perfil-edit.html",
         controller: "ProfileEditController",
+      })
+
+      .state('libreta', {
+        cache: false,
+        url: "/libreta",
+        templateUrl: "templates/donaciones/libreta-donacion.html",
+        controller: "LibretaController",
+      })
+
+      .state('registrar-donacion', {
+        cache: false,
+        url: "/donacion/registro",
+        templateUrl: "templates/donaciones/registrar-donacion.html",
+        controller: "RegistrarDonacionController",
       })
   });

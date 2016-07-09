@@ -2,12 +2,14 @@ angular.module('donacion')
 
   .factory('DonacionesService', function (global, $http, $location, $filter) {
 
-    var url = global.getApiUrl() + '/donaciones/crear/';
+    var registrarUrl = global.getApiUrl() + '/donaciones/crear/';
+
+    var eliminarUrl = global.getApiUrl() + '/donaciones/eliminar/';
 
     function registrarDonacion(donacion, idRegistro, foto) {
 
       $http({
-        url: url,
+        url: registrarUrl,
         method: "POST",
         data: {
           fechaHora: $filter('date')(donacion.fecha, 'dd/MM/yyyy') + ' ' + $filter('date')(donacion.hora, 'HH:mm'),
@@ -38,6 +40,19 @@ angular.module('donacion')
       });
     }
 
+    function eliminarDonacion(idDonacion) {
+      $http({
+        url: eliminarUrl + idDonacion,
+        method: 'DELETE'
+      }).success(function () {
+        console.log('Eliminación exitosa');
+        $location.path('/libreta')
+      }).error(function(response, data) {
+        console.log(response);
+        console.log(data);
+      })
+    }
+
 
     return {
 
@@ -53,6 +68,10 @@ angular.module('donacion')
           registrarDonacion(arguments[0], arguments[1], arguments[2]);
           return;
         }
+      },
+
+      eliminarDonacion: function (idDonacion) {
+        return eliminarDonacion(idDonacion);
       }
     }
 

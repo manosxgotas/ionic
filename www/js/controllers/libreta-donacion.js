@@ -1,5 +1,5 @@
 angular.module('donacion')
-  .controller('LibretaController', function ($http, $scope, AuthService, ProfileService) {
+  .controller('LibretaController', function ($http, $scope, $uibModal, AuthService, ProfileService) {
 
 
     AuthService.isLogged(function () {
@@ -12,6 +12,21 @@ angular.module('donacion')
 
       $scope.str2time = function (date) {
         return moment(date, 'DD/MM/YYYY HH:mm').format('HH:mm')
+      };
+
+      $scope.abrirModal = function (id) {
+
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'templates/donaciones/modal-eliminar-donacion.html',
+          size: 'sm',
+          controller: 'EliminarDonacionController',
+          resolve: {
+            idDonacion: function () {
+              return id;
+            }
+          }
+        });
       };
     })
   });

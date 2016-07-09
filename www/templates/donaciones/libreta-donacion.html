@@ -1,53 +1,69 @@
-  <div class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="header">
-              <h4 class="title">Libreta de donación
-                <div class="pull-right">
-                  <a class="btn btn-fill btn-danger btn-sm" ui-sref="registrar-donacion" ng-cloak>
-                    <span class="fa fa-tint" aria-hidden="true"></span>
-                    <span class='hidden-xs'>Nueva donación</span>
-                  </a>
-                </div>
-                <span class="clearfix"></span>
-              </h4>
-              <p class="category">Aquí puedes observar todas las donaciones que has realizado.</p>
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Libreta de donación
+              <div class="pull-right">
+                <a class="btn btn-fill btn-danger btn-sm" ui-sref="registrar-donacion" ng-cloak>
+                  <span class="fa fa-tint" aria-hidden="true"></span>
+                  <span class='hidden-xs'>Nueva donación</span>
+                </a>
+              </div>
+              <span class="clearfix"></span>
+            </h4>
+            <p class="category">Aquí puedes observar todas las donaciones que has realizado.</p>
 
-            </div>
+          </div>
 
-            <div class="content" ng-show="perfil.registro.donaciones.length == 0">
-              Todavía no has registrado ninguna donación
-            </div>
+          <div class="content" ng-show="perfil.registro.donaciones.length == 0">
+            Todavía no has registrado ninguna donación
+          </div>
 
-            <div class="content table-responsive table-full-width" ng-show="perfil.registro.donaciones.length > 0">
-              <table class="table table-hover table-striped">
-                <thead>
-                  <th>Fecha</th>
-                  <th>Hora</th>
-                  <th>Centro de donación</th>
-                  <th>Evento</th>
-                  <th>Estado</th>
-                  <th>Acciones</th>
-                </thead>
-                <tbody>
-                <tr ng-repeat="donacion in perfil.registro.donaciones">
-                  <td>{{str2date(donacion.fechaHora)}}</td>
-                  <td>{{str2time(donacion.fechaHora)}}hs.</td>
-                  <td>{{donacion.centroDonacion}}</td>
-                  <td>{{donacion.evento}}</td>
-                  <td>{{donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre}}</td>
-                  <td>
+          <div class="content table-responsive table-full-width" ng-show="perfil.registro.donaciones.length > 0">
+            <table class="table table-hover table-striped">
+              <thead>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Lugar</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </thead>
+              <tbody>
+              <tr ng-repeat="donacion in perfil.registro.donaciones">
+                <td>{{str2date(donacion.fechaHora)}}</td>
+                <td>{{str2time(donacion.fechaHora)}}hs.</td>
+                <td>{{donacion.centroDonacion}}</td>
+                <td>{{donacion.evento}}</td>
+                <td>
+                  {{donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre}}
+                  <button ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Pendiente'" popover-trigger="mouseenter" popover-placement="top" uib-popover="Verifica tu donación" class="btn btn-xs btn-success">
+                    <span class="fa fa-key"></span>
+                  </button>
+                </td>
+                <td>
+                  <div class="btn-group btn-group-sm" role="group">
+                    <button popover-trigger="mouseenter" popover-placement="top" uib-popover="Visualizar" type="button" class="btn btn-default">
+                      <span class="fa fa-eye"></span>
+                    </button>
+                    <button popover-trigger="mouseenter" popover-placement="top" uib-popover="Editar" type="button" class="btn btn-fill btn-default">
+                      <span class="fa fa-edit"></span>
+                    </button>
+                    <button popover-trigger="mouseenter" popover-placement="top" uib-popover="Eliminar" type="button" class="btn btn-fill btn-danger">
+                      <span class="fa fa-trash"></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
 
-
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-
-            </div>
           </div>
         </div>
-
       </div>
+
+    </div>
+  </div>
+</div>

@@ -65,4 +65,11 @@ angular.module('donacion', [
         templateUrl: "templates/donaciones/registrar-donacion.html",
         controller: "RegistrarDonacionController",
       })
+
+      .state('editar-donacion', {
+        cache: false,
+        url: "/donacion/editar/:donacionID",
+        templateUrl: "templates/donaciones/editar-donacion.html",
+        controller: "EditarDonacionController",
+      })
   });

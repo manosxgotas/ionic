@@ -38,7 +38,9 @@ angular.module('donacion')
     // Función que actualiza los datos del perfil del donante.
     function updateProfile(datosDonante) {
       var userid = getUserId();
-
+      if (datosDonante.grupoSanguineo == undefined) {
+        datosDonante.grupoSanguineo.id = null;
+      }
       $http({
         url: updateProfileUrl + userid,
         method: "PUT",

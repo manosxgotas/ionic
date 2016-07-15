@@ -7,6 +7,7 @@ angular.module('donacion', [
   'ionic',
   'ngResource',
   'LocalStorageModule',
+  'angular-loading-bar',
   'angular-jwt',
   'ngTouch',
   'ngAnimate',
@@ -16,12 +17,15 @@ angular.module('donacion', [
   'flow'
   ])
 
-  .config(function($stateProvider, $urlRouterProvider, $httpProvider, $resourceProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $httpProvider, $resourceProvider, cfpLoadingBarProvider) {
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 
     $resourceProvider.defaults.stripTrailingSlashes = false;
     $urlRouterProvider.otherwise("/");
+
+    cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
+    cfpLoadingBarProvider.spinnerTemplate = '<span class="fa fa-lg fa-spinner fa-pulse"></span>';
 
     $stateProvider
       .state('login', {

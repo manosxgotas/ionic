@@ -13,6 +13,7 @@
     <link href="bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="bower_components/robotodraft/robotodraft.css" rel="stylesheet">
+    <link href="bower_components/angular-loading-bar/build/loading-bar.css" rel="stylesheet">
 
     <!-- Animation library for notifications   -->
     <link href="components/light-bootstrap-dashboard/assets/css/animate.min.css" rel="stylesheet"/>
@@ -89,6 +90,10 @@
               </div>
 
              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+               <ul class="nav navbar-nav navbar-left">
+                 <li><a id="loading-bar-container"></a></li>
+               </ul>
                <ul class="nav navbar-nav navbar-right" ng-hide="is_logged">
                  <li><a ui-sref="login">Iniciar sesión</a></li>
                  <li><a ui-sref="registro">Registrarse</a></li>
@@ -118,7 +123,9 @@
 
         <div class="content">
           <div class="container-fluid">
-            <div ui-view></div>
+            <div id="view-content" ui-view>
+
+            </div>
           </div>
         </div>
 
@@ -202,6 +209,7 @@
     <script src="bower_components/angular-base64/angular-base64.js"></script>
     <script src="bower_components/ng-flow/dist/ng-flow-standalone.min.js"></script>
     <script src="bower_components/moment/min/moment.min.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
 
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 

@@ -1,5 +1,5 @@
 angular.module('donacion')
-  .controller('EditarDonacionController', function ($http, $scope, $stateParams, AuthService, ProfileService, DonacionesService) {
+  .controller('EditarDonacionController', function ($http, $scope, $stateParams, AuthService, ProfileService, DonacionesService, CentrosDonacionService, EventosService) {
 
     $scope.DPOptions = {
       maxDate: new Date()
@@ -9,6 +9,10 @@ angular.module('donacion')
       $scope.donacion = {};
 
       $scope.perfil = ProfileService.getProfile().get();
+
+      $scope.centros = CentrosDonacionService.query();
+
+      $scope.eventos = EventosService.query();
 
       var data = DonacionesService.infoDonacion().query({id: $stateParams.donacionID}, function () {
         $scope.donacion = data;

@@ -35,8 +35,12 @@
               <tr ng-repeat="donacion in perfil.registro.donaciones">
                 <td>{{str2date(donacion.fechaHora)}}</td>
                 <td>{{str2time(donacion.fechaHora)}}hs.</td>
-                <td>{{donacion.centroDonacion}}</td>
-                <td>{{donacion.evento}}</td>
+                <td ng-show="donacion.centroDonacion == undefined && donacion.evento == undefined">--</td>
+                <td ng-show="donacion.centroDonacion == undefined && donacion.evento == undefined">--</td>
+                <td ng-show="donacion.centroDonacion != undefined">Centro de donación</td>
+                <td ng-show="donacion.evento != undefined">Evento</td>
+                <td ng-show="donacion.centroDonacion != undefined">{{donacion.centroDonacion.nombre}}</td>
+                <td ng-show="donacion.evento != undefined">{{donacion.evento.nombre}}</td>
                 <td>
                   {{donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre}}
                   <button ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Pendiente'" popover-trigger="mouseenter" popover-placement="top" uib-popover="Verifica tu donación" class="btn btn-xs btn-success">

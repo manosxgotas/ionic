@@ -1,5 +1,5 @@
 angular.module('donacion')
-  .controller('NavController', function ($http, $scope, $rootScope, ProfileService, LogoffService) {
+  .controller('NavController', function ($http, $scope, $rootScope, $sce, ProfileService, LogoffService, DonacionesService) {
 
     $rootScope.$on('isLoggedEvent', function(args) {
 
@@ -15,15 +15,20 @@ angular.module('donacion')
             $rootScope.foto = data.foto;
             $scope.nombreUsuario=$rootScope.nombre + ' ' + $rootScope.apellido;
             $scope.fotoUsuario = $rootScope.foto;
+            DonacionesService.getDiasProxDonacion().get({}, function (data) {
+              $rootScope.diasProxDonacion = data.dias;
+            })
           });
 
         } else {
           $scope.nombreUsuario=$rootScope.nombre + ' ' + $rootScope.apellido;
           $scope.fotoUsuario = $rootScope.foto;
+          DonacionesService.getDiasProxDonacion().get({}, function (data) {
+            $rootScope.diasProxDonacion = data.dias;
+          })
         }
 
         $scope.is_logged = true;
-
 
     });
 

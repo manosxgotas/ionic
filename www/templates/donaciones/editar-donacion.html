@@ -1,0 +1,98 @@
+<div flow-init="{singleFile:true}" flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]">
+  <form name="formEditarDonacion" class="form-horizontal" ng-submit="updateDonacion($flow.files[0])" novalidate>
+
+    <div class='col-sm-12'>
+
+      <div class="card">
+
+        <div class='header' style='padding-top:15px;padding-bottom:5px;margin-bottom:15px;'>
+          <h4 class='title'>
+            <span class="fa fa-tint fa-lg" aria-hidden="true"></span>
+            &nbsp;&nbsp; Editar donación
+            <span class="pull-right">
+              <span flow-btn class="btn btn-fill btn-default btn-sm">
+                <span ng-hide="$flow.files.length || donacion.foto != undefined" class="fa fa-camera" aria-hidden="true"></span>
+                <span ng-hide="$flow.files.length || donacion.foto != undefined" class='hidden-xs'>Agrega una foto</span>
+                <span ng-show="$flow.files.length || (!$flow.files.length && donacion.foto != undefined)" class="fa fa-undo" aria-hidden="true"></span>
+                <span ng-show="$flow.files.length || (!$flow.files.length && donacion.foto != undefined)" class='hidden-xs'>Cambiar foto</span>
+              </span>
+              <a ng-click="$flow.files[0].cancel()" class="btn btn-fill btn-danger btn-sm" ng-show="$flow.files[0]">
+                <span class="fa fa-remove" aria-hidden="true"></span>
+                <span class='hidden-xs'>Eliminar foto</span>
+              </a>
+            </span>
+          </h4>
+        </div>
+
+        <div class="content">
+          <div class="col-sm-12 padding-bottom">
+            <pre class="hidden-xs" style="background-color: #FB404B; border-color: #FB404B; color: white">La donación fue realizada el día <strong>{{donacion.fecha ? (donacion.fecha | date:'fullDate') : '....'}}</strong> a las <strong>{{donacion.hora ? (donacion.hora | date:'shortTime') : '....'}}</strong>hs.</pre>
+            <pre class="visible-xs" style="background-color: #FB404B; border-color: #FB404B; color: white">Día: <strong>{{donacion.fecha ? (donacion.fecha | date:'dd/MM/yyyy') : '....'}}</strong> a las <strong>{{donacion.hora ? (donacion.hora | date:'shortTime') : '....'}}</strong>hs.</pre>
+          </div>
+
+          <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+
+            <span class="col-md-12 col-lg-4 col-sm-12 col-xs-12" style="margin-bottom: 10px; border: dashed 2px grey; border-radius: 5px; line-height: 244px;  text-align: center; color: black" ng-show="!$flow.files.length && donacion.foto == undefined" flow-drop>
+              <span class="fa fa-camera"></span> Arrastra tu foto aquí
+            </span>
+
+            <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12" ng-show="$flow.files.length">
+              <img class="img-responsive img-rounded" style="max-height: 250px; margin: 0 auto; margin-bottom: 10px;" flow-img="$flow.files[0]" />
+            </div>
+
+            <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12" ng-show="!$flow.files.length && donacion.foto != undefined">
+              <img class="img-responsive img-rounded" ng-src="{{donacion.foto}}" style="max-height: 250px; margin: 0 auto; margin-bottom: 10px;" />
+            </div>
+
+            <div class="col-md-8 col-lg-4 col-sm-12 col-xs-12">
+              <uib-datepicker style="display: table; margin: 0 auto; margin-bottom: 10px" ng-model="donacion.fecha" datepicker-options="DPOptions" ng-required="true"></uib-datepicker>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12" >
+              <uib-timepicker style="margin: 0 auto;  margin-bottom: 10px" ng-model="donacion.hora" ng-required="true"></uib-timepicker>
+            </div>
+          </div>
+
+          <div class="clearfix"></div>
+          <hr>
+          <div class="form-group">
+            <label for="centroDonacion" class="col-sm-3 control-label">Centro de donación</label>
+            <div class="col-sm-7">
+              <select class="form-control" id="centroDonacion" ng-model="donacion.centroDonacion">
+                <option ng-repeat="centro in centros" value="{{centro.id}}"> {{centro.nombre}} </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="evento" class="col-sm-3 control-label">Evento</label>
+            <div class="col-sm-7">
+              <select class="form-control" id="evento" ng-model="donacion.evento">
+                <option ng-repeat="evento in eventos" value="{{evento.id}}"> {{evento.nombre}} </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="descripcion" class="col-sm-3 control-label">¿Cómo te sentiste?</label>
+            <div class="col-sm-7">
+              <textarea id="descripcion" class="form-control" ng-model="donacion.descripcion" rows="4"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-12">
+              <div class="pull-right">
+                <button type="submit" class="btn btn-danger btn-fill" ng-disabled="formEditarDonacion.$invalid">
+                  <i class="fa fa-tint"></i> Actualizar donación
+                </button>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

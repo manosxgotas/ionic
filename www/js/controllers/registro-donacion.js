@@ -1,5 +1,5 @@
 angular.module('donacion')
-  .controller('RegistrarDonacionController', function ($http, $scope, AuthService, ProfileService, DonacionesService) {
+  .controller('RegistrarDonacionController', function ($http, $scope, AuthService, ProfileService, DonacionesService, CentrosDonacionService, EventosService) {
 
     $scope.DPOptions = {
       maxDate: new Date()
@@ -10,6 +10,10 @@ angular.module('donacion')
       $scope.donacion = {};
 
       $scope.perfil = ProfileService.getProfile().get();
+
+      $scope.centros = CentrosDonacionService.query();
+
+      $scope.eventos = EventosService.query();
 
       $scope.registrarDonacion = function(foto) {
         if (foto != undefined) {

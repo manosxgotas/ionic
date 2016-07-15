@@ -120,6 +120,10 @@ angular.module('donacion')
 
         updateAvatar : function(avatar) {
           return updateAvatar(avatar);
+        },
+        
+        getUserId: function () {
+          return getUserId();
         }
 
       }

@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('DonacionesService', function (global, $http, $resource, $location, $filter) {
+  .factory('DonacionesService', function (global, $http, $resource, $location, $filter, ProfileService) {
 
     var infoUrl = global.getApiUrl() + '/donaciones/:id';
 
@@ -9,6 +9,8 @@ angular.module('donacion')
     var eliminarUrl = global.getApiUrl() + '/donaciones/eliminar/';
 
     var editarUrl = global.getApiUrl() + '/donaciones/editar/';
+
+    var proxDonacionUrl = global.getApiUrl() + '/donaciones/proxima-donacion/' + ProfileService.getUserId();
 
     function infoDonacion() {
       return $resource(
@@ -104,6 +106,18 @@ angular.module('donacion')
       })
     }
 
+    function getDiasProxDonacion() {
+      return $resource(
+        proxDonacionUrl,
+        {},
+        {
+          query: {
+            method: 'GET',
+            isArray: false
+          }
+        }
+      );
+    }
 
     return {
 
@@ -141,6 +155,10 @@ angular.module('donacion')
 
       eliminarDonacion: function (idDonacion) {
         return eliminarDonacion(idDonacion);
+      },
+
+      getDiasProxDonacion: function () {
+        return getDiasProxDonacion();
       }
     }
 

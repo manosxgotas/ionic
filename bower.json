@@ -31,6 +31,7 @@
     "angular-base64": "^2.0.5",
     "robotodraft": "^1.1.0",
     "ng-flow": "~2",
-    "moment": "^2.14.1"
+    "moment": "^2.14.1",
+    "angular-loading-bar": "^0.9.0"
   }
 }

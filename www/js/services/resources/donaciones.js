@@ -10,8 +10,6 @@ angular.module('donacion')
 
     var editarUrl = global.getApiUrl() + '/donaciones/editar/';
 
-    var proxDonacionUrl = global.getApiUrl() + '/donaciones/proxima-donacion/' + ProfileService.getUserId();
-
     function infoDonacion() {
       return $resource(
         infoUrl,
@@ -107,6 +105,8 @@ angular.module('donacion')
     }
 
     function getDiasProxDonacion() {
+      var proxDonacionUrl = global.getApiUrl() + '/donaciones/proxima-donacion/' + ProfileService.getUserId();
+
       return $resource(
         proxDonacionUrl,
         {},

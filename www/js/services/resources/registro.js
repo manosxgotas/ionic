@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('RegistroService', function (global, $http, $filter) {
+  .factory('RegistroService', function (global,$http,$location,$filter) {
     var url = global.getApiUrl() + "/cuentas/registro/";
 
     function registrarse(datosDonante){
@@ -26,8 +26,11 @@ angular.module('donacion')
       }).success(function (data) {
         console.log(data);
         console.log('Registro realizado con éxito');
+         $location.path('/registroExito');
+
       }).error(function(data) {
-        console.log(data)
+        console.log(data);
+        console.log('hubo un error en el registro');
       });
   }
 

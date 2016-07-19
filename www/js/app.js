@@ -76,4 +76,11 @@ angular.module('donacion', [
         templateUrl: "templates/donaciones/editar-donacion.html",
         controller: "EditarDonacionController",
       })
+
+        .state('registro-exito', {
+        cache: false,
+        url: "/registro-exito",
+        templateUrl: "templates/cuentas/registro-exito.html",
+        controller: "",
+      })
   });

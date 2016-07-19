@@ -26,7 +26,7 @@ angular.module('donacion')
       }).success(function (data) {
         console.log(data);
         console.log('Registro realizado con éxito');
-         $location.path('/registroExito');
+         $location.path('/registro-exito');
 
       }).error(function(data) {
         console.log(data);

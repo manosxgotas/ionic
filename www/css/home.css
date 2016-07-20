@@ -1,0 +1,26 @@
+.jumbotron-home {
+  background-color: #FB404B !important;
+}
+
+.jumbotron-title {
+  font-size: 90px !important;
+  color: white !important;
+  text-shadow: 4px 3px 0 #FB404B,9px 8px 0 rgba(0,0,0,0.15);
+}
+
+.jumbotron-subtitle {
+  color: white !important;
+  margin-top: 40px !important;
+}
+
+.jumbotron-button {
+  color: white !important;
+  border-color: white !important;
+  font-size: 24px !important;
+  margin-top: 30px !important;
+}
+
+.footer-home {
+  margin-top: 60px !important;
+  background-color: #FB404B !important;
+}

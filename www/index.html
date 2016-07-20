@@ -8,6 +8,8 @@
 
     <link href="css/sidebar.css" rel="stylesheet">
     <link href="css/uib-angular.css" rel="stylesheet">
+    <link href="css/nav-home.css" rel="stylesheet">
+    <link href="css/home.css" rel="stylesheet">
 
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
     <link href="bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
@@ -32,124 +34,7 @@
 
   <body ng-app="donacion">
 
-    <div class="wrapper" ng-controller="NavController">
-      <div class="sidebar" data-color="red">
-
-        <div class="sidebar-wrapper">
-          <div class="logo">
-            <a href="http://www.creative-tim.com" class="simple-text">
-              Manos por gotas
-            </a>
-          </div>
-
-          <div class="avatar-container" ng-show="is_logged">
-            <img class="avatar-sidebar" ng-src="{{fotoUsuario}}">
-            <div class="title">
-              <a data-toggle="collapse" href="#collapseAvatar">
-                <p>
-                  {{nombreUsuario}}
-                  <b class="caret"></b>
-                </p>
-              </a>
-
-              <div class="collapse" id="collapseAvatar">
-                <ul class="nav">
-                  <li>
-                    <a ui-sref="perfil">Mi perfil</a>
-                  </li>
-                  <li>
-                    <a ui-sref="perfil-edit">Editar perfil</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <ul class="nav">
-            <li ng-show="is_logged">
-              <a ui-sref="libreta">
-                <i class="pe-7s-notebook"></i>
-                <p>Libreta de donación</p>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="main-panel">
-          <nav class="navbar navbar-default navbar-fixed">
-            <div class="container-fluid">
-              <!-- Brand and toggle get grouped for better mobile display -->
-              <div class="navbar-header">
-               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                 <span class="sr-only">Toggle navigation</span>
-                 <span class="icon-bar"></span>
-                 <span class="icon-bar"></span>
-                 <span class="icon-bar"></span>
-               </button>
-              </div>
-
-             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-               <ul class="nav navbar-nav navbar-left">
-                 <li><a id="loading-bar-container"></a></li>
-               </ul>
-               <ul class="nav navbar-nav navbar-right" ng-hide="is_logged">
-                 <li><a ui-sref="login">Iniciar sesión</a></li>
-                 <li><a ui-sref="registro">Registrarse</a></li>
-               </ul>
-
-               <ul class="nav navbar-nav navbar-right" ng-show="is_logged">
-                 <li>
-                   <a style="color: #9A9A9A; border: solid 2px #9A9A9A; border-radius: 3px" popover-trigger="mouseenter" popover-placement="bottom-right" uib-popover="{{diasProxDonacion}} días para tu próxima donación." ng-show="diasProxDonacion > 0">
-                     <i class="fa fa-clock-o fa-fw"></i>&nbsp; {{diasProxDonacion}}
-                   </a>
-                   <a style="color: #FB404B; border: solid 2px #FB404B; border-radius: 3px;" popover-trigger="mouseenter" popover-placement="bottom-right" uib-popover="¡Ya puedes donar!" ui-sref="libreta" ng-show="diasProxDonacion == 0">
-                     <i class="fa fa-tint fa-fw"></i>&nbsp; ¡Doná!
-                   </a>
-                 </li>
-
-
-                 <li>
-                   <a ng-click="logoff()">
-                     <i class="fa fa-sign-out fa-fw"></i>&nbsp; Cerrar sesión
-                   </a>
-                 </li>
-
-               </ul>
-             </div>
-           </div>
-         </nav>
-
-        <div class="content">
-          <div class="container-fluid">
-            <div id="view-content" ui-view>
-
-            </div>
-          </div>
-        </div>
-
-        <footer class="footer">
-          <div class="container-fluid">
-            <nav class="pull-left">
-              <ul>
-                <li>
-                  <a href="#">
-                    Home
-                  </a>
-                </li>
-
-              </ul>
-            </nav>
-            <p class="copyright pull-right">
-              MANOS POR GOTAS 2016. Sistema de donación de sangre.
-            </p>
-          </div>
-        </footer>
-
-      </div>
-    </div>
-
+    <div ui-view></div>
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -163,7 +48,7 @@
 
     <!-- Controllers -->
 
-    <script src="js/controllers/nav.js"></script>
+    <script src="js/controllers/nav-dashboard.js"></script>
     <script src="js/controllers/login.js"></script>
     <script src="js/controllers/registro.js"></script>
     <script src="js/controllers/profile.js"></script>

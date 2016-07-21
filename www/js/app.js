@@ -34,6 +34,7 @@ angular.module('donacion', [
         url: "/",
         abstract: true,
         templateUrl: "templates/home/nav-home.html",
+        controller: "NavHomeController"
       })
 
       .state('home.inicio', {
@@ -41,18 +42,8 @@ angular.module('donacion', [
         url: "home",
         views: {
           "homeContent": {
-            templateUrl: "templates/home/inicio.html"
-          }
-        }
-      })
-
-      .state('home.login', {
-        cache: false,
-        url: "/login",
-        views: {
-          "homeContent": {
-            templateUrl: "templates/cuentas/login.html",
-            controller: "LoginController"
+            templateUrl: "templates/home/inicio.html",
+            controller: "InicioController"
           }
         }
       })

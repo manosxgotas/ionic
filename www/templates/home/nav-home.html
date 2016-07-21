@@ -9,14 +9,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" ui-sref="home.inicio">
-          <i class="fa fa-tint fa-xs" aria-hidden="true"></i>&nbsp;Manos por gotas
+        <div>
+        <a ui-sref="home.inicio">
+          <img style="margin-top: 10px; margin-right: 25px" src="../../img/manosxgotas-titulo.png">
         </a>
+        </div>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav" style="height: 50px; border-left: 1px solid #E1373E">
           <li>
             <a ui-sref="home.inicio">
               <i class="fa fa-home" aria-hidden="true"></i>
@@ -24,9 +26,39 @@
             </a>
           </li>
 
+          <li class="dropdown">
+            <a ui-sref="home.inicio" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-tint" aria-hidden="true"></i>
+              &nbsp;Sangre
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li role="separator" class="divider"></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a ui-sref="home.inicio" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-list-ol" aria-hidden="true"></i>
+              &nbsp;¿Cómo donar?
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li role="separator" class="divider"></li>
+            </ul>
+          </li>
+
+          <li>
+            <a ui-sref="home.inicio">
+              <i class="fa fa-edit" aria-hidden="true"></i>
+              &nbsp;Solicitudes donación
+            </a>
+          </li>
         </ul>
 
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" style="border-left: 1px solid #E1373E">
           <li style="margin-right: 3px">
             <a ui-sref="home.login">
               <i class="fa fa-sign-in" aria-hidden="true"></i>

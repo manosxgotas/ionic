@@ -1,15 +1,12 @@
-.navbar-home .navbar-brand, .navbar-home .navbar-nav > li > a:not(.btn) {
+.navbar-home .navbar-brand, .navbar-home .navbar-nav > li > a {
   color: white; !important;
   margin: 0 !important;
-  border-radius: 2px;
+  height: 50px !important;
+  padding: 15px 15px 10px 15px !important;
 }
 
 .navbar-home .navbar-nav > .open > a:hover, .navbar-home .navbar-nav > .open > a:focus {
   color: white !important;
-}
-
-.navbar-home .navbar-nav > li {
-  padding-top: 6px !important;
 }
 
 .navbar-home .navbar-brand:hover, .navbar-home .navbar-brand:focus {

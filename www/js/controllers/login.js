@@ -1,10 +1,13 @@
 angular.module('donacion')
-  .controller('LoginController', function ($http, $scope, AuthService) {
+  .controller('LoginController', function ($http, $scope, AuthService, $uibModalInstance) {
 
-      $scope.credentials = {};
+    $scope.credentials = {};
 
-      $scope.login = function() {
-        AuthService.login($scope.credentials);
-      }
+    $scope.login = function() {
+      AuthService.login($scope.credentials);
+    }
 
-  });
+    $scope.close = function () {
+      $uibModalInstance.dismiss('cerrar');
+    };
+});

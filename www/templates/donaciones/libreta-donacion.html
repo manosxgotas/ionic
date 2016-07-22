@@ -6,7 +6,7 @@
           <div class="header">
             <h4 class="title">Libreta de donación
               <div class="pull-right">
-                <a class="btn btn-fill btn-danger btn-sm" ui-sref="registrar-donacion" ng-cloak>
+                <a class="btn btn-fill btn-danger btn-sm" ui-sref="dashboard.registrar-donacion" ng-cloak>
                   <span class="fa fa-tint" aria-hidden="true"></span>
                   <span class='hidden-xs'>Nueva donación</span>
                 </a>
@@ -52,7 +52,7 @@
                     <button popover-trigger="mouseenter" popover-placement="top" uib-popover="Visualizar" type="button" class="btn btn-default">
                       <span class="fa fa-eye"></span>
                     </button>
-                    <button ui-sref="editar-donacion({donacionID: donacion.id})" popover-trigger="mouseenter" popover-placement="top" uib-popover="Editar" type="button" class="btn btn-fill btn-default">
+                    <button ui-sref="dashboard.editar-donacion({donacionID: donacion.id})" popover-trigger="mouseenter" popover-placement="top" uib-popover="Editar" type="button" class="btn btn-fill btn-default">
                       <span class="fa fa-edit"></span>
                     </button>
                     <button popover-trigger="mouseenter" popover-placement="top" ng-click="abrirModal(donacion.id)" uib-popover="Eliminar" type="button" class="btn btn-fill btn-danger">

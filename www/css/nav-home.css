@@ -21,7 +21,7 @@
   background-color: #E1373E !important;
 }
 
-a:hover {
+.navbar-home a:hover {
   color: white !important;
 }
 

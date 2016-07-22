@@ -11,7 +11,7 @@
         </button>
         <div>
         <a ui-sref="home.inicio">
-          <img style="margin-top: 10px; margin-right: 25px" src="../../img/manosxgotas-titulo.png">
+          <img style="margin-top: 10px; margin-right: 15px" src="../../img/manosxgotas-titulo.png">
         </a>
         </div>
       </div>
@@ -19,13 +19,6 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav" style="height: 50px; border-left: 1px solid #E1373E">
-          <li>
-            <a ui-sref="home.inicio">
-              <i class="fa fa-home" aria-hidden="true"></i>
-              &nbsp;Inicio
-            </a>
-          </li>
-
           <li class="dropdown">
             <a ui-sref="home.inicio" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-tint" aria-hidden="true"></i>
@@ -33,8 +26,32 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
+              <li>
+                <a href="#">
+                  ¿Qué es la sangre?
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  ¿Para qué se utiliza?
+                </a>
+              </li>
               <li role="separator" class="divider"></li>
+              <li>
+                <a href="#">
+                  Grupos sanguíneos
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  Tratamiento de la sangre
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  Ley nacional de sangre
+                </a>
+              </li>
             </ul>
           </li>
 
@@ -45,15 +62,41 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
+              <li>
+                <a href="#">
+                  ¿Quiénes pueden donar?
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  ¿Dónde donar?
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  Recomendaciones y requisitos
+                </a>
+              </li>
               <li role="separator" class="divider"></li>
+              <li>
+                <a href="#">
+                  Proceso de donación
+                </a>
+              </li>
             </ul>
           </li>
 
           <li>
             <a ui-sref="home.inicio">
               <i class="fa fa-edit" aria-hidden="true"></i>
-              &nbsp;Solicitudes donación
+              &nbsp;Solicitudes
+            </a>
+          </li>
+
+          <li>
+            <a ui-sref="home.inicio">
+              <i class="fa fa-group" aria-hidden="true"></i>
+              &nbsp;¿Quiénes somos?
             </a>
           </li>
         </ul>
@@ -62,14 +105,14 @@
           <li style="margin-right: 3px">
             <a href="" ng-click="openLoginModal()">
               <i class="fa fa-sign-in" aria-hidden="true"></i>
-              &nbsp;Iniciar sesión
+              <span class="hidden-md">&nbsp;Iniciar sesión</span>
             </a>
           </li>
 
           <li>
             <a type="button" ui-sref="home.registro" class="btn btn-default btn-registro-home">
               <i class="fa fa-user-plus" aria-hidden="true"></i>
-              &nbsp;Registrarse
+              <span class="hidden-md">&nbsp;Registrarse</span>
             </a>
           </li>
         </ul>

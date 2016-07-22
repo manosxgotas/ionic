@@ -1,4 +1,5 @@
 .navbar-home .navbar-brand, .navbar-home .navbar-nav > li > a {
+  font-size: 14px !important;
   color: white; !important;
   margin: 0 !important;
   height: 50px !important;
@@ -35,7 +36,7 @@
   margin: 0 !important;
   color: white !important;
   border-color: white !important;
-  font-size: 16px !important;
+  font-size: 14px !important;
 }
 
 .navbar-home .nav .dropdown a:hover, .navbar-home .nav .dropdown a:focus {

@@ -3,15 +3,15 @@
 
     <div class="sidebar-wrapper">
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text">
-          Manos por gotas
+        <a class="simple-text" ui-sref="home.inicio" href="">
+          <img src="../img/manosxgotas-titulo.png">
         </a>
       </div>
 
       <div class="avatar-container" ng-show="is_logged">
         <img class="avatar-sidebar" ng-src="{{fotoUsuario}}">
         <div class="title">
-          <a data-toggle="collapse" href="#collapseAvatar">
+          <a href="" data-toggle="collapse" data-target="#collapseAvatar">
             <p>
               {{nombreUsuario}}
               <b class="caret"></b>
@@ -73,8 +73,9 @@
 
 
             <li>
-              <a ng-click="logoff()">
-                <i class="fa fa-sign-out fa-fw"></i>&nbsp; Cerrar sesión
+              <a href="" ng-click="logoff()">
+                <i class="fa fa-sign-out fa-fw"></i>
+                &nbsp; Cerrar sesión
               </a>
             </li>
 
@@ -96,15 +97,15 @@
         <nav class="pull-left">
           <ul>
             <li>
-              <a href="#">
+              <a href="" ui-sref="home.inicio">
                 Home
               </a>
             </li>
 
           </ul>
         </nav>
-        <p class="copyright pull-right">
-          MANOS POR GOTAS 2016. Sistema de donación de sangre.
+        <p class="copyright pull-right text-uppercase">
+          Sistema de donación de sangre
         </p>
       </div>
     </footer>

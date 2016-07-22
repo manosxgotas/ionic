@@ -11,9 +11,8 @@
     </a>
   </div>
 </div>
-<div class="modal-body">
-  <form name="validateLogin" role="form" class="form-horizontal" ng-submit="login()" novalidate>
-
+<form name="validateLogin" role="form" class="form-horizontal" ng-submit="login()" novalidate>
+  <div class="modal-body">
     <div class="form-group">
 
       <label for="username" class="col-sm-2 control-label">Usuario</label>
@@ -38,13 +37,13 @@
            class="help-block"> Debe ingresar una contraseña. </p>
       </div>
     </div>
-  </form>
   <p class="text-center" style="font-size: 12px">
     Si no posees una cuenta <a ui-sref="home.registro" ng-click="close()"><span class="label label-danger" style="font-size: 12px;">regístrate</span></a>
   </p>
-</div>
-<div class="modal-footer">
-  <button type="submit" class="btn btn-danger btn-fill" ng-disabled="validateLogin.$invalid">
-    <i class="fa fa-sign-in"></i>Iniciar sesión
-  </button>
-</div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-danger btn-fill" ng-disabled="validateLogin.$invalid">
+      <i class="fa fa-sign-in"></i>Iniciar sesión
+    </button>
+  </div>
+</form>

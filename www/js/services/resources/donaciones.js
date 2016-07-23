@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('DonacionesService', function (global, $http, $resource, $location, $filter, ProfileService) {
+  .factory('DonacionesService', function (global, $http, $resource, $location, $state, $filter, ProfileService) {
 
     var infoUrl = global.getApiUrl() + '/donaciones/:id';
 
@@ -49,7 +49,7 @@ angular.module('donacion')
           return fd;
         }
       }).success(function (response) {
-        $location.path('/libreta')
+        $state.transitionTo('dashboard.libreta');
       }).error(function (response, data) {
         console.log(response);
         console.log(data);

@@ -1,0 +1,124 @@
+<div class="wrapper">
+  <div class="sidebar" data-color="red">
+
+    <div class="sidebar-wrapper">
+      <div class="logo">
+        <a class="simple-text" ui-sref="home.inicio" href="">
+          <img src="../img/manosxgotas-titulo.png">
+        </a>
+      </div>
+
+      <div class="avatar-container" ng-show="is_logged">
+        <img class="avatar-sidebar" ng-src="{{fotoUsuario}}">
+        <div class="title">
+          <a href="" data-toggle="collapse" data-target="#collapseAvatar">
+            <p>
+              {{nombreUsuario}}
+              <b class="caret"></b>
+            </p>
+          </a>
+
+          <div class="collapse" id="collapseAvatar">
+            <ul class="nav">
+              <li>
+                <a ui-sref="dashboard.perfil">Mi perfil</a>
+              </li>
+              <li>
+                <a ui-sref="dashboard.perfil-edit">Editar perfil</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <ul class="nav">
+        <li ng-show="is_logged">
+          <a ui-sref="dashboard.libreta">
+            <i class="pe-7s-notebook"></i>
+            <p>Libreta de donación</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="main-panel">
+    <nav class="navbar navbar-default navbar-fixed">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+          <ul class="nav navbar-nav navbar-left">
+            <li><a id="loading-bar-container"></a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right" ng-show="is_logged">
+            <li>
+              <a style="color: #9A9A9A; border: solid 2px #9A9A9A; border-radius: 3px" popover-trigger="mouseenter" popover-placement="bottom-right" uib-popover="{{diasProxDonacion}} días para tu próxima donación." ng-show="diasProxDonacion > 0">
+                <i class="fa fa-clock-o fa-fw"></i>&nbsp; {{diasProxDonacion}}
+              </a>
+              <a style="color: #FB404B; border: solid 2px #FB404B; border-radius: 3px;" popover-trigger="mouseenter" popover-placement="bottom-right" uib-popover="¡Ya puedes donar!" ui-sref="dashboard.libreta" ng-show="diasProxDonacion == 0">
+                <i class="fa fa-tint fa-fw"></i>&nbsp; ¡Doná!
+              </a>
+            </li>
+
+
+            <li>
+              <a href="" ng-click="logoff()">
+                <i class="fa fa-sign-out fa-fw"></i>
+                &nbsp; Cerrar sesión
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="content">
+      <div class="container-fluid">
+        <div name="dashboardContent" ui-view>
+
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container-fluid">
+        <nav class="pull-left">
+          <ul>
+            <li>
+              <a href="" ui-sref="home.inicio">
+                Home
+              </a>
+            </li>
+
+          </ul>
+        </nav>
+        <p class="copyright pull-right text-uppercase">
+          Sistema de donación de sangre
+        </p>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+<!-- Light Bootstrap Dashboard -->
+
+<script src="../components/light-bootstrap-dashboard/assets/js/light-bootstrap-dashboard.js"></script>
+
+<!--  Charts Plugin -->
+<script src="../components/light-bootstrap-dashboard/assets/js/chartist.min.js"></script>
+
+<!--  Notifications Plugin    -->
+<script src="../components/light-bootstrap-dashboard/assets/js/bootstrap-notify.js"></script>

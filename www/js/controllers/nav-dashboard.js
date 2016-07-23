@@ -1,5 +1,5 @@
 angular.module('donacion')
-  .controller('NavController', function ($http, $scope, $rootScope, $sce, ProfileService, LogoffService, DonacionesService) {
+  .controller('NavDashboardController', function ($http, $scope, $rootScope, $sce, ProfileService, LogoffService, DonacionesService) {
 
     $rootScope.$on('isLoggedEvent', function(args) {
 

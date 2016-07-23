@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('AuthService', function (global, $http, $location, $rootScope, localStorageService, ProfileService) {
+  .factory('AuthService', function (global, $http, $rootScope, $state, localStorageService, ProfileService) {
 
     function getToken(credentials) {
       var url = global.getApiUrl() + "/cuentas/token/";
@@ -18,10 +18,13 @@ angular.module('donacion')
           var profile = ProfileService.getProfile().get({}, function () {
             $rootScope.nombre = profile.usuario.first_name;
             $rootScope.apellido = profile.usuario.last_name;
+            $rootScope.nombreUsuario = $rootScope.nombre + ' ' + $rootScope.apellido;
             $rootScope.foto = profile.foto;
           });
+        $rootScope.is_logged = true;
+        $state.transitionTo('dashboard');
         $rootScope.$emit('isLoggedEvent', [true]);
-
+        console.log($rootScope)
         }).error(function (data) {
         console.log(data);
       });
@@ -38,9 +41,9 @@ angular.module('donacion')
       var token = localStorageService.get('Token');
       var url = global.getApiUrl() + "/cuentas/verificar-token/";
 
-      if (!token) {
+      if (token == undefined) {
         $rootScope.$emit('isLoggedEvent', [false]);
-        $location.path('/login');
+        $state.transitionTo('home.inicio');
       } else {
         var authdata = token.substring(5);
         $http({
@@ -60,7 +63,7 @@ angular.module('donacion')
         }).error(function () {
           $rootScope.$emit('isLoggedEvent', [false]);
           console.log("El token de autentificación es inválido");
-          $location.path('/login');
+          $state.transitionTo('home.inicio');
         });
       }
     }

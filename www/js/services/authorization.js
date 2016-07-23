@@ -18,13 +18,13 @@ angular.module('donacion')
           var profile = ProfileService.getProfile().get({}, function () {
             $rootScope.nombre = profile.usuario.first_name;
             $rootScope.apellido = profile.usuario.last_name;
+            $rootScope.nombreUsuario = $rootScope.nombre + ' ' + $rootScope.apellido;
             $rootScope.foto = profile.foto;
           });
-        $rootScope.nombreUsuario = $rootScope.nombre + ' ' + $rootScope.apellido;
         $rootScope.is_logged = true;
         $state.transitionTo('dashboard');
         $rootScope.$emit('isLoggedEvent', [true]);
-
+        console.log($rootScope)
         }).error(function (data) {
         console.log(data);
       });

@@ -59,6 +59,14 @@ angular.module('donacion', [
         }
       })
 
+      .state('home.registro-exito', {
+        cache: false,
+        url: "/registro-exito",
+        "homeContent": {
+          templateUrl: "templates/cuentas/registro-exito.html",
+        }
+      })
+
       .state('dashboard', {
         cache: false,
         url: "/dashboard",

@@ -22,58 +22,102 @@ angular.module('donacion', [
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 
     $resourceProvider.defaults.stripTrailingSlashes = false;
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/home");
 
     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
     cfpLoadingBarProvider.spinnerTemplate = '<span class="fa fa-lg fa-spinner fa-pulse"></span>';
 
     $stateProvider
-      .state('login', {
+
+      .state('home', {
         cache: false,
-        url: "/login",
-        templateUrl: "templates/cuentas/login.html",
-        controller: "LoginController"
+        url: "/",
+        abstract: true,
+        templateUrl: "templates/home/nav-home.html",
+        controller: "NavHomeController"
       })
 
-      .state('registro', {
+      .state('home.inicio', {
+        cache: false,
+        url: "home",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/inicio.html",
+            controller: "InicioController"
+          }
+        }
+      })
+
+      .state('home.registro', {
         cache: false,
         url: "/registro",
-        templateUrl: "templates/cuentas/registro.html",
-        controller: "RegistroController"
+        views: {
+          "homeContent": {
+            templateUrl: "templates/cuentas/registro.html",
+            controller: "RegistroController"
+          }
+        }
       })
 
-      .state('perfil', {
+      .state('dashboard', {
+        cache: false,
+        url: "/dashboard",
+        templateUrl: "templates/nav-dashboard.html",
+        controller: "NavDashboardController"
+      })
+
+      .state('dashboard.perfil', {
         cache: false,
         url: "/perfil",
-        templateUrl: "templates/donantes/perfil.html",
-        controller: "ProfileController"
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/donantes/perfil.html",
+            controller: "ProfileController"
+          }
+        }
       })
 
-      .state('perfil-edit', {
+      .state('dashboard.perfil-edit', {
         cache: false,
         url: "/perfil/edit",
-        templateUrl: "templates/donantes/perfil-edit.html",
-        controller: "ProfileEditController",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/donantes/perfil-edit.html",
+            controller: "ProfileEditController",
+          }
+        }
       })
 
-      .state('libreta', {
+      .state('dashboard.libreta', {
         cache: false,
         url: "/libreta",
-        templateUrl: "templates/donaciones/libreta-donacion.html",
-        controller: "LibretaController",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/donaciones/libreta-donacion.html",
+            controller: "LibretaController",
+          }
+        }
       })
 
-      .state('registrar-donacion', {
+      .state('dashboard.registrar-donacion', {
         cache: false,
         url: "/donacion/registro",
-        templateUrl: "templates/donaciones/registrar-donacion.html",
-        controller: "RegistrarDonacionController",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/donaciones/registrar-donacion.html",
+            controller: "RegistrarDonacionController",
+          }
+        }
       })
 
-      .state('editar-donacion', {
+      .state('dashboard.editar-donacion', {
         cache: false,
         url: "/donacion/editar/:donacionID",
-        templateUrl: "templates/donaciones/editar-donacion.html",
-        controller: "EditarDonacionController",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/donaciones/editar-donacion.html",
+            controller: "EditarDonacionController",
+          }
+        }
       })
   });

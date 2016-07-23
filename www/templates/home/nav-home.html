@@ -1,0 +1,151 @@
+<nav class="navbar navbar-home">
+  <div class="container">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false" style="height: 30px;">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div>
+        <a ui-sref="home.inicio">
+          <img style="margin-top: 10px; margin-right: 15px" src="../../img/manosxgotas-titulo.png">
+        </a>
+        </div>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+        <ul class="nav navbar-nav" style="height: 50px; border-left: 1px solid #E1373E">
+          <li class="dropdown">
+            <a ui-sref="home.inicio" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-tint" aria-hidden="true"></i>
+              &nbsp;Sangre
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#">
+                  ¿Qué es la sangre?
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  ¿Para qué se utiliza?
+                </a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <a href="#">
+                  Grupos sanguíneos
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  Tratamiento de la sangre
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  Ley nacional de sangre
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a ui-sref="home.inicio" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-list-ol" aria-hidden="true"></i>
+              &nbsp;¿Cómo donar?
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#">
+                  ¿Quiénes pueden donar?
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  ¿Dónde donar?
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  Recomendaciones y requisitos
+                </a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <a href="#">
+                  Proceso de donación
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a ui-sref="home.inicio">
+              <i class="fa fa-edit" aria-hidden="true"></i>
+              &nbsp;Solicitudes
+            </a>
+          </li>
+
+          <li>
+            <a ui-sref="home.inicio">
+              <i class="fa fa-group" aria-hidden="true"></i>
+              &nbsp;¿Quiénes somos?
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right" style="border-left: 1px solid #E1373E">
+          <li style="margin-right: 3px">
+            <a href="" ng-click="openLoginModal()">
+              <i class="fa fa-sign-in" aria-hidden="true"></i>
+              <span class="hidden-md">&nbsp;Iniciar sesión</span>
+            </a>
+          </li>
+
+          <li>
+            <a type="button" ui-sref="home.registro" class="btn btn-default btn-registro-home">
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
+              <span class="hidden-md">&nbsp;Registrarse</span>
+            </a>
+          </li>
+        </ul>
+
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </div>
+</nav>
+
+<div name="homeContent" ui-view></div>
+
+<footer class="footer footer-home">
+  <div class="container text-center" style="padding-top: 50px; padding-bottom: 50px">
+
+    <div class="row">
+      <img src="../../img/tecnologias/angular.png">
+      <img src="../../img/tecnologias/bootstrap.png">
+      <img src="../../img/tecnologias/django.png">
+      <img src="../../img/tecnologias/postgresql.png">
+    </div>
+
+    <div class="row">
+      <div class="hidden-md hidden-lg">
+        <a target="_blank" href="https://github.com/manosxgotas">
+          <img src="../../img/tecnologias/github-color.png">
+        </a>
+      </div>
+      <div style="margin-top: 10px" class="visible-md visible-lg">
+        <a target="_blank" href="https://github.com/manosxgotas">
+          <img src="../../img/tecnologias/github-color.png">
+        </a>
+      </div>
+    </div>
+
+  </div>
+</footer>

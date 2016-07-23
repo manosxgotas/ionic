@@ -1,0 +1,60 @@
+/* Small devices (tablets, 768px and up) */
+
+@media (max-width: 349px) {
+  .jumbotron-title {
+    font-size: 32px !important;
+  }
+}
+
+@media (min-width: 350px) {
+  .jumbotron-title {
+    font-size: 38px !important;
+  }
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 520px) {
+  .jumbotron-title {
+    font-size: 60px !important;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .jumbotron-title {
+    font-size: 80px !important;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .jumbotron-title {
+    font-size: 90px !important;
+  }
+}
+
+.jumbotron-home {
+  background-color: #FB404B !important;
+}
+
+.jumbotron-title {
+  color: white !important;
+  text-shadow: 4px 3px 0 #FB404B,9px 8px 0 rgba(0,0,0,0.15);
+}
+
+.jumbotron-subtitle {
+  color: white !important;
+  margin-top: 40px !important;
+}
+
+.jumbotron-button {
+  color: white !important;
+  border-color: white !important;
+  font-size: 24px !important;
+  margin-top: 30px !important;
+}
+
+.footer-home {
+  margin-top: 60px !important;
+  background-color: #FB404B !important;
+}

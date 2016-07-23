@@ -2,7 +2,6 @@
   <form name="formRegistro" class="form-horizontal" ng-submit="signup()" novalidate>
 
     <div class='col-sm-12'>
-      <div class="card">
         <div class='header' style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;'>
           <h4 class='title'>
             <span class="fa fa-user-plus fa-lg" aria-hidden="true"></span>
@@ -233,14 +232,13 @@
           <div class="form-group">
             <div class="col-sm-10">
               <div class="pull-right">
-                <button type="submit" class="btn btn-success" ng-disabled="formRegistro.$invalid">
+                <button type="submit" class="btn btn-danger btn-fill" ng-disabled="formRegistro.$invalid">
                   <i class="fa fa-user-plus"></i> Registrarse
                 </button>
               </div>
             </div>
           </div>
         </div>
-      </div>
     </div>
   </form>
 </div>

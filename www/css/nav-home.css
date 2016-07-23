@@ -1,0 +1,48 @@
+.navbar-home .navbar-brand, .navbar-home .navbar-nav > li > a {
+  font-size: 14px !important;
+  color: white; !important;
+  margin: 0 !important;
+  height: 50px !important;
+  padding: 15px 15px 10px 15px !important;
+}
+
+.navbar-home .navbar-nav > .open > a:hover, .navbar-home .navbar-nav > .open > a:focus {
+  color: white !important;
+}
+
+.navbar-home .navbar-brand:hover, .navbar-home .navbar-brand:focus {
+  color: white !important;
+}
+
+.navbar-home .navbar-nav > li > a:focus:not(.btn), .navbar-home .navbar-nav > .active > a:hover:not(.btn), .navbar-home .navbar-nav > li > a:hover:not(.btn), .navbar-home .navbar-nav > li > a:focus:not(.btn) {
+  color: white !important;
+}
+
+.navbar-home .navbar-nav > li > a:focus:not(.btn) {
+  background-color: #E1373E !important;
+}
+
+.navbar-home a:hover {
+  color: white !important;
+}
+
+.navbar-home {
+  margin-bottom: 0 !important;
+  background-color: #FB404B !important;
+  border-bottom: solid 1px #E1373E !important;
+}
+
+.btn-registro-home {
+  margin: 0 !important;
+  color: white !important;
+  border-color: white !important;
+  font-size: 14px !important;
+}
+
+.navbar-home .nav .dropdown a:hover, .navbar-home .nav .dropdown a:focus {
+  background-color: #FB404B;
+}
+
+.navbar-home .nav .open > a {
+  background-color: #E1373E;
+}

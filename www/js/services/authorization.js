@@ -19,7 +19,7 @@ angular.module('donacion')
             $rootScope.nombre = profile.usuario.first_name;
             $rootScope.apellido = profile.usuario.last_name;
             $rootScope.nombreUsuario = $rootScope.nombre + ' ' + $rootScope.apellido;
-            $rootScope.foto = profile.foto;
+            $rootScope.fotoUsuario = profile.foto;
           });
         $rootScope.is_logged = true;
         $state.transitionTo('dashboard');

@@ -4,7 +4,9 @@
       <div class="col-md-12">
         <div class="card">
           <div class="header">
-            <h4 class="title">Libreta de donación
+            <h4 class="title">
+              <span class="fa fa-book fa-lg"></span>
+              &nbsp;&nbsp;Libreta de donación
               <div class="pull-right">
                 <a class="btn btn-fill btn-danger btn-sm" ui-sref="dashboard.registrar-donacion" ng-cloak>
                   <span class="fa fa-tint" aria-hidden="true"></span>
@@ -42,10 +44,16 @@
                 <td ng-show="donacion.centroDonacion != undefined">{{donacion.centroDonacion.nombre}}</td>
                 <td ng-show="donacion.evento != undefined">{{donacion.evento.nombre}}</td>
                 <td>
-                  {{donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre}}
-                  <button ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Pendiente'" popover-trigger="mouseenter" popover-placement="top" uib-popover="Verifica tu donación" class="btn btn-xs btn-success">
+                  <button ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Sin verificar'" popover-trigger="mouseenter" popover-placement="top" uib-popover="Verifica tu donación" class="btn btn-xs btn-success">
                     <span class="fa fa-key"></span>
                   </button>
+                  <button ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Pendiente'" popover-trigger="mouseenter" popover-placement="top" uib-popover="Tu donación está siendo evaluada" class="btn btn-xs btn-warning">
+                    <span class="fa fa-clock-o"></span>
+                  </button>
+                  <span ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Verificada'" class="btn btn-xs" style="cursor: default;">
+                    <span class="fa fa-unlock"></span>
+                  </span>
+                  &nbsp;{{donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre}}
                 </td>
                 <td>
                   <div class="btn-group btn-group-sm" role="group">

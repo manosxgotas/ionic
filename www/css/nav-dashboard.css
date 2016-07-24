@@ -1,0 +1,23 @@
+.sidebar-image {
+  background-image: url("../img/fondo-sidebar.png");
+  background-size: cover;
+  background-position: center center;
+  display: block;
+}
+
+.prox-donacion-time {
+  color: #9A9A9A !important;
+  border: solid 2px #9A9A9A;
+  border-radius: 3px;
+  margin: 8px 5px !important;
+}
+.prox-donacion-donar {
+  color: #FB404B !important;
+  border: solid 2px #FB404B;
+  border-radius: 3px;
+  margin: 8px 5px !important;
+}
+
+.navbar-dashboard a:not(.btn):hover {
+  color: #FB404B !important;
+}

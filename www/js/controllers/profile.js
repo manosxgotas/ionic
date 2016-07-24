@@ -21,9 +21,38 @@ angular.module('donacion')
             break;
         }
 
+        $scope.imagenGS = '../img/fondos-perfil/nada1.png';
+
         if (profile.grupoSanguineo != null) {
-            $scope.perfil.gs = profile.grupoSanguineo.nombre;
+          $scope.perfil.gs = profile.grupoSanguineo.nombre;
+
+          switch($scope.perfil.gs) {
+            case 'O+':
+              $scope.imagenGS = '../img/fondos-perfil/O+.png';
+              break;
+            case 'A+':
+              $scope.imagenGS = '../img/fondos-perfil/A+.png';
+              break;
+            case 'B+':
+              $scope.imagenGS = '../img/fondos-perfil/B+.png';
+              break;
+            case 'AB+':
+              $scope.imagenGS = '../img/fondos-perfil/AB+.png';
+              break;
+            case 'O-':
+              $scope.imagenGS = '../img/fondos-perfil/O-.png';
+              break;
+            case 'A-':
+              $scope.imagenGS = '../img/fondos-perfil/A-.png';
+              break;
+            case 'B-':
+              $scope.imagenGS = '../img/fondos-perfil/B-.png';
+              break;
+            case 'AB-':
+              $scope.imagenGS = '../img/fondos-perfil/AB-.png';
+              break;
           }
+        }
         $scope.perfil.correo = profile.usuario.email;
         $scope.perfil.peso = profile.peso;
         $scope.perfil.altura = profile.altura;

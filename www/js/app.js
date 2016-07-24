@@ -50,7 +50,7 @@ angular.module('donacion', [
 
       .state('home.registro', {
         cache: false,
-        url: "/registro",
+        url: "registro",
         views: {
           "homeContent": {
             templateUrl: "templates/cuentas/registro.html",
@@ -61,9 +61,11 @@ angular.module('donacion', [
 
       .state('home.registro-exito', {
         cache: false,
-        url: "/registro-exito",
-        "homeContent": {
-          templateUrl: "templates/cuentas/registro-exito.html",
+        url: "registro-exito",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/cuentas/registro-exito.html",
+          }
         }
       })
 

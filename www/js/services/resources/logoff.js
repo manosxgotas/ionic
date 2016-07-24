@@ -1,10 +1,10 @@
 angular.module('donacion')
 
-  .factory('LogoffService', function (global, $resource, $http, $location, localStorageService, $rootScope) {
+  .factory('LogoffService', function (global, $resource, $http, $state, localStorageService, $rootScope) {
 
     function logoff() {
       localStorageService.clearAll();
-      $location.path('/login');
+      $state.transitionTo('home.inicio');
 
       // Algoritmo para eliminar los atributos del rootScope creados "artificialmente".
       for (var prop in $rootScope) {

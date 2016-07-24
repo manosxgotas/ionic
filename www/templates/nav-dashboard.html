@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="sidebar" data-color="red">
 
-    <div class="sidebar-wrapper">
+    <div class="sidebar-wrapper sidebar-image">
       <div class="logo">
         <a class="simple-text" ui-sref="home.inicio" href="">
           <img src="../img/manosxgotas-titulo.png">
@@ -41,9 +41,9 @@
       </ul>
     </div>
   </div>
-
+  <div class="sidebar-background" ></div>
   <div class="main-panel">
-    <nav class="navbar navbar-default navbar-fixed">
+    <nav class="navbar navbar-default navbar-dashboard navbar-fixed">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -63,10 +63,10 @@
 
           <ul class="nav navbar-nav navbar-right" ng-show="is_logged">
             <li>
-              <a style="color: #9A9A9A; border: solid 2px #9A9A9A; border-radius: 3px" popover-trigger="mouseenter" popover-placement="bottom-right" uib-popover="{{diasProxDonacion}} días para tu próxima donación." ng-show="diasProxDonacion > 0">
+              <a class="prox-donacion-time" popover-trigger="mouseenter" popover-placement="bottom-right" uib-popover="{{diasProxDonacion}} días para tu próxima donación." ng-show="diasProxDonacion > 0">
                 <i class="fa fa-clock-o fa-fw"></i>&nbsp; {{diasProxDonacion}}
               </a>
-              <a style="color: #FB404B; border: solid 2px #FB404B; border-radius: 3px;" popover-trigger="mouseenter" popover-placement="bottom-right" uib-popover="¡Ya puedes donar!" ui-sref="dashboard.libreta" ng-show="diasProxDonacion == 0">
+              <a class="prox-donacion-donar" popover-trigger="mouseenter" popover-placement="bottom-right" uib-popover="¡Ya puedes donar!" ui-sref="dashboard.libreta" ng-show="diasProxDonacion == 0">
                 <i class="fa fa-tint fa-fw"></i>&nbsp; ¡Doná!
               </a>
             </li>
@@ -75,7 +75,7 @@
             <li>
               <a href="" ng-click="logoff()">
                 <i class="fa fa-sign-out fa-fw"></i>
-                &nbsp; Cerrar sesión
+                &nbsp;Cerrar sesión
               </a>
             </li>
 

@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('global', function($location) {
+  .factory('global', function() {
 
     var apiUrl = 'localhost:8000/api';
 

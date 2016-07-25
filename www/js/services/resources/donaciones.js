@@ -32,6 +32,7 @@ angular.module('donacion')
           fechaHora: $filter('date')(donacion.fecha, 'dd/MM/yyyy') + ' ' + $filter('date')(donacion.hora, 'HH:mm'),
           centroDonacion: donacion.centroDonacion,
           evento: donacion.evento,
+          direccion: donacion.direccion,
           descripcion: donacion.descripcion,
           registro: idRegistro,
           foto: foto
@@ -42,8 +43,12 @@ angular.module('donacion')
           if (data === undefined) return data;
           var fd = new FormData();
           angular.forEach(data, function (value, key) {
-            if (value !== undefined) {
-              fd.append(key, value);
+            if (value !== null && value !== undefined) {
+              if (typeof value === 'object' && !(value instanceof File)) {
+                fd.append(key, angular.toJson(value));
+              } else {
+                fd.append(key, value);
+              }
             }
           });
           return fd;
@@ -97,7 +102,7 @@ angular.module('donacion')
         method: 'DELETE'
       }).success(function () {
         console.log('Eliminación exitosa');
-        $state.transitionTo('dashboard.libreta');
+        $state.reload();
       }).error(function(response, data) {
         console.log(response);
         console.log(data);

@@ -9,7 +9,7 @@
       </div>
 
       <div class="avatar-container" ng-show="is_logged">
-        <img class="avatar-sidebar" ng-src="{{fotoUsuario}}">
+        <img class="avatar-sidebar" ng-src="{{fotoUsuario != null ? fotoUsuario : '../img/perfil-defecto.png'}}">
         <div class="title">
           <a href="" data-toggle="collapse" data-target="#collapseAvatar">
             <p>

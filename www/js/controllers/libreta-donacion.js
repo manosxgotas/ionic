@@ -19,7 +19,7 @@ angular.module('donacion')
         var modalInstance = $uibModal.open({
           animation: true,
           templateUrl: 'templates/donaciones/modal-eliminar-donacion.html',
-          size: 'sm',
+          size: 'md',
           controller: 'EliminarDonacionController',
           resolve: {
             idDonacion: function () {

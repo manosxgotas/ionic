@@ -29,7 +29,7 @@
                 <th>Fecha</th>
                 <th>Hora</th>
                 <th>Lugar</th>
-                <th>Nombre</th>
+                <th>Descripción</th>
                 <th>Estado</th>
                 <th>Acciones</th>
               </thead>
@@ -37,12 +37,12 @@
               <tr ng-repeat="donacion in perfil.registro.donaciones">
                 <td>{{str2date(donacion.fechaHora)}}</td>
                 <td>{{str2time(donacion.fechaHora)}}hs.</td>
-                <td ng-show="donacion.centroDonacion == undefined && donacion.evento == undefined">--</td>
-                <td ng-show="donacion.centroDonacion == undefined && donacion.evento == undefined">--</td>
-                <td ng-show="donacion.centroDonacion != undefined">Centro de donación</td>
-                <td ng-show="donacion.evento != undefined">Evento</td>
-                <td ng-show="donacion.centroDonacion != undefined">{{donacion.centroDonacion.nombre}}</td>
-                <td ng-show="donacion.evento != undefined">{{donacion.evento.nombre}}</td>
+                <td ng-show="donacion.lugarDonacion.lugarCentro != null">Centro de donación</td>
+                <td ng-show="donacion.lugarDonacion.lugarEventoDonacion != null">Evento</td>
+                <td ng-show="donacion.lugarDonacion.lugarCentro == null && donacion.lugarDonacion.lugarEventoDonacion == null">Otro</td>
+                <td ng-show="donacion.lugarDonacion.lugarCentro != null">{{donacion.lugarDonacion.lugarCentro.nombre}}</td>
+                <td ng-show="donacion.lugarDonacion.lugarEventoDonacion != null">{{donacion.lugarDonacion.lugarEventoDonacion.evento.nombre}}</td>
+                <td ng-show="donacion.lugarDonacion.lugarCentro == null && donacion.lugarDonacion.lugarEventoDonacion == null">{{donacion.lugarDonacion.direccion.localidad.provincia.nombre}}, {{donacion.lugarDonacion.direccion.localidad.nombre}}, {{donacion.lugarDonacion.direccion.calle}} {{donacion.lugarDonacion.direccion.numero}}</td>
                 <td>
                   <button ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Sin verificar'" popover-trigger="mouseenter" popover-placement="top" uib-popover="Verifica tu donación" class="btn btn-xs btn-success">
                     <span class="fa fa-key"></span>
@@ -60,10 +60,10 @@
                     <button popover-trigger="mouseenter" popover-placement="top" uib-popover="Visualizar" type="button" class="btn btn-default">
                       <span class="fa fa-eye"></span>
                     </button>
-                    <button ui-sref="dashboard.editar-donacion({donacionID: donacion.id})" popover-trigger="mouseenter" popover-placement="top" uib-popover="Editar" type="button" class="btn btn-fill btn-default">
+                    <button ng-hide="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Verificada'" ui-sref="dashboard.editar-donacion({donacionID: donacion.id})" popover-trigger="mouseenter" popover-placement="top" uib-popover="Editar" type="button" class="btn btn-fill btn-default">
                       <span class="fa fa-edit"></span>
                     </button>
-                    <button popover-trigger="mouseenter" popover-placement="top" ng-click="abrirModal(donacion.id)" uib-popover="Eliminar" type="button" class="btn btn-fill btn-danger">
+                    <button ng-hide="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Verificada'" popover-trigger="mouseenter" popover-placement="top" ng-click="abrirModal(donacion.id)" uib-popover="Eliminar" type="button" class="btn btn-fill btn-danger">
                       <span class="fa fa-trash"></span>
                     </button>
                   </div>

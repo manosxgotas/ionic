@@ -21,3 +21,24 @@
 .navbar-dashboard a:not(.btn):hover {
   color: #FB404B !important;
 }
+
+.avatar-sidebar {
+  width: 95px;
+  height: 95px;
+  border: 2px solid white;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 50%;
+  margin: 15px 0 10px 0;
+  overflow: hidden;
+}
+
+.avatar-container {
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.avatar-container a, .avatar-container a:hover, .avatar-container a:focus {
+  color: white;
+}

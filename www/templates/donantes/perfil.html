@@ -21,7 +21,7 @@
     <div class="content">
 
       <div class="author">
-        <img ng-src="{{perfil.foto}}" alt="" class="avatar border-gray">
+        <img ng-src="{{fotoUsuario != null ? fotoUsuario : '../../img/perfil-defecto-color.png'}}" class="avatar border-gray">
         <h4 class="title">{{perfil.nombre}} {{perfil.apellido}}<br />
           <small>{{perfil.username}}</small>
         </h4>

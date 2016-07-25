@@ -51,7 +51,41 @@
 
           <div class="clearfix"></div>
           <hr>
+
           <div class="form-group">
+            <label class="col-sm-3 control-label">Lugar de la donación</label>
+
+            <div class="col-sm-5">
+              <label class="radio" style="padding-top: 0; padding-left: 20px">
+                      <span class="icons">
+                        <span class="first-icon fa fa-circle-o"></span>
+                        <span class="second-icon fa fa-dot-circle-o"></span>
+                      </span>
+                <input type="radio" name="optionsLugar" id="opcionCentro" value="1" ng-model="donacion.lugar" ng-required="!donacion.lugar" ng-change='cambioLugar()'>
+                <span class="fa fa-hospital-o"></span> Centro de donación
+              </label>
+              <label class="radio" style="padding-top: 0; padding-left: 20px">
+                      <span class="icons">
+                        <span class="first-icon fa fa-circle-o"></span>
+                        <span class="second-icon fa fa-dot-circle-o"></span>
+                      </span>
+                <input type="radio" data-toggle="radio" name="optionsLugar" id="opcionEvento" value="2" ng-model="donacion.lugar" ng-required="!donacion.lugar" ng-change='cambioLugar()'>
+                <span class="fa fa-calendar"></span> Evento
+              </label>
+
+              <label class="radio" style="padding-top: 0; padding-left: 20px">
+                      <span class="icons">
+                        <span class="first-icon fa fa-circle-o"></span>
+                        <span class="second-icon fa fa-dot-circle-o"></span>
+                      </span>
+                <input type="radio" data-toggle="radio" name="optionsLugar" id="opcionOtro" value="3" ng-model="donacion.lugar" ng-required="!donacion.lugar" ng-change='cambioLugar()'>
+                <span class="fa fa-map-marker"></span> Ubicación
+              </label>
+            </div>
+          </div>
+
+
+          <div class="form-group" ng-show="donacion.lugar == 1">
             <label for="centroDonacion" class="col-sm-3 control-label">Centro de donación</label>
             <div class="col-sm-7">
               <select class="form-control" id="centroDonacion" ng-model="donacion.centroDonacion">
@@ -60,7 +94,7 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group" ng-show="donacion.lugar == 2">
             <label for="evento" class="col-sm-3 control-label">Evento</label>
             <div class="col-sm-7">
               <select class="form-control" id="evento" ng-model="donacion.evento">
@@ -69,6 +103,45 @@
             </div>
           </div>
 
+          <div ng-show="donacion.lugar == 3">
+
+            <div class="form-group">
+              <label for="provincia" class="col-sm-3 control-label">Provincia</label>
+              <div class="col-sm-7">
+                <select class="form-control" id="provincia" ng-model="donacion.direccion.provincia" ng-change="obtenerLocalidades(donacion.direccion.provincia)">
+                  <option ng-repeat="provincia in provincias" value="{{provincia.id}}"> {{provincia.nombre}} </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="localidad" class="col-sm-3 control-label">Localidad</label>
+              <div class="col-sm-7">
+                <select class="form-control" id="localidad" ng-model="donacion.direccion.localidad">
+                  <option ng-repeat="localidad in localidades" value="{{localidad.id}}"> {{localidad.nombre}} </option>
+                </select>
+              </div>
+            </div>
+
+
+            <div class="form-group" ng-class="{'has-error': formAltaDonacion.calle.$invalid && !formAltaDonacion.calle.$pristine,
+                                               'has-success has-feedback': formAltaDonacion.calle.$valid}">
+              <label for="calle" class="col-sm-3 control-label">Calle</label>
+              <div class="col-sm-7">
+                <input type="text" id="calle" name="calle" ng-model="donacion.direccion.calle" class="form-control"
+                       placeholder="Ingrese el nombre de la calle">
+              </div>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': formAltaDonacion.numero.$invalid && !formAltaDonacion.numero.$pristine,
+                                               'has-success has-feedback': formAltaDonacion.numero.$valid}">
+              <label for="numero" class="col-sm-3 control-label">Número de calle</label>
+              <div class="col-sm-7">
+                <input type="number" id="numero" name="numero" ng-model="donacion.direccion.numero" class="form-control"
+                       placeholder="Ingrese el número de la calle" min="0">
+              </div>
+            </div>
+          </div>
           <div class="form-group">
             <label for="descripcion" class="col-sm-3 control-label">¿Cómo te sentiste?</label>
             <div class="col-sm-7">
@@ -79,7 +152,11 @@
           <div class="form-group">
             <div class="col-sm-12">
               <div class="pull-right">
-                <button type="submit" class="btn btn-danger btn-fill" ng-disabled="formAltaDonacion.$invalid">
+                <button type="submit" class="btn btn-danger btn-fill"
+                        ng-disabled="(!donacion.fecha || !donacion.hora) ||
+                                     !donacion.centroDonacion &&
+                                     !donacion.evento &&
+                                     (!donacion.direccion.localidad || !donacion.direccion.calle || !donacion.direccion.numero)">
                   <i class="fa fa-tint"></i> Registrar donación
                 </button>
               </div>

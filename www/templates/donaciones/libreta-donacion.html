@@ -8,7 +8,7 @@
               <span class="fa fa-book fa-lg"></span>
               &nbsp;&nbsp;Libreta de donación
               <div class="pull-right">
-                <a class="btn btn-fill btn-danger btn-sm" ui-sref="dashboard.registrar-donacion" ng-cloak>
+                <a class="btn btn-fill btn-danger btn-sm" ui-sref="dashboard.registrar-donacion">
                   <span class="fa fa-tint" aria-hidden="true"></span>
                   <span class='hidden-xs'>Nueva donación</span>
                 </a>
@@ -44,7 +44,7 @@
                 <td ng-show="donacion.lugarDonacion.lugarEventoDonacion != null">{{donacion.lugarDonacion.lugarEventoDonacion.evento.nombre}}</td>
                 <td ng-show="donacion.lugarDonacion.lugarCentro == null && donacion.lugarDonacion.lugarEventoDonacion == null">{{donacion.lugarDonacion.direccion.localidad.provincia.nombre}}, {{donacion.lugarDonacion.direccion.localidad.nombre}}, {{donacion.lugarDonacion.direccion.calle}} {{donacion.lugarDonacion.direccion.numero}}</td>
                 <td>
-                  <button ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Sin verificar'" popover-trigger="mouseenter" popover-placement="top" uib-popover="Verifica tu donación" class="btn btn-xs btn-success">
+                  <button ng-click="modalVerificar(donacion.id)" ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Sin verificar'" popover-trigger="mouseenter" popover-placement="top" uib-popover="Verifica tu donación" class="btn btn-xs btn-success">
                     <span class="fa fa-key"></span>
                   </button>
                   <button ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Pendiente'" popover-trigger="mouseenter" popover-placement="top" uib-popover="Tu donación está siendo evaluada" class="btn btn-xs btn-warning">
@@ -53,17 +53,17 @@
                   <span ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Verificada'" class="btn btn-xs" style="cursor: default;">
                     <span class="fa fa-unlock"></span>
                   </span>
-                  &nbsp;{{donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre}}
+                  <span class="hidden-md hidden-sm hidden-xs">&nbsp;{{donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre}}</span>
                 </td>
                 <td>
                   <div class="btn-group btn-group-sm" role="group">
                     <button popover-trigger="mouseenter" popover-placement="top" uib-popover="Visualizar" type="button" class="btn btn-default">
-                      <span class="fa fa-eye"></span>
+                      <span class="fa fa-eye"></span><span ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Verificada'">&nbsp;Visualizar</span>
                     </button>
                     <button ng-hide="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Verificada'" ui-sref="dashboard.editar-donacion({donacionID: donacion.id})" popover-trigger="mouseenter" popover-placement="top" uib-popover="Editar" type="button" class="btn btn-fill btn-default">
                       <span class="fa fa-edit"></span>
                     </button>
-                    <button ng-hide="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Verificada'" popover-trigger="mouseenter" popover-placement="top" ng-click="abrirModal(donacion.id)" uib-popover="Eliminar" type="button" class="btn btn-fill btn-danger">
+                    <button ng-hide="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Verificada'" popover-trigger="mouseenter" popover-placement="top" ng-click="modalEliminar(donacion.id)" uib-popover="Eliminar" type="button" class="btn btn-fill btn-danger">
                       <span class="fa fa-trash"></span>
                     </button>
                   </div>

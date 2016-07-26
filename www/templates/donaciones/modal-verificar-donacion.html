@@ -1,0 +1,80 @@
+<div class="modal-header" style="background-color: #FB404B; color: white">
+  <div style="display: inline-block">
+    <h3 class="modal-title">
+      <span class="fa fa-key fa-lg" aria-hidden="true"></span>
+      &nbsp;&nbsp; Verificar donación
+    </h3>
+  </div>
+  <div class="pull-right" style="display: inline-block">
+    <a href="" ng-click="cerrarModal()" style="color: white">
+      <i class="fa fa-times fa-lg"></i>
+    </a>
+  </div>
+</div>
+<div flow-init="{singleFile:true}" flow-name="imagen.flow" flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]">
+  <div class="modal-body">
+    <h5 class="text-center">Puedes verificar tu donación ingresando un código o subiendo una imagen</h5>
+
+    <div class="col-sm-4 col-xs-4">
+
+      <label class="radio">
+        <span class="icons">
+          <span class="first-icon fa fa-circle-o"></span>
+          <span class="second-icon fa fa-dot-circle-o"></span>
+        </span>
+        <input type="radio" name="optionsVerificacion" id="opcionCodigo" value="1"
+               ng-model="verificacion.tipo" ng-required="!verificacion.tipo" ng-change="cambiarTipoVerificacion($flow.files[0])">
+        <span class="fa fa-code"></span>&nbsp;Código
+      </label>
+
+      <label class="radio">
+        <span class="icons">
+          <span class="first-icon fa fa-circle-o"></span>
+          <span class="second-icon fa fa-dot-circle-o"></span>
+        </span>
+        <input type="radio" data-toggle="radio" name="optionsVerificacion" id="opcionImagen" value="2"
+               ng-model="verificacion.tipo" ng-required="!verificacion.tipo" ng-change="cambiarTipoVerificacion($flow.files[0])">
+        <span class="fa fa-image"></span>&nbsp;Imagen
+      </label>
+    </div>
+
+    <div class="col-sm-8 col-xs-8">
+      <div class="form-group" style="margin-top: 15px;" ng-show="verificacion.tipo == 1">
+        <input type="text" maxlength="12" id="codigo" name="codigo" ng-model="verificacion.codigo" class="form-control text-center"
+               placeholder="Ingresa un código de verificación (12 digitos)">
+      </div>
+
+      <div class="pull-right" ng-show="verificacion.tipo == 2">
+       <span flow-btn class="btn btn-fill btn-default btn-sm">
+          <span ng-hide="$flow.files.length" class="fa fa-image" aria-hidden="true"></span>
+          <span ng-hide="$flow.files.length">Agrega una imagen</span>
+          <span ng-show="$flow.files.length" class="fa fa-undo" aria-hidden="true"></span>
+          <span ng-show="$flow.files.length" class="hidden-xs">Cambiar imagen</span>
+        </span>
+        <a ng-click="$flow.files[0].cancel()" class="btn btn-fill btn-danger btn-sm" ng-show="$flow.files[0]">
+          <span class="fa fa-remove" aria-hidden="true"></span>
+          <span class="hidden-xs">Eliminar imagen</span>
+        </a>
+      </div>
+    </div>
+
+    <span class="clearfix"></span>
+
+    <div class="text-center col-sm-8 col-sm-offset-2" style="margin-bottom: 10px; border: dashed 2px grey; border-radius: 5px; line-height: 200px;"
+         ng-show="verificacion.tipo == 2 && !$flow.files.length" flow-drop>
+      <span class="fa fa-image"></span> Arrastra una imagen aquí
+    </div>
+
+    <div class="col-sm-8 col-sm-offset-2" ng-show="verificacion.tipo == 2 && $flow.files.length">
+      <img class="img-responsive img-rounded" style="margin: 0 auto; max-height: 200px; margin-bottom: 10px;" flow-img="$flow.files[0]" />
+    </div>
+  </div>
+
+  <span class="clearfix"></span>
+
+  <div class="modal-footer">
+    <button class="btn btn-danger btn-fill" type="button" ng-click="verificar($flow.files[0])">
+      <span class="fa fa-key"></span>&nbsp;Verificar
+    </button>
+  </div>
+</div>

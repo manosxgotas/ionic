@@ -14,7 +14,7 @@ angular.module('donacion')
         return moment(date, 'DD/MM/YYYY HH:mm').format('HH:mm')
       };
 
-      $scope.abrirModal = function (id) {
+      $scope.modalEliminar = function (id) {
 
         var modalInstance = $uibModal.open({
           animation: true,
@@ -28,5 +28,21 @@ angular.module('donacion')
           }
         });
       };
+
+      $scope.modalVerificar = function (id) {
+
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'templates/donaciones/modal-verificar-donacion.html',
+          size: 'md',
+          controller: 'VerificarDonacionController',
+          resolve: {
+            idDonacion: function () {
+              return id;
+            }
+          }
+        });
+      };
+
     })
   });

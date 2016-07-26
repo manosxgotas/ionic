@@ -10,6 +10,11 @@ angular.module('donacion')
 
     var editarUrl = global.getApiUrl() + '/donaciones/editar/';
 
+    var verificarCodigoUrl = global.getApiUrl() + '/donaciones/verificar-codigo/';
+
+    var verificarImagenUrl = global.getApiUrl() + '/donaciones/verificar-imagen/';
+
+
     function infoDonacion() {
       return $resource(
         infoUrl,
@@ -109,6 +114,55 @@ angular.module('donacion')
       })
     }
 
+    function verificarCodigoDonacion(idDonacion, verificacion) {
+
+      $http({
+        url: verificarCodigoUrl + idDonacion,
+        method: "POST",
+        data: {
+          codigo: verificacion.codigo
+        }
+
+      }).success(function (response) {
+        console.log(response);
+        $state.reload();
+      }).error(function (response, data) {
+        console.log(response);
+        console.log(data);
+      });
+    }
+
+    function verificarImagenDonacion(idDonacion, imagen) {
+
+      $http({
+        url: verificarImagenUrl + idDonacion,
+        method: "POST",
+        data: {
+          imagen: imagen,
+          donacion: idDonacion
+        },
+        headers: {'Content-Type': undefined},
+
+        transformRequest: function (data) {
+          if (data === undefined) return data;
+          var fd = new FormData();
+          angular.forEach(data, function (value, key) {
+            if (value !== undefined && value != null) {
+              fd.append(key, value);
+            }
+          });
+          return fd;
+        }
+
+        }).success(function (response) {
+          console.log(response);
+          $state.reload();
+        }).error(function (response, data) {
+          console.log(response);
+          console.log(data);
+        });
+    }
+
     function getDiasProxDonacion() {
       var proxDonacionUrl = global.getApiUrl() + '/donaciones/proxima-donacion/' + ProfileService.getUserId();
 
@@ -160,6 +214,14 @@ angular.module('donacion')
 
       eliminarDonacion: function (idDonacion) {
         return eliminarDonacion(idDonacion);
+      },
+
+      verificarCodigoDonacion: function (idDonacion, verificacion) {
+        return verificarCodigoDonacion(idDonacion, verificacion);
+      },
+
+      verificarImagenDonacion: function (idDonacion, imagen) {
+        return verificarImagenDonacion(idDonacion, imagen);
       },
 
       getDiasProxDonacion: function () {

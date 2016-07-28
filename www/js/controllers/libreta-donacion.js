@@ -7,11 +7,11 @@ angular.module('donacion')
       $scope.perfil = ProfileService.getProfile().get();
 
       $scope.str2date = function (date) {
-        return moment(date, 'DD/MM/YYYY HH:mm').format('DD/MM/YYYY');
+        return moment(date).format('DD/MM/YYYY');
       };
 
       $scope.str2time = function (date) {
-        return moment(date, 'DD/MM/YYYY HH:mm').format('HH:mm')
+        return moment(date).format('HH:mm')
       };
 
       $scope.modalEliminar = function (id) {

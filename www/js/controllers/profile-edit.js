@@ -54,8 +54,8 @@ angular.module('donacion')
         $scope.localidades = DireccionesService.getLocalidades($scope.datosDonante.direccion.localidad.provincia).query();
 
         // Obtengo como String la fecha de nacimiento desde la API y la convierto en Date para pasarla al ng-model.
-        var from = $scope.datosDonante.nacimiento.split("/");
-        $scope.datosDonante.nacimiento = new Date(from[2], from[1] - 1, from[0]);
+        var from = $scope.datosDonante.nacimiento.split("-");
+        $scope.datosDonante.nacimiento = new Date(from[0], from[1] - 1, from[2]);
       });
       // Obtengo los datos de perfil del donante desde la API ---->
 

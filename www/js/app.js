@@ -25,7 +25,7 @@ angular.module('donacion', [
     $urlRouterProvider.otherwise("/home");
 
     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
-    cfpLoadingBarProvider.spinnerTemplate = '<span class="fa fa-lg fa-spinner fa-pulse"></span>';
+    cfpLoadingBarProvider.spinnerTemplate = '<span class="fa fa-spinner fa-pulse fa-lg fa-fw"></span>&nbsp;&nbsp;Cargando...';
 
     $stateProvider
 
@@ -37,7 +37,7 @@ angular.module('donacion', [
         controller: "NavHomeController"
       })
 
-      .state('home.inicio', {
+        .state('home.inicio', {
         cache: false,
         url: "home",
         views: {

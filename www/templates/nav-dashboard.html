@@ -57,10 +57,6 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-          <ul class="nav navbar-nav navbar-left">
-            <li><a id="loading-bar-container"></a></li>
-          </ul>
-
           <ul class="nav navbar-nav navbar-right" ng-show="is_logged">
             <li>
               <a class="prox-donacion-time" popover-trigger="mouseenter" popover-placement="bottom-right" uib-popover="{{diasProxDonacion}} días para tu próxima donación." ng-show="diasProxDonacion > 0">
@@ -86,9 +82,10 @@
 
     <div class="content">
       <div class="container-fluid">
-        <div name="dashboardContent" ui-view>
+        <div name="dashboardContent" ui-view ng-hide="loading">
 
         </div>
+        <div class="text-center" id="loading-bar-container" ng-show="loading"></div>
       </div>
     </div>
 

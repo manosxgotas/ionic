@@ -26,17 +26,19 @@
           <div class="content table-responsive table-full-width" ng-show="perfil.registro.donaciones.length > 0">
             <table class="table table-hover table-striped">
               <thead>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Lugar</th>
-                <th>Descripción</th>
-                <th>Estado</th>
-                <th>Acciones</th>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Hora</th>
+                  <th>Lugar</th>
+                  <th>Descripción</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
               </thead>
               <tbody>
               <tr ng-repeat="donacion in perfil.registro.donaciones">
-                <td>{{str2date(donacion.fechaHora)}}</td>
-                <td>{{str2time(donacion.fechaHora)}}hs.</td>
+                <td>{{donacion.fechaHora | date:'dd/MM/yyyy'}}</td>
+                <td>{{donacion.fechaHora | date:'HH:mm'}}hs.</td>
                 <td ng-show="donacion.lugarDonacion.lugarCentro != null">Centro de donación</td>
                 <td ng-show="donacion.lugarDonacion.lugarEventoDonacion != null">Evento</td>
                 <td ng-show="donacion.lugarDonacion.lugarCentro == null && donacion.lugarDonacion.lugarEventoDonacion == null">Otro</td>
@@ -57,7 +59,7 @@
                 </td>
                 <td>
                   <div class="btn-group btn-group-sm" role="group">
-                    <button popover-trigger="mouseenter" popover-placement="top" uib-popover="Visualizar" type="button" class="btn btn-default">
+                    <button popover-trigger="mouseenter" popover-placement="top" uib-popover="Visualizar" type="button" ng-click="modalVisualizar(donacion.id)" class="btn btn-default">
                       <span class="fa fa-eye"></span><span ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Verificada'">&nbsp;Visualizar</span>
                     </button>
                     <button ng-hide="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Verificada'" ui-sref="dashboard.editar-donacion({donacionID: donacion.id})" popover-trigger="mouseenter" popover-placement="top" uib-popover="Editar" type="button" class="btn btn-fill btn-default">

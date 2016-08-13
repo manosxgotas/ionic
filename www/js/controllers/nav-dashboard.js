@@ -1,5 +1,15 @@
 angular.module('donacion')
-  .controller('NavDashboardController', function ($http, $scope, $rootScope, $sce, ProfileService, LogoffService, DonacionesService) {
+  .controller('NavDashboardController', function ($http, $scope, $rootScope, ProfileService, LogoffService, DonacionesService) {
+
+    $scope.loading = false;
+
+    $scope.$on('cfpLoadingBar:loading', function () {
+      $scope.loading = true;
+    });
+
+    $scope.$on('cfpLoadingBar:completed', function () {
+      $scope.loading = false;
+    });
 
     $rootScope.$on('isLoggedEvent', function(args) {
 

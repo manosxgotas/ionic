@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('AuthService', function (global, $http, $q, $rootScope, $state, LogoffService, localStorageService, ProfileService) {
+  .factory('AuthService', function (global, $http, $q, $rootScope, $state, LogoffService, localStorageService, CurrentUserService) {
 
     function getToken(credentials) {
       var url = global.getApiUrl() + "/cuentas/token/";
@@ -15,7 +15,7 @@ angular.module('donacion')
       }).success(function (response) {
         var authdata = response.token;
         setToken(authdata);
-        setCurrentUser().then(function () {
+        CurrentUserService.setCurrentUser().then(function () {
           $state.transitionTo('dashboard.perfil');
         });
 
@@ -53,7 +53,7 @@ angular.module('donacion')
 
         }).success(function () {
           if (!currentUser) {
-            setCurrentUser().then(function () {
+            CurrentUserService.setCurrentUser().then(function () {
               deferred.resolve();
             });
           } else {
@@ -66,16 +66,7 @@ angular.module('donacion')
       }
       return deferred.promise;
     }
-
-    function setCurrentUser() {
-      var deferred = $q.defer();
-      var currentUser = ProfileService.getProfile().get({}, function () {
-        localStorageService.set('currentUser', currentUser);
-        deferred.resolve();
-      });
-
-      return deferred.promise;
-    }
+    
 
     return {
       login : function(credentials) {
@@ -84,7 +75,8 @@ angular.module('donacion')
 
       isLogged : function () {
         return isLogged();
-      }
+      },
+      
     }
 
   });

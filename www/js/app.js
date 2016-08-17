@@ -44,7 +44,7 @@ angular.module('donacion', [
 
     $urlRouterProvider.otherwise( function($injector) {
       var $state = $injector.get("$state");
-      $state.go("home.inicio");
+      $state.transitionTo("home.inicio");
     });
 
     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
@@ -65,8 +65,7 @@ angular.module('donacion', [
         url: "home",
         views: {
           "homeContent": {
-            templateUrl: "templates/home/inicio.html",
-            controller: "InicioController"
+            templateUrl: "templates/home/inicio.html"
           }
         }
       })
@@ -158,4 +157,4 @@ angular.module('donacion', [
         }
       })
 
-  })
+  });

@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('DonacionesService', function (global, $http, $resource, $state, $filter, ProfileService) {
+  .factory('DonacionesService', function (global, $http, $resource, $state, $filter, localStorageService, CurrentUserService) {
 
     var infoUrl = global.getApiUrl() + '/donaciones/:id';
 
@@ -59,6 +59,7 @@ angular.module('donacion')
           return fd;
         }
       }).success(function (response) {
+        CurrentUserService.setCurrentUser();
         $state.transitionTo('dashboard.libreta');
       }).error(function (response, data) {
         console.log(response);
@@ -113,7 +114,7 @@ angular.module('donacion')
         method: 'DELETE'
       }).success(function () {
         console.log('Eliminación exitosa');
-        $state.reload();
+        CurrentUserService.setCurrentUser();
       }).error(function(response, data) {
         console.log(response);
         console.log(data);
@@ -131,6 +132,7 @@ angular.module('donacion')
 
       }).success(function (response) {
         console.log(response);
+        CurrentUserService.setCurrentUser();
         $state.reload();
       }).error(function (response, data) {
         console.log(response);
@@ -161,8 +163,8 @@ angular.module('donacion')
         }
 
         }).success(function (response) {
-          console.log(response);
-          $state.reload();
+        console.log(response);
+        CurrentUserService.setCurrentUser();
         }).error(function (response, data) {
           console.log(response);
           console.log(data);
@@ -170,7 +172,9 @@ angular.module('donacion')
     }
 
     function getDiasProxDonacion() {
-      var proxDonacionUrl = global.getApiUrl() + '/donaciones/proxima-donacion/' + ProfileService.getUserId();
+      var currentUser = localStorageService.get('currentUser');
+      var userid = currentUser.usuario.id;
+      var proxDonacionUrl = global.getApiUrl() + '/donaciones/proxima-donacion/' + userid;
 
       return $resource(
         proxDonacionUrl,

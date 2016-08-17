@@ -8,12 +8,12 @@
         </a>
       </div>
 
-      <div class="avatar-container" ng-show="is_logged">
-        <img class="avatar-sidebar" ng-src="{{fotoUsuario != null ? fotoUsuario : '../img/perfil-defecto.png'}}">
+      <div class="avatar-container">
+        <img class="avatar-sidebar" ng-src="{{currentUser.foto != null ? currentUser.foto : '../img/perfil-defecto.png'}}">
         <div class="title">
           <a href="" data-toggle="collapse" data-target="#collapseAvatar">
             <p>
-              {{nombreUsuario}}
+              {{currentUser.usuario.first_name}} {{currentUser.usuario.last_name}}
               <b class="caret"></b>
             </p>
           </a>
@@ -32,7 +32,7 @@
       </div>
 
       <ul class="nav">
-        <li ng-show="is_logged">
+        <li>
           <a ui-sref="dashboard.libreta">
             <i class="pe-7s-notebook"></i>
             <p>Libreta de donación</p>
@@ -57,7 +57,7 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-          <ul class="nav navbar-nav navbar-right" ng-show="is_logged">
+          <ul class="nav navbar-nav navbar-right">
             <li>
               <a class="prox-donacion-time" popover-trigger="mouseenter" popover-placement="bottom-right" uib-popover="{{diasProxDonacion}} días para tu próxima donación." ng-show="diasProxDonacion > 0">
                 <i class="fa fa-clock-o fa-fw"></i>&nbsp; {{diasProxDonacion}}

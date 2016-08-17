@@ -17,12 +17,35 @@ angular.module('donacion', [
   'flow'
   ])
 
+  .run(function (AuthService, $rootScope, $state, LoginModal, LogoffService) {
+
+    $rootScope.$on('$stateChangeStart', function(event, toState) {
+
+      if (toState.data && toState.data.requireLogin) {
+
+        AuthService.isLogged()
+          .then(function () {
+            return $state.go(toState.name);
+          })
+          .catch(function () {
+            LogoffService.logoff();
+            LoginModal();
+          });
+      }
+    })
+  })
+
   .config(function($stateProvider, $urlRouterProvider, $httpProvider, $resourceProvider, cfpLoadingBarProvider) {
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+    $httpProvider.interceptors.push('APIInterceptor');
 
     $resourceProvider.defaults.stripTrailingSlashes = false;
-    $urlRouterProvider.otherwise("/home");
+
+    $urlRouterProvider.otherwise( function($injector) {
+      var $state = $injector.get("$state");
+      $state.transitionTo("home.inicio");
+    });
 
     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
     cfpLoadingBarProvider.spinnerTemplate = '<span class="fa fa-spinner fa-pulse fa-lg fa-fw"></span>&nbsp;&nbsp;Cargando...';
@@ -42,8 +65,7 @@ angular.module('donacion', [
         url: "home",
         views: {
           "homeContent": {
-            templateUrl: "templates/home/inicio.html",
-            controller: "InicioController"
+            templateUrl: "templates/home/inicio.html"
           }
         }
       })
@@ -72,8 +94,12 @@ angular.module('donacion', [
       .state('dashboard', {
         cache: false,
         url: "/dashboard",
+        abstract: true,
         templateUrl: "templates/nav-dashboard.html",
-        controller: "NavDashboardController"
+        controller: "NavDashboardController",
+        data: {
+          requireLogin: true
+        }
       })
 
       .state('dashboard.perfil', {
@@ -93,7 +119,7 @@ angular.module('donacion', [
         views: {
           "dashboardContent": {
             templateUrl: "templates/donantes/perfil-edit.html",
-            controller: "ProfileEditController",
+            controller: "ProfileEditController"
           }
         }
       })
@@ -104,7 +130,7 @@ angular.module('donacion', [
         views: {
           "dashboardContent": {
             templateUrl: "templates/donaciones/libreta-donacion.html",
-            controller: "LibretaController",
+            controller: "LibretaController"
           }
         }
       })
@@ -115,7 +141,7 @@ angular.module('donacion', [
         views: {
           "dashboardContent": {
             templateUrl: "templates/donaciones/registrar-donacion.html",
-            controller: "RegistrarDonacionController",
+            controller: "RegistrarDonacionController"
           }
         }
       })
@@ -126,8 +152,9 @@ angular.module('donacion', [
         views: {
           "dashboardContent": {
             templateUrl: "templates/donaciones/editar-donacion.html",
-            controller: "EditarDonacionController",
+            controller: "EditarDonacionController"
           }
         }
       })
+
   });

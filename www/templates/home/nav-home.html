@@ -101,7 +101,23 @@
           </li>
         </ul>
 
-        <ul class="nav navbar-nav navbar-right" style="border-left: 1px solid #E1373E">
+        <ul class="nav navbar-nav navbar-right" style="border-left: 1px solid #E1373E" ng-show="currentUser != null">
+
+          <li style="margin-right: 3px">
+            <a type="button" ui-sref="dashboard.perfil" class="btn btn-default btn-registro-home">
+              <i class="fa fa-sign-in" aria-hidden="true"></i>
+              <span class="hidden-md">&nbsp;Mi dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="" ng-click="logoff()">
+              <i class="fa fa-sign-out" aria-hidden="true"></i>
+              <span class="hidden-md">&nbsp;Cerrar sesión</span>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right" style="border-left: 1px solid #E1373E" ng-hide="currentUser != null">
           <li style="margin-right: 3px">
             <a href="" ng-click="openLoginModal()">
               <i class="fa fa-sign-in" aria-hidden="true"></i>

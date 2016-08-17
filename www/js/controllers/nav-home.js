@@ -1,12 +1,13 @@
 angular.module('donacion')
-  .controller('NavHomeController', function ($http, $scope, $rootScope, $uibModal) {
-    $scope.openLoginModal = function () {
+  .controller('NavHomeController', function ($scope, LoginModal, LogoffService, localStorageService) {
 
-      $uibModal.open({
-        animation: true,
-        templateUrl: 'templates/cuentas/login.html',
-        controller: 'LoginController',
-        size: 'md',
-      });
+    $scope.currentUser = localStorageService.get('currentUser');
+    
+    $scope.logoff = function () {
+      LogoffService.logoff();
+    };
+
+    $scope.openLoginModal = function () {
+      LoginModal();
     }
   });

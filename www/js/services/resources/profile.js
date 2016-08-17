@@ -1,9 +1,6 @@
 angular.module('donacion')
 
-  .factory('ProfileService', function (global, $rootScope, jwtHelper, localStorageService, $resource, $http, $state, $filter) {
-
-    // URL para obtener (GET) el perfil del donante.
-    var getProfileUrl = global.getApiUrl() + '/donantes/perfil/';
+  .factory('ProfileService', function (global, localStorageService, $http, $state, $filter, CurrentUserService) {
 
     // URL para actualizar (PUT) el perfil del donante.
     var updateProfileUrl = global.getApiUrl() + '/donantes/perfil/edit/';
@@ -11,33 +8,10 @@ angular.module('donacion')
     // URL para actualizar (PUT) la foto de perfil del donante.
     var updateAvatarUrl = global.getApiUrl() + '/donantes/perfil/edit/avatar/';
 
-
-    // Función que obtiene el id del usuario mediante la decodificación
-    // del token almacenado en el LocalStorage.
-    function getUserId() {
-      var token = localStorageService.get('Token');
-      var authdata = token.substring(5);
-      return jwtHelper.decodeToken(authdata).user_id;
-    }
-
-    // Función que obtiene los datos del perfil del donante.
-    function getProfile() {
-      var userid = getUserId();
-
-      return $resource(
-        getProfileUrl + userid,
-        {
-          query: {
-            method: 'GET',
-            isArray: false
-          }
-        }
-      );
-    }
-
     // Función que actualiza los datos del perfil del donante.
     function updateProfile(datosDonante) {
-      var userid = getUserId();
+      var currentUser = localStorageService.get('currentUser');
+      var userid = currentUser.usuario.id;
       if (datosDonante.grupoSanguineo == undefined) {
         datosDonante.grupoSanguineo = {
           id: null
@@ -69,9 +43,8 @@ angular.module('donacion')
           }
         }
       }).success(function (response) {
-        $rootScope.nombre = datosDonante.usuario.first_name;
-        $rootScope.apellido = datosDonante.usuario.last_name;
         console.log('Update realizado con éxito');
+        CurrentUserService.setCurrentUser();
         $state.transitionTo('dashboard.perfil');
       }).error(function (response, data) {
         console.log(response)
@@ -81,32 +54,32 @@ angular.module('donacion')
 
     // Función que actualiza la foto de perfil del donante.
     function updateAvatar(avatar) {
-        var userid = getUserId();
+      var currentUser = localStorageService.get('currentUser');
+      var userid = currentUser.usuario.id;
+      $http({
+        url: updateAvatarUrl + userid,
+        method: "PUT",
+        data: {
+          foto: avatar
+        },
+        headers: {'Content-Type': undefined},
 
-        $http({
-          url: updateAvatarUrl + userid,
-          method: "PUT",
-          data: {
-            foto: avatar
-          },
-          headers: {'Content-Type': undefined},
-
-          transformRequest: function (data) {
-            if (data === undefined) return data;
-            var fd = new FormData();
-            angular.forEach(data, function (value, key) {
-              /* Si es archivo */
-              if (value instanceof File) {
-                fd.append(key, value);
-              }
-            });
-            return fd;
-          }
+        transformRequest: function (data) {
+          if (data === undefined) return data;
+          var fd = new FormData();
+          angular.forEach(data, function (value, key) {
+            /* Si es archivo */
+            if (value instanceof File) {
+              fd.append(key, value);
+            }
+          });
+          return fd;
+        }
 
         }).success(function (response) {
           console.log('Cambio de avatar realizado con éxito');
-          $rootScope.fotoUsuario = avatar;
-          $state.transitionTo('dashboard.perfil');
+        CurrentUserService.setCurrentUser();
+        $state.transitionTo('dashboard.perfil');
         }).error(function (response, data) {
           console.log(response);
           console.log(data);
@@ -114,9 +87,6 @@ angular.module('donacion')
       }
 
       return {
-        getProfile: function() {
-          return getProfile();
-        },
 
         updateProfile: function(datosDonante) {
           return updateProfile(datosDonante);
@@ -124,10 +94,6 @@ angular.module('donacion')
 
         updateAvatar : function(avatar) {
           return updateAvatar(avatar);
-        },
-
-        getUserId: function () {
-          return getUserId();
         }
 
       }

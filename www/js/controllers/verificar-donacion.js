@@ -1,30 +1,29 @@
 angular.module('donacion')
-  .controller('VerificarDonacionController', function ($http, $scope, $uibModalInstance, AuthService, DonacionesService, idDonacion) {
+  .controller('VerificarDonacionController', function ($http, $scope, $uibModalInstance, DonacionesService, idDonacion) {
 
-    AuthService.isLogged(function () {
+    $scope.verificacion = {};
 
-      $scope.verificacion = {};
+    $scope.imagen = {};
 
-      $scope.imagen = {};
-
-      $scope.cambiarTipoVerificacion = function (imagen) {
-        $scope.verificacion.codigo = undefined;
+    $scope.cambiarTipoVerificacion = function (imagen) {
+      $scope.verificacion.codigo = undefined;
+      if (imagen) {
         imagen.cancel();
-      };
-
-      $scope.verificar = function (imagen) {
-
-        if ($scope.verificacion.codigo != undefined) {
-          DonacionesService.verificarCodigoDonacion(idDonacion, $scope.verificacion);
-        } else {
-          DonacionesService.verificarImagenDonacion(idDonacion, imagen.file);
-        }
-
-        $uibModalInstance.dismiss();
-      };
-
-      $scope.cerrarModal = function () {
-        $uibModalInstance.dismiss();
       }
-    })
+    };
+
+    $scope.verificar = function (imagen) {
+
+      if ($scope.verificacion.codigo != undefined) {
+        DonacionesService.verificarCodigoDonacion(idDonacion, $scope.verificacion);
+      } else {
+        DonacionesService.verificarImagenDonacion(idDonacion, imagen.file);
+      }
+
+      $uibModalInstance.dismiss();
+    };
+
+    $scope.cerrarModal = function () {
+      $uibModalInstance.dismiss();
+    }
   });

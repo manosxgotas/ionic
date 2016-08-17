@@ -19,11 +19,11 @@
 
           </div>
 
-          <div class="content" ng-show="perfil.registro.donaciones.length == 0">
+          <div class="content" ng-show="currentUser.registro.donaciones.length == 0">
             Todavía no has registrado ninguna donación
           </div>
 
-          <div class="content table-responsive table-full-width" ng-show="perfil.registro.donaciones.length > 0">
+          <div class="content table-responsive table-full-width" ng-show="currentUser.registro.donaciones.length > 0">
             <table class="table table-hover table-striped">
               <thead>
                 <tr>
@@ -36,7 +36,7 @@
                 </tr>
               </thead>
               <tbody>
-              <tr ng-repeat="donacion in perfil.registro.donaciones">
+              <tr ng-repeat="donacion in currentUser.registro.donaciones">
                 <td>{{donacion.fechaHora | date:'dd/MM/yyyy'}}</td>
                 <td>{{donacion.fechaHora | date:'HH:mm'}}hs.</td>
                 <td ng-show="donacion.lugarDonacion.lugarCentro != null">Centro de donación</td>

@@ -6,7 +6,11 @@
         <h3 class="jumbotron-subtitle text-uppercase">Sistema de donación de sangre</h3>
 
         <p>
-          <a href="" class="btn btn-lg jumbotron-button" ng-click="openLoginModal()">
+          <a href="" class="btn btn-lg jumbotron-button" ng-click="openLoginModal()" ng-hide="currentUser != null">
+            <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i>
+            &nbsp;&nbsp;Ingresá ahora
+          </a>
+          <a ui-sref="dashboard.perfil" class="btn btn-lg jumbotron-button" ng-show="currentUser != null">
             <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i>
             &nbsp;&nbsp;Ingresá ahora
           </a>

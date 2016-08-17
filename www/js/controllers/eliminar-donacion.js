@@ -1,14 +1,12 @@
 angular.module('donacion')
-  .controller('EliminarDonacionController', function ($http, $scope, $uibModalInstance, AuthService, DonacionesService, idDonacion) {
+  .controller('EliminarDonacionController', function ($http, $scope, $uibModalInstance, DonacionesService, idDonacion) {
 
-    AuthService.isLogged(function () {
-      $scope.eliminar = function () {
-        DonacionesService.eliminarDonacion(idDonacion);
-        $uibModalInstance.dismiss();
-      };
+    $scope.eliminar = function () {
+      DonacionesService.eliminarDonacion(idDonacion);
+      $uibModalInstance.dismiss();
+    };
 
-      $scope.cerrarModal = function () {
-        $uibModalInstance.dismiss();
-      }
-    })
+    $scope.cerrarModal = function () {
+      $uibModalInstance.dismiss();
+    }
   });

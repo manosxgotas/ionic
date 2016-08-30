@@ -81,6 +81,28 @@ angular.module('donacion', [
         }
       })
 
+      .state('home.activar-cuenta-clave', {
+        cache: false,
+        url: "activar-cuenta-clave",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/activar-cuenta-clave.html",
+            controller: "ActivarCuentaClaveController"
+          }
+        }
+      })
+
+      .state('home.activar-cuenta', {
+        cache: false,
+        url: "activar-cuenta/:token",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/activar-cuenta.html",
+            controller: "ActivarCuentaController"
+          }
+        }
+      })
+
       .state('home.registro-exito', {
         cache: false,
         url: "registro-exito",

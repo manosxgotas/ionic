@@ -1,6 +1,36 @@
 angular.module('donacion')
 
-  .factory('AuthService', function (global, $http, $q, $rootScope, $state, LogoffService, localStorageService, CurrentUserService) {
+  .factory('AuthService', function (global, $http, $resource, $q, $rootScope, $state, LogoffService, localStorageService, CurrentUserService) {
+
+    function accountActivateKey(key) {
+      var url = global.getApiUrl() + "/cuentas/activar-cuenta-clave/";
+      $http({
+        url: url,
+        dataType: "json",
+        method: "POST",
+        data: {
+          clave: key
+        }
+      }).success(function (response) {
+        console.log('Cuenta activada');
+        $state.transitionTo('home.inicio')
+      }).error(function (data) {
+        console.log(data);
+      });
+    }
+
+    function accountActivateLink() {
+      var url = global.getApiUrl() + "/cuentas/activar-cuenta-link/:token";
+      return $resource(
+        url,
+        { token: '@_token' },
+        {
+          query: {
+            method: 'GET',
+            isArray: false
+          }
+        });
+    }
 
     function getToken(credentials) {
       var url = global.getApiUrl() + "/cuentas/token/";
@@ -66,7 +96,7 @@ angular.module('donacion')
       }
       return deferred.promise;
     }
-    
+
 
     return {
       login : function(credentials) {
@@ -76,7 +106,14 @@ angular.module('donacion')
       isLogged : function () {
         return isLogged();
       },
-      
+
+      accountActivateKey: function (key) {
+        return accountActivateKey(key)
+      },
+
+      accountActivateLink: function () {
+        return accountActivateLink()
+      }
     }
 
   });

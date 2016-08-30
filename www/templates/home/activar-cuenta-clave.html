@@ -1,0 +1,35 @@
+<div class="container">
+  <form name="formActivarCuenta" class="form-horizontal" ng-submit="activarCuenta()" novalidate>
+
+    <div class='col-sm-12'>
+      <div class='header' style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;'>
+        <h4 class='title'>
+          <span class="fa fa-key fa-lg" aria-hidden="true"></span>
+          &nbsp;&nbsp; Activar cuenta
+        </h4>
+      </div>
+
+      <div class="content">
+
+        <div class="form-group" ng-class="{'has-error': formActivarCuenta.key.$invalid && !formActivarCuenta.key.$pristine,
+                                           'has-success has-feedback': formActivarCuenta.key.$valid}">
+          <label for="key" class="col-sm-3 control-label">Clave</label>
+          <div class="col-sm-7">
+            <input type="text" id="key" name="key" ng-model="key" class="form-control" maxlength="50" minlength="25"
+                   placeholder="Ingresa la clave de activación" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-10">
+            <div class="pull-right">
+              <button type="submit" class="btn btn-danger btn-fill" ng-disabled="formActivarCuenta.$invalid">
+                <i class="fa fa-unlock"></i> Activar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

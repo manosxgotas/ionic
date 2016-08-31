@@ -24,7 +24,7 @@ angular.module('donacion')
 
     $scope.centros = CentrosDonacionService.query();
 
-    $scope.eventos = EventosService.query();
+    $scope.eventos = EventosService.listadoEventos().query();
 
     $scope.registrarDonacion = function(foto) {
       if (foto != undefined) {

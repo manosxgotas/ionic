@@ -14,7 +14,8 @@ angular.module('donacion', [
   'ui.bootstrap',
   'file-model',
   'base64',
-  'flow'
+  'flow',
+  'ngVideo'
   ])
 
   .run(function (AuthService, $rootScope, $state, LoginModal, LogoffService) {
@@ -60,7 +61,7 @@ angular.module('donacion', [
         controller: "NavHomeController"
       })
 
-        .state('home.inicio', {
+      .state('home.inicio', {
         cache: false,
         url: "home",
         views: {
@@ -179,4 +180,25 @@ angular.module('donacion', [
         }
       })
 
+      .state('dashboard.listado-eventos', {
+        cache: false,
+        url: "/listado-eventos",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/eventos/listado-eventos.html",
+            controller: "EventosController",
+          }
+        }
+      })
+
+      .state('dashboard.detalle-evento', {
+        cache: false,
+        url: "/evento/:eventoID",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/eventos/detalle-evento.html",
+            controller: "DetalleEventoController",
+          }
+        }
+      })
   });

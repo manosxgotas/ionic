@@ -1,0 +1,73 @@
+<div class ="col-md-12">
+	<div class="card">
+	<div class="title">
+		<h4 class="padding"><span class="fa fa-calendar"></span>&nbsp;&nbsp;{{evento.nombre}}</h4>
+		<p class="category padding">
+      <span class="fa fa-calendar-check-o"></span>
+        &nbsp;{{evento.fechaHoraInicio | date:'dd/MM/yyyy'}}
+      <span class="fa fa-clock-o"></span>&nbsp;
+        &nbsp;{{evento.fechaHoraInicio | date:'HH:mm'}}</p>
+		<ul class="nav nav-tabs">
+      <li id="tabFotos" class="pull-right" role="presentation" ng-click="changeTab(1)">
+        <h4>Fotos</h4>
+      </li>
+			<li id="tabVideo" class="pull-right" role="presentation" ng-click="changeTab(2)" ng-show="evento.video">
+        <h4>Videos</h4>
+      </li>
+		</ul>
+		<br><br>
+		<div class="row">
+      <div ng-repeat="imagen in evento.imagenesEvento" ng-init="addSlide(imagen)"></div>
+
+      <div class="col-sm-8 col-sm-offset-2" ng-if="tab === 1">
+        <div uib-carousel active="active" interval="myInterval">
+          <div uib-slide ng-repeat="slide in slides" index="slide.id">
+            <img class="center-block" ng-src="{{slide.image}}">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-sm-8 col-sm-offset-2" ng-if="tab === 2 && evento.video">
+        <section class="ng-video-container" style="width:100%">
+          <!-- Base Directive -->
+          <section class="video" ng-video>
+
+            <!-- Screen Directive -->
+            <video vi-screen></video>
+
+            <section vi-controls class="controls">
+              <span vi-controls-play title="Play" class="glyphicon glyphicon-play"></span>
+              <span vi-controls-pause title="Pause" class="glyphicon glyphicon-pause"></span>
+            </section>
+            <!-- Feedback Directive -->
+            <section vi-feedback class="feedback">
+
+              <section class="loading" ng-show="loading">
+                Loading...
+              </section>
+
+              <!-- Volume Directive -->
+              <section vi-volume class="volume">
+                <span vi-volume-decrease title="Decrease Volume" class="decrease glyphicon glyphicon-minus"></span>
+                <span vi-volume-increase title="Increase Volume" class="increase glyphicon glyphicon-plus"></span>
+
+              </section>
+              <!-- Timeline Directive -->
+              <section class="timeline">
+                <input vi-timeline />
+              </section>
+              <!-- Full Screen Directive -->
+              <section class="full-screen">
+                <span title="Full Screen" vi-full-screen-toggle class="glyphicon glyphicon-fullscreen"></span>
+              </section>
+            </section>
+          </section>
+        </section>
+      </div>
+		</div>
+		<br><br>
+		<p class="category padding"><span class="fa fa-edit"></span>&nbsp;&nbsp;&nbsp;{{evento.descripcion}}</p>
+	</div>
+	</div>
+</div>

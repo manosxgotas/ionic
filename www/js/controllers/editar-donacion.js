@@ -28,7 +28,7 @@ angular.module('donacion')
     $scope.centros = CentrosDonacionService.query();
 
     // Obtengo los eventos de la API.
-    $scope.eventos = EventosService.query();
+    $scope.eventos = EventosService.listadoEventos().query();
 
     var data = DonacionesService.infoDonacion().query({id: $stateParams.donacionID}, function () {
       // Seteo en el scope los datos obtenidos de la donación.

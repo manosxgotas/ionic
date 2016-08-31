@@ -3,7 +3,29 @@ angular.module('donacion')
   .factory('EventosService', function (global, $resource) {
 
     var url = global.getApiUrl() + '/listado-eventos/';
+    var infoUrl = global.getApiUrl() + '/evento/:id';
 
-    return $resource(url);
+    function infoEvento(){
+    	return $resource(
+    		infoUrl,
+    		{ id : '@_id'},
+    		{
+	          query: {
+	            method: 'GET',
+	            isArray: false
+	          }
+        });
+    }
 
+    return {
+
+      infoEvento : function(){
+    		return infoEvento();
+    	},
+
+    	listadoEventos :  function(){
+    		return $resource(url);
+    	}
+
+    }
   });

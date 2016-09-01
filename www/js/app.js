@@ -15,7 +15,8 @@ angular.module('donacion', [
   'file-model',
   'base64',
   'flow',
-  'ngVideo'
+  'ngVideo',
+  'uiGmapgoogle-maps'
   ])
 
   .run(function (AuthService, $rootScope, $state, LoginModal, LogoffService) {
@@ -36,7 +37,7 @@ angular.module('donacion', [
     })
   })
 
-  .config(function($stateProvider, $urlRouterProvider, $httpProvider, $resourceProvider, cfpLoadingBarProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $httpProvider, $resourceProvider, cfpLoadingBarProvider, uiGmapGoogleMapApiProvider) {
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
     $httpProvider.interceptors.push('APIInterceptor');
@@ -50,6 +51,12 @@ angular.module('donacion', [
 
     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
     cfpLoadingBarProvider.spinnerTemplate = '<span class="fa fa-spinner fa-pulse fa-lg fa-fw"></span>&nbsp;&nbsp;Cargando...';
+
+    uiGmapGoogleMapApiProvider.configure({
+      key: '',
+      v: '3.25',
+      libraries: 'weather,geometry,visualization'
+    });
 
     $stateProvider
 
@@ -198,6 +205,28 @@ angular.module('donacion', [
           "dashboardContent": {
             templateUrl: "templates/eventos/detalle-evento.html",
             controller: "DetalleEventoController",
+          }
+        }
+      })
+
+      .state('dashboard.listado-centros', {
+        cache: false,
+        url: "/listado-centros",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/centros/listado-centros.html",
+            controller: "CentrosDonacionController",
+          }
+        }
+      })
+
+      .state('dashboard.detalle-centro', {
+        cache: false,
+        url: "/centro-donacion/:centroID",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/centros/detalle-centro.html",
+            controller: "DetalleCentroController",
           }
         }
       })

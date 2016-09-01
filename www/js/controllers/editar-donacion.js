@@ -25,7 +25,7 @@ angular.module('donacion')
     };
 
     // Obtengo los centros de donación de la API.
-    $scope.centros = CentrosDonacionService.query();
+    $scope.centros = CentrosDonacionService.listadoCentros().query();
 
     // Obtengo los eventos de la API.
     $scope.eventos = EventosService.listadoEventos().query();

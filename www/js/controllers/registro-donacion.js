@@ -22,7 +22,7 @@ angular.module('donacion')
       $scope.localidades = DireccionesService.getLocalidades(idprov).query();
     };
 
-    $scope.centros = CentrosDonacionService.query();
+    $scope.centros = CentrosDonacionService.listadoCentros().query();
 
     $scope.eventos = EventosService.listadoEventos().query();
 

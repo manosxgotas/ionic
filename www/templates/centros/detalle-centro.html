@@ -1,0 +1,95 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">
+              <span class="fa fa-hospital-o fa-lg"></span>
+              &nbsp;&nbsp;{{centro.nombre}}
+              <div class="pull-right">
+                <span class="btn btn-success hidden-xs" style="cursor: default;">{{centro.tipo.nombre}}</span>
+              </div>
+              <span class="clearfix"></span>
+            </h4>
+          </div>
+          <div class="content">
+            <div class="row">
+              <div class="col-md-6 col-lg-6">
+                <ui-gmap-google-map class="small-map" center='map.center' zoom='map.zoom' options="map.options">
+                  <ui-gmap-marker coords="centro.coords"
+                                  idKey="centro.id">
+                  </ui-gmap-marker>
+                </ui-gmap-google-map>
+              </div>
+              <div class="col-md-6 col-lg-6">
+
+                <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapseHorarios">
+                  <h4>
+                    <span class="fa fa-clock-o"></span>
+                    &nbsp;&nbsp;Horarios de atención
+                    <b class="caret"></b>
+                  </h4>
+                </a>
+
+                <div class="collapse" id="collapseHorarios">
+                  <ul ng-show="horarios.length > 0">
+                    <li ng-repeat="horario in horarios">
+                      <b>{{horario.dia}}</b> de {{horario.horaApertura | date:'HH:mm'}} a {{horario.horaCierre | date:'HH:mm'}}
+                    </li>
+                  </ul>
+                  <p ng-show="horarios.length == 0">No hay horarios disponibles</p>
+                </div>
+
+                <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapseTelefono">
+                  <h4>
+                    <span class="fa fa-phone" aria-hidden="true"></span>
+                    &nbsp;&nbsp;Teléfono
+                    <b class="caret"></b>
+                  </h4>
+                </a>
+                <div class="collapse" id="collapseTelefono">
+                  <p ng-show="centro.telefono">{{centro.telefono}}</p>
+                  <p ng-hide="centro.telefono">No hay teléfono disponible</p>
+                </div>
+
+                <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapseUbicacion">
+                  <h4>
+                    <span class="fa fa-map-marker" aria-hidden="true"></span>
+                    &nbsp;&nbsp;Ubicación
+                    <b class="caret"></b>
+                  </h4>
+                </a>
+
+                <div class="collapse" id="collapseUbicacion">
+                  <ul>
+                    <li>
+                      <h5><b>Provincia:</b> {{centro.lugarDonacion.direccion.localidad.provincia.nombre}}</h5>
+                    </li>
+                    <li>
+                      <h5><b>Localidad:</b> {{centro.lugarDonacion.direccion.localidad.nombre}}</h5>
+                    </li>
+                    <li>
+                      <h5><b>Calle:</b> {{centro.lugarDonacion.direccion.calle}} {{centro.lugarDonacion.direccion.numero}}</h5>
+                    </li>
+                    <li ng-show="centro.lugarDonacion.direccion.piso">
+                      <h5><b>Piso:</b> {{centro.lugarDonacion.direccion.piso}}</h5>
+                    </li>
+                    <li ng-show="centro.lugarDonacion.direccion.numeroDepartamento">
+                      <h5><b>Número de departamento:</b> {{centro.lugarDonacion.direccion.numeroDepartamento}}</h5>
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="row">
+              <img src="../../img/centro-donacion.png" class="img-responsive center-block">
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

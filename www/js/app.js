@@ -30,8 +30,9 @@ angular.module('donacion', [
             return $state.go(toState.name);
           })
           .catch(function () {
-            LogoffService.logoff();
-            LoginModal();
+            LogoffService.logoff().then(function () {
+              LoginModal();
+            });
           });
       }
     })
@@ -53,7 +54,7 @@ angular.module('donacion', [
     cfpLoadingBarProvider.spinnerTemplate = '<span class="fa fa-spinner fa-pulse fa-lg fa-fw"></span>&nbsp;&nbsp;Cargando...';
 
     uiGmapGoogleMapApiProvider.configure({
-      key: '',
+      key: 'AIzaSyBtTbhkqxMoIrLrDxlvUTI-cOCvesNX8zQ',
       v: '3.25',
       libraries: 'weather,geometry,visualization'
     });

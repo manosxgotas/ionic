@@ -33,7 +33,8 @@
     "ng-flow": "~2",
     "moment": "^2.14.1",
     "angular-loading-bar": "^0.9.0",
-    "ngvideo": "^1.0.2"
+    "ngvideo": "^1.0.2",
+    "angular-google-maps": "^2.3.4"
   },
   "resolutions": {
     "angular": "1.5.3",

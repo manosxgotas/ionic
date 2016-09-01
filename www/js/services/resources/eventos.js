@@ -2,7 +2,7 @@ angular.module('donacion')
 
   .factory('EventosService', function (global, $resource) {
 
-    var url = global.getApiUrl() + '/listado-eventos/';
+    var listadoUrl = global.getApiUrl() + '/listado-eventos/';
     var infoUrl = global.getApiUrl() + '/evento/:id';
 
     function infoEvento(){
@@ -10,10 +10,10 @@ angular.module('donacion')
     		infoUrl,
     		{ id : '@_id'},
     		{
-	          query: {
-	            method: 'GET',
-	            isArray: false
-	          }
+          query: {
+            method: 'GET',
+            isArray: false
+          }
         });
     }
 
@@ -24,7 +24,7 @@ angular.module('donacion')
     	},
 
     	listadoEventos :  function(){
-    		return $resource(url);
+    		return $resource(listadoUrl);
     	}
 
     }

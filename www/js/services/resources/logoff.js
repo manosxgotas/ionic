@@ -1,8 +1,9 @@
 angular.module('donacion')
 
-  .factory('LogoffService', function (global, $resource, $http, $state, localStorageService, $rootScope) {
+  .factory('LogoffService', function (global, $q, $resource, $http, $state, localStorageService, $rootScope) {
 
     function logoff() {
+      var deferred = $q.defer();
       localStorageService.clearAll();
 
       // Verifico si estoy o no en la sección home
@@ -18,6 +19,8 @@ angular.module('donacion')
           delete $rootScope[prop];
         }
       }
+      deferred.resolve();
+      return deferred.promise;
     }
 
     return {

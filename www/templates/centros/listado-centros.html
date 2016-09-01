@@ -1,0 +1,29 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">
+              <span class="fa fa-map-signs fa-lg"></span>
+              &nbsp;&nbsp;Centros de donación
+              <span class="clearfix"></span>
+            </h4>
+            <p class="category">A continuación podrás observar la ubicación de cada centro de donación en la provincia.</p>
+          </div>
+          <div style="margin-top: 15px">
+            <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+              <ui-gmap-marker ng-repeat="marker in markers"
+                              coords="marker.coords"
+                              idKey="marker.id"
+                              options="marker.options"
+                              click="mostrarDetalle(marker.id)">
+              </ui-gmap-marker>
+            </ui-gmap-google-map>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

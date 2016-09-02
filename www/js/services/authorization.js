@@ -32,6 +32,53 @@ angular.module('donacion')
         });
     }
 
+    function resetPassRequest(email) {
+      var url = global.getApiUrl() + "/cuentas/reset-pass-request/";
+      $http({
+        url: url,
+        dataType: "json",
+        method: "POST",
+        data: {
+          email: email
+        }
+      }).success(function (response) {
+        console.log(response);
+      }).error(function (response) {
+        console.log(response);
+      });
+    }
+
+    function resetPassToken() {
+      var url = global.getApiUrl() + "/cuentas/reset-pass-token/:token";
+      return $resource(
+        url,
+        { token: '@_token' },
+        {
+          query: {
+            method: 'GET',
+            isArray: false
+          }
+        });
+    }
+
+    function resetPass(pass1, pass2, token) {
+      var url = global.getApiUrl() + "/cuentas/reset-pass/";
+      $http({
+        url: url,
+        dataType: "json",
+        method: "POST",
+        data: {
+          password: pass1,
+          password2: pass2,
+          token: token
+        }
+      }).success(function (response) {
+        console.log(response);
+      }).error(function (response) {
+        console.log(response);
+      });
+    }
+
     function getToken(credentials) {
       var url = global.getApiUrl() + "/cuentas/token/";
       $http({
@@ -113,7 +160,20 @@ angular.module('donacion')
 
       accountActivateLink: function () {
         return accountActivateLink()
+      },
+
+      resetPassRequest: function (email) {
+        return resetPassRequest(email)
+      },
+
+      resetPass: function (pass1, pass2, token) {
+        return resetPass(pass1, pass2, token)
+      },
+
+      resetPassToken: function () {
+        return resetPassToken()
       }
+
     }
 
   });

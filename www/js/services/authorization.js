@@ -74,6 +74,7 @@ angular.module('donacion')
         }
       }).success(function (response) {
         console.log(response);
+        $state.transitionTo('home.inicio')
       }).error(function (response) {
         console.log(response);
       });

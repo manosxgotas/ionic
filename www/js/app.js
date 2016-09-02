@@ -122,6 +122,17 @@ angular.module('donacion', [
         }
       })
 
+      .state('home.reset-pass', {
+        cache: false,
+        url: "reset-password/:token",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/cuentas/reset-pass.html",
+            controller: "ResetPassController"
+          }
+        }
+      })
+
       .state('dashboard', {
         cache: false,
         url: "/dashboard",

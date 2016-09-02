@@ -58,3 +58,7 @@
   margin-top: 60px !important;
   background-color: #FB404B !important;
 }
+
+.home-container {
+  min-height: calc(100vh - 353px);
+}

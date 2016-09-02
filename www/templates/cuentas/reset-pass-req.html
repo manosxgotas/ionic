@@ -1,0 +1,37 @@
+<div class="modal-header" style="background-color: #FB404B; color: white">
+  <div style="display: inline-block">
+    <h3 class="modal-title">
+      <span class="fa fa-refresh fa-lg" aria-hidden="true"></span>
+      &nbsp;&nbsp; Reiniciar contraseña
+    </h3>
+  </div>
+  <div class="pull-right" style="display: inline-block">
+    <a href="" ng-click="close()" style="color: white">
+      <i class="fa fa-times fa-lg"></i>
+    </a>
+  </div>
+</div>
+<form name="resetPassReqForm" role="form" class="form-horizontal" ng-submit="enviarMail()" novalidate>
+  <div class="modal-body">
+    <div class="form-group" ng-class="{'has-error': resetPassReqForm.correo.$invalid && !resetPassReqForm.correo.$pristine,
+                                             'has-success has-feedback': resetPassReqForm.correo.$valid}">
+
+      <label for="correo" class="col-sm-2 control-label">Correo electrónico</label>
+
+      <div class="col-sm-9" required>
+        <input type="email" class="form-control" ng-model="correo"
+               id="correo" name="correo" placeholder="Ingresa tu correo electrónico" required>
+
+        <p ng-show="resetPassReqForm.correo.$invalid && resetPassReqForm.correo.$touched"
+           class="help-block"> Debes ingresar un correo electrónico. </p>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-danger btn-fill" ng-disabled="resetPassReqForm.$invalid">
+      <i class="fa fa-paper-plane"></i>
+      &nbsp;Enviar mail
+    </button>
+  </div>
+</form>

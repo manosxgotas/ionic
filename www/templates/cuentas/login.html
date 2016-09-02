@@ -37,13 +37,20 @@
            class="help-block"> Debe ingresar una contraseña. </p>
       </div>
     </div>
-  <p class="text-center" style="font-size: 12px">
-    Si no posees una cuenta <a ui-sref="home.registro" ng-click="close()"><span class="label label-danger" style="font-size: 12px;">regístrate</span></a>
-  </p>
+
+    <h5 class="text-center">
+      Si no posees una cuenta <a ui-sref="home.registro" ng-click="close()"><span class="label label-danger" style="font-size: 12px;">regístrate</span></a>
+    </h5>
   </div>
   <div class="modal-footer">
+    <div class="pull-left">
+      <a href="" class="btn btn-default" ng-click="resetPass()">
+        ¿Olvidaste tu contraseña?
+      </a>
+    </div>
     <button type="submit" class="btn btn-danger btn-fill" ng-disabled="validateLogin.$invalid">
-      <i class="fa fa-sign-in"></i>Iniciar sesión
+      <i class="fa fa-sign-in"></i>
+      &nbsp;Iniciar sesión
     </button>
   </div>
 </form>

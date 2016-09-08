@@ -13,27 +13,49 @@
           <div class="content" ng-show="eventos.length == 0">
             No hay ningún evento disponible
           </div>
-          <div class="content" ng-show="eventos.length > 0">
+          <div class="content eventos-container" ng-show="eventos.length > 0">
             <div class="row">
-              <div class="col-sm-6" ng-repeat="evento in eventos" ng-init="tienePortada()">
-                <a ui-sref="dashboard.detalle-evento({eventoID: evento.id})">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-repeat="evento in eventos" style="border: solid 1px #c0c0c0; padding: 10px 10px">
                   <h4 class="title">
-                    {{evento.nombre}}
+                    <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapseInfo{{evento.id}}">
+                      {{evento.nombre}}
+                      <b class="caret"></b>
+                    </a>
                   </h4>
-                <br>
-                <p class="category">
-                  {{evento.fechaHoraInicio | date:'dd/MM/yyyy'}}
-                </p>
-                <br>
-                <div ng-repeat="imagen in evento.imagenesEvento">
-                  <img ng-if="imagen.portada" ng-src="{{imagen.imagen}}" class="img-responsive center-block" style="height:300px;">
+
+                <div class="collapse in" id="collapseInfo{{evento.id}}">
+                  <ul class="fa-ul" style="margin-top: 5px">
+                    <li>
+                      <i class="fa-li fa fa-hourglass-start"></i>
+                      <b class="text-danger">Inicio:</b> {{evento.fechaHoraInicio | date:'dd/MM/yyyy'}} {{evento.fechaHoraInicio | date:'HH:mm'}} hs.
+                    </li>
+                    <li>
+                      <i class="fa-li fa fa-hourglass-end"></i>
+                      <b class="text-danger">Finalización:</b> {{evento.fechaHoraFin | date:'dd/MM/yyyy'}} {{evento.fechaHoraFin | date:'HH:mm'}} hs.
+                    </li>
+                    <li ng-repeat="lugar in evento.lugarEvento">
+                      <i class="fa-li fa fa-map-marker"></i>
+                      {{lugar.lugarDonacion.direccion.localidad.provincia.nombre}}, {{lugar.lugarDonacion.direccion.localidad.nombre}}, {{lugar.lugarDonacion.direccion.calle}} {{lugar.lugarDonacion.direccion.numero}}
+                    </li>
+                  </ul>
                 </div>
-                  <img ng-if="!evento.tienePortada" ng-src="{{evento.tienePortada ? '':'../../img/perfil-defecto-color.png'}}" class="img-responsive center-block" style="height:300px;">
-                <br>
-                  <p class="category">
-                    {{evento.descripcion}}
-                  </p>
-                </a>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <img style="padding: 10px 10px; max-height: 300px" ng-src="{{portada[evento.id] ? portada[evento.id].imagen : '../../img/evento-defecto.jpg'}}" class="img-responsive center-block">
+                  </div>
+                </div>
+                <hr>
+                <div class="pull-left">
+                  <span popover-trigger="mouseenter" popover-placement="top" uib-popover="{{estado[evento.id].nombre}}" class="btn btn-{{estado[evento.id].color}}" style="cursor: default;">
+                    <span class="fa {{estado[evento.id].icono}}"></span>
+                  </span>
+                </div>
+                <div class="pull-right">
+                  <a href="" ui-sref="dashboard.detalle-evento({eventoID: evento.id})" class="btn btn-danger">
+                    <span class="fa fa-info-circle"></span>
+                    <span class="hidden-xs">Leer más</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

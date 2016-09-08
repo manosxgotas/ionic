@@ -1,0 +1,7 @@
+.eventos-container .col-lg-6:nth-child(odd), .eventos-container .col-md-6:nth-child(odd) {
+  clear: left;
+}
+.eventos-container .col-lg-6:nth-child(even), .eventos-container .col-md-6:nth-child(even) {
+  clear: right;
+  float: right;
+}

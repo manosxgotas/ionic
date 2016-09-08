@@ -2,3 +2,7 @@
   opacity: 1 !important;
   visibility: visible !important;
 }
+
+.carousel-evento .carousel-inner {
+  line-height: 320px;
+}

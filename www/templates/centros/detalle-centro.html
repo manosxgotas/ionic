@@ -32,7 +32,7 @@
                   </h4>
                 </a>
 
-                <div class="collapse" id="collapseHorarios">
+                <div class="collapse in" id="collapseHorarios">
                   <ul ng-show="horarios.length > 0">
                     <li ng-repeat="horario in horarios">
                       <b>{{horario.dia}}</b> de {{horario.horaApertura | date:'HH:mm'}} a {{horario.horaCierre | date:'HH:mm'}}
@@ -48,7 +48,7 @@
                     <b class="caret"></b>
                   </h4>
                 </a>
-                <div class="collapse" id="collapseTelefono">
+                <div class="collapse in" id="collapseTelefono">
                   <p ng-show="centro.telefono">{{centro.telefono}}</p>
                   <p ng-hide="centro.telefono">No hay teléfono disponible</p>
                 </div>
@@ -61,7 +61,7 @@
                   </h4>
                 </a>
 
-                <div class="collapse" id="collapseUbicacion">
+                <div class="collapse in" id="collapseUbicacion">
                   <ul>
                     <li>
                       <h5><b>Provincia:</b> {{centro.lugarDonacion.direccion.localidad.provincia.nombre}}</h5>

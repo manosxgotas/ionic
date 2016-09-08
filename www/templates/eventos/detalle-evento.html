@@ -1,73 +1,135 @@
-<div class ="col-md-12">
-	<div class="card">
-	<div class="title">
-		<h4 class="padding"><span class="fa fa-calendar"></span>&nbsp;&nbsp;{{evento.nombre}}</h4>
-		<p class="category padding">
-      <span class="fa fa-calendar-check-o"></span>
-        &nbsp;{{evento.fechaHoraInicio | date:'dd/MM/yyyy'}}
-      <span class="fa fa-clock-o"></span>&nbsp;
-        &nbsp;{{evento.fechaHoraInicio | date:'HH:mm'}}</p>
-		<ul class="nav nav-tabs">
-      <li id="tabFotos" class="pull-right" role="presentation" ng-click="changeTab(1)">
-        <h4>Fotos</h4>
-      </li>
-			<li id="tabVideo" class="pull-right" role="presentation" ng-click="changeTab(2)" ng-show="evento.video">
-        <h4>Videos</h4>
-      </li>
-		</ul>
-		<br><br>
-		<div class="row">
-      <div ng-repeat="imagen in evento.imagenesEvento" ng-init="addSlide(imagen)"></div>
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">
+		          <span class="fa fa-calendar"></span>&nbsp;&nbsp;{{evento.nombre}}
+              <div class="pull-right">
+                <button class="btn btn-success" ng-click="changeOption(1)">
+                  <span class="fa fa-camera"></span>
+                  <span class="hidden-xs">&nbsp;Fotos</span>
+                </button>
+                <button ng-show="evento.video" class="btn btn-success btn-fill" ng-click="changeOption(2)">
+                  <span class="fa fa-video-camera"></span>
+                  <span class="hidden-xs">&nbsp;Video</span>
+                </button>
+                <button ng-show="markers.length > 0" class="btn btn-warning btn-fill" ng-click="changeOption(3)">
+                  <span class="fa fa-map-marker"></span>
+                  <span class="hidden-xs">Ver mapa</span>
+                </button>
+              </div>
+            </h4>
+            <div class="content">
+              <div class="row">
+                <h4>
+                  {{evento.descripcion}}
+                </h4>
+              </div>
 
-      <div class="col-sm-8 col-sm-offset-2" ng-if="tab === 1">
-        <div uib-carousel active="active" interval="myInterval">
-          <div uib-slide ng-repeat="slide in slides" index="slide.id">
-            <img class="center-block" ng-src="{{slide.image}}">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <div style="margin: 30px 10px;">
+                    <div class="carousel-evento" ng-show="option === 1 && slides.length > 0" uib-carousel active="active" interval="myInterval">
+                      <div uib-slide ng-repeat="slide in slides" index="slide.id">
+                        <img style="display: inline-block; vertical-align: middle; background-size: cover" class="img-responsive center-block" ng-src="{{slide.image}}">
+                      </div>
+                    </div>
+
+                    <div ng-show="option === 1 && slides.length == 0">
+                      <img style="display: inline-block; vertical-align: middle" class="img-responsive center-block" src="../../img/evento-defecto.jpg">
+                    </div>
+
+                  <section ng-show="option === 2" class="ng-video-container">
+                    <section class="video" ng-video>
+
+                      <video vi-screen></video>
+
+                      <section vi-controls class="controls">
+                        <span vi-controls-play title="Play" class="glyphicon glyphicon-play"></span>
+                        <span vi-controls-pause title="Pause" class="glyphicon glyphicon-pause"></span>
+                      </section>
+
+                      <section class="full-screen">
+                        <span title="Full Screen" vi-full-screen-toggle class="glyphicon glyphicon-fullscreen"></span>
+                      </section>
+
+                      <section vi-feedback class="feedback">
+
+                        <section class="loading" ng-show="loading">
+                          <span class="fa fa-spinner fa-pulse"></span>&nbsp;&nbsp;Cargando...
+                        </section>
+
+                        <section class="timeline">
+                          <input vi-timeline />
+                        </section>
+
+                      </section>
+                    </section>
+                  </section>
+
+                  <ui-gmap-google-map ng-show="option === 3" class="small-map" center='map.center' zoom='map.zoom' options="map.options">
+                    <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords"
+                                    idKey="marker.id">
+                    </ui-gmap-marker>
+                  </ui-gmap-google-map>
+                </div>
+
+                  <hr class="hidden-lg hidden-md">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapseHorarios">
+                    <h4>
+                      <span class="fa fa-clock-o"></span>
+                      &nbsp;&nbsp;Horarios del evento
+                      <b class="caret"></b>
+                    </h4>
+                  </a>
+                  <div class="collapse in" id="collapseHorarios">
+                    <ul style="margin-top: 5px">
+                      <li>
+                        <b class="text-danger">Inicio:</b> {{evento.fechaHoraInicio | date:'fullDate'}} a las {{evento.fechaHoraInicio | date:'HH:mm'}} hs.
+                      </li>
+                      <li>
+                        <b class="text-danger">Finalización:</b> {{evento.fechaHoraFin | date:'fullDate'}} a las {{evento.fechaHoraFin | date:'HH:mm'}} hs.
+                      </li>
+                    </ul>
+                  </div>
+                  <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapseUbicacion">
+                    <h4>
+                      <span class="fa fa-map-marker" aria-hidden="true"></span>
+                      &nbsp;&nbsp;Ubicación
+                      <b class="caret"></b>
+                    </h4>
+                  </a>
+
+                  <div class="collapse in" id="collapseUbicacion">
+                    <p ng-show="evento.lugarEvento.length > 0" ng-repeat="lugar in evento.lugarEvento">
+                      {{lugar.lugarDonacion.direccion.localidad.provincia.nombre}}, {{lugar.lugarDonacion.direccion.localidad.nombre}}, {{lugar.lugarDonacion.direccion.calle}} {{lugar.lugarDonacion.direccion.numero}}
+                    </p>
+                    <p ng-show="evento.lugarEvento.length == 0">
+                      No hay ubicaciones disponibles
+                    </p>
+                  </div>
+                  <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapseCategoria">
+                    <h4>
+                      <span class="fa fa-tag"></span>
+                      &nbsp;&nbsp;Categoría
+                      <b class="caret"></b>
+                    </h4>
+                  </a>
+                  <div class="collapse in" id="collapseCategoria">
+                    <p>{{evento.categoria.nombre}}</p>
+                  </div>
+                </div>
+              </div>
+              <span class="clearfix"></span>
+              </div>
+            </div>
           </div>
         </div>
-
       </div>
-
-      <div class="col-sm-8 col-sm-offset-2" ng-if="tab === 2 && evento.video">
-        <section class="ng-video-container" style="width:100%">
-          <!-- Base Directive -->
-          <section class="video" ng-video>
-
-            <!-- Screen Directive -->
-            <video vi-screen></video>
-
-            <section vi-controls class="controls">
-              <span vi-controls-play title="Play" class="glyphicon glyphicon-play"></span>
-              <span vi-controls-pause title="Pause" class="glyphicon glyphicon-pause"></span>
-            </section>
-            <!-- Feedback Directive -->
-            <section vi-feedback class="feedback">
-
-              <section class="loading" ng-show="loading">
-                Loading...
-              </section>
-
-              <!-- Volume Directive -->
-              <section vi-volume class="volume">
-                <span vi-volume-decrease title="Decrease Volume" class="decrease glyphicon glyphicon-minus"></span>
-                <span vi-volume-increase title="Increase Volume" class="increase glyphicon glyphicon-plus"></span>
-
-              </section>
-              <!-- Timeline Directive -->
-              <section class="timeline">
-                <input vi-timeline />
-              </section>
-              <!-- Full Screen Directive -->
-              <section class="full-screen">
-                <span title="Full Screen" vi-full-screen-toggle class="glyphicon glyphicon-fullscreen"></span>
-              </section>
-            </section>
-          </section>
-        </section>
-      </div>
-		</div>
-		<br><br>
-		<p class="category padding"><span class="fa fa-edit"></span>&nbsp;&nbsp;&nbsp;{{evento.descripcion}}</p>
-	</div>
-	</div>
+    </div>
+  </div>
 </div>

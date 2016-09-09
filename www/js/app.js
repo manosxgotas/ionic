@@ -79,6 +79,16 @@ angular.module('donacion', [
         }
       })
 
+      .state('home.sangre', {
+        cache: false,
+        url: "sangre",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/sangre.html"
+          }
+        }
+      })
+
       .state('home.registro', {
         cache: false,
         url: "registro",

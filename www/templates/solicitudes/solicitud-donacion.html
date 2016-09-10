@@ -1,0 +1,271 @@
+
+  <div class="row">
+      <form name="solicitudForm" class="form-horizontal" ng-submit="crearSolicitud()" novalidate>
+        <div class="col-sm-6">
+          <div class='header' style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;'>
+            <h4 class='title'>
+              <span class="fa fa-user-plus fa-lg" aria-hidden="true"></span>
+              &nbsp;&nbsp; Datos del paciente
+            </h4>
+          </div>
+
+          <div class="content">
+            <div class="form-group">
+              <label for="nombrePaciente" class="col-sm-3 control-label">Nombre</label>
+              <div class="col-sm-7">
+                <input type="text" id="nombrePaciente" name="tituloSoilicitud" ng-model="solicitud.paciente.nombre" class="form-control"
+                       placeholder="Ingrese el nombre del paciente" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="apellidoPaciente" class="col-sm-3 control-label">Apellido</label>
+              <div class="col-sm-7">
+                <input type="text" id="apellidoPaciente" name="tituloSoilicitud" ng-model="solicitud.paciente.apellido" class="form-control"
+                       placeholder="Ingrese el apellido del paciente" required>
+              </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': solicitudForm.correo.$invalid && !solicitudForm.correo.$pristine,
+                                             'has-success has-feedback': solicitudForm.correo.$valid}">
+              <label for="correo" class="col-sm-3 control-label">Correo electrónico</label>
+              <div class="col-sm-7">
+                <input type="email" id="correo" name="correo" ng-model="solicitud.paciente.email" class="form-control"
+                       placeholder="Ingrese un correo electrónico" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="nacimiento" class="col-sm-3 control-label">Fecha de nacimiento</label>
+              <div class="col-sm-7">
+                <p class="input-group">
+                  <input uib-datepicker-popup="{{format}}" is-open="fechaDPNacimiento.opened" type="text" name="nacimiento" class="form-control" id="nacimiento" ng-model="solicitud.paciente.nacimiento"
+                         datepicker-options="fechaNacimientoDPOptions" show-button-bar="false" placeholder="Ingresa la fecha de nacimiento del paciente" ng-required="true">
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="openDatePicker('nacimiento')"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+                </p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="nroTelefono" class="col-sm-3 control-label">Numero de teléfono</label>
+              <div class="col-sm-7">
+                <input type="number" id="nroTelefono" name="nroTelefono" ng-model="solicitud.paciente.telefono" class="form-control"
+                       placeholder="Cod. de area(sin 0) + numero de telefono(sin 15)" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Sexo</label>
+
+              <div class="col-sm-5">
+                <label class="radio" style="padding-top: 0; padding-left: 20px">
+                      <span class="icons">
+                        <span class="first-icon fa fa-circle-o"></span>
+                        <span class="second-icon fa fa-dot-circle-o"></span>
+                      </span>
+                  <input type="radio" name="optionsGenero" id="masculino" value="1" ng-model="solicitud.paciente.genero">
+                  <span class="fa fa-male"></span> Hombre
+                </label>
+                <label class="radio" style="padding-top: 0; padding-left: 20px">
+                      <span class="icons">
+                        <span class="first-icon fa fa-circle-o"></span>
+                        <span class="second-icon fa fa-dot-circle-o"></span>
+                      </span>
+                  <input type="radio" data-toggle="radio" name="optionsGenero" id="femenino" value="2" ng-model="solicitud.paciente.genero">
+                  <span class="fa fa-female"></span> Mujer
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="provincia" class="col-sm-3 control-label">Provincia</label>
+              <div class="col-sm-7">
+                <select class="form-control" id="provincia" ng-model="solicitud.paciente.direccion.provincia" ng-change="obtenerLocalidades(solicitud.paciente.direccion.provincia)">
+                  <option ng-repeat="provincia in provincias" value="{{provincia.id}}"> {{provincia.nombre}} </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="localidad" class="col-sm-3 control-label">Localidad</label>
+              <div class="col-sm-7">
+                <select class="form-control" id="localidad" ng-model="solicitud.paciente.direccion.localidad">
+                  <option ng-repeat="localidad in localidades" value="{{localidad.id}}"> {{localidad.nombre}} </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': solicitudForm.calle.$invalid && !solicitudForm.calle.$pristine,
+                                             'has-success has-feedback': solicitudForm.calle.$valid}">
+              <label for="calle" class="col-sm-3 control-label">Calle</label>
+              <div class="col-sm-7">
+                <input type="text" id="calle" name="calle" ng-model="solicitud.paciente.direccion.calle" class="form-control"
+                       placeholder="Ingrese el nombre de la calle de su domicilio" required>
+              </div>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': solicitudForm.numero.$invalid && !solicitudForm.numero.$pristine,
+                                             'has-success has-feedback': solicitudForm.numero.$valid}">
+              <label for="numero" class="col-sm-3 control-label">Número</label>
+              <div class="col-sm-7">
+                <input type="number" id="numero" name="numero" ng-model="solicitud.paciente.direccion.numero" class="form-control"
+                       placeholder="Ingrese el número de la calle de su domicilio" min="0" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="piso" class="col-sm-3 control-label">Piso</label>
+              <div class="col-sm-7">
+                <input type="number" id="piso" name="piso" ng-model="solicitud.paciente.direccion.piso" class="form-control"
+                       placeholder="Ingrese el número de piso de su domicilio">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="numeroDepartamento" class="col-sm-3 control-label">Número de departamento</label>
+              <div class="col-sm-7">
+                <input type="number" id="numeroDepartamento" name="numeroDepartamento" ng-model="solicitud.paciente.direccion.numeroDepartamento" class="form-control"
+                       placeholder="Ingrese el número de departamento de su domicilio">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+
+        <div class='header' style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;'>
+          <h4 class='title'>
+            <span class="fa fa-heartbeat fa-lg" aria-hidden="true"></span>
+            &nbsp;&nbsp; Datos de la solicitud
+          </h4>
+        </div>
+
+        <div class="content">
+          <div class="form-group">
+            <label for="tituloSolicitud" class="col-sm-3 control-label">Titulo</label>
+            <div class="col-sm-7">
+              <input type="text" id="tituloSolicitud" name="tituloSoilicitud" ng-model="solicitud.titulo" class="form-control"
+                     placeholder="Ingrese el titulo de la solicitud" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="donanteNecesarios" class="col-sm-3 control-label">Donantes necesarios</label>
+            <div class="col-sm-7">
+              <input type="number" id="donanteNecesarios" name="donantesNecesarios" ng-model="solicitud.donantesNecesarios" class="form-control"
+                     placeholder="Ingrese la cantidad de donantes necesarios" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="fechaInicio" class="col-sm-3 control-label">Fecha de inicio</label>
+            <div class="col-sm-7">
+              <p class="input-group">
+                <input uib-datepicker-popup="{{format}}" is-open="fechaDPInicio.opened" type="text" name="fechaInicio" class="form-control" id="fechaInicio" ng-model="solicitud.fechaInicio"
+                       datepicker-options="fechaInicioDPOptions" show-button-bar="false" placeholder="Ingresa la fecha de inicio de la solicitud aqui" ng-required="true">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="openDatePicker('fechaInicio')"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+            <label  class="col-sm-3 control-label">Hora de inicio</label>
+            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12"  >
+              <uib-timepicker style="margin: 0 auto;  margin-bottom: 10px;" ng-model="solicitud.horaInicio" ng-required="true"></uib-timepicker>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fechaFin" class="col-sm-3 control-label">Fecha de finalización</label>
+            <div class="col-sm-7">
+              <p class="input-group">
+                <input uib-datepicker-popup="{{format}}" is-open="fechaDPFin.opened" type="text" name="fechaFin" class="form-control" id="fechaFin" ng-model="solicitud.fechaFin"
+                       datepicker-options="fechaFinDPOptions" show-button-bar="false" placeholder="Ingresa la fecha de finalizacion de la solicitud aqui" ng-required="true">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="openDatePicker('fechaFin')"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+            <label  class="col-sm-3 control-label">Hora de finalización</label>
+            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12"  >
+              <uib-timepicker style="margin: 0 auto;  margin-bottom: 10px;" ng-model="solicitud.horaFin" ng-required="true"></uib-timepicker>
+            </div>
+            </div>
+
+          <div class="form-group">
+            <label for="tipoSolicitud" class="col-sm-3 control-label">Tipo de solicitud</label>
+            <div class="col-sm-7">
+              <select class="form-control" id="tipoSolicitud" ng-model="solicitud.idTipoSolicitud" required>
+                <option ng-repeat="tipo in tiposSolicitudes" value="{{tipo.id}}"> {{tipo.nombre}} </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Grupos sangunieos necesarios</label>
+            <div class="col-sm-5">
+             <label class="checkbox" style="padding-top: 0; padding-left: 20px" ng-repeat="grupo in gruposSanguineos">
+                      <span class="icons">
+                        <span class="first-icon fa fa-square-o"></span>
+                        <span class="second-icon fa fa-check-square-o"></span>
+                      </span>
+                <input type="checkbox" value="{{grupo.id}}"   ng-model="solicitud.gs[grupo.id]" ng-click="unCheck(grupo.id)" >
+                {{grupo.nombre}}
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="centroDonacion" class="col-sm-3 control-label">Centro de donación</label>
+            <div class="col-sm-7">
+              <select class="form-control" id="centroDonacion" ng-model="solicitud.idCentroDonacion" required>
+                <option ng-repeat="centro in centrosDonacion" value="{{centro.id}}"> {{centro.nombre}}</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="form-group" flow-init="{singleFile:true}" flow-name="solicitud.video" flow-file-added="!!{png:1}[$file.getExtension()]">
+            <label class="col-sm-3 control-label" for="inputVideo" flow-btn>Video (opcional):</label>
+            <div class="col-sm-7">
+              <span class="btn" id="inputVideo" ng-hide="$flow.files.length" flow-btn>Seleccionar video</span>
+              <span class="btn" id="inputVideo" ng-show="$flow.files.length" flow-btn>Cambiar</span>
+              <table>
+                <tr ng-repeat="file in $flow.files">
+                  <td>{{$index+1}}&nbsp;&nbsp;</td>
+                  <td>{{file.name}}&nbsp;&nbsp;</td>
+                  <td>{{file.msg}} </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="form-group" flow-init flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-name="solicitud.imagenes">
+            <label class="col-sm-3 control-label" for="inputImagen" flow-btn>Fotos:</label>
+            <div class="col-sm-7">
+              <span class="btn" id="inputImagen" ng-hide="$flow.files.length" flow-btn>Seleccionar imagen</span>
+              <span class="btn" id="inputImagen" ng-show="$flow.files.length" flow-btn>Agregar mas imagenes</span>
+              <table>
+                <tr ng-repeat="file in $flow.files">
+                  <td>{{$index+1}}&nbsp;&nbsp;</td>
+                  <td>{{file.name}}&nbsp;&nbsp;</td>
+                  <td>{{file.msg}} </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <div class="col-sm-10">
+              <div class="pull-right">
+                <button type="submit" class="btn btn-danger btn-fill">
+                  <i class="fa fa-heartbeat"></i> Crear solicitud
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+
+      </form>
+  </div>
+

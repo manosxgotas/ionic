@@ -15,7 +15,8 @@ angular.module('donacion', [
   'file-model',
   'base64',
   'flow',
-  'ngVideo'
+  'ngVideo',
+  'ng-file-input'
   ])
 
   .run(function (AuthService, $rootScope, $state, LoginModal, LogoffService) {
@@ -201,4 +202,16 @@ angular.module('donacion', [
           }
         }
       })
+
+      .state('dashboard.crear-solicitud-donacion', {
+        cache: false,
+        url: "/solicitud-donacion",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/solicitudes/solicitud-donacion.html",
+            controller: "CrearSolicitudDonacionController",
+          }
+        }
+      })
+
   });

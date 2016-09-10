@@ -2,6 +2,9 @@
   color: #FB404B !important;
 }
 
-.radio.checked {
+.radio.checked,.checkbox.checked {
   color: #FB404B !important;
+}
+#inputVideo, #inputImagen{
+  color: black !important;
 }

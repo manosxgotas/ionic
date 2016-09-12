@@ -119,6 +119,15 @@ angular.module('donacion', [
         }
       })
 
+      .state('home.quienes-donan', {
+        cache: false,
+        url: "quienes-donan",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/quienes-donan.html"
+          }
+        }
+      })
 
       .state('home.registro', {
         cache: false,

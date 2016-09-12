@@ -109,6 +109,16 @@ angular.module('donacion', [
         }
       })
 
+      .state('home.tratamiento-sangre', {
+        cache: false,
+        url: "tratamiento-sangre",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/tratamiento-sangre.html"
+          }
+        }
+      })
+
 
       .state('home.registro', {
         cache: false,

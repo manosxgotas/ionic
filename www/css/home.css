@@ -6,6 +6,11 @@
   }
   .jumbotron-title {
     font-size: 25px !important;
+    text-align: center !important;
+  }
+  .jumbotron-subtitle {
+    font-size: 13px !important;
+    text-align: center !important;
   }
 }
 
@@ -15,6 +20,11 @@
   }
   .jumbotron-title {
     font-size: 35px !important;
+    text-align: center !important;
+  }
+  .jumbotron-subtitle {
+    font-size: 20px !important;
+    text-align: center !important;
   }
 }
 
@@ -25,6 +35,11 @@
   }
   .jumbotron-title {
     font-size: 50px !important;
+    text-align: center !important;
+  }
+  .jumbotron-subtitle {
+    font-size: 25px !important;
+    text-align: center !important;
   }
 }
 
@@ -35,6 +50,10 @@
   }
   .jumbotron-title {
     font-size: 70px !important;
+    text-align: center !important;
+  }
+  .jumbotron-subtitle {
+    font-size: 28px !important;
   }
 }
 
@@ -45,6 +64,10 @@
   }
   .jumbotron-title {
     font-size: 80px !important;
+    text-align: left !important;
+  }
+  .jumbotron-subtitle {
+    font-size: 32px !important;
   }
 }
 

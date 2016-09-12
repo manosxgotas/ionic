@@ -99,6 +99,17 @@ angular.module('donacion', [
         }
       })
 
+      .state('home.grupos-sanguineos', {
+        cache: false,
+        url: "grupos-sanguineos",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/grupos-sanguineos-info.html"
+          }
+        }
+      })
+
+
       .state('home.registro', {
         cache: false,
         url: "registro",

@@ -129,6 +129,17 @@ angular.module('donacion', [
         }
       })
 
+      .state('home.donde-donar', {
+        cache: false,
+        url: "donde-donar",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/donde-donar.html",
+            controller: "CentrosDonacionController"
+          }
+        }
+      })
+
       .state('home.registro', {
         cache: false,
         url: "registro",

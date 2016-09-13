@@ -46,3 +46,8 @@
 .navbar-home .nav .open > a {
   background-color: #E1373E;
 }
+
+.navbar-home .nav-img {
+  margin-top: 10px;
+  margin-right: 15px;
+}

@@ -14,7 +14,7 @@
   }
 }
 
-@media (min-width: 350px) {
+@media (min-width: 350px) and (max-width: 519px) {
   .jumbotron-supertitle {
     font-size: 38px !important;
   }
@@ -29,7 +29,7 @@
 }
 
 /* Small devices (tablets, 768px and up) */
-@media (min-width: 520px) {
+@media (min-width: 520px) and (max-width: 991px) {
   .jumbotron-supertitle {
     font-size: 60px !important;
   }
@@ -44,7 +44,7 @@
 }
 
 /* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
+@media (min-width: 992px) and (max-width: 1199px) {
   .jumbotron-supertitle {
     font-size: 80px !important;
   }

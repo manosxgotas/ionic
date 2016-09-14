@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false" style="height: 30px;">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-home-collapse" aria-expanded="false" style="height: 30px;">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -18,12 +18,12 @@
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-        <ul class="nav navbar-nav" style="height: 50px; border-left: 1px solid #E1373E">
+      <div class="collapse navbar-collapse" id="navbar-home-collapse">
+        <ul class="nav navbar-nav">
           <li class="dropdown">
             <a ui-sref="home.inicio" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-tint" aria-hidden="true"></i>
-              &nbsp;Sangre
+              <i class="fa fa-tint hidden-xs hidden-sm" aria-hidden="true"></i>
+              <span class="hidden-xs hidden-sm">&nbsp;</span>Sangre
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
@@ -37,7 +37,7 @@
                   Funciones de la sangre
                 </a>
               </li>
-              <li role="separator" class="divider"></li>
+              <li role="separator" class="divider hidden-xs hidden-sm"></li>
               <li>
                 <a ui-sref="home.grupos-sanguineos">
                   Grupos sanguíneos
@@ -58,8 +58,8 @@
 
           <li class="dropdown">
             <a ui-sref="home.inicio" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-list-ol" aria-hidden="true"></i>
-              &nbsp;¿Cómo donar?
+              <i class="fa fa-list-ol hidden-xs hidden-sm" aria-hidden="true"></i>
+              <span class="hidden-xs hidden-sm">&nbsp;</span>¿Cómo donar?
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
@@ -78,7 +78,7 @@
                   Recomendaciones y requisitos
                 </a>
               </li>
-              <li role="separator" class="divider"></li>
+              <li role="separator" class="divider hidden-xs hidden-sm"></li>
               <li>
                 <a href="#">
                   Proceso de donación
@@ -89,22 +89,22 @@
 
           <li>
             <a ui-sref="home.inicio">
-              <i class="fa fa-edit" aria-hidden="true"></i>
-              &nbsp;Solicitudes
+              <i class="fa fa-edit hidden-xs hidden-sm" aria-hidden="true"></i>
+              <span class="hidden-xs hidden-sm">&nbsp;</span>Solicitudes
             </a>
           </li>
 
           <li>
             <a ui-sref="home.inicio">
-              <i class="fa fa-group" aria-hidden="true"></i>
-              &nbsp;¿Quiénes somos?
+              <i class="fa fa-group hidden-xs hidden-sm" aria-hidden="true"></i>
+              <span class="hidden-xs hidden-sm">&nbsp;</span>¿Quiénes somos?
             </a>
           </li>
         </ul>
 
-        <ul class="nav navbar-nav navbar-right" style="border-left: 1px solid #E1373E" ng-show="currentUser != null">
+        <ul class="nav navbar-nav navbar-right" ng-show="currentUser != null">
 
-          <li style="margin-right: 3px">
+          <li>
             <a type="button" ui-sref="dashboard.perfil" class="btn btn-default btn-registro-home">
               <i class="fa fa-sign-in" aria-hidden="true"></i>
               <span class="hidden-md">&nbsp;Mi dashboard</span>
@@ -118,8 +118,8 @@
           </li>
         </ul>
 
-        <ul class="nav navbar-nav navbar-right" style="border-left: 1px solid #E1373E" ng-hide="currentUser != null">
-          <li style="margin-right: 3px">
+        <ul class="nav navbar-nav navbar-right" ng-hide="currentUser != null">
+          <li>
             <a href="" ng-click="openLoginModal()">
               <i class="fa fa-sign-in" aria-hidden="true"></i>
               <span class="hidden-md">&nbsp;Iniciar sesión</span>

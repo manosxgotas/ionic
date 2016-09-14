@@ -1,35 +1,73 @@
 /* Small devices (tablets, 768px and up) */
 
 @media (max-width: 349px) {
-  .jumbotron-title {
+  .jumbotron-supertitle {
     font-size: 32px !important;
+  }
+  .jumbotron-title {
+    font-size: 25px !important;
+    text-align: center !important;
+  }
+  .jumbotron-subtitle {
+    font-size: 13px !important;
+    text-align: center !important;
   }
 }
 
-@media (min-width: 350px) {
-  .jumbotron-title {
+@media (min-width: 350px) and (max-width: 519px) {
+  .jumbotron-supertitle {
     font-size: 38px !important;
+  }
+  .jumbotron-title {
+    font-size: 35px !important;
+    text-align: center !important;
+  }
+  .jumbotron-subtitle {
+    font-size: 20px !important;
+    text-align: center !important;
   }
 }
 
 /* Small devices (tablets, 768px and up) */
-@media (min-width: 520px) {
-  .jumbotron-title {
+@media (min-width: 520px) and (max-width: 991px) {
+  .jumbotron-supertitle {
     font-size: 60px !important;
+  }
+  .jumbotron-title {
+    font-size: 50px !important;
+    text-align: center !important;
+  }
+  .jumbotron-subtitle {
+    font-size: 25px !important;
+    text-align: center !important;
   }
 }
 
 /* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .jumbotron-title {
+@media (min-width: 992px) and (max-width: 1199px) {
+  .jumbotron-supertitle {
     font-size: 80px !important;
+  }
+  .jumbotron-title {
+    font-size: 70px !important;
+    text-align: center !important;
+  }
+  .jumbotron-subtitle {
+    font-size: 28px !important;
   }
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-  .jumbotron-title {
+  .jumbotron-supertitle {
     font-size: 90px !important;
+  }
+  .jumbotron-title {
+    font-size: 80px !important;
+    text-align: left !important;
+  }
+  .jumbotron-subtitle {
+    font-size: 32px !important;
   }
 }
 
@@ -37,7 +75,7 @@
   background-color: #FB404B !important;
 }
 
-.jumbotron-title {
+.jumbotron-supertitle, .jumbotron-title {
   color: white !important;
   text-shadow: 4px 3px 0 #FB404B,9px 8px 0 rgba(0,0,0,0.15);
 }

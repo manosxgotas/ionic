@@ -79,6 +79,67 @@ angular.module('donacion', [
         }
       })
 
+      .state('home.sangre', {
+        cache: false,
+        url: "sangre",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/sangre.html"
+          }
+        }
+      })
+
+      .state('home.sangre-funcion', {
+        cache: false,
+        url: "sangre-funcion",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/sangre-funcion.html"
+          }
+        }
+      })
+
+      .state('home.grupos-sanguineos', {
+        cache: false,
+        url: "grupos-sanguineos",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/grupos-sanguineos-info.html"
+          }
+        }
+      })
+
+      .state('home.tratamiento-sangre', {
+        cache: false,
+        url: "tratamiento-sangre",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/tratamiento-sangre.html"
+          }
+        }
+      })
+
+      .state('home.quienes-donan', {
+        cache: false,
+        url: "quienes-donan",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/quienes-donan.html"
+          }
+        }
+      })
+
+      .state('home.donde-donar', {
+        cache: false,
+        url: "donde-donar",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/donde-donar.html",
+            controller: "CentrosDonacionController"
+          }
+        }
+      })
+
       .state('home.registro', {
         cache: false,
         url: "registro",

@@ -1,0 +1,42 @@
+<div class="jumbotron jumbotron-home">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <h1 class="jumbotron-title">
+          <span class="fa fa-map-marker hidden-xs hidden-sm" aria-hidden="true"></span>
+          <span class="hidden-xs hidden-sm">&nbsp;</span>¿Dónde donar?
+        </h1>
+        <h3 class="jumbotron-subtitle text-uppercase">Llamamos "Centros de donación" a los lugares donde se pueden realizar donaciones</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <h4 class="text-center">
+      <i>
+        "Los Centros de Donación son establecimientos aptos para realizar donaciones de sangre, plasma, etc."
+      </i>
+    </h4>
+  </div>
+
+  <div class="row">
+    <ui-gmap-google-map style="max-width: 100%" center='map.center' zoom='map.zoom'>
+      <ui-gmap-marker ng-repeat="marker in markers"
+                      coords="marker.coords"
+                      idKey="marker.id"
+                      options="marker.options">
+      </ui-gmap-marker>
+    </ui-gmap-google-map>
+  </div>
+
+  <div class="row">
+    <h4 class="text-center">
+      ¡Para encontrar información detallada de cada uno de los Centros de Donación únete a nosotros!
+    </h4>
+  </div>
+
+
+</div>
+

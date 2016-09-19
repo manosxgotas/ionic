@@ -11,18 +11,21 @@
     </a>
   </div>
 </div>
+
+
 <form name="validateLogin" role="form" class="form-horizontal" ng-submit="login()" novalidate>
   <div class="modal-body">
+
     <div class="form-group">
 
-      <label for="username" class="col-sm-2 control-label">Usuario</label>
+      <label for="email" class="col-sm-2 control-label">Correo electrónico</label>
 
       <div class="col-sm-9" required>
-        <input type="text" class="form-control" ng-model="credentials.username"
-               id="username" required>
+        <input type="email" class="form-control" ng-model="credentials.email"
+               id="email" required>
 
-        <p ng-show="validateLogin.username.$invalid && validateLogin.username.$touched"
-           class="help-block"> Debe ingresar un nombre de usuario. </p>
+        <p ng-show="validateLogin.email.$invalid && validateLogin.email.$touched"
+           class="help-block"> Debe ingresar un correo electrónico de usuario. </p>
       </div>
     </div>
 
@@ -38,19 +41,28 @@
       </div>
     </div>
 
+    <div class="text-center">
+      <a style="color: #333" href="" ng-click="resetPass()">
+        <b>¿Olvidaste tu contraseña?</b>
+      </a>
+    </div>
+
     <h5 class="text-center">
-      Si no posees una cuenta <a ui-sref="home.registro" ng-click="close()"><span class="label label-danger" style="font-size: 12px;">regístrate</span></a>
+      Si no posees una cuenta <a href="" ng-click="openRegistroModal()"><span class="label label-danger" style="font-size: 12px;">regístrate</span></a>
     </h5>
   </div>
   <div class="modal-footer">
-    <div class="pull-left">
-      <a href="" class="btn btn-default" ng-click="resetPass()">
-        ¿Olvidaste tu contraseña?
-      </a>
-    </div>
     <button type="submit" class="btn btn-danger btn-fill" ng-disabled="validateLogin.$invalid">
       <i class="fa fa-sign-in"></i>
       &nbsp;Iniciar sesión
     </button>
+
+    <div class="pull-left">
+      <a fb-login class="btn btn-fill" ng-click="close()" style="background-color: #3b5998; border-color: #3b5998">
+        <i class="fa fa-facebook-f"></i>
+        <span class="hidden-xs">&nbsp;Ingresar con Facebook</span>
+      </a>
+    </div>
   </div>
 </form>
+

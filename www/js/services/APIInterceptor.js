@@ -11,7 +11,4 @@ angular.module('donacion')
 
       return config;
     };
-    service.responseError = function(response) {
-      return response;
-    };
   });

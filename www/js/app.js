@@ -16,10 +16,15 @@ angular.module('donacion', [
   'base64',
   'flow',
   'ngVideo',
-  'uiGmapgoogle-maps'
+  'uiGmapgoogle-maps',
+  'socialLogin'
   ])
 
   .run(function (AuthService, $rootScope, $state, LoginModal, LogoffService) {
+
+    $rootScope.$on('event:social-sign-in-success', function(event, userDetails){
+      AuthService.loginSocial(userDetails.token, userDetails.provider)
+    });
 
     $rootScope.$on('$stateChangeStart', function(event, toState) {
 
@@ -38,7 +43,7 @@ angular.module('donacion', [
     })
   })
 
-  .config(function($stateProvider, $urlRouterProvider, $httpProvider, $resourceProvider, cfpLoadingBarProvider, uiGmapGoogleMapApiProvider) {
+  .config(function($stateProvider, $urlRouterProvider, socialProvider, $httpProvider, $resourceProvider, cfpLoadingBarProvider, uiGmapGoogleMapApiProvider) {
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
     $httpProvider.interceptors.push('APIInterceptor');
@@ -58,6 +63,8 @@ angular.module('donacion', [
       v: '3.25',
       libraries: 'weather,geometry,visualization'
     });
+
+    socialProvider.setFbKey({appId: "299809130392810", apiVersion: "v2.7"});
 
     $stateProvider
 
@@ -136,17 +143,6 @@ angular.module('donacion', [
           "homeContent": {
             templateUrl: "templates/home/donde-donar.html",
             controller: "CentrosDonacionController"
-          }
-        }
-      })
-
-      .state('home.registro', {
-        cache: false,
-        url: "registro",
-        views: {
-          "homeContent": {
-            templateUrl: "templates/cuentas/registro.html",
-            controller: "RegistroController"
           }
         }
       })

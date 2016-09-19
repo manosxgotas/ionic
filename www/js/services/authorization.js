@@ -2,6 +2,26 @@ angular.module('donacion')
 
   .factory('AuthService', function (global, $http, $resource, $q, $rootScope, $state, LogoffService, localStorageService, CurrentUserService) {
 
+    function loginSocial(token, provider) {
+      var url = global.getApiUrl() + "/cuentas/social/" + provider + "/";
+      $http({
+        url: url,
+        dataType: "json",
+        method: "POST",
+        data: {
+          access_token: token
+        }
+      }).success(function (response) {
+        var authdata = response.token;
+        setToken(authdata);
+        CurrentUserService.setCurrentUser().then(function () {
+          $state.transitionTo('dashboard.perfil');
+        });
+      }).error(function (data) {
+        console.log(data);
+      });
+    }
+
     function accountActivateKey(key) {
       var url = global.getApiUrl() + "/cuentas/activar-cuenta-clave/";
       $http({
@@ -81,13 +101,13 @@ angular.module('donacion')
     }
 
     function getToken(credentials) {
-      var url = global.getApiUrl() + "/cuentas/token/";
+      var url = global.getApiUrl() + "/cuentas/login/";
       $http({
         url: url,
         dataType: "json",
         method: "POST",
         data: {
-          username: credentials.username,
+          email: credentials.email,
           password: credentials.password,
         }
       }).success(function (response) {
@@ -149,6 +169,10 @@ angular.module('donacion')
     return {
       login : function(credentials) {
         return getToken(credentials);
+      },
+
+      loginSocial: function (token, provider) {
+        return loginSocial(token, provider)
       },
 
       isLogged : function () {

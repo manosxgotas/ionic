@@ -1,11 +1,11 @@
 angular.module('donacion')
-  .controller('NavDashboardController', function ($http, $scope, $rootScope, ProfileService, LogoffService, DonacionesService, localStorageService) {
+  .controller('NavDashboardController', function ($http, $scope, $rootScope, $uibModal, ProfileService, DonacionesService, localStorageService) {
 
     $scope.currentUser = localStorageService.get('currentUser');
-    console.log($scope.currentUser)
+    console.log($scope.currentUser);
 
     DonacionesService.getDiasProxDonacion().get({}, function (data) {
-      $rootScope.diasProxDonacion = data.dias;
+        $rootScope.diasProxDonacion = data.dias;
     });
 
     $scope.loading = false;
@@ -19,7 +19,12 @@ angular.module('donacion')
     });
 
     $scope.logoff = function () {
-      LogoffService.logoff();
+      $uibModal.open({
+        animation: true,
+        templateUrl: 'templates/cuentas/logoff.html',
+        size: 'md',
+        controller: 'LogoffController'
+      });
     }
 
   });

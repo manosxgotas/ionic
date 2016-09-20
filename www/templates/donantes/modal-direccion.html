@@ -1,0 +1,78 @@
+<div class="modal-header" style="background-color: #FB404B; color: white">
+  <div style="display: inline-block">
+    <h3 class="modal-title">
+      <span class="fa fa-map-marker fa-lg" aria-hidden="true"></span>
+      &nbsp;&nbsp;Dirección
+    </h3>
+  </div>
+  <div class="pull-right" style="display: inline-block">
+    <a href="" ng-click="close()" style="color: white">
+      <i class="fa fa-times fa-lg"></i>
+    </a>
+  </div>
+</div>
+
+
+<form name="formDireccion" role="form" class="form-horizontal" ng-submit="updateDireccion()" novalidate>
+  <div class="modal-body">
+
+    <div class="form-group">
+      <label for="provincia" class="col-sm-3 control-label">Provincia</label>
+      <div class="col-sm-7">
+        <select class="form-control" id="provincia" ng-model="donante.direccion.localidad.provincia" convert-to-number ng-change="obtenerLocalidades(donante.direccion.localidad.provincia)">
+          <option ng-repeat="provincia in provincias" value="{{provincia.id}}"> {{provincia.nombre}} </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="localidad" class="col-sm-3 control-label">Localidad</label>
+      <div class="col-sm-7">
+        <select class="form-control" id="localidad" ng-disabled="!donante.direccion.localidad.provincia" ng-model="donante.direccion.localidad.id" convert-to-number>
+          <option ng-repeat="localidad in localidades" value="{{localidad.id}}"> {{localidad.nombre}} </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': formDireccion.calle.$invalid && !formDireccion.calle.$pristine,
+                                       'has-success has-feedback': formDireccion.calle.$valid}">
+      <label for="calle" class="col-sm-3 control-label">Calle</label>
+      <div class="col-sm-7">
+        <input type="text" id="calle" name="calle" ng-model="donante.direccion.calle" class="form-control"
+               placeholder="Ingrese el nombre de la calle de su domicilio" required>
+      </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': formDireccion.numero.$invalid && !formDireccion.numero.$pristine,
+                                       'has-success has-feedback': formDireccion.numero.$valid}">
+      <label for="numero" class="col-sm-3 control-label">Número</label>
+      <div class="col-sm-7">
+        <input type="number" id="numero" name="numero" ng-model="donante.direccion.numero" class="form-control"
+               placeholder="Ingrese el número de la calle de su domicilio" min="0" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="piso" class="col-sm-3 control-label">Piso</label>
+      <div class="col-sm-7">
+        <input type="number" id="piso" name="piso" ng-model="donante.direccion.piso" class="form-control"
+               placeholder="Ingrese el número de piso de su domicilio">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="numeroDepartamento" class="col-sm-3 control-label">Número de departamento</label>
+      <div class="col-sm-7">
+        <input type="number" id="numeroDepartamento" name="numeroDepartamento" ng-model="donante.direccion.numeroDepartamento" class="form-control"
+               placeholder="Ingrese el número de departamento de su domicilio">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-danger btn-fill" ng-disabled="formDireccion.$invalid">
+      <i class="fa fa-map-marker"></i>
+      &nbsp;Guardar dirección
+    </button>
+  </div>
+</form>
+

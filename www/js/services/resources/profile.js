@@ -8,6 +8,9 @@ angular.module('donacion')
     // URL para actualizar (PUT) la foto de perfil del donante.
     var updateAvatarUrl = global.getApiUrl() + '/donantes/perfil/edit/avatar/';
 
+    // URL para actualizar (PUT) la dirección del donante.
+    var updateDireccionUrl = global.getApiUrl() + '/donantes/perfil/edit/direccion/';
+
     // Función que actualiza los datos del perfil del donante.
     function updateProfile(datosDonante) {
       var currentUser = localStorageService.get('currentUser');
@@ -33,14 +36,7 @@ angular.module('donacion')
           peso: datosDonante.peso,
           altura: datosDonante.altura,
           genero: datosDonante.genero,
-          grupoSanguineo: datosDonante.grupoSanguineo.id,
-          direccion: {
-            calle: datosDonante.direccion.calle,
-            numero: datosDonante.direccion.numero,
-            piso: datosDonante.direccion.piso,
-            numeroDepartamento: datosDonante.direccion.numeroDepartamento,
-            localidad: datosDonante.direccion.localidad
-          }
+          grupoSanguineo: datosDonante.grupoSanguineo.id
         }
       }).success(function (response) {
         console.log('Update realizado con éxito');
@@ -86,10 +82,39 @@ angular.module('donacion')
         });
       }
 
+      function updateDireccion(direccion) {
+        var currentUser = localStorageService.get('currentUser');
+        var userid = currentUser.usuario.id;
+        $http({
+          url: updateDireccionUrl + userid,
+          method: "PUT",
+          data: {
+            direccion: {
+              calle: direccion.calle,
+              numero: direccion.numero,
+              piso: direccion.piso,
+              numeroDepartamento: direccion.numeroDepartamento,
+              localidad: direccion.localidad
+            }
+          }
+        }).success(function (response) {
+          console.log('Update dirección realizado con éxito');
+          CurrentUserService.setCurrentUser();
+          $state.transitionTo('dashboard.perfil');
+        }).error(function (response, data) {
+          console.log(response)
+          console.log(data)
+        });
+      }
+
       return {
 
         updateProfile: function(datosDonante) {
           return updateProfile(datosDonante);
+        },
+
+        updateDireccion : function(direccion) {
+          return updateDireccion(direccion);
         },
 
         updateAvatar : function(avatar) {

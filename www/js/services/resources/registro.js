@@ -1,27 +1,22 @@
 angular.module('donacion')
 
-  .factory('RegistroService', function (global, $http, $state, $filter) {
+  .factory('RegistroService', function (global, $http, $state) {
     var url = global.getApiUrl() + "/cuentas/registro/";
 
-    function registrarse(datosDonante){
+    function registrarse(donante){
       $http({
         url: url,
         dataType: "json",
         method: "POST",
 
         data: {
-          usuario: datosDonante.usuario,
-          numeroDocumento: datosDonante.donante.numeroDocumento,
-          tipoDocumento: datosDonante.donante.tipoDocumento,
-          nacionalidad: datosDonante.donante.nacionalidad,
-          telefono: datosDonante.donante.telefono,
-          nacimiento: $filter('date')(datosDonante.donante.nacimiento, 'dd/MM/yyyy'),
-          grupoSanguineo: datosDonante.donante.gs,
-          peso: datosDonante.donante.peso,
-          altura: datosDonante.donante.altura,
-          genero: datosDonante.donante.genero,
-          direccion: datosDonante.direccion
-        },
+          email: donante.email,
+          email2: donante.confirmCorreo,
+          password1: donante.password,
+          first_name: donante.first_name,
+          last_name: donante.last_name,
+          genero: donante.genero
+        }
 
       }).success(function (data) {
         console.log(data);
@@ -35,8 +30,8 @@ angular.module('donacion')
   }
 
     return {
-      registrarse: function (datosDonante) {
-        return registrarse(datosDonante);
+      registrarse: function (donante) {
+        return registrarse(donante);
       }
     }
   });

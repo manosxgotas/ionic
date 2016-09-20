@@ -20,5 +20,14 @@ angular.module('donacion')
         size: 'md',
         controller: 'ResetPassReqController'
       });
-    }
+    };
+    $scope.openRegistroModal = function () {
+      $uibModalInstance.close();
+      $uibModal.open({
+        animation: true,
+        templateUrl: 'templates/cuentas/registro.html',
+        size: 'md',
+        controller: 'RegistroController'
+      });
+    };
   });

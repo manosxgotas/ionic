@@ -4,7 +4,12 @@ angular.module('donacion')
     $scope.currentUser = localStorageService.get('currentUser');
 
     $scope.logoff = function () {
-      LogoffService.logoff();
+      $uibModal.open({
+        animation: true,
+        templateUrl: 'templates/cuentas/logoff.html',
+        size: 'md',
+        controller: 'LogoffController'
+      });
     };
 
     $scope.openLoginModal = function () {

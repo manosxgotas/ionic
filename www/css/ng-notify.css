@@ -1,0 +1,18 @@
+.light-bootstrap.ngn-info {
+  background-color: #1DC7EA
+}
+
+.light-bootstrap.ngn-error {
+  background-color: #FB404B
+}
+.light-bootstrap.ngn-success {
+  background-color: #87CB16
+}
+
+.light-bootstrap.ngn-warn {
+  background-color: #FF9500
+}
+
+.light-bootstrap.ngn-grimace {
+  background-color: rgb(147, 104, 233)
+}

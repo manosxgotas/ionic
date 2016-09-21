@@ -32,19 +32,19 @@
           <div class="col-md-6 text-right">Correo electrónico:</div>
           <div style='padding-left:0px' class="col-md-6">{{currentUser.usuario.email}}</div>
         </div>
-        <div class="row ">
+        <div class="row">
           <div class="col-md-6 text-right">Sexo:</div>
           <div style='padding-left:0px' class="col-md-6">{{currentUser.sexo}}</div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="currentUser.peso">
           <div class="col-md-6 text-right">Peso:</div>
           <div style='padding-left:0px' class="col-md-6">{{currentUser.peso}} kg.</div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="currentUser.altura">
           <div class="col-md-6 text-right">Altura:</div>
           <div style='padding-left:0px' class="col-md-6">{{currentUser.altura}} cm.</div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="currentUser.nacimiento">
           <div class="col-md-6 text-right">Nacimiento:</div>
           <div style='padding-left:0px' class="col-md-6">{{currentUser.nacimiento | date:'dd/MM/yyyy'}}</div>
         </div>
@@ -61,17 +61,17 @@
               {{currentUser.sexo}}
             </div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="currentUser.peso">
             <div class='text-center'>
               {{currentUser.peso}} kg.
             </div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="currentUser.altura">
             <div class='text-center'>
               {{currentUser.altura}} cm.
             </div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="currentUser.nacimiento">
             <div class='text-center'>
               {{currentUser.nacimiento | date:'dd/MM/yyyy'}}
             </div>

@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('RegistroService', function (global, $http, $state) {
+  .factory('RegistroService', function (global, $http, $state, ngNotify) {
     var url = global.getApiUrl() + "/cuentas/registro/";
 
     function registrarse(donante){
@@ -18,14 +18,20 @@ angular.module('donacion')
           genero: donante.genero
         }
 
-      }).success(function (data) {
-        console.log(data);
-        console.log('Registro realizado con éxito');
+      }).success(function (response) {
+        ngNotify.set(
+          '¡Bienvenido a <b>Manos por gotas</b> ' + response.user.first_name + '!',
+          'info'
+        );
         $state.transitionTo('home.registro-exito');
 
-      }).error(function(data) {
-        console.log(data);
-        console.log('hubo un error en el registro');
+      }).error(function(response) {
+        angular.forEach(response, function (valor, clave) {
+          ngNotify.set(
+            '<span class="fa fa-warning"></span>&nbsp; ' + valor,
+            'warn'
+          );
+        });
       });
   }
 

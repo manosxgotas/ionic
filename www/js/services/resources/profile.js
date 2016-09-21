@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('ProfileService', function (global, localStorageService, $http, $state, $filter, CurrentUserService) {
+  .factory('ProfileService', function (global, localStorageService, ngNotify, $http, $state, $filter, CurrentUserService) {
 
     // URL para actualizar (PUT) el perfil del donante.
     var updateProfileUrl = global.getApiUrl() + '/donantes/perfil/edit/';
@@ -38,8 +38,11 @@ angular.module('donacion')
           genero: datosDonante.genero,
           grupoSanguineo: datosDonante.grupoSanguineo.id
         }
-      }).success(function (response) {
-        console.log('Update realizado con éxito');
+      }).success(function () {
+        ngNotify.set(
+          '<span class="fa fa-user"></span>&nbsp; ¡Se han actualizado con éxito tus datos personales!',
+          'info'
+        );
         CurrentUserService.setCurrentUser();
         $state.transitionTo('dashboard.perfil');
       }).error(function (response, data) {
@@ -73,12 +76,17 @@ angular.module('donacion')
         }
 
         }).success(function (response) {
-          console.log('Cambio de avatar realizado con éxito');
+        ngNotify.set(
+          '<span class="fa fa-image"></span>&nbsp; ¡Tu foto de perfil se ha actualizado con éxito!',
+          'info'
+        );
         CurrentUserService.setCurrentUser();
         $state.transitionTo('dashboard.perfil');
         }).error(function (response, data) {
-          console.log(response);
-          console.log(data);
+        ngNotify.set(
+          '<span class="fa fa-warning"></span>&nbsp; Hubo un problema al procesar tu nueva foto de perfil, inténtalo de nuevo.',
+          'warn'
+        );
         });
       }
 
@@ -98,12 +106,16 @@ angular.module('donacion')
             }
           }
         }).success(function (response) {
-          console.log('Update dirección realizado con éxito');
-          CurrentUserService.setCurrentUser();
+          ngNotify.set(
+            '<span class="fa fa-map-marker"></span>&nbsp; ¡Tu dirección se ha actualizado con éxito!',
+            'info'
+          );          CurrentUserService.setCurrentUser();
           $state.transitionTo('dashboard.perfil');
         }).error(function (response, data) {
-          console.log(response)
-          console.log(data)
+          ngNotify.set(
+            '<span class="fa fa-image"></span>&nbsp; Hubo un problema al procesar tu dirección, inténtalo de nuevo.',
+            'warn'
+          );
         });
       }
 

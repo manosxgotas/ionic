@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('DonacionesService', function (global, $http, $resource, $state, $filter, localStorageService, CurrentUserService) {
+  .factory('DonacionesService', function (global, $http, $resource, $state, $filter, ngNotify, localStorageService, CurrentUserService) {
 
     var infoUrl = global.getApiUrl() + '/donaciones/:id';
 
@@ -59,12 +59,19 @@ angular.module('donacion')
           return fd;
         }
       }).success(function (response) {
+        console.log(response)
+        ngNotify.set(
+          '<span class="fa fa-tint"></span>&nbsp; ¡Tu donación se ha registrado exitosamente!',
+          'info'
+        );
         CurrentUserService.setCurrentUser();
         $state.transitionTo('dashboard.libreta');
-      }).error(function (response, data) {
+      }).error(function (response) {
         console.log(response);
-        console.log(data);
-        console.log(foto)
+        ngNotify.set(
+          response,
+          'info'
+        );
       });
     }
 
@@ -100,7 +107,10 @@ angular.module('donacion')
         }
       }).success(function () {
         $state.transitionTo('dashboard.libreta');
-        console.log('edición realizada con éxito');
+        ngNotify.set(
+          '<span class="fa fa-tint"></span>&nbsp; ¡Se ha actualizado con éxito la información de tu donación!',
+          'info'
+        );
       }).error(function (response, data) {
         console.log(response);
         console.log(data);
@@ -113,7 +123,10 @@ angular.module('donacion')
         url: eliminarUrl + idDonacion,
         method: 'DELETE'
       }).success(function () {
-        console.log('Eliminación exitosa');
+        ngNotify.set(
+          '<span class="fa fa-trash"></span>&nbsp; ¡Se ha eliminado correctamente tu donación!',
+          'info'
+        );
         CurrentUserService.setCurrentUser();
       }).error(function(response, data) {
         console.log(response);
@@ -131,12 +144,16 @@ angular.module('donacion')
         }
 
       }).success(function (response) {
-        console.log(response);
+        ngNotify.set(
+          '<span class="fa fa-key"></span>&nbsp; ' + response.mensaje,
+          'info'
+        );
         CurrentUserService.setCurrentUser();
-        $state.reload();
-      }).error(function (response, data) {
-        console.log(response);
-        console.log(data);
+      }).error(function (response) {
+        ngNotify.set(
+          '<span class="fa fa-warning"></span>&nbsp; ' + response.mensaje,
+          'warn'
+        );
       });
     }
 
@@ -163,11 +180,16 @@ angular.module('donacion')
         }
 
         }).success(function (response) {
-        console.log(response);
+        ngNotify.set(
+          '<span class="fa fa-clock-o"></span>&nbsp; ¡La imágen de verificación ha sido registrada correctamente! Deberás esperar a que un administrador la evalúe.',
+          'info'
+        );
         CurrentUserService.setCurrentUser();
         }).error(function (response, data) {
-          console.log(response);
-          console.log(data);
+        ngNotify.set(
+          '<span class="fa fa-warning"></span>&nbsp; Ha ocurrido un error al intentar procesar tu imágen, inténtalo de nuevo.',
+          'warn'
+        );
         });
     }
 

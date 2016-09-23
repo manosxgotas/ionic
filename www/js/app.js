@@ -17,10 +17,24 @@ angular.module('donacion', [
   'flow',
   'ngVideo',
   'uiGmapgoogle-maps',
-  'socialLogin'
+  'socialLogin',
+  'ngNotify'
   ])
 
-  .run(function (AuthService, $rootScope, $state, LoginModal, LogoffService) {
+  .run(function (AuthService, ngNotify, $rootScope, $state, LoginModal, LogoffService) {
+
+    ngNotify.addTheme('custom', 'light-bootstrap');
+
+    ngNotify.config({
+      theme: 'custom',
+      position: 'bottom',
+      duration: 3000,
+      type: 'info',
+      sticky: false,
+      button: true,
+      html: true
+    });
+
 
     $rootScope.$on('event:social-sign-in-success', function(event, userDetails){
       AuthService.loginSocial(userDetails.token, userDetails.provider)
@@ -67,6 +81,12 @@ angular.module('donacion', [
     socialProvider.setFbKey({appId: "299809130392810", apiVersion: "v2.7"});
 
     $stateProvider
+
+      .state('404notfound', {
+        cache: false,
+        url: "/404nf",
+        templateUrl: "templates/404.html",
+      })
 
       .state('home', {
         cache: false,

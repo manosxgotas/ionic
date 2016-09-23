@@ -19,12 +19,27 @@
     </div>
 
     <div class="content">
+      <div flow-init="{singleFile:true}" flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]">
 
       <div class="author">
-        <img ng-src="{{currentUser.foto != null ? currentUser.foto : '../../img/perfil-defecto-color.png'}}" class="avatar border-gray">
+        <span  style="cursor: pointer" flow-btn>
+          <img popover-trigger="mouseenter" popover-placement="top" uib-popover="Cambiar foto" ng-hide="$flow.files.length" ng-src="{{currentUser.foto != null ? currentUser.foto : '../../img/perfil-defecto-color.png'}}" class="avatar border-gray">
+          <img popover-trigger="mouseenter" popover-placement="top" uib-popover="Cambiar foto" ng-show="$flow.files.length" class="avatar border-gray" flow-img="$flow.files[0]">
+        </span>
+        <div ng-show="$flow.files[0]" style="display: block; margin-bottom: 5px">
+          <a ng-click="updateAvatar($flow.files[0])" class="btn btn-fill btn-success btn-sm" >
+            <span class="fa fa-camera" aria-hidden="true"></span>
+            <span class='hidden-xs'>Guardar foto</span>
+          </a>
+          <a ng-click="$flow.files[0].cancel()" class="btn btn-fill btn-danger btn-sm">
+            <span class="fa fa-remove" aria-hidden="true"></span>
+            <span class='hidden-xs'>Descartar foto</span>
+          </a>
+        </div>
         <h4 class="title">{{currentUser.usuario.first_name}} {{currentUser.usuario.last_name}}<br />
-          <small>{{currentUser.usuario.username}}</small>
+            <small>{{currentUser.usuario.username}}</small>
         </h4>
+
       </div>
 
       <div class='visible-lg'>
@@ -32,19 +47,19 @@
           <div class="col-md-6 text-right">Correo electrónico:</div>
           <div style='padding-left:0px' class="col-md-6">{{currentUser.usuario.email}}</div>
         </div>
-        <div class="row ">
+        <div class="row">
           <div class="col-md-6 text-right">Sexo:</div>
           <div style='padding-left:0px' class="col-md-6">{{currentUser.sexo}}</div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="currentUser.peso">
           <div class="col-md-6 text-right">Peso:</div>
           <div style='padding-left:0px' class="col-md-6">{{currentUser.peso}} kg.</div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="currentUser.altura">
           <div class="col-md-6 text-right">Altura:</div>
           <div style='padding-left:0px' class="col-md-6">{{currentUser.altura}} cm.</div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="currentUser.nacimiento">
           <div class="col-md-6 text-right">Nacimiento:</div>
           <div style='padding-left:0px' class="col-md-6">{{currentUser.nacimiento | date:'dd/MM/yyyy'}}</div>
         </div>
@@ -61,23 +76,23 @@
               {{currentUser.sexo}}
             </div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="currentUser.peso">
             <div class='text-center'>
               {{currentUser.peso}} kg.
             </div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="currentUser.altura">
             <div class='text-center'>
               {{currentUser.altura}} cm.
             </div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="currentUser.nacimiento">
             <div class='text-center'>
               {{currentUser.nacimiento | date:'dd/MM/yyyy'}}
             </div>
         </div>
       </div>
     </div>
-
+  </div>
   </div>
 </div>

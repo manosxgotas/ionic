@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('AuthService', function (global, $http, $resource, $q, $rootScope, $state, LogoffService, localStorageService, CurrentUserService) {
+  .factory('AuthService', function (global, $http, ngNotify, $resource, $q, $rootScope, $state, LogoffService, localStorageService, CurrentUserService) {
 
     function loginSocial(token, provider) {
       var url = global.getApiUrl() + "/cuentas/social/" + provider + "/";
@@ -13,6 +13,10 @@ angular.module('donacion')
         }
       }).success(function (response) {
         var authdata = response.token;
+        ngNotify.set(
+          '¡Hola de nuevo ' + response.user.first_name + '!',
+          'info'
+        );
         setToken(authdata);
         CurrentUserService.setCurrentUser().then(function () {
           $state.transitionTo('dashboard.perfil');
@@ -62,7 +66,13 @@ angular.module('donacion')
           email: email
         }
       }).success(function (response) {
-        console.log(response);
+        ngNotify.set(
+          '<span class="fa fa-paper-plane"></span>&nbsp; ' + response.mensaje,
+          {
+            type: 'info',
+            sticky: true
+          }
+        );
       }).error(function (response) {
         console.log(response);
       });
@@ -93,7 +103,13 @@ angular.module('donacion')
           token: token
         }
       }).success(function (response) {
-        console.log(response);
+        ngNotify.set(
+          '<span class="fa fa-refresh"></span>&nbsp; ' + response.mensaje,
+          {
+            type: 'info',
+            sticky: true
+          }
+        );
         $state.transitionTo('home.inicio')
       }).error(function (response) {
         console.log(response);
@@ -111,6 +127,10 @@ angular.module('donacion')
           password: credentials.password,
         }
       }).success(function (response) {
+        ngNotify.set(
+          '¡Hola de nuevo ' + response.user.first_name + '!',
+          'info'
+        );
         var authdata = response.token;
         setToken(authdata);
         CurrentUserService.setCurrentUser().then(function () {
@@ -118,7 +138,7 @@ angular.module('donacion')
         });
 
       }).error(function (data) {
-        console.log(data);
+        ngNotify.set("<span class='fa fa-key'></span>&nbsp; Las credenciales proporcionadas no son correctas", 'warn');
       });
     }
 

@@ -2,6 +2,7 @@ angular.module('donacion')
   .controller('ProfileEditController',
     function ($http,
               $scope,
+              $uibModal,
               localStorageService,
               ProfileService,
               DireccionesService,
@@ -9,10 +10,8 @@ angular.module('donacion')
               TiposDocumentosService,
               NacionalidadesService) {
 
-    // Obtengo las provincias de la API.
-    $scope.provincias = DireccionesService.getProvincias().query();
 
-    // Obtengo los tipos de documentos de la API
+        // Obtengo los tipos de documentos de la API
     $scope.tiposDocumentos = TiposDocumentosService.query();
 
     // Obtengo las nacionalidades de la API
@@ -20,11 +19,6 @@ angular.module('donacion')
 
     // Obtengo los grupos sanguíneos de la API
     $scope.gruposSanguineos = GruposSanguineosService.query();
-
-    // Según la provincia elegida obtengo sus localidades.
-    $scope.obtenerLocalidades = function(idprov) {
-      $scope.localidades = DireccionesService.getLocalidades(idprov).query();
-    };
 
     // <---- DatePicker fecha de nacimiento
     $scope.nacimientoDPOptions = {
@@ -48,17 +42,30 @@ angular.module('donacion')
 
     // <---- Obtengo los datos de perfil del donante desde la API
     $scope.datosDonante = localStorageService.get('currentUser');
-      $scope.localidades = DireccionesService.getLocalidades($scope.datosDonante.direccion.localidad.provincia).query();
 
+    if ($scope.datosDonante.nacimiento != null) {
       var from = $scope.datosDonante.nacimiento.split("-");
       $scope.datosDonante.nacimiento = new Date(from[0], from[1] - 1, from[2]);
+    }
+
     // Obtengo los datos de perfil del donante desde la API ---->
+
+    $scope.modalDireccion = function () {
+      $uibModal.open({
+        animation: true,
+        templateUrl: 'templates/donantes/modal-direccion.html',
+        size: 'md',
+        controller: 'DireccionController',
+        resolve: {
+          donante: function () {
+            return $scope.datosDonante;
+          }
+        }
+      });
+    }
 
 
     $scope.update = function () {
       ProfileService.updateProfile($scope.datosDonante);
-      if ($scope.avatar != undefined) {
-        ProfileService.updateAvatar($scope.avatar);
-      }
     }
   });

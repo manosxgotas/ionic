@@ -1,5 +1,5 @@
 angular.module('donacion')
-  .controller('ProfileController', function ($http, $scope) {
+  .controller('ProfileController', function ($http, $scope, ProfileService) {
 
     switch ($scope.currentUser.genero) {
       case '1':
@@ -41,4 +41,11 @@ angular.module('donacion')
     } else {
       $scope.imagenGS = '../img/fondos-perfil/nada1.png';
     }
+    $scope.updateAvatar = function (avatar) {
+      if(avatar) {
+        ProfileService.updateAvatar(avatar.file)
+      }
+    }
+
+
   });

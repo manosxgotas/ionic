@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .service('APIInterceptor', function (localStorageService) {
+  .service('APIInterceptor', function (localStorageService, $q, $location) {
     var service = this;
     service.request = function(config) {
       var token = localStorageService.get('Token');
@@ -11,4 +11,12 @@ angular.module('donacion')
 
       return config;
     };
+    service.responseError = function (rejection) {
+
+      if(rejection.status === 404) {
+        $location.path("/404nf");
+      }
+
+      return $q.reject(rejection);
+    }
   });

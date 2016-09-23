@@ -34,5 +34,6 @@ angular.module('donacion')
 
       $scope.signup = function() {
         RegistroService.registrarse($scope.donante);
+        $uibModalInstance.close();
       }
   });

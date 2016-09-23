@@ -2,12 +2,7 @@
 .card label{
 	color: black !important;
 }
-.alert-success {
-  background-color: #dff0d8 !important;
-}
-.alert{
-	color: #3c763d !important;
-}
+
 li > a{
-color:#FB404B;
+  color:#FB404B;
 }

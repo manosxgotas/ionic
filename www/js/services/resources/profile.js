@@ -1,12 +1,15 @@
 angular.module('donacion')
 
-  .factory('ProfileService', function (global, localStorageService, $http, $state, $filter, CurrentUserService) {
+  .factory('ProfileService', function (global, localStorageService, ngNotify, $http, $state, $filter, $window, CurrentUserService) {
 
     // URL para actualizar (PUT) el perfil del donante.
     var updateProfileUrl = global.getApiUrl() + '/donantes/perfil/edit/';
 
     // URL para actualizar (PUT) la foto de perfil del donante.
     var updateAvatarUrl = global.getApiUrl() + '/donantes/perfil/edit/avatar/';
+
+    // URL para actualizar (PUT) la dirección del donante.
+    var updateDireccionUrl = global.getApiUrl() + '/donantes/perfil/edit/direccion/';
 
     // Función que actualiza los datos del perfil del donante.
     function updateProfile(datosDonante) {
@@ -33,17 +36,13 @@ angular.module('donacion')
           peso: datosDonante.peso,
           altura: datosDonante.altura,
           genero: datosDonante.genero,
-          grupoSanguineo: datosDonante.grupoSanguineo.id,
-          direccion: {
-            calle: datosDonante.direccion.calle,
-            numero: datosDonante.direccion.numero,
-            piso: datosDonante.direccion.piso,
-            numeroDepartamento: datosDonante.direccion.numeroDepartamento,
-            localidad: datosDonante.direccion.localidad
-          }
+          grupoSanguineo: datosDonante.grupoSanguineo.id
         }
-      }).success(function (response) {
-        console.log('Update realizado con éxito');
+      }).success(function () {
+        ngNotify.set(
+          '<span class="fa fa-user"></span>&nbsp; ¡Se han actualizado con éxito tus datos personales!',
+          'info'
+        );
         CurrentUserService.setCurrentUser();
         $state.transitionTo('dashboard.perfil');
       }).error(function (response, data) {
@@ -77,12 +76,48 @@ angular.module('donacion')
         }
 
         }).success(function (response) {
-          console.log('Cambio de avatar realizado con éxito');
+        ngNotify.set(
+          '<span class="fa fa-camera"></span>&nbsp; ¡Tu foto de perfil se ha actualizado con éxito!',
+          'info'
+        );
+        $window.location.reload();
         CurrentUserService.setCurrentUser();
         $state.transitionTo('dashboard.perfil');
         }).error(function (response, data) {
-          console.log(response);
-          console.log(data);
+        ngNotify.set(
+          '<span class="fa fa-warning"></span>&nbsp; Hubo un problema al procesar tu nueva foto de perfil, inténtalo de nuevo.',
+          'warn'
+        );
+        });
+      }
+
+      function updateDireccion(direccion) {
+        var currentUser = localStorageService.get('currentUser');
+        var userid = currentUser.usuario.id;
+        $http({
+          url: updateDireccionUrl + userid,
+          method: "PUT",
+          data: {
+            direccion: {
+              calle: direccion.calle,
+              numero: direccion.numero,
+              piso: direccion.piso,
+              numeroDepartamento: direccion.numeroDepartamento,
+              localidad: direccion.localidad
+            }
+          }
+        }).success(function (response) {
+          ngNotify.set(
+            '<span class="fa fa-map-marker"></span>&nbsp; ¡Tu dirección se ha actualizado con éxito!',
+            'info'
+          );
+          CurrentUserService.setCurrentUser();
+          $state.transitionTo('dashboard.perfil');
+        }).error(function (response, data) {
+          ngNotify.set(
+            '<span class="fa fa-image"></span>&nbsp; Hubo un problema al procesar tu dirección, inténtalo de nuevo.',
+            'warn'
+          );
         });
       }
 
@@ -90,6 +125,10 @@ angular.module('donacion')
 
         updateProfile: function(datosDonante) {
           return updateProfile(datosDonante);
+        },
+
+        updateDireccion : function(direccion) {
+          return updateDireccion(direccion);
         },
 
         updateAvatar : function(avatar) {

@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('ProfileService', function (global, localStorageService, ngNotify, $http, $state, $filter, CurrentUserService) {
+  .factory('ProfileService', function (global, localStorageService, ngNotify, $http, $state, $filter, $window, CurrentUserService) {
 
     // URL para actualizar (PUT) el perfil del donante.
     var updateProfileUrl = global.getApiUrl() + '/donantes/perfil/edit/';
@@ -77,9 +77,10 @@ angular.module('donacion')
 
         }).success(function (response) {
         ngNotify.set(
-          '<span class="fa fa-image"></span>&nbsp; ¡Tu foto de perfil se ha actualizado con éxito!',
+          '<span class="fa fa-camera"></span>&nbsp; ¡Tu foto de perfil se ha actualizado con éxito!',
           'info'
         );
+        $window.location.reload();
         CurrentUserService.setCurrentUser();
         $state.transitionTo('dashboard.perfil');
         }).error(function (response, data) {
@@ -109,7 +110,8 @@ angular.module('donacion')
           ngNotify.set(
             '<span class="fa fa-map-marker"></span>&nbsp; ¡Tu dirección se ha actualizado con éxito!',
             'info'
-          );          CurrentUserService.setCurrentUser();
+          );
+          CurrentUserService.setCurrentUser();
           $state.transitionTo('dashboard.perfil');
         }).error(function (response, data) {
           ngNotify.set(

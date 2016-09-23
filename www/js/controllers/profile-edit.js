@@ -67,8 +67,5 @@ angular.module('donacion')
 
     $scope.update = function () {
       ProfileService.updateProfile($scope.datosDonante);
-      if ($scope.avatar != undefined) {
-        ProfileService.updateAvatar($scope.avatar);
-      }
     }
   });

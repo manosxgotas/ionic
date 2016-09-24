@@ -34,7 +34,7 @@ angular.module('donacion')
       $scope.nacionalidades = NacionalidadesService.query();
 
       // Obtengo los grupos sanguíneos de la API
-      $scope.gruposSanguineos = GruposSanguineosService.query();
+      $scope.gruposSanguineos = GruposSanguineosService.listadoGruposSanguineos().query();
 
       // Según la provincia elegida obtengo sus localidades.
       $scope.obtenerLocalidades = function(idprov) {

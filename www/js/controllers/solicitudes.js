@@ -4,7 +4,7 @@
 angular.module('donacion')
   .controller('CrearSolicitudDonacionController',function ($scope,CentrosDonacionService,PacientesService,CurrentUserService,TiposSolicitudesService,DireccionesService,SolicitudesService,GruposSanguineosService) {
     //Obtengo los centros de donacion
-    $scope.centrosDonacion = CentrosDonacionService.query();
+    $scope.centrosDonacion = CentrosDonacionService.listadoCentros().query();
 
     // Obtengo las provincias de la API.
     $scope.provincias = DireccionesService.getProvincias().query();
@@ -17,13 +17,38 @@ angular.module('donacion')
     //Obtengo los tipos de solicitudes
     $scope.tiposSolicitudes = TiposSolicitudesService.query();
     //Obtengo los grupos sanguineos
-    $scope.gruposSanguineos = GruposSanguineosService.query();
+    $scope.gruposSanguineos = GruposSanguineosService.listadoGruposSanguineos().query({},function(){
+      $scope.check = {}
+      angular.forEach($scope.gruposSanguineos,function (valor,clave) {
+        $scope.check[valor.id] = false
+      })
+    });
 
     //Objeto que contendra los datos de la solicitud
     $scope.solicitud = {
       paciente: undefined,
+      gruposSanguineos:[],
+      imagenesSolicitud : {}
     }
+    function gs(idGS){
+      this.id = idGS
+    }
+    // funcion para agregar o quitar grupos sanguineos dentro de los seleccionados
+    $scope.addGrupoSanguineo = function (grupo) {
+      var seEncontro = false
+      angular.forEach($scope.solicitud.gruposSanguineos,function(valor,clave){
+        if (valor == grupo.id){
+          $scope.solicitud.gruposSanguineos.splice(clave,1)
+          seEncontro = true
+          $scope.check[grupo.id] = false
 
+        }
+      })
+      if (seEncontro == false){
+        $scope.solicitud.gruposSanguineos.push(grupo.id)
+        $scope.check[grupo.id] = true
+      }
+    }
     $scope.solicitud.fechaPublicacion = new Date();
     // <---- DatePicker fecha de inicio
     $scope.fechaInicioDPOptions = {
@@ -66,11 +91,6 @@ angular.module('donacion')
     // DatePicker fecha de nacimiento ---->
 
     $scope.crearSolicitud = function (video) {
-      if ($scope.solicitud.imagenes !== undefined){
-        angular.forEach($scope.solicitud.imagenes.files,function (value,key) {
-          $scope.solicitud.imagenes[key] = value
-        })
-      }
    /*  PacientesService.crearPaciente($scope.solicitud).success(function (data,response) {
         $scope.solicitud.paciente = data
         if ($scope.solicitud.video.files[0] != undefined) {
@@ -80,10 +100,7 @@ angular.module('donacion')
           SolicitudesService.crearSolicitudDonacion($scope.solicitud, $scope.currentUser.registro.id)
         }
      })*/
-
      $scope.solicitud.paciente.id =2
      SolicitudesService.crearSolicitudDonacion($scope.solicitud, $scope.currentUser.registro.id)
- // console.log($scope.solicitud)
-//      console.log($scope.solicitud.imagenes)
     }
   })

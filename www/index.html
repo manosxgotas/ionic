@@ -11,8 +11,11 @@
     <link href="css/nav-dashboard.css" rel="stylesheet">
     <link href="css/nav-home.css" rel="stylesheet">
     <link href="css/home.css" rel="stylesheet">
-    <link href="img/favicon.png" rel="icon">
+    <link href="css/google-maps.css" rel="stylesheet">
+    <link href="css/eventos.css" rel="stylesheet">
+    <link href="css/ng-video.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
+    <link href="img/favicon.png" rel="icon">
 
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
     <link href="bower_components/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
@@ -52,6 +55,8 @@
     <script src="js/controllers/registro.js"></script>
     <script src="js/controllers/activar-cuenta.js"></script>
     <script src="js/controllers/activar-cuenta-clave.js"></script>
+    <script src="js/controllers/reset-pass.js"></script>
+    <script src="js/controllers/reset-pass-req.js"></script>
     <script src="js/controllers/profile.js"></script>
     <script src="js/controllers/profile-edit.js"></script>
     <script src="js/controllers/libreta-donacion.js"></script>
@@ -62,6 +67,12 @@
     <script src="js/controllers/visualizar-donacion.js"></script>
     <script src="js/controllers/listado-eventos.js"></script>
     <script src="js/controllers/detalle-evento.js"></script>
+    <script src="js/controllers/listado-centros.js"></script>
+    <script src="js/controllers/detalle-centro.js"></script>
+    <script src="js/controllers/solicitudes.js"></script>
+    <script src="js/controllers/listado-solicitudes.js"></script>
+    <script src="js/controllers/detalle-solicitud.js"></script>
+
 
 
     <!-- Services -->
@@ -81,6 +92,10 @@
     <script src="js/services/resources/direcciones.js"></script>
     <script src="js/services/resources/donaciones.js"></script>
     <script src="js/services/resources/eventos.js"></script>
+    <script src="js/services/resources/solicitudes.js"></script>
+    <script src="js/services/resources/pacientes.js"></script>
+    <script src="js/services/resources/tipos-solicitudes.js"></script>
+
 
 
     <!-- Directives -->
@@ -103,8 +118,12 @@
     <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
     <script src="bower_components/ngvideo/dist/ng-video.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src='bower_components/lodash/dist/lodash.min.js'></script>
+    <script src='bower_components/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
+    <script src='bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script>
 
-
+    <!--Filters-->
+    <script src="js/filters/filtro-grupos-sanguineos.js"></script>
     <!--  Checkbox, Radio & Switch Plugins -->
     <script src="components/light-bootstrap-dashboard/assets/js/bootstrap-checkbox-radio-switch.js"></script>
   </body>

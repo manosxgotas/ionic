@@ -16,7 +16,7 @@ angular.module('donacion', [
   'base64',
   'flow',
   'ngVideo',
-  'ng-file-input'
+  'uiGmapgoogle-maps'
   ])
 
   .run(function (AuthService, $rootScope, $state, LoginModal, LogoffService) {
@@ -30,14 +30,15 @@ angular.module('donacion', [
             return $state.go(toState.name);
           })
           .catch(function () {
-            LogoffService.logoff();
-            LoginModal();
+            LogoffService.logoff().then(function () {
+              LoginModal();
+            });
           });
       }
     })
   })
 
-  .config(function($stateProvider, $urlRouterProvider, $httpProvider, $resourceProvider, cfpLoadingBarProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $httpProvider, $resourceProvider, cfpLoadingBarProvider, uiGmapGoogleMapApiProvider) {
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
     $httpProvider.interceptors.push('APIInterceptor');
@@ -51,6 +52,12 @@ angular.module('donacion', [
 
     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
     cfpLoadingBarProvider.spinnerTemplate = '<span class="fa fa-spinner fa-pulse fa-lg fa-fw"></span>&nbsp;&nbsp;Cargando...';
+
+    uiGmapGoogleMapApiProvider.configure({
+      key: 'AIzaSyBtTbhkqxMoIrLrDxlvUTI-cOCvesNX8zQ',
+      v: '3.25',
+      libraries: 'weather,geometry,visualization'
+    });
 
     $stateProvider
 
@@ -111,6 +118,17 @@ angular.module('donacion', [
         views: {
           "homeContent": {
             templateUrl: "templates/cuentas/registro-exito.html",
+          }
+        }
+      })
+
+      .state('home.reset-pass', {
+        cache: false,
+        url: "reset-password/:token",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/cuentas/reset-pass.html",
+            controller: "ResetPassController"
           }
         }
       })
@@ -203,15 +221,55 @@ angular.module('donacion', [
         }
       })
 
-      .state('dashboard.crear-solicitud-donacion', {
+      .state('dashboard.listado-centros', {
         cache: false,
-        url: "/solicitud-donacion",
+        url: "/listado-centros",
         views: {
           "dashboardContent": {
-            templateUrl: "templates/solicitudes/solicitud-donacion.html",
-            controller: "CrearSolicitudDonacionController",
+            templateUrl: "templates/centros/listado-centros.html",
+            controller: "CentrosDonacionController",
           }
         }
       })
 
+      .state('dashboard.detalle-centro', {
+        cache: false,
+        url: "/centro-donacion/:centroID",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/centros/detalle-centro.html",
+            controller: "DetalleCentroController",
+          }
+        }
+      })
+      .state('dashboard.crear-solicitud', {
+        cache: false,
+        url: "/crear-solicitud",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/solicitudes/crear-solicitud.html",
+            controller: "CrearSolicitudDonacionController",
+          }
+        }
+      })
+      .state('dashboard.detalle-solicitud', {
+        cache: false,
+        url: "/solicitud/:solicitudID",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/solicitudes/detalle-solicitud.html",
+            controller: "DetalleSolicitudController",
+          }
+        }
+      })
+      .state('dashboard.listado-solicitudes', {
+        cache: false,
+        url: "/listado-solicitudes",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/solicitudes/listado-solicitudes.html",
+            controller: "ListadoSolicitudesController",
+          }
+        }
+      })
   });

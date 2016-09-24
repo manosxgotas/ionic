@@ -1,4 +1,4 @@
-
+<div class="card">
   <div class="row">
       <form name="solicitudForm" class="form-horizontal" ng-submit="crearSolicitud()" novalidate>
         <div class="col-sm-6">
@@ -202,14 +202,17 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">Grupos sangunieos necesarios</label>
             <div class="col-sm-5">
-             <label class="checkbox" style="padding-top: 0; padding-left: 20px" ng-repeat="grupo in gruposSanguineos">
-                      <span class="icons">
-                        <span class="first-icon fa fa-square-o"></span>
-                        <span class="second-icon fa fa-check-square-o"></span>
-                      </span>
-                <input type="checkbox" value="{{grupo.id}}"   ng-model="solicitud.gs[grupo.id]" ng-click="unCheck(grupo.id)" >
-                {{grupo.nombre}}
-              </label>
+              <a ng-repeat="grupo in gruposSanguineos" ng-show="!check[grupo.id]" ng-click="addGrupoSanguineo(grupo)" popover-trigger="mouseenter" popover-placement="bottom" uib-popover="Click para agregar grupo sanguineo" class="btn  btn-fill btn-danger" style="margin-right: 5px; ">
+                <span class="" aria-hidden="true"></span>
+                <span class='hidden-xs' >{{grupo.nombre}}</span>
+              </a>
+            </div>
+            <div class="col-sm-5 col-sm-offset-3">
+              <span ng-show="solicitud.gruposSanguineos != undefined">Seleccionados:</span><br>
+              <a ng-repeat="grupo in gruposSanguineos" ng-show="check[grupo.id]" ng-click="addGrupoSanguineo(grupo)" popover-trigger="mouseenter" popover-placement="bottom" uib-popover="Click para eliminar grupo sanguineo" class="btn  btn-fill btn-success" style="margin-right: 5px; ">
+                <span class="" aria-hidden="true"></span>
+                <span class='hidden-xs' >{{grupo.nombre}}</span>
+              </a>
             </div>
           </div>
           <div class="form-group">
@@ -222,7 +225,7 @@
           </div>
 
 
-          <div class="form-group" flow-init="{singleFile:true}" flow-name="solicitud.video" flow-file-added="!!{png:1}[$file.getExtension()]">
+          <div class="form-group" flow-init="{singleFile:true}" flow-name="solicitud.video" flow-file-added="!!{mp4:1}[$file.getExtension()]">
             <label class="col-sm-3 control-label" for="inputVideo" flow-btn>Video (opcional):</label>
             <div class="col-sm-7">
               <span class="btn" id="inputVideo" ng-hide="$flow.files.length" flow-btn>Seleccionar video</span>
@@ -268,4 +271,4 @@
 
       </form>
   </div>
-
+</div>

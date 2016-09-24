@@ -2,50 +2,21 @@ angular.module('donacion')
 
   .factory('SolicitudesService', function (global, $http, $resource, $state, $filter, localStorageService, CurrentUserService) {
 
-    var crearURL = global.getApiUrl() + '/solicitudes/crear/'
+    var crearUrl = global.getApiUrl() + '/solicitudes/crear/'
+    var listadoUrl = global.getApiUrl() + '/solicitudes/listado-solicitudes/'
+    var infoUrl = global.getApiUrl() + '/solicitudes/:id'
 
-    function crearSolicitudDonacion(solicitud,idDonante,video) {
+    function crearSolicitudDonacion(data) {
       return  $http({
-                  url: crearURL,
-              //    type: 'json',
+                  url: crearUrl,
+                 //type: 'json',
                   method: 'POST',
-                  data: {
-                    id : solicitud.id,
-                    titulo: solicitud.titulo,
-                    fechaPublicacion: $filter('date')(solicitud.fechaPublicacion, 'dd/MM/yyyy'),
-                    donantesNecesarios: solicitud.donantesNecesarios,
-                    fechaHoraInicio: $filter('date')(solicitud.fechaInicio, 'dd/MM/yyyy')+ ' ' + $filter('date')(solicitud.horaInicio, 'HH:mm'),
-                    fechaHoraFin: $filter('date')(solicitud.fechaFin, 'dd/MM/yyyy')+ ' ' + $filter('date')(solicitud.horaFin, 'HH:mm'),
-                    tipo: solicitud.idTipoSolicitud,
-                    centroDonacion: solicitud.idCentroDonacion,
-                    paciente: solicitud.paciente.id,
-                    donante: idDonante,
-                    video: video,
-                    gruposSanguineo : solicitud.gs,
-                    imagenes : solicitud.imagenes
-                  },
+                  data: data,
                   headers: {'Content-Type': undefined},
 
-                  transformRequest: function (data) {
-                    if (data === undefined) return data;
-                    var fd = new FormData();
-                    fd.append();
-                    angular.forEach(data, function (value, key) {
-                      if (value !== null && value !== undefined) {
-                        if (value instanceof File) {
-                          fd.append(key,value)
-                        }
-                      }
-                      /*
-                      if (value instanceof File) {
-                        console.log(key+value)
-                        fd.append(key, value);
-                      }else{
-                        fd.append(key, angular.toJson(value));
-                      }*/
-                    });
-                    return fd;
-                  }
+
+                transformRequest: angular.identity
+
             }).success(function (response,data) {
               console.log('La solicitud se creo con éxito')
             }).error(function (response, data) {
@@ -54,19 +25,69 @@ angular.module('donacion')
 
       })
     }
-      return {
-        crearSolicitudDonacion: function () {
-          // crearSolicitudDonacion(donacion, idRegistro)
-          if (arguments[0].video.files[0] == undefined) {
-            crearSolicitudDonacion(arguments[0], arguments[1]);
-            return;
-          } else {
-            // crearSolicitudDonacion(donacion, idRegistro, videoDonacion)
-            crearSolicitudDonacion(arguments[0], arguments[1], arguments[0].video.files[0].file);
-            return;
+
+    function listadoSolicitudes() {
+      return $resource(listadoUrl)
+    }
+
+    function infoSolicitud(){
+      return $resource(
+        infoUrl,
+        { id: '@_id' },
+        {
+          query: {
+            method: 'GET',
+            isArray: false
           }
         }
-      }
+      );
+    }
+      return {
+        crearSolicitudDonacion: function (solicitud,idDonante) {
+          var fd = new FormData();
 
+          var data = {
+              id : solicitud.id,
+              titulo: solicitud.titulo,
+              fechaPublicacion: $filter('date')(solicitud.fechaPublicacion, 'dd/MM/yyyy'),
+              donantesNecesarios: solicitud.donantesNecesarios,
+              fechaHoraInicio: $filter('date')(solicitud.fechaInicio, 'dd/MM/yyyy')+ ' ' + $filter('date')(solicitud.horaInicio, 'HH:mm'),
+              fechaHoraFin: $filter('date')(solicitud.fechaFin, 'dd/MM/yyyy')+ ' ' + $filter('date')(solicitud.horaFin, 'HH:mm'),
+              tipo: solicitud.idTipoSolicitud,
+              centroDonacion: solicitud.idCentroDonacion,
+              paciente: solicitud.paciente.id,
+              donante: idDonante,
+              grupos : solicitud.gruposSanguineos,
+          }
+          angular.forEach(data,function(valor,clave){
+            if (typeof  valor == 'object' ) {
+              fd.append(clave,JSON.stringify(valor))
+            }else{
+              fd.append(clave,valor)
+            }
+          })
+          if (solicitud.video.files[0] !== undefined){
+            console.log(solicitud.video.files[0].file)
+            fd.append('video',solicitud.video.files[0].file)
+          }
+          if (solicitud.imagenes.files !== undefined){
+            var imagenes = []
+            angular.forEach(solicitud.imagenes.files,function (valor,clave) {
+              imagenes.push(valor.file)
+            })
+            fd.append('imagenes',JSON.stringify(imagenes))
+          }
+          crearSolicitudDonacion(fd)
+          return
+        },
+
+        listadoSolicitudes: function () {
+          return listadoSolicitudes();
+
+        },
+        infoSolicitud: function () {
+          return infoSolicitud();
+        }
+      }
 
   })

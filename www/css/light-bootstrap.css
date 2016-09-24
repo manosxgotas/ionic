@@ -8,3 +8,8 @@
 #inputVideo, #inputImagen{
   color: black !important;
 }
+.card label {
+  text-transform: none !important;
+  color: #333 !important;
+  font-weight : 700 !important;
+}

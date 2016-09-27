@@ -28,9 +28,9 @@ angular.module('donacion')
 
     $scope.registrarDonacion = function(foto) {
       if (foto != undefined) {
-        DonacionesService.registrarDonacion($scope.donacion, $scope.currentUser.registro.id, foto.file);
+        DonacionesService.registrarDonacion($scope.donacion, foto.file);
       } else {
-        DonacionesService.registrarDonacion($scope.donacion, $scope.currentUser.registro.id);
+        DonacionesService.registrarDonacion($scope.donacion);
       }
     }
   });

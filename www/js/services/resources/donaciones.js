@@ -28,7 +28,7 @@ angular.module('donacion')
       );
     }
 
-    function registrarDonacion(donacion, idRegistro, foto) {
+    function registrarDonacion(donacion, foto) {
 
       $http({
         url: registrarUrl,
@@ -39,7 +39,6 @@ angular.module('donacion')
           evento: donacion.evento,
           direccion: donacion.direccion,
           descripcion: donacion.descripcion,
-          registro: idRegistro,
           foto: foto
         },
         headers: {'Content-Type': undefined},
@@ -86,7 +85,6 @@ angular.module('donacion')
           evento: donacion.evento,
           direccion: donacion.direccion,
           descripcion: donacion.descripcion,
-          registro: 1,
           foto: foto
         },
         headers: {'Content-Type': undefined},
@@ -107,6 +105,7 @@ angular.module('donacion')
         }
       }).success(function () {
         $state.transitionTo('dashboard.libreta');
+        CurrentUserService.setCurrentUser()
         ngNotify.set(
           '<span class="fa fa-tint"></span>&nbsp; ¡Se ha actualizado con éxito la información de tu donación!',
           'info'
@@ -218,14 +217,14 @@ angular.module('donacion')
 
       registrarDonacion: function () {
 
-        // registrarDonacion(donacion, idRegistro)
-        if (arguments.length == 2) {
-          registrarDonacion(arguments[0], arguments[1]);
+        // registrarDonacion(donacion)
+        if (arguments.length == 1) {
+          registrarDonacion(arguments[0]);
           return;
 
-        // registrarDonacion(donacion, idRegistro, fotoDonacion)
+        // registrarDonacion(donacion, fotoDonacion)
         } else {
-          registrarDonacion(arguments[0], arguments[1], arguments[2]);
+          registrarDonacion(arguments[0], arguments[1]);
           return;
         }
       },

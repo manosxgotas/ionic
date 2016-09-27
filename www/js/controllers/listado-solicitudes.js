@@ -48,7 +48,6 @@ angular.module('donacion')
         })
         $scope.solicitudes[clave].gruposSanguineos = $scope.grupos[solicitud.id]
       });
-      console.log($scope.solicitudes)
     });
 
     $scope.filtrado = false
@@ -71,5 +70,6 @@ angular.module('donacion')
         $scope.gruposDonante = undefined
       }
     }
+
 
   });

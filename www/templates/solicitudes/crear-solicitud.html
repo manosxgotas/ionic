@@ -10,18 +10,20 @@
           </div>
 
           <div class="content">
-            <div class="form-group">
+            <div class="form-group" ng-class="{'has-error': solicitudForm.nombrePaciente.$invalid && !solicitudForm.nombrePaciente.$pristine,
+                                                'has-success has-feedback': solicitudForm.nombrePaciente.$valid}">
               <label for="nombrePaciente" class="col-sm-3 control-label">Nombre</label>
               <div class="col-sm-7">
-                <input type="text" id="nombrePaciente" name="tituloSoilicitud" ng-model="solicitud.paciente.nombre" class="form-control"
-                       placeholder="Ingrese el nombre del paciente" required>
+                <input type="text" id="nombrePaciente" name="nombrePaciente" ng-model="solicitud.paciente.nombre" class="form-control"
+                       placeholder="Ingrese el nombre del paciente" ng-pattern="/^([a-z ñáéíóú]{1,60})$/i" required>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-class="{'has-error': solicitudForm.apellidoPaciente.$invalid && !solicitudForm.apellidoPaciente.$pristine,
+                                                'has-success has-feedback': solicitudForm.apellidoPaciente.$valid}">
               <label for="apellidoPaciente" class="col-sm-3 control-label">Apellido</label>
               <div class="col-sm-7">
-                <input type="text" id="apellidoPaciente" name="tituloSoilicitud" ng-model="solicitud.paciente.apellido" class="form-control"
-                       placeholder="Ingrese el apellido del paciente" required>
+                <input type="text" id="apellidoPaciente" name="apellidoPaciente" ng-model="solicitud.paciente.apellido" class="form-control"
+                       placeholder="Ingrese el apellido del paciente" ng-pattern="/^([a-z ñáéíóú]{1,60})$/i" required>
               </div>
             </div>
             <div class="form-group" ng-class="{'has-error': solicitudForm.correo.$invalid && !solicitudForm.correo.$pristine,
@@ -46,11 +48,12 @@
               </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-class="{'has-error': solicitudForm.nrotelefono.$invalid && !solicitudForm.nrotelefono.$pristine,
+                                             'has-success has-feedback': solicitudForm.nrotelefono.$valid}">
               <label for="nroTelefono" class="col-sm-3 control-label">Numero de teléfono</label>
               <div class="col-sm-7">
                 <input type="number" id="nroTelefono" name="nroTelefono" ng-model="solicitud.paciente.telefono" class="form-control"
-                       placeholder="Cod. de area(sin 0) + numero de telefono(sin 15)" required>
+                       placeholder="Cod. de area(sin 0) + numero de telefono(sin 15)" maxlength="20"  required>
               </div>
             </div>
 
@@ -153,7 +156,7 @@
             <label for="donanteNecesarios" class="col-sm-3 control-label">Donantes necesarios</label>
             <div class="col-sm-7">
               <input type="number" id="donanteNecesarios" name="donantesNecesarios" ng-model="solicitud.donantesNecesarios" class="form-control"
-                     placeholder="Ingrese la cantidad de donantes necesarios" required>
+                     placeholder="Ingrese la cantidad de donantes necesarios" maxlength="2" required>
             </div>
           </div>
 
@@ -180,7 +183,7 @@
                 <input uib-datepicker-popup="{{format}}" is-open="fechaDPFin.opened" type="text" name="fechaFin" class="form-control" id="fechaFin" ng-model="solicitud.fechaFin"
                        datepicker-options="fechaFinDPOptions" show-button-bar="false" placeholder="Ingresa la fecha de finalizacion de la solicitud aqui" ng-required="true">
                 <span class="input-group-btn">
-                  <button type="button" class="btn btn-default" ng-click="openDatePicker('fechaFin')"><i class="glyphicon glyphicon-calendar"></i></button>
+                  <button type="button" class="btn btn-default" ng-click="establecerHoraFin()"><i class="glyphicon glyphicon-calendar"></i></button>
                 </span>
               </p>
             </div>
@@ -202,14 +205,8 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">Grupos sangunieos necesarios</label>
             <div class="col-sm-5">
-              <a ng-repeat="grupo in gruposSanguineos" ng-show="!check[grupo.id]" ng-click="addGrupoSanguineo(grupo)" popover-trigger="mouseenter" popover-placement="bottom" uib-popover="Click para agregar grupo sanguineo" class="btn  btn-fill btn-danger" style="margin-right: 5px; ">
-                <span class="" aria-hidden="true"></span>
-                <span class='hidden-xs' >{{grupo.nombre}}</span>
-              </a>
-            </div>
-            <div class="col-sm-5 col-sm-offset-3">
-              <span ng-show="solicitud.gruposSanguineos != undefined">Seleccionados:</span><br>
-              <a ng-repeat="grupo in gruposSanguineos" ng-show="check[grupo.id]" ng-click="addGrupoSanguineo(grupo)" popover-trigger="mouseenter" popover-placement="bottom" uib-popover="Click para eliminar grupo sanguineo" class="btn  btn-fill btn-success" style="margin-right: 5px; ">
+              <a ng-repeat="grupo in gruposSanguineos | orderBy:'nombre'"  ng-click="addGrupoSanguineo(grupo)" popover-trigger="mouseenter" popover-placement="bottom"
+                 uib-popover="{{checkPopover[grupo.id]}}" ng-class="checkClass[grupo.id]" style="margin: 5px; ">
                 <span class="" aria-hidden="true"></span>
                 <span class='hidden-xs' >{{grupo.nombre}}</span>
               </a>
@@ -259,7 +256,7 @@
           <div class="form-group">
             <div class="col-sm-10">
               <div class="pull-right">
-                <button type="submit" class="btn btn-danger btn-fill">
+                <button type="submit" class="btn btn-danger btn-fill" ng-disabled="solicitudForm.$invalid">
                   <i class="fa fa-heartbeat"></i> Crear solicitud
                 </button>
               </div>

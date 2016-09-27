@@ -19,8 +19,12 @@ angular.module('donacion')
     //Obtengo los grupos sanguineos
     $scope.gruposSanguineos = GruposSanguineosService.listadoGruposSanguineos().query({},function(){
       $scope.check = {}
+      $scope.checkClass = {}
+      $scope.checkPopover = {}
       angular.forEach($scope.gruposSanguineos,function (valor,clave) {
         $scope.check[valor.id] = false
+        $scope.checkClass[valor.id] = "btn  btn-fill btn-danger"
+        $scope.checkPopover[valor.id] = "Click para agregar grupo sanguineo"
       })
     });
 
@@ -41,12 +45,16 @@ angular.module('donacion')
           $scope.solicitud.gruposSanguineos.splice(clave,1)
           seEncontro = true
           $scope.check[grupo.id] = false
+          $scope.checkClass[grupo.id] = "btn  btn-fill btn-danger"
+          $scope.checkPopover[grupo.id] = "Click para agregar grupo sanguineo"
 
         }
       })
       if (seEncontro == false){
         $scope.solicitud.gruposSanguineos.push(grupo.id)
         $scope.check[grupo.id] = true
+        $scope.checkClass[grupo.id] = "btn  btn-fill btn-success"
+        $scope.checkPopover[grupo.id] = "Click para eliminar grupo sanguineo"
       }
     }
     $scope.solicitud.fechaPublicacion = new Date();
@@ -56,11 +64,11 @@ angular.module('donacion')
       minDate: new Date(),
       datepickerMode: 'year'
     };
-    $scope.fechaFinDPOptions = {
+/*    $scope.fechaFinDPOptions = {
       initDate: new Date(2016, 0, 1),
       minDate: new Date(),
       datepickerMode: 'year'
-    };
+    };*/
     $scope.fechaNacimientoDPOptions = {
       initDate: new Date(1980, 0, 1),
       minDate: new Date(1920,0,1),
@@ -87,20 +95,34 @@ angular.module('donacion')
       if (picker == "nacimiento")
         $scope.fechaDPNacimiento.opened = true;
     };
+    $scope.establecerHoraFin = function(){
+      if ($scope.solicitud.fechaInicio != undefined) {
+        var fechaAux= new Date($scope.solicitud.fechaInicio)
+        fechaAux.setMonth(fechaAux.getMonth()+2)
+        $scope.fechaFinDPOptions = {
+          initDate: $scope.solicitud.fechaInicio,
+          minDate: $scope.solicitud.fechaInicio,
+          maxDate: fechaAux,
+          datepickerMode: 'year'
+        };
+        $scope.openDatePicker('fechaFin')
+      }else{
+
+      }
+    }
 
     // DatePicker fecha de nacimiento ---->
 
     $scope.crearSolicitud = function (video) {
-   /*  PacientesService.crearPaciente($scope.solicitud).success(function (data,response) {
+     PacientesService.crearPaciente($scope.solicitud).success(function (data,response) {
         $scope.solicitud.paciente = data
+       console.log($scope.solicitud.paciente)
         if ($scope.solicitud.video.files[0] != undefined) {
           SolicitudesService.crearSolicitudDonacion($scope.solicitud, $scope.currentUser.registro.id,video)
         }
         else{
           SolicitudesService.crearSolicitudDonacion($scope.solicitud, $scope.currentUser.registro.id)
         }
-     })*/
-     $scope.solicitud.paciente.id =2
-     SolicitudesService.crearSolicitudDonacion($scope.solicitud, $scope.currentUser.registro.id)
+     })
     }
   })

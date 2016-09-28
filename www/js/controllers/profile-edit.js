@@ -18,7 +18,7 @@ angular.module('donacion')
     $scope.nacionalidades = NacionalidadesService.query();
 
     // Obtengo los grupos sanguíneos de la API
-    $scope.gruposSanguineos = GruposSanguineosService.query();
+    $scope.gruposSanguineos = GruposSanguineosService.listadoGruposSanguineos().query();
 
     // <---- DatePicker fecha de nacimiento
     $scope.nacimientoDPOptions = {

@@ -1,8 +1,31 @@
-/*En este archivo se definen todos los css que se desean crear, o que se desean personalizar*/
-.card label{
-	color: black !important;
+/* En este archivo se definen todos los css que se desean crear, o que se desean personalizar */
+
+/* WebKit, Blink, Edge */
+::-webkit-input-placeholder {
+  color: #b3aaaa !important;
 }
 
-li > a{
-  color:#FB404B;
+/* Mozilla Firefox 4 to 18 */
+:-moz-placeholder {
+  color: #333 !important;
+  opacity: 0.5 !important;
+}
+
+/* Mozilla Firefox 19+ */
+::-moz-placeholder {
+  color: #333!important;
+  opacity: 0.5 !important;
+}
+
+/* Internet Explorer 10-11 */
+:-ms-input-placeholder {
+  color: #333 !important;
+}
+
+.form-control {
+  border-color: #b3aaaa !important ;
+}
+
+li > a {
+  color: #FB404B;
 }

@@ -58,6 +58,7 @@ angular.module('donacion', [
   })
 
   .config(function($stateProvider, $urlRouterProvider, socialProvider, $httpProvider, $resourceProvider, cfpLoadingBarProvider, uiGmapGoogleMapApiProvider) {
+
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
     $httpProvider.interceptors.push('APIInterceptor');
@@ -316,6 +317,37 @@ angular.module('donacion', [
           "dashboardContent": {
             templateUrl: "templates/centros/detalle-centro.html",
             controller: "DetalleCentroController",
+          }
+        }
+      })
+
+      .state('dashboard.crear-solicitud', {
+        cache: false,
+        url: "/crear-solicitud",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/solicitudes/crear-solicitud.html",
+            controller: "CrearSolicitudDonacionController",
+          }
+        }
+      })
+      .state('dashboard.detalle-solicitud', {
+        cache: false,
+        url: "/solicitud/:solicitudID",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/solicitudes/detalle-solicitud.html",
+            controller: "DetalleSolicitudController",
+          }
+        }
+      })
+      .state('dashboard.listado-solicitudes', {
+        cache: false,
+        url: "/listado-solicitudes",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/solicitudes/listado-solicitudes.html",
+            controller: "ListadoSolicitudesController",
           }
         }
       })

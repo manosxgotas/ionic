@@ -1,0 +1,141 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">
+              <span class="fa fa-plus-square"></span>&nbsp;&nbsp;{{solicitud.titulo}}
+              <div class="pull-right">
+                <button ng-show="solicitud.imagenesSolicitud" class="btn btn-success" ng-click="changeOption(1)">
+                  <span class="fa fa-camera"></span>
+                  <span class="hidden-xs">&nbsp;Fotos</span>
+                </button>
+                <button ng-show="solicitud.video" class="btn btn-success btn-fill" ng-click="changeOption(2)">
+                  <span class="fa fa-video-camera"></span>
+                  <span class="hidden-xs">&nbsp;Video</span>
+                </button>
+                <button ng-show="markers.length > 0" class="btn btn-warning btn-fill" ng-click="changeOption(3)">
+                  <span class="fa fa-map-marker"></span>
+                  <span class="hidden-xs">Ver mapa</span>
+                </button>
+              </div>
+            </h4>
+            <div class="content">
+              <div class="row">
+                <h4>
+                  Se solicitan {{solicitud.donantesNecesarios}} dadores de sangre tipo:<span ng-repeat="grupo in solicitud.gruposSanguineos">&nbsp;{{grupo.grupoSanguineo.nombre}}</span>
+                </h4>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <div style="margin: 30px 10px;">
+                    <div class="carousel-evento" ng-show="option === 1 && slides.length > 0" uib-carousel active="active" interval="myInterval">
+                      <div uib-slide ng-repeat="slide in slides" index="slide.id">
+                        <img style="display: inline-block; vertical-align: middle; background-size: cover" class="img-responsive center-block" ng-src="{{slide.image}}">
+                      </div>
+                    </div>
+
+                    <div ng-show="option === 1 && slides.length == 0">
+                      <img style="display: inline-block; vertical-align: middle" class="img-responsive center-block" src="../../img/solicitud-defecto.png">
+                    </div>
+
+                    <section ng-show="option === 2" class="ng-video-container">
+                      <section class="video" ng-video>
+
+                        <video vi-screen></video>
+
+                        <section vi-controls class="controls">
+                          <span vi-controls-play title="Play" class="glyphicon glyphicon-play"></span>
+                          <span vi-controls-pause title="Pause" class="glyphicon glyphicon-pause"></span>
+                        </section>
+
+                        <section class="full-screen">
+                          <span title="Full Screen" vi-full-screen-toggle class="glyphicon glyphicon-fullscreen"></span>
+                        </section>
+
+                        <section vi-feedback class="feedback">
+
+                          <section class="loading" ng-show="loading">
+                            <span class="fa fa-spinner fa-pulse"></span>&nbsp;&nbsp;Cargando...
+                          </section>
+
+                          <section class="timeline">
+                            <input vi-timeline />
+                          </section>
+
+                        </section>
+                      </section>
+                    </section>
+
+                    <ui-gmap-google-map ng-show="option === 3" class="small-map" center='map.center' zoom='map.zoom' options="map.options">
+                      <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords"
+                                      idKey="marker.id">
+                      </ui-gmap-marker>
+                    </ui-gmap-google-map>
+                  </div>
+
+                  <hr class="hidden-lg hidden-md">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapseHorarios">
+                    <h4>
+                      <span class="fa fa-clock-o"></span>
+                      &nbsp;&nbsp;Horarios de la solicitud
+                      <b class="caret"></b>
+                    </h4>
+                  </a>
+                  <div class="collapse in" id="collapseHorarios">
+                    <ul style="margin-top: 5px">
+                      <li>
+                        <b class="text-danger">Inicio:</b> {{solicitud.fechaHoraInicio | date:'fullDate'}} a las {{solicitud.fechaHoraInicio | date:'HH:mm'}} hs.
+                      </li>
+                      <li>
+                        <b class="text-danger">Finalización:</b> {{solicitud.fechaHoraFin | date:'fullDate'}} a las {{solicitud.fechaHoraFin | date:'HH:mm'}} hs.
+                      </li>
+                    </ul>
+                  </div>
+                  <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapseUbicacion">
+                    <h4>
+                      <span class="fa fa-map-marker" aria-hidden="true"></span>
+                      &nbsp;&nbsp;Lugar de donación
+                      <b class="caret"></b>
+                    </h4>
+                  </a>
+
+                  <div class="collapse in" id="collapseUbicacion">
+                    <ul  style="margin-top: 5px" ng-show="solicitud.centroDonacion">
+                      <li>
+                        {{solicitud.centroDonacion.nombre}}<br>
+                      </li>
+
+                        {{solicitud.centroDonacion.lugarDonacion.direccion.localidad.provincia.nombre}}, {{solicitud.centroDonacion.lugarDonacion.direccion.localidad.nombre}}, {{solicitud.lugarDonacion.centroDonacion.direccion.calle}} {{solicitud.centroDonacion.lugarDonacion.direccion.numero}}
+
+                    </ul>
+                    <p ng-show="solicitud.centroDonacion == null">
+                      No hay ubicaciones disponibles
+                    </p>
+                  </div>
+                  <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapseCategoria">
+                    <h4>
+                      <span class="fa fa-user"></span>
+                      &nbsp;&nbsp;Paciente
+                      <b class="caret"></b>
+                    </h4>
+                  </a>
+                  <div class="collapse in" id="collapseCategoria">
+                    <ul style="margin-top: 5px">
+                        <li>{{solicitud.paciente.nombre}}, {{solicitud.paciente.apellido}}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <span class="clearfix"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

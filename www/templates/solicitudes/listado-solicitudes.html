@@ -8,7 +8,7 @@
               <span class="fa fa-heartbeat fa-lg"></span>
               &nbsp;&nbsp;Listado de solicitudes
               <div class="pull-right">
-                <a popover-trigger="mouseenter" popover-placement="bottom" uib-popover="Mostrar solamente las que son compatibles conmigo" class="btn  btn-fill btn-success btn-sm" ng-click="filtrarSolicitudes()">
+                <a ng-hide="solicitudes.length == 0" popover-trigger="mouseenter" popover-placement="bottom" uib-popover="Mostrar solamente las que son compatibles conmigo" class="btn btn-fill btn-success btn-sm" ng-click="filtrarSolicitudes()">
                   <span class="fa fa-filter" aria-hidden="true"></span>
                   <span ng-show="!filtrado" class='hidden-xs'>Filtrar</span>
                   <span ng-show="filtrado" class='hidden-xs'>Volver</span>
@@ -50,8 +50,8 @@
                       <b class="text-danger">Finalización:</b> {{solicitud.fechaHoraFin | date:'dd/MM/yyyy'}} {{solicitud.fechaHoraFin | date:'HH:mm'}} hs.
                     </li>
                     <li>
-                      <i class="fa-li fa fa-map-marker"></i>
-                      {{solicitud.centroDonacion.lugarDonacion.direccion.localidad.provincia.nombre}}, {{solicitud.centroDonacion.lugarDonacion.direccion.localidad.nombre}}, {{solicitud.centroDonacion.lugarDonacion.direccion.calle}} {{solicitud.centroDonacion.lugarDonacion.direccion.numero}}
+                      <i class="fa-li fa fa-hospital-o"></i>
+                      {{solicitud.centroDonacion.nombre}} <a href="" class="fa fa-map-marker" ui-sref="dashboard.detalle-centro({centroID: solicitud.centroDonacion.id})"></a>
                     </li>
                   </ul>
                 </div>

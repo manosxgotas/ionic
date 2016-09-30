@@ -168,6 +168,16 @@ angular.module('donacion', [
         }
       })
 
+      .state('home.recomendaciones', {
+        cache: false,
+        url: "recomendaciones",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/recomendaciones.html",
+          }
+        }
+      })
+
       .state('home.activar-cuenta-clave', {
         cache: false,
         url: "activar-cuenta-clave",

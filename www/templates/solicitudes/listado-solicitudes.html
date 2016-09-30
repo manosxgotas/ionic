@@ -28,8 +28,8 @@
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-repeat="solicitud in solicitudes | FiltroGruposSanguineos: gruposDonante | orderBy:'-fechaPublicacion' " style="border: solid 1px #c0c0c0; padding: 10px 10px">
                 <div class="pull-right">
-                  <span popover-trigger="mouseenter" popover-placement="bottom" uib-popover="Se solicita: {{solicitud.gruposSanguineos}}" class="btn btn-fill btn-danger" style="cursor: default;margin-right: 20px;">
-                    <span class="fa fa-medkit"></span>
+                  <span popover-trigger="mouseenter" popover-placement="bottom" uib-popover="Se solicitan {{solicitud.donantesNecesarios}} donantes, grupos: {{solicitud.gruposSanguineos}}" class="btn btn-fill btn-danger" style="cursor: default;margin-right: 20px;">
+                    <span class="fa fa-group"></span>&nbsp;{{solicitud.donantesNecesarios}}
                   </span>
                 </div>
                 <h4 class="title">

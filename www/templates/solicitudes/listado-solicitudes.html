@@ -7,7 +7,7 @@
             <h4 class="title">
               <span class="fa fa-heartbeat fa-lg"></span>
               &nbsp;&nbsp;Listado de solicitudes
-              <div class="pull-right">
+              <div class="hidden-xs pull-right">
                 <a ng-hide="solicitudes.length == 0" popover-trigger="mouseenter" popover-placement="bottom" uib-popover="Mostrar solamente las que son compatibles conmigo" class="btn btn-fill btn-success btn-sm" ng-click="filtrarSolicitudes()">
                   <span class="fa fa-filter" aria-hidden="true"></span>
                   <span ng-show="!filtrado" class='hidden-xs'>Filtrar</span>
@@ -19,58 +19,76 @@
                 </a>
               </div>
             </h4>
-            <p class="category">Aquí puedes observar todas las solicitudes de donacion.</p>
+            <p class="category hidden-xs">Aquí puedes observar todas las solicitudes de donacion.</p>
+            <div class="visible-xs" style="margin-top: 5px">
+              <a ng-hide="solicitudes.length == 0" popover-trigger="mouseenter" popover-placement="top-left" uib-popover="Mostrar solamente las que son compatibles conmigo" class="btn btn-fill btn-success btn-sm" ng-click="filtrarSolicitudes()">
+                <span class="fa fa-filter" aria-hidden="true"></span>
+                <span ng-show="!filtrado" class='hidden-xs'>Filtrar</span>
+                <span ng-show="filtrado" class='hidden-xs'>Volver</span>
+              </a>
+              <a class="btn btn-fill btn-danger btn-sm" ui-sref="dashboard.crear-solicitud">
+                <span class="fa fa-heartbeat" aria-hidden="true"></span>
+                <span class='hidden-xs'>Nueva solicitud</span>
+              </a>
+            </div>
           </div>
           <div class="content" ng-show="solicitudes.length == 0">
             Actualmente no hay ninguna solicitud
           </div>
           <div class="content eventos-container" ng-show="solicitudes.length > 0">
             <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-repeat="solicitud in solicitudes | FiltroGruposSanguineos: gruposDonante | orderBy:'-fechaPublicacion' " style="border: solid 1px #c0c0c0; padding: 10px 10px">
-                <div class="pull-right">
-                  <span popover-trigger="mouseenter" popover-placement="bottom" uib-popover="Se solicitan {{solicitud.donantesNecesarios}} donantes, grupos: {{solicitud.gruposSanguineos}}" class="btn btn-fill btn-danger" style="cursor: default;margin-right: 20px;">
-                    <span class="fa fa-group"></span>&nbsp;{{solicitud.donantesNecesarios}}
-                  </span>
-                </div>
-                <h4 class="title">
-                  <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapseInfo{{solicitud.id}}">
-                    {{solicitud.titulo}}
-                    <b class="caret"></b>
-                  </a>
-                </h4>
-
-                <div class="collapse in" id="collapseInfo{{solicitud.id}}">
-                  <ul class="fa-ul" style="margin-top: 5px">
-                    <li>
-                      <i class="fa-li fa fa-hourglass-start"></i>
-                      <b class="text-danger">Inicio:</b> {{solicitud.fechaHoraInicio | date:'dd/MM/yyyy'}} {{solicitud.fechaHoraInicio | date:'HH:mm'}} hs.
-                    </li>
-                    <li>
-                      <i class="fa-li fa fa-hourglass-end"></i>
-                      <b class="text-danger">Finalización:</b> {{solicitud.fechaHoraFin | date:'dd/MM/yyyy'}} {{solicitud.fechaHoraFin | date:'HH:mm'}} hs.
-                    </li>
-                    <li>
-                      <i class="fa-li fa fa-hospital-o"></i>
-                      {{solicitud.centroDonacion.nombre}} <a href="" class="fa fa-map-marker" ui-sref="dashboard.detalle-centro({centroID: solicitud.centroDonacion.id})"></a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <img style="padding: 10px 10px; max-height: 300px" ng-src="{{portada[solicitud.id] ? portada[solicitud.id].imagen : '../../img/solicitud-defecto.png'}}" class="img-responsive center-block">
+              <div class="items-container" style="padding: 0 10px">
+                <div class="items" ng-repeat="solicitud in solicitudes | FiltroGruposSanguineos: gruposDonante | orderBy:'-fechaPublicacion' " style="border: solid 2px #c0c0c0; border-radius: 10px; padding: 10px 10px">
+                  <div class="hidden-xs pull-right">
+                    <span popover-trigger="mouseenter" popover-placement="bottom" uib-popover="Se solicitan {{solicitud.donantesNecesarios}} donantes, grupos: {{solicitud.gruposSanguineos}}" class="btn btn-fill btn-danger" style="cursor: default;margin-right: 20px;">
+                      <span class="fa fa-group"></span>&nbsp;{{solicitud.donantesNecesarios}}
+                    </span>
                   </div>
-                </div>
-                <hr>
-                <div class="pull-left">
-                  <span popover-trigger="mouseenter" popover-placement="top" uib-popover="{{estado[solicitud.id].nombre}}" class="btn btn-{{estado[solicitud.id].color}}" style="cursor: default;">
-                    <span class="fa {{estado[solicitud.id].icono}}"></span>
-                  </span>
-                </div>
-                <div class="pull-right">
-                  <a href="" ui-sref="dashboard.detalle-solicitud({solicitudID: solicitud.id})" class="btn btn-danger">
-                    <span class="fa fa-info-circle"></span>
-                    <span class="hidden-xs">Leer más</span>
-                  </a>
+                  <h4 class="title">
+                    <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapseInfo{{solicitud.id}}">
+                      {{solicitud.titulo}}
+                      <b class="caret"></b>
+                    </a>
+                  </h4>
+
+                  <div class="collapse in" id="collapseInfo{{solicitud.id}}">
+                    <ul class="fa-ul" style="margin-top: 5px">
+                      <li>
+                        <i class="fa-li fa fa-hourglass-start"></i>
+                        <b class="text-danger">Inicio:</b> {{solicitud.fechaHoraInicio | date:'dd/MM/yyyy'}} {{solicitud.fechaHoraInicio | date:'HH:mm'}} hs.
+                      </li>
+                      <li>
+                        <i class="fa-li fa fa-hourglass-end"></i>
+                        <b class="text-danger">Finalización:</b> {{solicitud.fechaHoraFin | date:'dd/MM/yyyy'}} {{solicitud.fechaHoraFin | date:'HH:mm'}} hs.
+                      </li>
+                      <li>
+                        <i class="fa-li fa fa-hospital-o"></i>
+                        {{solicitud.centroDonacion.nombre}} <a href="" class="fa fa-map-marker" ui-sref="dashboard.detalle-centro({centroID: solicitud.centroDonacion.id})"></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <img style="padding: 10px 10px; max-height: 300px" ng-src="{{portada[solicitud.id] ? portada[solicitud.id].imagen : '../../img/solicitud-defecto.png'}}" class="img-responsive center-block">
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="hidden-xs pull-left">
+                    <span popover-trigger="mouseenter" popover-placement="top" uib-popover="{{estado[solicitud.id].nombre}}" class="btn btn-{{estado[solicitud.id].color}}" style="cursor: default;">
+                      <span class="fa {{estado[solicitud.id].icono}}"></span>
+                    </span>
+                  </div>
+                  <div class="visible-xs pull-left">
+                    <span popover-trigger="mouseenter" popover-placement="top-left" uib-popover="Se solicitan {{solicitud.donantesNecesarios}} donantes, grupos: {{solicitud.gruposSanguineos}}" class="btn btn-fill btn-danger" style="cursor: default;margin-right: 20px;">
+                      <span class="fa fa-group"></span>&nbsp;{{solicitud.donantesNecesarios}}
+                    </span>
+                  </div>
+                  <div class="pull-right">
+                    <a href="" ui-sref="dashboard.detalle-solicitud({solicitudID: solicitud.id})" class="btn btn-danger">
+                      <span class="fa fa-info-circle"></span>
+                      <span class="hidden-xs">Leer más</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

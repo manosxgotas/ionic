@@ -188,6 +188,16 @@ angular.module('donacion', [
         }
       })
 
+      .state('home.mitos', {
+        cache: false,
+        url: "mitos",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/mitos.html",
+          }
+        }
+      })
+
       .state('home.activar-cuenta-clave', {
         cache: false,
         url: "activar-cuenta-clave",

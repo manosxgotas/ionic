@@ -59,6 +59,7 @@ angular.module('donacion')
           tipo: solicitud.idTipoSolicitud,
           centroDonacion: solicitud.idCentroDonacion,
           grupos: solicitud.gruposSanguineos,
+          historia: solicitud.historia,
           paciente: {
             nombre: solicitud.paciente.nombre,
             apellido: solicitud.paciente.apellido,

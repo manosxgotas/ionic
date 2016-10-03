@@ -198,6 +198,16 @@ angular.module('donacion', [
         }
       })
 
+      .state('home.quienes-somos', {
+        cache: false,
+        url: "quienes-somos",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/quienes-somos.html",
+          }
+        }
+      })
+
       .state('home.activar-cuenta-clave', {
         cache: false,
         url: "activar-cuenta-clave",

@@ -5,9 +5,7 @@
 .radio.checked,.checkbox.checked {
   color: #FB404B !important;
 }
-#inputVideo, #inputImagen{
-  color: black !important;
-}
+
 .card label {
   text-transform: none !important;
   color: #333 !important;

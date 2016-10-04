@@ -168,6 +168,46 @@ angular.module('donacion', [
         }
       })
 
+      .state('home.recomendaciones', {
+        cache: false,
+        url: "recomendaciones",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/recomendaciones.html",
+          }
+        }
+      })
+
+      .state('home.proceso-donacion', {
+        cache: false,
+        url: "proceso-donacion",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/proceso-donacion.html",
+          }
+        }
+      })
+
+      .state('home.mitos', {
+        cache: false,
+        url: "mitos",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/mitos.html",
+          }
+        }
+      })
+
+      .state('home.quienes-somos', {
+        cache: false,
+        url: "quienes-somos",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/quienes-somos.html",
+          }
+        }
+      })
+
       .state('home.activar-cuenta-clave', {
         cache: false,
         url: "activar-cuenta-clave",

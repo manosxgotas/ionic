@@ -47,11 +47,10 @@ angular.module('donacion')
     }
 
     return {
-      crearSolicitudDonacion: function (solicitud, idDonante) {
+      crearSolicitudDonacion: function (solicitud) {
         var fd = new FormData();
 
         var data = {
-          id: solicitud.id,
           titulo: solicitud.titulo,
           fechaPublicacion: $filter('date')(solicitud.fechaPublicacion, 'dd/MM/yyyy'),
           donantesNecesarios: solicitud.donantesNecesarios,
@@ -59,9 +58,22 @@ angular.module('donacion')
           fechaHoraFin: $filter('date')(solicitud.fechaFin, 'dd/MM/yyyy') + ' ' + $filter('date')(solicitud.horaFin, 'HH:mm'),
           tipo: solicitud.idTipoSolicitud,
           centroDonacion: solicitud.idCentroDonacion,
-          paciente: solicitud.paciente.id,
-          donante: idDonante,
           grupos: solicitud.gruposSanguineos,
+          historia: solicitud.historia,
+          paciente: {
+            nombre: solicitud.paciente.nombre,
+            apellido: solicitud.paciente.apellido,
+            nacimiento: $filter('date')(solicitud.paciente.nacimiento, 'yyyy-MM-dd'),
+            telefono: solicitud.paciente.telefono,
+            email: solicitud.paciente.email,
+            direccion: {
+              numero: solicitud.paciente.direccion.numero,
+              calle: solicitud.paciente.direccion.calle,
+              piso: solicitud.paciente.direccion.piso,
+              numeroDepartamento: solicitud.paciente.direccion.numeroDepartamento,
+              localidad: solicitud.paciente.direccion.localidad
+            }
+          }
         };
         angular.forEach(data, function (valor, clave) {
           if (typeof  valor == 'object') {
@@ -74,11 +86,9 @@ angular.module('donacion')
           fd.append('video', solicitud.video.files[0].file)
         }
         if (solicitud.imagenes.files !== undefined) {
-          var imagenes = [];
-          angular.forEach(solicitud.imagenes.files, function (valor, clave) {
-            imagenes.push(valor.file)
+          angular.forEach(solicitud.imagenes.files, function (imagen, clave) {
+            fd.append('imagenes', imagen.file)
           });
-          fd.append('imagenes', JSON.stringify(imagenes))
         }
         crearSolicitudDonacion(fd);
         return

@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="row">
+  <div class="row" style="margin: 0">
       <form name="solicitudForm" class="form-horizontal" ng-submit="crearSolicitud()" novalidate>
         <div class="col-sm-6">
           <div class='header' style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;'>
@@ -53,7 +53,7 @@
               <label for="telefono" class="col-sm-3 control-label">Numero de teléfono</label>
               <div class="col-sm-7">
                 <input type="text" id="telefono" name="telefono" ng-model="solicitud.paciente.telefono" class="form-control"
-                       placeholder="Ingresa tu número de teléfono" maxlength="20"  required>
+                       placeholder="Ingresa tu número de teléfono" maxlength="20" required>
               </div>
             </div>
 
@@ -203,7 +203,7 @@
           </div>
 
           <div class="form-group">
-            <label class="col-sm-3 control-label">Grupos sangunieos necesarios</label>
+            <label class="col-sm-3 control-label">Grupos sanguineos necesarios</label>
             <div class="col-sm-5">
               <a ng-repeat="grupo in gruposSanguineos | orderBy:'nombre'"  ng-click="addGrupoSanguineo(grupo)" popover-trigger="mouseenter" popover-placement="bottom"
                  uib-popover="{{checkPopover[grupo.id]}}" ng-class="checkClass[grupo.id]" style="margin: 5px; ">
@@ -220,52 +220,108 @@
               </select>
             </div>
           </div>
+        </div>
+        </div>
 
-
-          <div class="form-group" flow-init="{singleFile:true}" flow-name="solicitud.video" flow-file-added="!!{mp4:1}[$file.getExtension()]">
-            <label class="col-sm-3 control-label" for="inputVideo" flow-btn>Video (opcional):</label>
-            <div class="col-sm-7">
-              <span class="btn" id="inputVideo" ng-hide="$flow.files.length" flow-btn>Seleccionar video</span>
-              <span class="btn" id="inputVideo" ng-show="$flow.files.length" flow-btn>Cambiar</span>
-              <table>
-                <tr ng-repeat="file in $flow.files">
-                  <td>{{$index+1}}&nbsp;&nbsp;</td>
-                  <td>{{file.name}}&nbsp;&nbsp;</td>
-                  <td>{{file.msg}} </td>
-                </tr>
-              </table>
-            </div>
+        <div class="col-sm-12">
+          <div class='header' style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;'>
+            <h4 class='title'>
+              <span class="fa fa-history fa-lg" aria-hidden="true"></span>
+              &nbsp; Historia
+            </h4>
           </div>
 
-          <div class="form-group" flow-init flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-name="solicitud.imagenes">
-            <label class="col-sm-3 control-label" for="inputImagen" flow-btn>Fotos:</label>
-            <div class="col-sm-7">
-              <span class="btn" id="inputImagen" ng-hide="$flow.files.length" flow-btn>Seleccionar imagen</span>
-              <span class="btn" id="inputImagen" ng-show="$flow.files.length" flow-btn>Agregar mas imagenes</span>
-              <table>
-                <tr ng-repeat="file in $flow.files">
-                  <td>{{$index+1}}&nbsp;&nbsp;</td>
-                  <td>{{file.name}}&nbsp;&nbsp;</td>
-                  <td>{{file.msg}} </td>
-                </tr>
-              </table>
-            </div>
+          <div class="content">
+            <textarea rows="5" id="historia" name="historia" ng-model="solicitud.historia" class="form-control"
+                   placeholder="Aquí puedes escribir la historia de la persona">
+            </textarea>
           </div>
+        </div>
 
-
-          <div class="form-group">
-            <div class="col-sm-10">
+        <div class="col-sm-12" flow-init flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-name="solicitud.imagenes">
+          <div class='header' style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;'>
+            <h4 class='title'>
+              <span class="fa fa-camera fa-lg" aria-hidden="true"></span>
+              &nbsp;&nbsp; Fotos
               <div class="pull-right">
-                <button type="submit" class="btn btn-danger btn-fill" ng-disabled="solicitudForm.$invalid">
-                  <i class="fa fa-heartbeat"></i> Crear solicitud
-                </button>
+                <span class="btn btn-default btn-fill" ng-hide="$flow.files.length == 3" id="inputImagen" flow-btn>
+                  <span class="fa fa-camera"></span>
+                  <span ng-hide="$flow.files.length">Seleccionar foto</span>
+                  <span ng-show="$flow.files.length">Agregar más fotos</span>
+                </span>
+                <a class="btn btn-default" ng-show="$flow.files.length == 3" style="cursor: default">
+                  <span class="fa-stack">
+                    <i class="fa fa-camera fa-stack-1x" style="margin-left: 3px"></i>
+                    <i class="fa fa-ban fa-stack-2x text-danger"></i>
+                  </span>
+                  <span class="hidden-xs">No puedes agregar fotos</span>
+                </a>
+                <span ng-click="$flow.files[$flow.files.length - 1].cancel()" class="btn btn-fill btn-danger" ng-show="$flow.files.length">
+                  <span class="fa fa-remove" aria-hidden="true"></span>
+                  <span class='hidden-xs'>Eliminar foto</span>
+                </span>
               </div>
+            </h4>
+          </div>
+          <div class="content">
+
+            <span class="col-md-12 col-lg-4 col-sm-12 col-xs-12" style="margin-bottom: 10px; border: dashed 2px grey; border-radius: 10px; line-height: 200px;  text-align: center; color: black" ng-hide="$flow.files[0]" flow-drop>
+              <span class="fa fa-plus"></span> Agrega una foto aquí
+            </span>
+            <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12" ng-show="$flow.files[0]">
+              <img class="img-responsive img-rounded" style="max-height: 250px; margin: 0 auto; margin-bottom: 10px;" flow-img="$flow.files[0]" />
+            </div>
+            <span class="col-md-12 col-lg-4 col-sm-12 col-xs-12" style="margin-bottom: 10px; border: dashed 2px grey; border-radius: 10px; line-height: 200px;  text-align: center; color: black" ng-hide="!$flow.files[0] || $flow.files[1]" flow-drop>
+              <span class="fa fa-plus"></span> Agrega una foto aquí
+            </span>
+            <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12" ng-show="$flow.files[1]">
+              <img class="img-responsive img-rounded" style="max-height: 200px; margin: 0 auto; margin-bottom: 10px;" flow-img="$flow.files[1]" />
+            </div>
+            <span class="col-md-12 col-lg-4 col-sm-12 col-xs-12" style="margin-bottom: 10px; border: dashed 2px grey; border-radius: 10px; line-height: 200px;  text-align: center; color: black" ng-hide="!$flow.files[1] || $flow.files[2]" flow-drop>
+              <span class="fa fa-plus"></span> Agrega una foto aquí
+            </span>
+            <div class="col-md-12 col-lg-4 col-sm-12 col-xs-12" ng-show="$flow.files[2]">
+              <img class="img-responsive img-rounded" style="max-height: 250px; margin: 0 auto; margin-bottom: 10px;" flow-img="$flow.files[2]" />
             </div>
           </div>
         </div>
 
-        </div>
+        <div class="col-sm-12" flow-init="{singleFile:true}" flow-name="solicitud.video" flow-file-added="!!{mp4:1}[$file.getExtension()]">
+          <div class='header' style='padding-top:10px;padding-bottom:10px;margin-bottom:15px;'>
+            <h4 class='title'>
+              <span class="fa fa-video-camera fa-lg" aria-hidden="true"></span>
+              &nbsp;&nbsp; Video
+            <div class="pull-right">
+              <span class="btn btn-default btn-fill" id="inputVideo" ng-hide="$flow.files.length" flow-btn>
+                    <span class="fa fa-video-camera"></span>
+                    <span ng-hide="$flow.files.length">Agregar video</span>
+                    <span ng-show="$flow.files.length">Cambiar video</span>
+              </span>
+              <span ng-click="$flow.files[0].cancel()" class="btn btn-fill btn-danger" ng-show="$flow.files.length">
+                  <span class="fa fa-remove" aria-hidden="true"></span>
+                  <span class='hidden-xs'>Eliminar video</span>
+                </span>
+            </div>
+            </h4>
+          </div>
 
+          <div class="content">
+            <span class="col-md-12 col-lg-6 col-lg-offset-3 col-sm-12 col-xs-12" style="margin-bottom: 10px; border: dashed 2px grey; border-radius: 10px; line-height: 50px; text-align: center; color: black" ng-hide="$flow.files.length" flow-drop>
+              <span class="fa fa-plus-circle"></span> Arrastra tu video aquí
+            </span>
+            <span class="btn btn-success btn-fill col-md-12 col-lg-6 col-lg-offset-3 col-sm-12 col-xs-12" style="margin-bottom: 10px; line-height: 50px; cursor: default" ng-show="$flow.files.length">
+              <span class="fa fa-check"></span> ¡Video {{$flow.files[0].file.name}} cargado con éxito!
+            </span>
+
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="pull-right">
+            <button type="submit" class="btn btn-danger btn-fill" ng-disabled="solicitudForm.$invalid">
+              <i class="fa fa-heartbeat"></i> Crear solicitud
+            </button>
+          </div>
+        </div>
       </form>
   </div>
 </div>

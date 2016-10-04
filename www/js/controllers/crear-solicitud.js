@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .controller('CrearSolicitudDonacionController', function($scope, CentrosDonacionService, PacientesService, TiposSolicitudesService, DireccionesService, SolicitudesService, GruposSanguineosService) {
+  .controller('CrearSolicitudDonacionController', function($scope, CentrosDonacionService, TiposSolicitudesService, DireccionesService, SolicitudesService, GruposSanguineosService) {
     //Obtengo los centros de donacion
     $scope.centrosDonacion = CentrosDonacionService.listadoCentros().query();
 
@@ -32,7 +32,7 @@ angular.module('donacion')
     $scope.solicitud = {
       paciente: undefined,
       gruposSanguineos:[],
-      imagenesSolicitud : {}
+      imagenes: {}
     };
 
     // Función para agregar o quitar grupos sanguineos dentro de los seleccionados
@@ -111,16 +111,8 @@ angular.module('donacion')
 
     // Opciones DatePickers ---->
 
-    $scope.crearSolicitud = function (video) {
-      PacientesService.crearPaciente($scope.solicitud).success(function (data, response) {
-        $scope.solicitud.paciente = data;
-
-        if ($scope.solicitud.video.files[0] != undefined) {
-          SolicitudesService.crearSolicitudDonacion($scope.solicitud, $scope.currentUser.usuario.id, video)
-        } else{
-          SolicitudesService.crearSolicitudDonacion($scope.solicitud, $scope.currentUser.usuario.id)
-        }
-      })
+    $scope.crearSolicitud = function () {
+      SolicitudesService.crearSolicitudDonacion($scope.solicitud, $scope.currentUser.usuario.id)
     }
 
   });

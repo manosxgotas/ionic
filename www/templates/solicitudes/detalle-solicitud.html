@@ -24,7 +24,7 @@
             <div class="content">
               <div class="row">
                 <h4>
-                  Se solicitan {{solicitud.donantesNecesarios}} dadores de sangre tipo:<span ng-repeat="grupo in solicitud.gruposSanguineos">&nbsp;{{grupo.grupoSanguineo.nombre}}</span>
+                  Se solicitan {{solicitud.donantesNecesarios}} dadores de sangre para {{solicitud.paciente.nombre}} {{solicitud.paciente.apellido}} tipo: <span ng-repeat="grupo in solicitud.gruposSanguineos">&nbsp;{{grupo.grupoSanguineo.nombre}}</span>
                 </h4>
               </div>
               <div class="row">
@@ -78,10 +78,24 @@
                   <hr class="hidden-lg hidden-md">
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapsePaciente">
+                    <h4>
+                      <span class="fa fa-user"></span>
+                      &nbsp;&nbsp;Paciente
+                      <b class="caret"></b>
+                    </h4>
+                  </a>
+                  <div class="collapse in" id="collapsePaciente">
+                    <ul style="margin-top: 5px">
+                      <li><b>Nombre:</b> {{solicitud.paciente.nombre}}</li>
+                      <li><b>Apellido:</b> {{solicitud.paciente.apellido}}</li>
+                      <li><b>Edad:</b> {{solicitud.paciente.edad}} años</li>
+                    </ul>
+                  </div>
                   <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapseHorarios">
                     <h4>
                       <span class="fa fa-clock-o"></span>
-                      &nbsp;&nbsp;Horarios de la solicitud
+                      &nbsp;&nbsp;Horarios de donación
                       <b class="caret"></b>
                     </h4>
                   </a>
@@ -97,7 +111,7 @@
                   </div>
                   <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapseUbicacion">
                     <h4>
-                      <span class="fa fa-map-marker" aria-hidden="true"></span>
+                      <span class="fa fa-hospital-o" aria-hidden="true"></span>
                       &nbsp;&nbsp;Lugar de donación
                       <b class="caret"></b>
                     </h4>
@@ -106,36 +120,35 @@
                   <div class="collapse in" id="collapseUbicacion">
                     <ul  style="margin-top: 5px" ng-show="solicitud.centroDonacion">
                       <li>
-                        {{solicitud.centroDonacion.nombre}}<br>
+                        {{solicitud.centroDonacion.nombre}} <a href="" class="fa fa-map-marker" ui-sref="dashboard.detalle-centro({centroID: solicitud.centroDonacion.id})"></a>
                       </li>
-
-                        {{solicitud.centroDonacion.lugarDonacion.direccion.localidad.provincia.nombre}}, {{solicitud.centroDonacion.lugarDonacion.direccion.localidad.nombre}}, {{solicitud.lugarDonacion.centroDonacion.direccion.calle}} {{solicitud.centroDonacion.lugarDonacion.direccion.numero}}
 
                     </ul>
                     <p ng-show="solicitud.centroDonacion == null">
                       No hay ubicaciones disponibles
                     </p>
                   </div>
-                  <a style="color: rgb(51, 51, 51)" href="" data-toggle="collapse" data-target="#collapseCategoria">
-                    <h4>
-                      <span class="fa fa-user"></span>
-                      &nbsp;&nbsp;Paciente
-                      <b class="caret"></b>
-                    </h4>
-                  </a>
-                  <div class="collapse in" id="collapseCategoria">
-                    <ul style="margin-top: 5px">
-                        <li>{{solicitud.paciente.nombre}}, {{solicitud.paciente.apellido}}</li>
-                    </ul>
-                  </div>
+
                 </div>
               </div>
-              <span class="clearfix"></span>
             </div>
           </div>
+
+          <div class="col-sm-12" ng-show="solicitud.historia != null">
+            <div class="header">
+              <h4 class="title">
+                <span class="fa fa-history"></span>&nbsp;&nbsp;Historia
+              </h4>
+            </div>
+            <div class="content">
+              <p>
+                {{solicitud.historia}}
+              </p>
+            </div>
+          </div>
+          <span class="clearfix"></span>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>

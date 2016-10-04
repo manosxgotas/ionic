@@ -2,7 +2,6 @@ angular.module('donacion')
   .controller('NavDashboardController', function ($http, $scope, $rootScope, $uibModal, ProfileService, DonacionesService, localStorageService) {
 
     $scope.currentUser = localStorageService.get('currentUser');
-    console.log($scope.currentUser);
 
     DonacionesService.getDiasProxDonacion().get({}, function (data) {
         $rootScope.diasProxDonacion = data.dias;
@@ -10,7 +9,7 @@ angular.module('donacion')
 
     $scope.loading = false;
 
-    $scope.$on('cfpLoadingBar:loading', function () {
+    $scope.$on('cfpLoadingBar:started', function () {
       $scope.loading = true;
     });
 

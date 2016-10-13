@@ -14,7 +14,10 @@
   <div class="modal-body">
     <div class="row" ng-hide="loading">
       <div class="col-sm-6" style="line-height: 200px; margin-top: 10px; margin-bottom: 10px">
-        <img class="img-responsive img-rounded center-block" style="max-width: 100%;" ng-src="{{ donacion.foto ? donacion.foto : '../../img/donacion-defecto.png'}}">
+        <span class="loading">
+          <i style="width: 100%" class="fa fix fa-spin fa-refresh fa-3x fa-fw"></i>
+        </span>
+        <img class="img-responsive img-rounded center-block" img-preload style="max-width: 100%;" ng-src="{{ donacion.foto ? donacion.foto : '../../img/donacion-defecto.png'}}">
       </div>
       <hr class="visible-xs" style="border-color: #FB404B">
       <div class="col-sm-6">

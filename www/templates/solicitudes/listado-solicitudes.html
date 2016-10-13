@@ -69,7 +69,10 @@
                   </div>
                   <div class="row">
                     <div class="col-sm-12">
-                      <img style="padding: 10px 10px; max-height: 300px" ng-src="{{portada[solicitud.id] ? portada[solicitud.id].imagen : '../../img/solicitud-defecto.png'}}" class="img-responsive center-block">
+                      <span class="loading">
+                        <i style="width: 100%" class="fa fix fa-spin fa-refresh fa-3x fa-fw"></i>
+                      </span>
+                      <img style="padding: 10px 10px; max-height: 300px" ng-src="{{portada[solicitud.id] ? portada[solicitud.id].imagen : '../../img/solicitud-defecto.png'}}" img-preload class="img-responsive center-block">
                     </div>
                   </div>
                   <hr>

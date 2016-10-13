@@ -7,16 +7,6 @@ angular.module('donacion')
         $rootScope.diasProxDonacion = data.dias;
     });
 
-    $scope.loading = false;
-
-    $scope.$on('cfpLoadingBar:started', function () {
-      $scope.loading = true;
-    });
-
-    $scope.$on('cfpLoadingBar:completed', function () {
-      $scope.loading = false;
-    });
-
     $scope.logoff = function () {
       $uibModal.open({
         animation: true,

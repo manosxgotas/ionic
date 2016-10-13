@@ -204,7 +204,7 @@
 
           <div class="form-group">
             <label class="col-sm-3 control-label">Grupos sanguineos necesarios</label>
-            <div class="col-sm-5">
+            <div class="col-sm-7">
               <a ng-repeat="grupo in gruposSanguineos | orderBy:'nombre'"  ng-click="addGrupoSanguineo(grupo)" popover-trigger="mouseenter" popover-placement="bottom"
                  uib-popover="{{checkPopover[grupo.id]}}" ng-class="checkClass[grupo.id]" style="margin: 5px; ">
                 <span class="" aria-hidden="true"></span>

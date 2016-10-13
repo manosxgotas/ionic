@@ -9,5 +9,6 @@
 .card label {
   text-transform: none !important;
   color: #333 !important;
-  font-weight : 700 !important;
+  font-weight : bold !important;
+  font-size: 14px !important;
 }

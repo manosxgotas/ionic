@@ -14,7 +14,13 @@ angular.module('donacion')
 
     function getLocalidades(idProvincia) {
 
-      return $resource(localidadesURL + idProvincia)
+      return $resource(localidadesURL + idProvincia, {}, {
+        query: {
+          method: 'GET',
+          isArray: true,
+          ignoreLoadingBar: true
+        }
+      })
 
     }
 

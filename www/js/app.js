@@ -35,6 +35,16 @@ angular.module('donacion', [
       html: true
     });
 
+    $rootScope.loading = false;
+
+    $rootScope.$on('cfpLoadingBar:started', function () {
+      $rootScope.loading = true;
+    });
+
+    $rootScope.$on('cfpLoadingBar:completed', function () {
+      $rootScope.loading = false;
+    });
+
 
     $rootScope.$on('event:social-sign-in-success', function(event, userDetails){
       AuthService.loginSocial(userDetails.token, userDetails.provider)

@@ -261,6 +261,28 @@ angular.module('donacion', [
         }
       })
 
+      .state('home.listado-solicitudes', {
+        cache: false,
+        url: "listado-solicitudes",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/solicitudes.html",
+            controller: "ListadoSolicitudesController",
+          }
+        }
+      })
+
+      .state('home.detalle-solicitud', {
+        cache: false,
+        url: "solicitud/:solicitudID",
+        views: {
+          "homeContent": {
+            templateUrl: "templates/home/detalle-solicitud.html",
+            controller: "DetalleSolicitudController",
+          }
+        }
+      })
+
       .state('dashboard', {
         cache: false,
         url: "/dashboard",

@@ -28,10 +28,6 @@ angular.module('donacion')
           }
         }
 
-        var data =  CentrosDonacionService.infoCentro().query({id:solicitud.centroDonacion},function(){
-          $scope.solicitudes[clave].centroDonacion = data
-        });
-
         angular.forEach(solicitud.imagenesSolicitud, function (imagen, key) {
 
           if (imagen.portada == true && $scope.portada[solicitud.id] == undefined) {

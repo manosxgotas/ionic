@@ -35,6 +35,28 @@ angular.module('donacion')
       $scope.donacion = data;
       $scope.donacion.fecha = data.fechaHora;
       $scope.donacion.hora = data.fechaHora;
+      console.log(data.estado)
+
+      switch (data.estado) {
+        case "1":
+          $('#sentMuyMal').addClass('checked');
+          break;
+        case "2":
+          $('#sentMal').addClass('checked');
+          break;
+        case "3":
+          $('#sentDescompuesto').addClass('checked');
+          break;
+        case "4":
+          $('#sentBien').addClass('checked');
+          break;
+        case "5":
+          $('#sentMuyBien').addClass('checked');
+          break;
+        case "6":
+          $('#sentExcelente').addClass('checked');
+          break;
+      }
 
       // Si la donación fue realizada en un centro de donación.
       if (data.lugarDonacion.lugarCentro != null) {
@@ -48,7 +70,7 @@ angular.module('donacion')
 
         $scope.donacion.lugar = 2;
         $('#opcionEvento').addClass('checked');
-        $scope.donacion.evento = data.lugarDonacion.lugarEventoDonacion.id;
+        $scope.donacion.evento = data.lugarDonacion.lugarEventoDonacion.evento.id;
 
       // Si la donación fue realizada en otro lugar.
       } else {

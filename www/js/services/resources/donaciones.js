@@ -162,10 +162,9 @@ angular.module('donacion')
 
       $http({
         url: verificarImagenUrl + idDonacion,
-        method: "POST",
+        method: "PUT",
         data: {
-          imagen: imagen,
-          donacion: idDonacion
+          imagen_verificacion: imagen
         },
         headers: {'Content-Type': undefined},
 

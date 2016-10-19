@@ -18,7 +18,8 @@ angular.module('donacion', [
   'ngVideo',
   'uiGmapgoogle-maps',
   'socialLogin',
-  'ngNotify'
+  'ngNotify',
+  '720kb.socialshare'
   ])
 
   .run(function (AuthService, ngNotify, $rootScope, $state, LoginModal, LogoffService) {
@@ -67,7 +68,7 @@ angular.module('donacion', [
     })
   })
 
-  .config(function($stateProvider, $urlRouterProvider, socialProvider, $httpProvider, $resourceProvider, cfpLoadingBarProvider, uiGmapGoogleMapApiProvider) {
+  .config(function($stateProvider, $urlRouterProvider, socialProvider, socialshareConfProvider, $httpProvider, $resourceProvider, cfpLoadingBarProvider, uiGmapGoogleMapApiProvider) {
 
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -90,6 +91,19 @@ angular.module('donacion', [
     });
 
     socialProvider.setFbKey({appId: "299809130392810", apiVersion: "v2.7"});
+
+    socialshareConfProvider.configure([
+      {
+        'provider': 'facebook',
+        'conf': {
+          'url': 'http://manosxgotas.com.ar',
+          'type': 'feed',
+          'via': '299809130392810',
+          'popupHeight': 1300,
+          'popupWidth' : 1000
+        }
+      }
+    ]);
 
     $stateProvider
 

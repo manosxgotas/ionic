@@ -37,6 +37,7 @@ angular.module('donacion')
           fechaHora: $filter('date')(donacion.fecha, 'dd/MM/yyyy') + ' ' + $filter('date')(donacion.hora, 'HH:mm'),
           centroDonacion: donacion.centroDonacion,
           evento: donacion.evento,
+          estado: donacion.estado,
           direccion: donacion.direccion,
           descripcion: donacion.descripcion,
           foto: foto
@@ -84,6 +85,7 @@ angular.module('donacion')
           centroDonacion: donacion.centroDonacion,
           evento: donacion.evento,
           direccion: donacion.direccion,
+          estado: donacion.estado,
           descripcion: donacion.descripcion,
           foto: foto
         },

@@ -52,6 +52,14 @@
             &nbsp;&nbsp;{{donacion.lugarDonacion.direccion.localidad.provincia.nombre}}, {{donacion.lugarDonacion.direccion.localidad.nombre}}, {{donacion.lugarDonacion.direccion.calle}} {{donacion.lugarDonacion.direccion.numero}}
           </h5>
         </div>
+        <div style="margin-top: 20px" ng-show="sentimiento">
+          <h5>
+            <span class="fa fa-comment fa-lg" style="color: #FB404B"></span>
+            &nbsp;&nbsp;Me sentí {{sentimiento.nombre}}
+            <br>
+            &nbsp;&nbsp;<img ng-src="{{sentimiento.img}}" class="center-block img-responsive">
+          </h5>
+        </div>
         <div style="margin-top: 20px" ng-show="donacion.descripcion">
           <h5>
             <span class="fa fa-edit fa-lg" style="color: #FB404B"></span>
@@ -65,7 +73,13 @@
     <button class="btn btn-default btn-fill" type="button" ng-click="cerrarModal()">
       <span class="fa fa-times"></span>&nbsp;Cerrar
     </button>
-    <button class="btn btn-fill" style="background-color: #3B5998; border-color: #3B5998" type="button">
+
+    <button class="btn btn-fill" style="background-color: #3B5998; border-color: #3B5998" href=""
+            socialshare
+            socialshare-provider="facebook"
+            socialshare-text="¡Doné sangre en Manos por gotas! SUMATE Y SALVEMOS VIDAS"
+            socialshare-description="{{donacion.descripcion}}"
+            socialshare-media="https://rawgit.com/Renzo04/ionic/master/www/img/donacion-defecto.png">
       <span class="fa fa-facebook"></span>&nbsp;Compartir
     </button>
   </div>

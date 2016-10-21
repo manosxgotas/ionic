@@ -5,6 +5,7 @@ angular.module('donacion')
     var crearUrl = global.getApiUrl() + '/solicitudes/crear/';
     var listadoUrl = global.getApiUrl() + '/solicitudes/listado-solicitudes/';
     var infoUrl = global.getApiUrl() + '/solicitudes/:id';
+    var solicitudesDonanteUrl = global.getApiUrl() + 'listado-solicitudes-donante/:donante'
 
     function crearSolicitudDonacion(data) {
       return $http({
@@ -44,6 +45,10 @@ angular.module('donacion')
           }
         }
       );
+    }
+
+    function  () {
+
     }
 
     return {
@@ -100,6 +105,9 @@ angular.module('donacion')
       },
       infoSolicitud: function () {
         return infoSolicitud();
+      },
+      solicitudesDonante: function(){
+        return solicitudesDonante();
       }
     }
   });

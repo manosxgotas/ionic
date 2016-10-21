@@ -12,7 +12,6 @@ angular.module('donacion', [
   'ngTouch',
   'ngAnimate',
   'ui.bootstrap',
-  'file-model',
   'base64',
   'flow',
   'ngVideo',
@@ -315,7 +314,16 @@ angular.module('donacion', [
           }
         }
       })
-
+      .state('dashboard.solicitudes-donante', {
+        cache: false,
+        url: "/perfil/solicitudes",
+        views: {
+          "dashboardContent": {
+            templateUrl: "templates/donantes/solicitudes.html",
+            controller: "SolicitudesDonanteController"
+          }
+        }
+      })
       .state('dashboard.libreta', {
         cache: false,
         url: "/libreta",

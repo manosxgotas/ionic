@@ -319,11 +319,12 @@ angular.module('donacion', [
         url: "/perfil/solicitudes",
         views: {
           "dashboardContent": {
-            templateUrl: "templates/donantes/solicitudes.html",
+            templateUrl: "templates/donantes/solicitudes-donante.html",
             controller: "SolicitudesDonanteController"
           }
         }
       })
+
       .state('dashboard.libreta', {
         cache: false,
         url: "/libreta",

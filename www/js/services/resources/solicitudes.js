@@ -1,10 +1,12 @@
 angular.module('donacion')
 
-  .factory('SolicitudesService', function (global, $http, $resource, $state, $filter, ngNotify) {
+  .factory('SolicitudesService', function (global, $http, $resource, $state, $filter, ngNotify, CurrentUserService) {
 
     var crearUrl = global.getApiUrl() + '/solicitudes/crear/';
     var listadoUrl = global.getApiUrl() + '/solicitudes/listado-solicitudes/';
     var infoUrl = global.getApiUrl() + '/solicitudes/:id';
+    var solicitudesDonanteUrl = global.getApiUrl() + '/solicitudes/listado-solicitudes-donante/:donante';
+    var eliminarUrl = global.getApiUrl() + '/solicitudes/eliminar-solicitud/';
 
     function crearSolicitudDonacion(data) {
       return $http({
@@ -44,6 +46,34 @@ angular.module('donacion')
           }
         }
       );
+    }
+
+    function solicitudesDonante() {
+      return $resource(
+          solicitudesDonanteUrl,
+          {id: '@_donante'},
+          {
+            query: {
+              method: 'GET',
+              isArray: true
+            }
+          }
+      );
+    }
+    function eliminarSolicitud(idSolicitud) {
+      $http({
+        url: eliminarUrl + idSolicitud,
+        method: 'DELETE'
+      }).success(function () {
+        ngNotify.set(
+            '<span class="fa fa-trash"></span>&nbsp; ¡Se ha eliminado correctamente tu solicitud!',
+            'info'
+        );
+        CurrentUserService.setCurrentUser();
+      }).error(function(response, data) {
+        console.log(response);
+        console.log(data);
+      })
     }
 
     return {
@@ -100,6 +130,12 @@ angular.module('donacion')
       },
       infoSolicitud: function () {
         return infoSolicitud();
+      },
+      solicitudesDonante: function(){
+        return solicitudesDonante();
+      },
+      eliminarSolicitud: function (idSolicitud) {
+        return eliminarSolicitud(idSolicitud);
       }
     }
   });

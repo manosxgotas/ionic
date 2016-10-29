@@ -1,0 +1,22 @@
+<div class="modal-header" style="background-color: #FB404B; color: white">
+  <div style="display: inline-block">
+    <h3 class="modal-title">
+      <span class="fa fa-trash fa-lg" aria-hidden="true"></span>
+      &nbsp;&nbsp; Eliminar solicitud
+    </h3>
+  </div>
+  <div class="pull-right" style="display: inline-block">
+    <a href="" ng-click="cerrarModal()" style="color: white">
+      <i class="fa fa-times fa-lg"></i>
+    </a>
+  </div>
+</div>
+
+<div class="modal-body">
+    <h4 class="text-center">¿Estás seguro de eliminar esta solicitud?</h4>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger btn-fill" type="button" ng-click="eliminar()">
+    <span class="fa fa-trash"></span>Eliminar
+  </button>
+</div>

@@ -13,10 +13,14 @@ angular.module('donacion')
         longitude: 0
       },
       options: {
+        draggable: false,
+        zoomControl: false,
         streetViewControl: false,
+        scrollwheel: false,
         mapTypeControl: false,
         keyboardShortcuts: false,
-        clickableIcons: false
+        clickableIcons: false,
+        disableDoubleClickZoom: true
       }
     };
 

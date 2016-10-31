@@ -1,63 +1,62 @@
 <div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title">
-                            <span class="fa fa-heartbeat fa-lg"></span>
-                            &nbsp;&nbsp;Mis solicitudes
-                            <div class="pull-right">
-                                <a class="btn btn-fill btn-danger btn-sm" ui-sref="dashboard.crear-solicitud">
-                                    <span class="fa fa-tint" aria-hidden="true"></span>
-                                    <span class='hidden-xs'>Nueva solicitud</span>
-                                </a>
-                            </div>
-                            <span class="clearfix"></span>
-                        </h4>
-                        <p class="category">Aquí puedes observar todas las solicitudes que has creado.</p>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">
+              <span class="fa fa-heartbeat fa-lg"></span>
+              &nbsp;&nbsp;Mis solicitudes
+              <div class="pull-right">
+                <a class="btn btn-fill btn-danger btn-sm" ui-sref="dashboard.crear-solicitud">
+                  <span class="fa fa-tint" aria-hidden="true"></span>
+                  <span class='hidden-xs'>Nueva solicitud</span>
+                </a>
+              </div>
+              <span class="clearfix"></span>
+            </h4>
+            <p class="category">Aquí puedes observar todas las solicitudes que has creado.</p>
+          </div>
 
-                    </div>
+          <div class="content" ng-show="solicitudes.length == 0">
+              Todavía no has registrado ninguna solicitud
+          </div>
 
-                    <div class="content" ng-show="solicitudes.length == 0">
-                        Todavía no has registrado ninguna solicitud
-                    </div>
+          <div class="content table-responsive table-full-width" ng-show="solicitudes.length > 0">
+            <table class="table table-hover table-striped">
+              <thead>
+              <tr>
+                <th>Fecha de publicación</th>
+                <th>Titulo</th>
+                <th>Centro de donación</th>
+                <th>Paciente</th>
+                <th>Acciones</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="solicitud in solicitudes">
+                <td>{{solicitud.fechaPublicacion | date:'dd/MM/yyyy'}}</td>
+                <td>{{solicitud.titulo}}</td>
+                <td>{{solicitud.centroDonacion.nombre}}</td>
+                <td>{{solicitud.paciente.nombre}} {{solicitud.paciente.apellido}}</td>
+                <td>
+                  <div class="btn-group btn-group-sm" role="group">
+                    <button  popover-trigger="mouseenter" popover-placement="top" uib-popover="Visualizar" type="button" ui-sref="dashboard.detalle-solicitud({solicitudID: solicitud.id})" class="btn btn-default">
+                      <span class="fa fa-eye"></span>Visualizar
+                    </button>
+                    <button style="margin-left: 3px;" popover-trigger="mouseenter" popover-placement="top" ng-click="modalEliminar(solicitud.id)" uib-popover="Eliminar" type="button" class="btn btn-fill btn-danger">
+                      <span class="fa fa-trash"></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
 
-                    <div class="content table-responsive table-full-width" ng-show="solicitudes.length > 0">
-                        <table class="table table-hover table-striped">
-                            <thead>
-                            <tr>
-                                <th>Fecha de publicación</th>
-                                <th>Titulo</th>
-                                <th>Centro de donación</th>
-                                <th>Paciente</th>
-                                <th>Acciones</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="solicitud in solicitudes">
-                                <td>{{solicitud.fechaPublicacion | date:'dd/MM/yyyy'}}</td>
-                                <td>{{solicitud.titulo}}</td>
-                                <td>{{solicitud.centroDonacion.nombre}}</td>
-                                <td>{{solicitud.paciente.nombre}} {{solicitud.paciente.apellido}}</td>
-                                <td>
-                                    <div class="btn-group btn-group-sm" role="group">
-                                        <button  popover-trigger="mouseenter" popover-placement="top" uib-popover="Visualizar" type="button" ui-sref="dashboard.detalle-solicitud({solicitudID: solicitud.id})" class="btn btn-default">
-                                            <span class="fa fa-eye"></span>Visualizar
-                                        </button>
-                                        <button style="margin-left: 3px;" popover-trigger="mouseenter" popover-placement="top" ng-click="modalEliminar(solicitud.id)" uib-popover="Eliminar" type="button" class="btn btn-fill btn-danger">
-                                            <span class="fa fa-trash"></span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-            </div>
-
+          </div>
         </div>
+      </div>
+
     </div>
+  </div>
 </div>

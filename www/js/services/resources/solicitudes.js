@@ -5,8 +5,8 @@ angular.module('donacion')
     var crearUrl = global.getApiUrl() + '/solicitudes/crear/';
     var listadoUrl = global.getApiUrl() + '/solicitudes/listado-solicitudes/';
     var infoUrl = global.getApiUrl() + '/solicitudes/:id';
-    var solicitudesDonanteUrl = global.getApiUrl() + '/solicitudes/listado-solicitudes-donante/:donante';
-    var eliminarUrl = global.getApiUrl() + '/solicitudes/eliminar-solicitud/';
+    var solicitudesDonanteUrl = global.getApiUrl() + '/solicitudes/listado-solicitudes-donante/';
+    var eliminarUrl = global.getApiUrl() + '/solicitudes/eliminar/';
 
     function crearSolicitudDonacion(data) {
       return $http({
@@ -96,6 +96,7 @@ angular.module('donacion')
             nacimiento: $filter('date')(solicitud.paciente.nacimiento, 'yyyy-MM-dd'),
             telefono: solicitud.paciente.telefono,
             email: solicitud.paciente.email,
+            genero: solicitud.paciente.genero,
             direccion: {
               numero: solicitud.paciente.direccion.numero,
               calle: solicitud.paciente.direccion.calle,

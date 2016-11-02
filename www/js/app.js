@@ -58,7 +58,8 @@ angular.module('donacion', [
           .then(function () {
             return $state.go(toState.name);
           })
-          .catch(function () {
+          .catch(function (error) {
+            ngNotify.set("<span class='fa fa-key'></span>&nbsp; " + error, 'warn');
             LogoffService.logoff().then(function () {
               LoginModal();
             });

@@ -6,3 +6,7 @@
 .carousel-evento .carousel-inner {
   line-height: 320px;
 }
+
+.progress-bar-danger {
+  background-color: #FB404B !important;
+}

@@ -3,15 +3,14 @@ angular.module('donacion')
     function ($http,
               $scope,
               $uibModal,
-              localStorageService,
               ProfileService,
               DireccionesService,
               GruposSanguineosService,
               TiposDocumentosService,
-              NacionalidadesService) {
+              NacionalidadesService,
+              CurrentUserService) {
 
-
-        // Obtengo los tipos de documentos de la API
+      // Obtengo los tipos de documentos de la API
     $scope.tiposDocumentos = TiposDocumentosService.query();
 
     // Obtengo las nacionalidades de la API
@@ -41,7 +40,7 @@ angular.module('donacion')
     // DatePicker fecha de nacimiento ---->
 
     // <---- Obtengo los datos de perfil del donante desde la API
-    $scope.datosDonante = localStorageService.get('currentUser');
+    $scope.datosDonante = CurrentUserService.getCurrentUser().get();
 
     if ($scope.datosDonante.nacimiento != null) {
       var from = $scope.datosDonante.nacimiento.split("-");

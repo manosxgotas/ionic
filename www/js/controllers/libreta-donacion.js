@@ -1,6 +1,8 @@
 angular.module('donacion')
-  .controller('LibretaController', function ($http, $scope, $uibModal, ProfileService) {
-    
+  .controller('LibretaController', function ($http, $scope, $uibModal, DonacionesService) {
+
+    $scope.registroDonacion = DonacionesService.registroDonaciones().query();
+
     $scope.modalEliminar = function (id) {
       $scope.loading = false;
 

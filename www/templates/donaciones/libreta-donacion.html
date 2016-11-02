@@ -19,11 +19,11 @@
 
           </div>
 
-          <div class="content" ng-show="currentUser.registro.donaciones.length == 0">
+          <div class="content" ng-show="registroDonacion.donaciones.length == 0">
             Todavía no has registrado ninguna donación
           </div>
 
-          <div class="content table-responsive table-full-width" ng-show="currentUser.registro.donaciones.length > 0">
+          <div class="content table-responsive table-full-width" ng-show="registroDonacion.donaciones.length > 0">
             <table class="table table-hover table-striped">
               <thead>
                 <tr>
@@ -36,13 +36,13 @@
                 </tr>
               </thead>
               <tbody>
-              <tr ng-repeat="donacion in currentUser.registro.donaciones">
+              <tr ng-repeat="donacion in registroDonacion.donaciones">
                 <td>{{donacion.fechaHora | date:'dd/MM/yyyy'}}</td>
                 <td>{{donacion.fechaHora | date:'HH:mm'}}hs.</td>
-                <td ng-show="donacion.lugarDonacion.lugarCentro != null">Centro de donación</td>
+                <td ng-show="donacion.lugarDonacion.lugarCentro != null && donacion.lugarDonacion.lugarEventoDonacion == null">Centro de donación</td>
                 <td ng-show="donacion.lugarDonacion.lugarEventoDonacion != null">Evento</td>
                 <td ng-show="donacion.lugarDonacion.lugarCentro == null && donacion.lugarDonacion.lugarEventoDonacion == null">Otro</td>
-                <td ng-show="donacion.lugarDonacion.lugarCentro != null">{{donacion.lugarDonacion.lugarCentro.nombre}}</td>
+                <td ng-show="donacion.lugarDonacion.lugarCentro != null && donacion.lugarDonacion.lugarEventoDonacion == null">{{donacion.lugarDonacion.lugarCentro.nombre}}</td>
                 <td ng-show="donacion.lugarDonacion.lugarEventoDonacion != null">{{donacion.lugarDonacion.lugarEventoDonacion.evento.nombre}}</td>
                 <td ng-show="donacion.lugarDonacion.lugarCentro == null && donacion.lugarDonacion.lugarEventoDonacion == null">{{donacion.lugarDonacion.direccion.localidad.provincia.nombre}}, {{donacion.lugarDonacion.direccion.localidad.nombre}}, {{donacion.lugarDonacion.direccion.calle}} {{donacion.lugarDonacion.direccion.numero}}</td>
                 <td>

@@ -96,3 +96,52 @@
   </div>
   </div>
 </div>
+
+<div class='col-md-6'>
+  <div class="card card-user">
+    <div class="header" style='margin-bottom:15px;' >
+      <h4 class='title'>
+        <span class='fa fa-line-chart fa-lg'></span>
+        &nbsp;&nbsp;&nbsp;Estado de tus donaciones
+      </h4>
+    </div>
+
+    <div class="content">
+      <h5 class="title">
+        <span class='fa fa-heart-o fa-lg'></span>
+        &nbsp;&nbsp;&nbsp;Donaciones registradas
+      </h5>
+      <br>
+      <div class="col-sm-12">
+        <uib-progressbar max="25" value="currentUser.cantidad_donaciones" type="danger"><i>{{currentUser.cantidad_donaciones}}/25</i></uib-progressbar>
+      </div>
+      <h5 class="title">
+        <span class='fa fa-heart fa-lg'></span>
+        &nbsp;&nbsp;&nbsp;Donaciones verificadas
+      </h5>
+      <br>
+      <div class="col-sm-12">
+        <uib-progressbar class="progress-striped active" max="25" value="currentUser.cantidad_donaciones_verificadas" type="danger"><i>{{currentUser.cantidad_donaciones_verificadas}}/25</i></uib-progressbar>
+      </div>
+      <h5 class="title">
+        <span class='fa fa-clock-o fa-lg'></span>
+        &nbsp;&nbsp;&nbsp;Donaciones Pendientes
+      </h5>
+      <br>
+      <div class="col-sm-12">
+        <p ng-show="currentUser.cantidad_donaciones_pendientes > 0">
+          Actualmente <b>estamos evaluando {{currentUser.cantidad_donaciones_pendientes}} de tus donaciones</b> para ser verificadas por nuestros administradores.
+        </p>
+        <p ng-hide="currentUser.cantidad_donaciones_pendientes > 0">
+          Actualmente <b>no tienes donaciones pendientes</b> para ser verificadas por nuestros administradores.
+        </p>
+      </div>
+      <div class="col-sm-12 text-center" style="margin-top: 5px">
+        <a ui-sref="home.quienes-somos" class="btn btn-lg btn-danger">
+          ¿Por qué 25 donaciones?
+        </a>
+      </div>
+      <span class="clearfix"></span>
+    </div>
+  </div>
+</div>

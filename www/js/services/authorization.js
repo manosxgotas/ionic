@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('AuthService', function (global, $http, ngNotify, $resource, $q, $rootScope, $state, LogoffService, localStorageService, CurrentUserService) {
+  .factory('AuthService', function (global, $http, ngNotify, $resource, $q, $rootScope, $state, LogoffService, localStorageService) {
 
     function loginSocial(token, provider) {
       var url = global.getApiUrl() + "/cuentas/social/" + provider + "/";
@@ -18,9 +18,8 @@ angular.module('donacion')
           'info'
         );
         setToken(authdata);
-        CurrentUserService.setCurrentUser().then(function () {
-          $state.transitionTo('dashboard.perfil');
-        });
+        $state.transitionTo('dashboard.perfil');
+
       }).error(function (data) {
         console.log(data);
       });
@@ -133,9 +132,7 @@ angular.module('donacion')
         );
         var authdata = response.token;
         setToken(authdata);
-        CurrentUserService.setCurrentUser().then(function () {
-          $state.transitionTo('dashboard.perfil');
-        });
+        $state.transitionTo('dashboard.perfil');
 
       }).error(function (data) {
         ngNotify.set("<span class='fa fa-key'></span>&nbsp; Las credenciales proporcionadas no son correctas", 'warn');
@@ -151,7 +148,6 @@ angular.module('donacion')
       var deferred = $q.defer();
 
       var token = localStorageService.get('Token');
-      var currentUser = localStorageService.get('currentUser');
 
       if (!token) {
 
@@ -170,13 +166,7 @@ angular.module('donacion')
           }
 
         }).success(function () {
-          if (!currentUser) {
-            CurrentUserService.setCurrentUser().then(function () {
-              deferred.resolve();
-            });
-          } else {
-            deferred.resolve();
-          }
+          deferred.resolve();
 
         }).error(function () {
           deferred.reject("El token de autentificación es inválido")

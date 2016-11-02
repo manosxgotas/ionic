@@ -1,12 +1,13 @@
 angular.module('donacion')
 
-  .factory('SolicitudesService', function (global, $http, $resource, $state, $filter, ngNotify, CurrentUserService) {
+  .factory('SolicitudesService', function (global, $http, $resource, $state, $filter, ngNotify) {
 
     var crearUrl = global.getApiUrl() + '/solicitudes/crear/';
     var listadoUrl = global.getApiUrl() + '/solicitudes/listado-solicitudes/';
     var infoUrl = global.getApiUrl() + '/solicitudes/:id';
     var solicitudesDonanteUrl = global.getApiUrl() + '/solicitudes/listado-solicitudes-donante/';
     var eliminarUrl = global.getApiUrl() + '/solicitudes/eliminar/';
+    var solicitudesCompatiblesUrl = global.getApiUrl() + '/solicitudes/solicitudes-compatibles/';
 
     function crearSolicitudDonacion(data) {
       return $http({
@@ -48,6 +49,19 @@ angular.module('donacion')
       );
     }
 
+    function obtenerCantidadSolicitudesCompatibles() {
+      return $resource(
+        solicitudesCompatiblesUrl,
+        {},
+        {
+          query: {
+            method: 'GET',
+            isArray: false
+          }
+        }
+      );
+    }
+
     function solicitudesDonante() {
       return $resource(
           solicitudesDonanteUrl,
@@ -69,7 +83,6 @@ angular.module('donacion')
             '<span class="fa fa-trash"></span>&nbsp; ¡Se ha eliminado correctamente tu solicitud!',
             'info'
         );
-        CurrentUserService.setCurrentUser();
       }).error(function(response, data) {
         console.log(response);
         console.log(data);
@@ -79,6 +92,9 @@ angular.module('donacion')
     return {
       crearSolicitudDonacion: function (solicitud) {
         var fd = new FormData();
+        if (solicitud.historia == undefined) {
+          solicitud.historia = null;
+        }
 
         var data = {
           titulo: solicitud.titulo,
@@ -97,6 +113,7 @@ angular.module('donacion')
             telefono: solicitud.paciente.telefono,
             email: solicitud.paciente.email,
             genero: solicitud.paciente.genero,
+            grupoSanguineo: solicitud.paciente.grupoSanguineo,
             direccion: {
               numero: solicitud.paciente.direccion.numero,
               calle: solicitud.paciente.direccion.calle,
@@ -123,6 +140,10 @@ angular.module('donacion')
         }
         crearSolicitudDonacion(fd);
         return
+      },
+
+      obtenerCantidadSolicitudesCompatibles: function () {
+        return obtenerCantidadSolicitudesCompatibles()
       },
 
       listadoSolicitudes: function () {

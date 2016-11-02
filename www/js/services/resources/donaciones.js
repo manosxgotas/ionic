@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('DonacionesService', function (global, $http, $resource, $state, $filter, ngNotify, localStorageService, CurrentUserService) {
+  .factory('DonacionesService', function (global, $http, $resource, $state, $filter, ngNotify) {
 
     var infoUrl = global.getApiUrl() + '/donaciones/:id';
 
@@ -14,6 +14,10 @@ angular.module('donacion')
 
     var verificarImagenUrl = global.getApiUrl() + '/donaciones/verificar-imagen/';
 
+    var registroDonacionesUrl = global.getApiUrl() + '/donaciones/registro-donaciones/';
+
+    var proxDonacionUrl = global.getApiUrl() + '/donaciones/proxima-donacion/';
+
 
     function infoDonacion() {
       return $resource(
@@ -23,6 +27,19 @@ angular.module('donacion')
           query: {
             method: 'GET',
               isArray: false
+          }
+        }
+      );
+    }
+
+    function registroDonaciones() {
+      return $resource(
+        registroDonacionesUrl,
+        {},
+        {
+          query: {
+            method: 'GET',
+            isArray: false
           }
         }
       );
@@ -64,7 +81,6 @@ angular.module('donacion')
           '<span class="fa fa-tint"></span>&nbsp; ¡Tu donación se ha registrado exitosamente!',
           'info'
         );
-        CurrentUserService.setCurrentUser();
         $state.transitionTo('dashboard.libreta');
       }).error(function (response) {
         console.log(response);
@@ -107,7 +123,6 @@ angular.module('donacion')
         }
       }).success(function () {
         $state.transitionTo('dashboard.libreta');
-        CurrentUserService.setCurrentUser()
         ngNotify.set(
           '<span class="fa fa-tint"></span>&nbsp; ¡Se ha actualizado con éxito la información de tu donación!',
           'info'
@@ -128,7 +143,6 @@ angular.module('donacion')
           '<span class="fa fa-trash"></span>&nbsp; ¡Se ha eliminado correctamente tu donación!',
           'info'
         );
-        CurrentUserService.setCurrentUser();
       }).error(function(response, data) {
         console.log(response);
         console.log(data);
@@ -149,7 +163,6 @@ angular.module('donacion')
           '<span class="fa fa-key"></span>&nbsp; ' + response.mensaje,
           'info'
         );
-        CurrentUserService.setCurrentUser();
       }).error(function (response) {
         ngNotify.set(
           '<span class="fa fa-warning"></span>&nbsp; ' + response.mensaje,
@@ -184,7 +197,6 @@ angular.module('donacion')
           '<span class="fa fa-clock-o"></span>&nbsp; ¡La imágen de verificación ha sido registrada correctamente! Deberás esperar a que un administrador la evalúe.',
           'info'
         );
-        CurrentUserService.setCurrentUser();
         }).error(function (response, data) {
         ngNotify.set(
           '<span class="fa fa-warning"></span>&nbsp; Ha ocurrido un error al intentar procesar tu imágen, inténtalo de nuevo.',
@@ -194,9 +206,6 @@ angular.module('donacion')
     }
 
     function getDiasProxDonacion() {
-      var currentUser = localStorageService.get('currentUser');
-      var userid = currentUser.usuario.id;
-      var proxDonacionUrl = global.getApiUrl() + '/donaciones/proxima-donacion/' + userid;
 
       return $resource(
         proxDonacionUrl,
@@ -214,6 +223,10 @@ angular.module('donacion')
 
       infoDonacion: function () {
         return infoDonacion();
+      },
+
+      registroDonaciones : function () {
+        return registroDonaciones();
       },
 
       registrarDonacion: function () {

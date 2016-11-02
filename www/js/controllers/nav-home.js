@@ -1,7 +1,5 @@
 angular.module('donacion')
-  .controller('NavHomeController', function ($scope, LoginModal, LogoffService, localStorageService, $uibModal) {
-
-    $scope.currentUser = localStorageService.get('currentUser');
+  .controller('NavHomeController', function ($scope, LoginModal, LogoffService, $uibModal) {
 
     $scope.logoff = function () {
       $uibModal.open({

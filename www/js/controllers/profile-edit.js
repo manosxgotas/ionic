@@ -40,12 +40,15 @@ angular.module('donacion')
     // DatePicker fecha de nacimiento ---->
 
     // <---- Obtengo los datos de perfil del donante desde la API
-    $scope.datosDonante = CurrentUserService.getCurrentUser().get();
+    $scope.datosDonante = CurrentUserService.getCurrentUser().get({}, function () {
+      console.log($scope.datosDonante.nacimiento);
 
-    if ($scope.datosDonante.nacimiento != null) {
-      var from = $scope.datosDonante.nacimiento.split("-");
-      $scope.datosDonante.nacimiento = new Date(from[0], from[1] - 1, from[2]);
-    }
+      if ($scope.datosDonante.nacimiento != null) {
+        var from = $scope.datosDonante.nacimiento.split("-");
+        $scope.datosDonante.nacimiento = new Date(from[0], from[1] - 1, from[2]);
+      }
+    });
+
 
     // Obtengo los datos de perfil del donante desde la API ---->
 

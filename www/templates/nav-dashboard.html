@@ -79,6 +79,27 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
+          <ul class="nav navbar-nav navbar-left">
+            <li>
+              <a class="solicitudes-compatibles" ui-sref="dashboard.listado-solicitudes" popover-trigger="mouseenter" popover-placement="bottom-left" uib-popover="¡Puedes ayudar a {{solicitudesCompatibles}} personas en este momento!" ng-show="solicitudesCompatibles > 0">
+                <i class="fa fa-bell-o fa-fw"></i>&nbsp; {{solicitudesCompatibles}}
+              </a>
+            <li>
+              <a class="no-solicitudes-compatibles" popover-trigger="mouseenter" popover-placement="bottom-left" uib-popover="Actualmente no hay solicitudes disponibles que sean compatibles con tu grupo sanguíneo." ng-hide="solicitudesCompatibles > 0">
+                <i class="fa fa-bell-o fa-fw"></i>&nbsp; 0
+              </a>
+            </li>
+            <li>
+              <a class="eventos-en-curso" ui-sref="dashboard.listado-eventos" popover-trigger="mouseenter" popover-placement="bottom-left" uib-popover="¡Hay {{eventosEnCurso}} eventos que se están realizando en este momento!" ng-show="eventosEnCurso > 0">
+                <i class="fa fa-calendar-check-o fa-fw"></i>&nbsp; {{eventosEnCurso}}
+              </a>
+            <li>
+              <a class="no-eventos-en-curso" popover-trigger="mouseenter" popover-placement="bottom-left" uib-popover="Actualmente no hay eventos en curso." ng-hide="eventosEnCurso > 0">
+                <i class="fa fa-calendar-check-o fa-fw"></i>&nbsp; 0
+              </a>
+            </li>
+          </ul>
+
           <ul class="nav navbar-nav navbar-right">
             <li>
               <a class="prox-donacion-time" popover-trigger="mouseenter" popover-placement="bottom-right" uib-popover="{{diasProxDonacion}} días para tu próxima donación." ng-show="diasProxDonacion > 0">

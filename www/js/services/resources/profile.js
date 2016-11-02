@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('ProfileService', function (global, localStorageService, ngNotify, $http, $state, $filter, $window, CurrentUserService) {
+  .factory('ProfileService', function (global, localStorageService, ngNotify, $http, $state, $filter, $window) {
 
     // URL para actualizar (PUT) el perfil del donante.
     var updateProfileUrl = global.getApiUrl() + '/donantes/perfil/edit/';
@@ -13,15 +13,13 @@ angular.module('donacion')
 
     // Función que actualiza los datos del perfil del donante.
     function updateProfile(datosDonante) {
-      var currentUser = localStorageService.get('currentUser');
-      var userid = currentUser.usuario.id;
       if (datosDonante.grupoSanguineo == undefined) {
         datosDonante.grupoSanguineo = {
           id: null
         };
       }
       $http({
-        url: updateProfileUrl + userid,
+        url: updateProfileUrl,
         method: "PUT",
         data: {
           usuario: {
@@ -43,7 +41,6 @@ angular.module('donacion')
           '<span class="fa fa-user"></span>&nbsp; ¡Se han actualizado con éxito tus datos personales!',
           'info'
         );
-        CurrentUserService.setCurrentUser();
         $state.transitionTo('dashboard.perfil');
       }).error(function (response, data) {
         console.log(response)
@@ -53,10 +50,8 @@ angular.module('donacion')
 
     // Función que actualiza la foto de perfil del donante.
     function updateAvatar(avatar) {
-      var currentUser = localStorageService.get('currentUser');
-      var userid = currentUser.usuario.id;
       $http({
-        url: updateAvatarUrl + userid,
+        url: updateAvatarUrl,
         method: "PUT",
         data: {
           foto: avatar
@@ -81,7 +76,6 @@ angular.module('donacion')
           'info'
         );
         $window.location.reload();
-        CurrentUserService.setCurrentUser();
         $state.transitionTo('dashboard.perfil');
         }).error(function (response, data) {
         ngNotify.set(
@@ -92,10 +86,8 @@ angular.module('donacion')
       }
 
       function updateDireccion(direccion) {
-        var currentUser = localStorageService.get('currentUser');
-        var userid = currentUser.usuario.id;
         $http({
-          url: updateDireccionUrl + userid,
+          url: updateDireccionUrl,
           method: "PUT",
           data: {
             direccion: {
@@ -111,7 +103,6 @@ angular.module('donacion')
             '<span class="fa fa-map-marker"></span>&nbsp; ¡Tu dirección se ha actualizado con éxito!',
             'info'
           );
-          CurrentUserService.setCurrentUser();
           $state.transitionTo('dashboard.perfil');
         }).error(function (response, data) {
           ngNotify.set(

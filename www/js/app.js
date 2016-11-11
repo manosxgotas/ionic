@@ -21,7 +21,7 @@ angular.module('donacion', [
   '720kb.socialshare'
   ])
 
-  .run(function (AuthService, ngNotify, $rootScope, $state, LoginModal, LogoffService) {
+  .run(function (AuthService, ngNotify, $rootScope, $state, $timeout, LoginModal, LogoffService) {
 
     ngNotify.addTheme('custom', 'light-bootstrap');
 
@@ -56,12 +56,14 @@ angular.module('donacion', [
 
         AuthService.isLogged()
           .then(function () {
-            return $state.go(toState.name);
+            $timeout(function () {
+              $state.go(toState.name);
+            });
           })
           .catch(function (error) {
-            ngNotify.set("<span class='fa fa-key'></span>&nbsp; " + error, 'warn');
             LogoffService.logoff().then(function () {
               LoginModal();
+              ngNotify.set("<span class='fa fa-key'></span>&nbsp; " + error, 'warn');
             });
           });
       }
@@ -81,8 +83,10 @@ angular.module('donacion', [
       $state.transitionTo("home.inicio");
     });
 
+    cfpLoadingBarProvider.latencyThreshold = 350;
+
     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
-    cfpLoadingBarProvider.spinnerTemplate = '<span class="fa fa-spinner fa-pulse fa-lg fa-fw"></span>&nbsp;&nbsp;Cargando...';
+    cfpLoadingBarProvider.spinnerTemplate = '<span style="width: 100%" class="fa fa-refresh fa-spin fix fa-5x fa-fw"></span>';
 
     uiGmapGoogleMapApiProvider.configure({
       key: 'AIzaSyBtTbhkqxMoIrLrDxlvUTI-cOCvesNX8zQ',

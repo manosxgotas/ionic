@@ -1,6 +1,6 @@
 angular.module('donacion')
 
-  .factory('ProfileService', function (global, localStorageService, ngNotify, $http, $state, $filter, $window) {
+  .factory('ProfileService', function (global, localStorageService, ngNotify, $http, $state, $filter, $window, $q) {
 
     // URL para actualizar (PUT) el perfil del donante.
     var updateProfileUrl = global.getApiUrl() + '/donantes/perfil/edit/';
@@ -42,9 +42,20 @@ angular.module('donacion')
           'info'
         );
         $state.transitionTo('dashboard.perfil');
-      }).error(function (response, data) {
-        console.log(response)
-        console.log(data)
+      }).error(function (error) {
+        if (typeof error === 'object') {
+          angular.forEach(error, function (valor, campo) {
+            ngNotify.set(
+              '<span class="fa fa-user"></span>&nbsp; ' + campo + ': ' + valor,
+              'warn'
+            );
+          });
+        } else {
+          ngNotify.set(
+            '<span class="fa fa-user"></span>&nbsp; ' + error,
+            'warn'
+          );
+        }
       });
     }
 
@@ -70,14 +81,14 @@ angular.module('donacion')
           return fd;
         }
 
-        }).success(function (response) {
+        }).success(function () {
         ngNotify.set(
           '<span class="fa fa-camera"></span>&nbsp; ¡Tu foto de perfil se ha actualizado con éxito!',
           'info'
         );
         $window.location.reload();
         $state.transitionTo('dashboard.perfil');
-        }).error(function (response, data) {
+        }).error(function () {
         ngNotify.set(
           '<span class="fa fa-warning"></span>&nbsp; Hubo un problema al procesar tu nueva foto de perfil, inténtalo de nuevo.',
           'warn'
@@ -86,6 +97,7 @@ angular.module('donacion')
       }
 
       function updateDireccion(direccion) {
+        var deferred = $q.defer();
         $http({
           url: updateDireccionUrl,
           method: "PUT",
@@ -99,17 +111,39 @@ angular.module('donacion')
             }
           }
         }).success(function (response) {
+          deferred.resolve();
           ngNotify.set(
             '<span class="fa fa-map-marker"></span>&nbsp; ¡Tu dirección se ha actualizado con éxito!',
             'info'
           );
           $state.transitionTo('dashboard.perfil');
-        }).error(function (response, data) {
-          ngNotify.set(
-            '<span class="fa fa-image"></span>&nbsp; Hubo un problema al procesar tu dirección, inténtalo de nuevo.',
-            'warn'
-          );
+        }).error(function (error) {
+          deferred.reject();
+          if (typeof error === 'object') {
+            angular.forEach(error, function (valor, campo) {
+              if (typeof valor === 'object') {
+                angular.forEach(valor, function (valor2, campo2) {
+                  ngNotify.set(
+                    '<span class="fa fa-map-marker"></span>&nbsp; ' + campo2 + ': ' + valor2,
+                    'warn'
+                  );
+                })
+                } else {
+                ngNotify.set(
+                  '<span class="fa fa-map-marker"></span>&nbsp; ' + campo + ': ' + valor,
+                  'warn'
+                );
+              }
+
+            });
+          } else {
+            ngNotify.set(
+              '<span class="fa fa-map-marker"></span>&nbsp; ' + error,
+              'warn'
+            );
+          }
         });
+        return deferred.promise;
       }
 
       return {

@@ -62,7 +62,7 @@
                                              'has-success has-feedback': solicitudForm.telefono.$valid}">
               <label for="telefono" class="col-sm-3 control-label">Numero de teléfono</label>
               <div class="col-sm-7">
-                <input type="text" id="telefono" name="telefono" ng-model="solicitud.paciente.telefono" class="form-control"
+                <input type="text" id="telefono" pattern="\+?[\d()*-]+" name="telefono" ng-model="solicitud.paciente.telefono" class="form-control"
                        placeholder="Ingresa tu número de teléfono" maxlength="20" required>
               </div>
             </div>
@@ -121,23 +121,25 @@
                                              'has-success has-feedback': solicitudForm.numero.$valid}">
               <label for="numero" class="col-sm-3 control-label">Número</label>
               <div class="col-sm-7">
-                <input type="number" id="numero" name="numero" ng-model="solicitud.paciente.direccion.numero" class="form-control"
+                <input type="number" pattern=".{1,7}" id="numero" name="numero" ng-model="solicitud.paciente.direccion.numero" class="form-control"
                        placeholder="Ingrese el número de la calle de su domicilio" min="0" required>
               </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-class="{'has-error': solicitudForm.piso.$invalid && !solicitudForm.piso.$pristine,
+                                                'has-success has-feedback': solicitudForm.piso.$valid}">
               <label for="piso" class="col-sm-3 control-label">Piso</label>
               <div class="col-sm-7">
-                <input type="number" id="piso" name="piso" ng-model="solicitud.paciente.direccion.piso" class="form-control"
+                <input type="number" max="2147483647" id="piso" name="piso" ng-model="solicitud.paciente.direccion.piso" class="form-control"
                        placeholder="Ingrese el número de piso de su domicilio">
               </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-class="{'has-error': solicitudForm.numeroDepartamento.$invalid && !solicitudForm.numeroDepartamento.$pristine,
+                                                'has-success has-feedback': solicitudForm.numeroDepartamento.$valid}">
               <label for="numeroDepartamento" class="col-sm-3 control-label">Número de departamento</label>
               <div class="col-sm-7">
-                <input type="number" id="numeroDepartamento" name="numeroDepartamento" ng-model="solicitud.paciente.direccion.numeroDepartamento" class="form-control"
+                <input type="number" pattern=".{1,7}" id="numeroDepartamento" name="numeroDepartamento" ng-model="solicitud.paciente.direccion.numeroDepartamento" class="form-control"
                        placeholder="Ingrese el número de departamento de su domicilio">
               </div>
             </div>

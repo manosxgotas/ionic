@@ -137,7 +137,7 @@
                                                'has-success has-feedback': formAltaDonacion.numero.$valid}">
               <label for="numero" class="col-sm-3 control-label">Número de calle</label>
               <div class="col-sm-7">
-                <input type="number" id="numero" name="numero" ng-model="donacion.direccion.numero" class="form-control"
+                <input type="number" pattern=".{1,7}" id="numero" name="numero" ng-model="donacion.direccion.numero" class="form-control"
                        placeholder="Ingrese el número de la calle" min="0">
               </div>
             </div>

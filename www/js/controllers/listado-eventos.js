@@ -2,7 +2,12 @@ angular.module('donacion')
   .controller('EventosController', function ($scope, EventosService) {
     $scope.portada = [];
     $scope.estado = [];
-    $scope.eventos = EventosService.listadoEventos().query({}, function () {
+    $scope.maxSize = 5;
+
+
+    function poblarControlador(eventos) {
+      $scope.eventos = eventos.results;
+      $scope.count = eventos.count;
       // Obtengo foto de portada del evento
       angular.forEach($scope.eventos, function (evento, clave) {
         var inicio = new Date(evento.fechaHoraInicio);
@@ -33,7 +38,18 @@ angular.module('donacion')
           }
         });
       });
+    }
+
+    var eventos = EventosService.listadoSeccionEventos().query({}, function () {
+      $scope.currentPage = 1;
+      poblarControlador(eventos);
     });
+
+    $scope.pageChanged = function () {
+      var eventos = EventosService.listadoSeccionEventos($scope.currentPage).query({}, function () {
+        poblarControlador(eventos);
+      });
+    };
   });
 
 

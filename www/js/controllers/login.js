@@ -4,8 +4,9 @@ angular.module('donacion')
     $scope.credentials = {};
 
     $scope.login = function() {
-      AuthService.login($scope.credentials);
-      $uibModalInstance.close();
+      AuthService.login($scope.credentials).then(function () {
+        $uibModalInstance.close();
+      });
     };
 
     $scope.close = function () {

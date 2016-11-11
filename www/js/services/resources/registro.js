@@ -1,9 +1,10 @@
 angular.module('donacion')
 
-  .factory('RegistroService', function (global, $http, $state, ngNotify) {
+  .factory('RegistroService', function (global, $http, $state, ngNotify, $q) {
     var url = global.getApiUrl() + "/cuentas/registro/";
 
     function registrarse(donante){
+      var deferred = $q.defer();
       $http({
         url: url,
         dataType: "json",
@@ -19,20 +20,23 @@ angular.module('donacion')
         }
 
       }).success(function (response) {
+        deferred.resolve();
         ngNotify.set(
           '¡Bienvenido a <b>Manos por gotas</b> ' + response.user.first_name + '!',
           'info'
         );
         $state.transitionTo('home.registro-exito');
 
-      }).error(function(response) {
-        angular.forEach(response, function (valor, clave) {
+      }).error(function(error) {
+        deferred.reject();
+        angular.forEach(error, function (valor, campo) {
           ngNotify.set(
-            '<span class="fa fa-warning"></span>&nbsp; ' + valor,
+            '<span class="fa fa-warning"></span>&nbsp; ' + campo + ': ' + valor,
             'warn'
           );
         });
       });
+      return deferred.promise;
   }
 
     return {

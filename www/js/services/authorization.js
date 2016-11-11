@@ -20,8 +20,20 @@ angular.module('donacion')
         setToken(authdata);
         $state.transitionTo('dashboard.perfil');
 
-      }).error(function (data) {
-        console.log(data);
+      }).error(function (error) {
+        if (typeof error === 'object') {
+          angular.forEach(error, function (valor, campo) {
+            ngNotify.set(
+              '<span class="fa fa-key"></span>&nbsp; ' + campo + ': ' + valor,
+              'warn'
+            );
+          });
+        } else {
+          ngNotify.set(
+            '<span class="fa fa-key"></span>&nbsp; ' + error,
+            'warn'
+          );
+        }
       });
     }
 
@@ -35,10 +47,27 @@ angular.module('donacion')
           clave: key
         }
       }).success(function (response) {
-        console.log('Cuenta activada');
+        ngNotify.set(
+          '<span class="fa fa-refresh"></span>&nbsp; ' + response.mensaje,
+        {
+          type: 'info',
+          sticky: true
+        });
         $state.transitionTo('home.inicio')
-      }).error(function (data) {
-        console.log(data);
+      }).error(function (error) {
+        if (typeof error === 'object') {
+          angular.forEach(error, function (valor, campo) {
+            ngNotify.set(
+              '<span class="fa fa-key"></span>&nbsp; ' + campo + ': ' + valor,
+              'warn'
+            );
+          });
+        } else {
+          ngNotify.set(
+            '<span class="fa fa-key"></span>&nbsp; ' + error,
+            'warn'
+          );
+        }
       });
     }
 
@@ -72,8 +101,20 @@ angular.module('donacion')
             sticky: true
           }
         );
-      }).error(function (response) {
-        console.log(response);
+      }).error(function (error) {
+        if (typeof error === 'object') {
+          angular.forEach(error, function (valor, campo) {
+            ngNotify.set(
+              '<span class="fa fa-key"></span>&nbsp; ' + campo + ': ' + valor,
+              'warn'
+            );
+          });
+        } else {
+          ngNotify.set(
+            '<span class="fa fa-key"></span>&nbsp; ' + error,
+            'warn'
+          );
+        }
       });
     }
 
@@ -110,12 +151,25 @@ angular.module('donacion')
           }
         );
         $state.transitionTo('home.inicio')
-      }).error(function (response) {
-        console.log(response);
+      }).error(function (error) {
+        if (typeof error === 'object') {
+          angular.forEach(error, function (valor, campo) {
+            ngNotify.set(
+              '<span class="fa fa-key"></span>&nbsp; ' + campo + ': ' + valor,
+              'warn'
+            );
+          });
+        } else {
+          ngNotify.set(
+            '<span class="fa fa-key"></span>&nbsp; ' + error,
+            'warn'
+          );
+        }
       });
     }
 
     function getToken(credentials) {
+      var deferred = $q.defer();
       var url = global.getApiUrl() + "/cuentas/login/";
       $http({
         url: url,
@@ -126,6 +180,7 @@ angular.module('donacion')
           password: credentials.password,
         }
       }).success(function (response) {
+        deferred.resolve();
         ngNotify.set(
           '¡Hola de nuevo ' + response.user.first_name + '!',
           'info'
@@ -133,10 +188,23 @@ angular.module('donacion')
         var authdata = response.token;
         setToken(authdata);
         $state.transitionTo('dashboard.perfil');
-
-      }).error(function (data) {
-        ngNotify.set("<span class='fa fa-key'></span>&nbsp; Las credenciales proporcionadas no son correctas", 'warn');
+      }).error(function (error) {
+        deferred.reject();
+        if (typeof error === 'object') {
+          angular.forEach(error, function (valor, campo) {
+            ngNotify.set(
+              '<span class="fa fa-key"></span>&nbsp; ' + campo + ': ' + valor,
+              'warn'
+            );
+          });
+        } else {
+          ngNotify.set(
+            '<span class="fa fa-key"></span>&nbsp; ' + error,
+            'warn'
+          );
+        }
       });
+      return deferred.promise;
     }
 
     function setToken(authdata) {

@@ -16,8 +16,9 @@ angular.module('donacion')
       $scope.donante = {};
     }
     $scope.updateDireccion = function() {
-      ProfileService.updateDireccion($scope.donante.direccion);
-      $uibModalInstance.close();
+      ProfileService.updateDireccion($scope.donante.direccion).then(function () {
+        $uibModalInstance.close();
+      });
     };
 
     $scope.close = function () {

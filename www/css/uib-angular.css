@@ -10,3 +10,13 @@
 .progress-bar-danger {
   background-color: #FB404B !important;
 }
+
+.pagination > li.active > a {
+  background-color: #FB404B !important;
+  border-color: #FB404B !important;
+  color: white !important;
+}
+
+.pagination > li > a {
+  color: #FB404B !important;
+}

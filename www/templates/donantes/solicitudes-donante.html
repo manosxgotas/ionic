@@ -54,6 +54,12 @@
             </table>
 
           </div>
+          <div class="col-sm-12" ng-show="count > 10">
+            <div class="text-center">
+              <ul uib-pagination previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="maxSize" total-items="count" ng-model="currentPage" boundary-links="true" boundary-link-numbers="true" ng-change="pageChanged()"></ul>
+            </div>
+          </div>
+          <span class="clearfix"></span>
         </div>
       </div>
 

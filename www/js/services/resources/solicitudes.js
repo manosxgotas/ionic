@@ -23,17 +23,38 @@ angular.module('donacion')
           'info'
         );
         $state.transitionTo('dashboard.listado-solicitudes')
-      }).error(function (response, data) {
-        ngNotify.set(
-          '<span class="fa fa-medkit"></span>&nbsp; La creación de la solicitud falló',
-          'warn'
-        );
-        console.log(data)
-      })
+      }).error(function (error) {
+        if (typeof error === 'object') {
+          angular.forEach(error, function (valor, campo) {
+            ngNotify.set(
+              '<span class="fa fa-medkit"></span>&nbsp; ' + campo + ': ' + valor,
+              'warn'
+            );
+          });
+        } else {
+          ngNotify.set(
+            '<span class="fa fa-medkit"></span>&nbsp; ' + error,
+            'warn'
+          );
+        }
+      });
     }
 
-    function listadoSolicitudes() {
-      return $resource(listadoUrl)
+    function listadoSolicitudes(pagina) {
+      var listadoSolicitudesUrl = listadoUrl;
+      if(pagina){
+        listadoSolicitudesUrl += '?page=' + pagina;
+      }
+      return $resource(
+        listadoSolicitudesUrl,
+        {},
+        {
+          query: {
+            method: 'GET',
+            isArray: false
+          }
+        }
+      );
     }
 
     function infoSolicitud() {
@@ -62,14 +83,18 @@ angular.module('donacion')
       );
     }
 
-    function solicitudesDonante() {
+    function solicitudesDonante(pagina) {
+      var listadoSolicitudesUrl = solicitudesDonanteUrl;
+      if(pagina){
+        listadoSolicitudesUrl += '?page=' + pagina;
+      }
       return $resource(
-          solicitudesDonanteUrl,
-          {id: '@_donante'},
+        listadoSolicitudesUrl,
+          {},
           {
             query: {
               method: 'GET',
-              isArray: true
+              isArray: false
             }
           }
       );
@@ -83,9 +108,12 @@ angular.module('donacion')
             '<span class="fa fa-trash"></span>&nbsp; ¡Se ha eliminado correctamente tu solicitud!',
             'info'
         );
-      }).error(function(response, data) {
-        console.log(response);
-        console.log(data);
+        $state.reload()
+      }).error(function(error) {
+        ngNotify.set(
+          '<span class="fa fa-trash"></span>&nbsp; ' + error,
+          'warn'
+        );
       })
     }
 
@@ -146,15 +174,15 @@ angular.module('donacion')
         return obtenerCantidadSolicitudesCompatibles()
       },
 
-      listadoSolicitudes: function () {
-        return listadoSolicitudes();
+      listadoSolicitudes: function (pagina) {
+        return listadoSolicitudes(pagina);
 
       },
       infoSolicitud: function () {
         return infoSolicitud();
       },
-      solicitudesDonante: function(){
-        return solicitudesDonante();
+      solicitudesDonante: function(pagina){
+        return solicitudesDonante(pagina);
       },
       eliminarSolicitud: function (idSolicitud) {
         return eliminarSolicitud(idSolicitud);

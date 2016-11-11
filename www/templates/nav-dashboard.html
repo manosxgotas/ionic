@@ -9,7 +9,9 @@
       </div>
 
       <div class="avatar-container">
-        <img class="avatar-sidebar" ng-src="{{currentUser.foto != null ? currentUser.foto : '../img/perfil-defecto.png'}}">
+        <a ui-sref="dashboard.perfil">
+          <img class="avatar-sidebar" ng-src="{{currentUser.foto != null ? currentUser.foto : '../img/perfil-defecto.png'}}">
+        </a>
         <div class="title">
           <a href="" data-toggle="collapse" data-target="#collapseAvatar">
             <p>
@@ -128,7 +130,7 @@
         <div name="dashboardContent" ui-view ng-hide="loading">
 
         </div>
-        <div class="text-center" id="loading-bar-container" ng-show="loading"></div>
+        <div style="padding-top: 30px;" class="text-center" id="loading-bar-container" ng-show="loading"></div>
       </div>
     </div>
 

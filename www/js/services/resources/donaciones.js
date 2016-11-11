@@ -76,18 +76,25 @@ angular.module('donacion')
           return fd;
         }
       }).success(function (response) {
-        console.log(response)
         ngNotify.set(
           '<span class="fa fa-tint"></span>&nbsp; ¡Tu donación se ha registrado exitosamente!',
           'info'
         );
         $state.transitionTo('dashboard.libreta');
-      }).error(function (response) {
-        console.log(response);
-        ngNotify.set(
-          response,
-          'info'
-        );
+      }).error(function (error) {
+        if (typeof error === 'object') {
+          angular.forEach(error, function (valor, campo) {
+            ngNotify.set(
+              '<span class="fa fa-tint"></span>&nbsp; ' + campo + ': ' + valor,
+              'warn'
+            );
+          });
+        } else {
+          ngNotify.set(
+            '<span class="fa fa-tint"></span>&nbsp; ' + error,
+            'warn'
+          );
+        }
       });
     }
 
@@ -127,10 +134,20 @@ angular.module('donacion')
           '<span class="fa fa-tint"></span>&nbsp; ¡Se ha actualizado con éxito la información de tu donación!',
           'info'
         );
-      }).error(function (response, data) {
-        console.log(response);
-        console.log(data);
-        console.log(foto)
+      }).error(function (error) {
+        if (typeof error === 'object') {
+          angular.forEach(error, function (valor, campo) {
+            ngNotify.set(
+              '<span class="fa fa-tint"></span>&nbsp; ' + campo + ': ' + valor,
+              'warn'
+            );
+          });
+        } else {
+          ngNotify.set(
+            '<span class="fa fa-tint"></span>&nbsp; Hubo un error al editar la donación. Inténtalo de nuevo más tarde.',
+            'warn'
+          );
+        }
       });
     }
 
@@ -139,13 +156,16 @@ angular.module('donacion')
         url: eliminarUrl + idDonacion,
         method: 'DELETE'
       }).success(function () {
+        $state.reload();
         ngNotify.set(
           '<span class="fa fa-trash"></span>&nbsp; ¡Se ha eliminado correctamente tu donación!',
           'info'
         );
-      }).error(function(response, data) {
-        console.log(response);
-        console.log(data);
+      }).error(function(error) {
+        ngNotify.set(
+          '<span class="fa fa-trash"></span>&nbsp; ' + error,
+          'warn'
+        );
       })
     }
 
@@ -193,6 +213,7 @@ angular.module('donacion')
         }
 
         }).success(function (response) {
+        $state.reload();
         ngNotify.set(
           '<span class="fa fa-clock-o"></span>&nbsp; ¡La imágen de verificación ha sido registrada correctamente! Deberás esperar a que un administrador la evalúe.',
           'info'

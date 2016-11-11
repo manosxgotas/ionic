@@ -3,7 +3,11 @@ angular.module('donacion')
     $scope.portada = [];
     $scope.estado = [];
     $scope.grupos = [];
-    $scope.solicitudes = SolicitudesService.listadoSolicitudes().query({}, function () {
+    $scope.maxSize = 5;
+
+    function poblarControlador(solicitudes) {
+      $scope.solicitudes = solicitudes.results;
+      $scope.count = solicitudes.count;
       angular.forEach($scope.solicitudes, function (solicitud, clave) {
         var inicio = new Date(solicitud.fechaHoraInicio);
         var fin = new Date(solicitud.fechaHoraFin);
@@ -48,7 +52,19 @@ angular.module('donacion')
         $scope.solicitudes[clave].gruposSanguineos = $scope.grupos[solicitud.id];
 
       });
-    });
+
+    }
+
+    $scope.pageChanged = function () {
+      var solicitudes = SolicitudesService.listadoSolicitudes($scope.currentPage).query({}, function () {
+        poblarControlador(solicitudes);
+      });
+    };
+
+    var solicitudes = SolicitudesService.listadoSolicitudes().query({}, function () {
+      $scope.currentPage = 1;
+      poblarControlador(solicitudes);
+      });
 
     $scope.filtrado = false;
 

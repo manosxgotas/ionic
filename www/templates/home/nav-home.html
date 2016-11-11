@@ -144,7 +144,11 @@
   </div>
 </nav>
 
-<div name="homeContent" class="home-container" ui-view></div>
+<div class="home-container">
+  <div name="homeContent" ui-view ng-hide="loading"></div>
+  <div style="padding-top: 30px;" class="text-center" id="loading-bar-container" ng-show="loading"></div>
+</div>
+
 
 <footer class="footer footer-home">
   <div class="container text-center" style="padding-top: 50px; padding-bottom: 50px">

@@ -33,7 +33,8 @@ angular.module('donacion')
       };
 
       $scope.signup = function() {
-        RegistroService.registrarse($scope.donante);
-        $uibModalInstance.close();
+        RegistroService.registrarse($scope.donante).then(function () {
+          $uibModalInstance.close();
+        });
       }
   });

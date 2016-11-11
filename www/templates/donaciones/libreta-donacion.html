@@ -46,26 +46,26 @@
                 <td ng-show="donacion.lugarDonacion.lugarEventoDonacion != null">{{donacion.lugarDonacion.lugarEventoDonacion.evento.nombre}}</td>
                 <td ng-show="donacion.lugarDonacion.lugarCentro == null && donacion.lugarDonacion.lugarEventoDonacion == null">{{donacion.lugarDonacion.direccion.localidad.provincia.nombre}}, {{donacion.lugarDonacion.direccion.localidad.nombre}}, {{donacion.lugarDonacion.direccion.calle}} {{donacion.lugarDonacion.direccion.numero}}</td>
                 <td>
-                  <button ng-click="modalVerificar(donacion.id)" ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Sin verificar'" popover-trigger="mouseenter" popover-placement="top" uib-popover="Verifica tu donación" class="btn btn-xs btn-success">
+                  <button ng-click="modalVerificar(donacion.id)" ng-show="donacion.estado_donacion == 'Sin verificar'" popover-trigger="mouseenter" popover-placement="top" uib-popover="Verifica tu donación" class="btn btn-xs btn-success">
                     <span class="fa fa-key"></span>
                   </button>
-                  <button ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Pendiente'" popover-trigger="mouseenter" popover-placement="top" uib-popover="Tu donación está siendo evaluada" class="btn btn-xs btn-warning">
+                  <button ng-show="donacion.estado_donacion == 'Pendiente'" popover-trigger="mouseenter" popover-placement="top" uib-popover="Tu donación está siendo evaluada" class="btn btn-xs btn-warning">
                     <span class="fa fa-clock-o"></span>
                   </button>
-                  <span ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Verificada'" class="btn btn-xs" style="cursor: default;">
+                  <span ng-show="donacion.estado_donacion == 'Verificada'" class="btn btn-xs" style="cursor: default;">
                     <span class="fa fa-unlock"></span>
                   </span>
-                  <span class="hidden-md hidden-sm hidden-xs">&nbsp;{{donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre}}</span>
+                  <span class="hidden-md hidden-sm hidden-xs">&nbsp;{{donacion.estado_donacion}} </span>
                 </td>
                 <td>
                   <div class="btn-group btn-group-sm" role="group">
                     <button popover-trigger="mouseenter" popover-placement="top" uib-popover="Visualizar" type="button" ng-click="modalVisualizar(donacion.id)" class="btn btn-default">
-                      <span class="fa fa-eye"></span><span ng-show="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Verificada'">&nbsp;Visualizar</span>
+                      <span class="fa fa-eye"></span><span ng-show="donacion.estado_donacion == 'Verificada'">&nbsp;Visualizar</span>
                     </button>
-                    <button ng-hide="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Verificada'" ui-sref="dashboard.editar-donacion({donacionID: donacion.id})" popover-trigger="mouseenter" popover-placement="top" uib-popover="Editar" type="button" class="btn btn-fill btn-default">
+                    <button ng-hide="donacion.estado_donacion == 'Verificada'" ui-sref="dashboard.editar-donacion({donacionID: donacion.id})" popover-trigger="mouseenter" popover-placement="top" uib-popover="Editar" type="button" class="btn btn-fill btn-default">
                       <span class="fa fa-edit"></span>
                     </button>
-                    <button ng-hide="donacion.historicoEstados[donacion.historicoEstados.length-1].estado.nombre == 'Verificada'" popover-trigger="mouseenter" popover-placement="top" ng-click="modalEliminar(donacion.id)" uib-popover="Eliminar" type="button" class="btn btn-fill btn-danger">
+                    <button ng-hide="donacion.estado_donacion == 'Verificada'" popover-trigger="mouseenter" popover-placement="top" ng-click="modalEliminar(donacion.id)" uib-popover="Eliminar" type="button" class="btn btn-fill btn-danger">
                       <span class="fa fa-trash"></span>
                     </button>
                   </div>

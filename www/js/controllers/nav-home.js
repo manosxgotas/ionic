@@ -22,4 +22,15 @@ angular.module('donacion')
         controller: 'RegistroController'
       });
     };
+
+      var dropdown = $('.dropdown-menu');
+      var alter = $('.alter-option');
+      var navHome = $("#navbar-home-collapse");
+      dropdown.on("click", "a", null, function () {
+        navHome.removeClass('in');
+      });
+
+      alter.on("click", "a", null, function () {
+        navHome.removeClass('in');
+      });
   });

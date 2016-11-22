@@ -1,7 +1,7 @@
 <div class="wrapper">
-  <div class="sidebar" data-color="red">
+  <div class="sidebar" id="sidebar" data-color="red" data-image="../img/fondo-sidebar.png">
 
-    <div class="sidebar-wrapper sidebar-image">
+    <div class="sidebar-wrapper">
       <div class="logo">
         <a class="simple-text" ui-sref="home.inicio" href="">
           <img src="../img/manosxgotas-titulo.png">
@@ -23,21 +23,30 @@
           <div class="collapse" id="collapseAvatar">
             <ul class="nav">
               <li>
-                <a ui-sref="dashboard.perfil">Mi perfil</a>
+                <a ui-sref="dashboard.perfil">
+                  <i class="pe-7s-user hidden-lg hidden-md"></i>
+                  <p>Mi perfil</p>
+                </a>
+              </li>
+              <li class="hidden-sm hidden-xs">
+                <a ui-sref="dashboard.perfil-edit">
+                  <p>Editar perfil</p>
+                </a>
               </li>
               <li>
-                <a ui-sref="dashboard.perfil-edit">Editar perfil</a>
+                <a ui-sref="dashboard.solicitudes-donante">
+                  <i class="pe-7s-note hidden-lg hidden-md"></i>
+                  <p>Mis solicitudes</p>
+                </a>
               </li>
-              <li>
-                <a ui-sref="dashboard.solicitudes-donante">Mis solicitudes</a>
-              </li>
+              <hr style="margin: 0 15px; opacity: 0.2" class="visible-sm visible-xs">
             </ul>
           </div>
         </div>
       </div>
 
 
-      <ul class="nav">
+      <ul class="nav nav-sections">
         <li>
           <a ui-sref="dashboard.libreta">
             <i class="pe-7s-notebook"></i>
@@ -62,16 +71,16 @@
             <p>Centros de donación</p>
           </a>
         </li>
+        <hr style="margin: 0 15px; opacity: 0.2" class="visible-sm visible-xs">
       </ul>
     </div>
   </div>
-  <div class="sidebar-background" ></div>
   <div class="main-panel">
     <nav class="navbar navbar-default navbar-dashboard navbar-fixed">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation-example-2" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -79,24 +88,24 @@
           </button>
         </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse navbar-collapse-dashboard">
 
-          <ul class="nav navbar-nav navbar-left">
+          <ul class="nav navbar-nav navbar-left nav-dashboard">
             <li>
-              <a class="solicitudes-compatibles" ui-sref="dashboard.listado-solicitudes" popover-trigger="mouseenter" popover-placement="bottom-left" uib-popover="¡Puedes ayudar a {{solicitudesCompatibles}} personas en este momento!" ng-show="solicitudesCompatibles > 0">
+              <a class="solicitudes-compatibles hidden-sm hidden-xs" ui-sref="dashboard.listado-solicitudes" popover-trigger="mouseenter" popover-placement="bottom-left" uib-popover="¡Puedes ayudar a {{solicitudesCompatibles}} personas en este momento!" ng-show="solicitudesCompatibles > 0">
                 <i class="fa fa-bell-o fa-fw"></i>&nbsp; {{solicitudesCompatibles}}
               </a>
             <li>
-              <a class="no-solicitudes-compatibles" popover-trigger="mouseenter" popover-placement="bottom-left" uib-popover="Actualmente no hay solicitudes disponibles que sean compatibles con tu grupo sanguíneo." ng-hide="solicitudesCompatibles > 0">
+              <a class="no-solicitudes-compatibles hidden-sm hidden-xs" popover-trigger="mouseenter" popover-placement="bottom-left" uib-popover="Actualmente no hay solicitudes disponibles que sean compatibles con tu grupo sanguíneo." ng-hide="solicitudesCompatibles > 0">
                 <i class="fa fa-bell-o fa-fw"></i>&nbsp; 0
               </a>
             </li>
             <li>
-              <a class="eventos-en-curso" ui-sref="dashboard.listado-eventos" popover-trigger="mouseenter" popover-placement="bottom-left" uib-popover="¡Hay {{eventosEnCurso}} eventos que se están realizando en este momento!" ng-show="eventosEnCurso > 0">
+              <a class="eventos-en-curso hidden-sm hidden-xs" ui-sref="dashboard.listado-eventos" popover-trigger="mouseenter" popover-placement="bottom-left" uib-popover="¡Hay {{eventosEnCurso}} eventos que se están realizando en este momento!" ng-show="eventosEnCurso > 0">
                 <i class="fa fa-calendar-check-o fa-fw"></i>&nbsp; {{eventosEnCurso}}
               </a>
             <li>
-              <a class="no-eventos-en-curso" popover-trigger="mouseenter" popover-placement="bottom-left" uib-popover="Actualmente no hay eventos en curso." ng-hide="eventosEnCurso > 0">
+              <a class="no-eventos-en-curso hidden-sm hidden-xs" popover-trigger="mouseenter" popover-placement="bottom-left" uib-popover="Actualmente no hay eventos en curso." ng-hide="eventosEnCurso > 0">
                 <i class="fa fa-calendar-check-o fa-fw"></i>&nbsp; 0
               </a>
             </li>
@@ -104,17 +113,17 @@
 
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a class="prox-donacion-time" popover-trigger="mouseenter" popover-placement="bottom-right" uib-popover="{{diasProxDonacion}} días para tu próxima donación." ng-show="diasProxDonacion > 0">
+              <a class="prox-donacion-time hidden-sm hidden-xs" popover-trigger="mouseenter" popover-placement="bottom-right" uib-popover="{{diasProxDonacion}} días para tu próxima donación." ng-show="diasProxDonacion > 0">
                 <i class="fa fa-clock-o fa-fw"></i>&nbsp; {{diasProxDonacion}}
               </a>
-              <a class="prox-donacion-donar" popover-trigger="mouseenter" popover-placement="bottom-right" uib-popover="¡Ya puedes donar!" ui-sref="dashboard.libreta" ng-show="diasProxDonacion == 0">
+              <a class="prox-donacion-donar hidden-sm hidden-xs" popover-trigger="mouseenter" popover-placement="bottom-right" uib-popover="¡Ya puedes donar!" ui-sref="dashboard.libreta" ng-show="diasProxDonacion == 0">
                 <i class="fa fa-tint fa-fw"></i>&nbsp; ¡Doná!
               </a>
             </li>
 
 
             <li>
-              <a href="" ng-click="logoff()">
+              <a class="logoff" href="" ng-click="logoff()">
                 <i class="fa fa-sign-out fa-fw"></i>
                 &nbsp;Cerrar sesión
               </a>
@@ -154,13 +163,3 @@
 
   </div>
 </div>
-
-<!-- Light Bootstrap Dashboard -->
-
-<script src="../components/light-bootstrap-dashboard/assets/js/light-bootstrap-dashboard.js"></script>
-
-<!--  Charts Plugin -->
-<script src="../components/light-bootstrap-dashboard/assets/js/chartist.min.js"></script>
-
-<!--  Notifications Plugin    -->
-<script src="../components/light-bootstrap-dashboard/assets/js/bootstrap-notify.js"></script>

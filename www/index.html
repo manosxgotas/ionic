@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="donacion">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>{{title}}</title>
 
     <link href="css/light-bootstrap.css" rel="stylesheet">
     <link href="css/uib-angular.css" rel="stylesheet">
@@ -38,7 +38,7 @@
 
   </head>
 
-  <body ng-app="donacion">
+  <body>
 
     <div ui-view></div>
 
@@ -105,7 +105,7 @@
     <!-- Directives -->
     <script src="js/directives/convert-to-number.js"></script>
     <script src="js/directives/img-preload.js"></script>
-
+    <script src="js/directives/update-title.js"></script>
 
     <!-- Bower modules -->
     <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
@@ -132,5 +132,7 @@
     <script src="js/filters/filtro-grupos-sanguineos.js"></script>
     <!--  Checkbox, Radio & Switch Plugins -->
     <script src="components/light-bootstrap-dashboard/assets/js/bootstrap-checkbox-radio-switch.js"></script>
+
+
   </body>
 </html>

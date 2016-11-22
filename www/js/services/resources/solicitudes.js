@@ -22,7 +22,9 @@ angular.module('donacion')
           '<span class="fa fa-medkit"></span>&nbsp; La solicitud se creó con éxito',
           'info'
         );
-        $state.transitionTo('dashboard.listado-solicitudes')
+        $state.transitionTo('dashboard.listado-solicitudes').then(function () {
+          $state.reload();
+        })
       }).error(function (error) {
         if (typeof error === 'object') {
           angular.forEach(error, function (valor, campo) {
@@ -121,7 +123,7 @@ angular.module('donacion')
       crearSolicitudDonacion: function (solicitud) {
         var fd = new FormData();
         if (solicitud.historia == undefined) {
-          solicitud.historia = null;
+          solicitud.historia = '';
         }
 
         var data = {

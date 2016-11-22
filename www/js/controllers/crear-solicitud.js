@@ -112,7 +112,7 @@ angular.module('donacion')
     // Opciones DatePickers ---->
 
     $scope.crearSolicitud = function () {
-      SolicitudesService.crearSolicitudDonacion($scope.solicitud, $scope.currentUser.usuario.id)
+      SolicitudesService.crearSolicitudDonacion($scope.solicitud)
     }
 
   });

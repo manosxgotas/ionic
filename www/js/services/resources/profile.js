@@ -41,7 +41,9 @@ angular.module('donacion')
           '<span class="fa fa-user"></span>&nbsp; ¡Se han actualizado con éxito tus datos personales!',
           'info'
         );
-        $state.transitionTo('dashboard.perfil');
+        $state.transitionTo('dashboard.perfil').then(function () {
+          $state.reload();
+        });
       }).error(function (error) {
         if (typeof error === 'object') {
           angular.forEach(error, function (valor, campo) {

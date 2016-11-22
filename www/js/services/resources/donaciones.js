@@ -76,11 +76,13 @@ angular.module('donacion')
           return fd;
         }
       }).success(function (response) {
+        $state.transitionTo('dashboard.libreta').then(function () {
+          $state.reload();
+        });
         ngNotify.set(
           '<span class="fa fa-tint"></span>&nbsp; ¡Tu donación se ha registrado exitosamente!',
           'info'
         );
-        $state.transitionTo('dashboard.libreta');
       }).error(function (error) {
         if (typeof error === 'object') {
           angular.forEach(error, function (valor, campo) {
@@ -129,7 +131,9 @@ angular.module('donacion')
           return fd;
         }
       }).success(function () {
-        $state.transitionTo('dashboard.libreta');
+        $state.transitionTo('dashboard.libreta').then(function () {
+          $state.reload();
+        });
         ngNotify.set(
           '<span class="fa fa-tint"></span>&nbsp; ¡Se ha actualizado con éxito la información de tu donación!',
           'info'

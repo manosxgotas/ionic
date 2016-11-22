@@ -1,7 +1,6 @@
 .sidebar-image {
-  background-image: url("../img/fondo-sidebar.png");
-  background-size: cover;
-  background-position: center center;
+  background-size: cover !important;
+  background-position: center center !important;
   display: block;
 }
 

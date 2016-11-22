@@ -50,14 +50,18 @@ angular.module('donacion', [
       AuthService.loginSocial(userDetails.token, userDetails.provider)
     });
 
-    $rootScope.$on('$stateChangeStart', function(event, toState) {
+    $rootScope.$on('$stateChangeSuccess', function () {
+      $rootScope.title = $state.current.data.title;
+    });
+
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
 
       if (toState.data && toState.data.requireLogin) {
 
         AuthService.isLogged()
           .then(function () {
             $timeout(function () {
-              $state.go(toState.name);
+              $state.go(toState.name, toParams);
             });
           })
           .catch(function (error) {
@@ -86,7 +90,7 @@ angular.module('donacion', [
     cfpLoadingBarProvider.latencyThreshold = 350;
 
     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
-    cfpLoadingBarProvider.spinnerTemplate = '<span style="width: 100%" class="fa fa-refresh fa-spin fix fa-5x fa-fw"></span>';
+    cfpLoadingBarProvider.spinnerTemplate = '<span style="width: 100%" class="fa fa-refresh fa-spin fix fa-4x fa-fw"></span>';
 
     uiGmapGoogleMapApiProvider.configure({
       key: 'AIzaSyBtTbhkqxMoIrLrDxlvUTI-cOCvesNX8zQ',
@@ -115,6 +119,9 @@ angular.module('donacion', [
         cache: false,
         url: "/404nf",
         templateUrl: "templates/404.html",
+        data: {
+          title: 'Página no encontrada - MxG'
+        }
       })
 
       .state('home', {
@@ -132,6 +139,9 @@ angular.module('donacion', [
           "homeContent": {
             templateUrl: "templates/home/inicio.html"
           }
+        },
+        data: {
+          title: 'Página de inicio - MxG'
         }
       })
 
@@ -142,6 +152,9 @@ angular.module('donacion', [
           "homeContent": {
             templateUrl: "templates/home/sangre.html"
           }
+        },
+        data: {
+          title: '¿Qué es la sangre? - MxG'
         }
       })
 
@@ -152,6 +165,9 @@ angular.module('donacion', [
           "homeContent": {
             templateUrl: "templates/home/sangre-funcion.html"
           }
+        },
+        data: {
+          title: 'Funciones de la sangre - MxG'
         }
       })
 
@@ -162,6 +178,9 @@ angular.module('donacion', [
           "homeContent": {
             templateUrl: "templates/home/grupos-sanguineos-info.html"
           }
+        },
+        data: {
+          title: 'Grupos sanguíneos - MxG'
         }
       })
 
@@ -172,6 +191,9 @@ angular.module('donacion', [
           "homeContent": {
             templateUrl: "templates/home/tratamiento-sangre.html"
           }
+        },
+        data: {
+          title: 'Tratamiento de la sangre - MxG'
         }
       })
 
@@ -182,6 +204,9 @@ angular.module('donacion', [
           "homeContent": {
             templateUrl: "templates/home/quienes-donan.html"
           }
+        },
+        data: {
+          title: '¿Quiénes pueden donar? - MxG'
         }
       })
 
@@ -193,6 +218,9 @@ angular.module('donacion', [
             templateUrl: "templates/home/donde-donar.html",
             controller: "CentrosDonacionController"
           }
+        },
+        data: {
+          title: '¿Dónde donar? - MxG'
         }
       })
 
@@ -203,6 +231,9 @@ angular.module('donacion', [
           "homeContent": {
             templateUrl: "templates/home/recomendaciones.html",
           }
+        },
+        data: {
+          title: 'Recomendaciones - MxG'
         }
       })
 
@@ -213,6 +244,9 @@ angular.module('donacion', [
           "homeContent": {
             templateUrl: "templates/home/proceso-donacion.html",
           }
+        },
+        data: {
+          title: 'Proceso de donación - MxG'
         }
       })
 
@@ -223,6 +257,9 @@ angular.module('donacion', [
           "homeContent": {
             templateUrl: "templates/home/mitos.html",
           }
+        },
+        data: {
+          title: 'Mitos sobre la donación de sangre - MxG'
         }
       })
 
@@ -233,6 +270,9 @@ angular.module('donacion', [
           "homeContent": {
             templateUrl: "templates/home/quienes-somos.html",
           }
+        },
+        data: {
+          title: '¿Quiénes somos? - MxG'
         }
       })
 
@@ -244,6 +284,9 @@ angular.module('donacion', [
             templateUrl: "templates/home/activar-cuenta-clave.html",
             controller: "ActivarCuentaClaveController"
           }
+        },
+        data: {
+          title: 'Activar cuenta - MxG'
         }
       })
 
@@ -255,6 +298,9 @@ angular.module('donacion', [
             templateUrl: "templates/home/activar-cuenta.html",
             controller: "ActivarCuentaController"
           }
+        },
+        data: {
+          title: 'Activar cuenta - MxG'
         }
       })
 
@@ -265,6 +311,9 @@ angular.module('donacion', [
           "homeContent": {
             templateUrl: "templates/cuentas/registro-exito.html",
           }
+        },
+        data: {
+          title: 'Registro exitoso - MxG'
         }
       })
 
@@ -276,6 +325,9 @@ angular.module('donacion', [
             templateUrl: "templates/cuentas/reset-pass.html",
             controller: "ResetPassController"
           }
+        },
+        data: {
+          title: 'Reiniciar contraseña - MxG'
         }
       })
 
@@ -287,6 +339,9 @@ angular.module('donacion', [
             templateUrl: "templates/home/solicitudes.html",
             controller: "ListadoSolicitudesController",
           }
+        },
+        data: {
+          title: 'Solicitudes de donación - MxG'
         }
       })
 
@@ -298,6 +353,9 @@ angular.module('donacion', [
             templateUrl: "templates/home/detalle-solicitud.html",
             controller: "DetalleSolicitudController",
           }
+        },
+        data: {
+          title: 'Solicitud de donación - MxG'
         }
       })
 
@@ -320,6 +378,9 @@ angular.module('donacion', [
             templateUrl: "templates/donantes/perfil.html",
             controller: "ProfileController"
           }
+        },
+        data: {
+          title: 'Mi perfil - MxG'
         }
       })
 
@@ -331,6 +392,9 @@ angular.module('donacion', [
             templateUrl: "templates/donantes/perfil-edit.html",
             controller: "ProfileEditController"
           }
+        },
+        data: {
+          title: 'Edición de perfil - MxG'
         }
       })
       .state('dashboard.solicitudes-donante', {
@@ -341,6 +405,9 @@ angular.module('donacion', [
             templateUrl: "templates/donantes/solicitudes-donante.html",
             controller: "SolicitudesDonanteController"
           }
+        },
+        data: {
+          title: 'Mis solicitudes de donación - MxG'
         }
       })
 
@@ -352,6 +419,9 @@ angular.module('donacion', [
             templateUrl: "templates/donaciones/libreta-donacion.html",
             controller: "LibretaController"
           }
+        },
+        data: {
+          title: 'Mi libreta de donación - MxG'
         }
       })
 
@@ -363,6 +433,9 @@ angular.module('donacion', [
             templateUrl: "templates/donaciones/registrar-donacion.html",
             controller: "RegistrarDonacionController"
           }
+        },
+        data: {
+          title: 'Registrar donación - MxG'
         }
       })
 
@@ -374,6 +447,9 @@ angular.module('donacion', [
             templateUrl: "templates/donaciones/editar-donacion.html",
             controller: "EditarDonacionController"
           }
+        },
+        data: {
+          title: 'Editar donación - MxG'
         }
       })
 
@@ -385,6 +461,9 @@ angular.module('donacion', [
             templateUrl: "templates/eventos/listado-eventos.html",
             controller: "EventosController",
           }
+        },
+        data: {
+          title: 'Eventos de donación - MxG'
         }
       })
 
@@ -396,6 +475,9 @@ angular.module('donacion', [
             templateUrl: "templates/eventos/detalle-evento.html",
             controller: "DetalleEventoController",
           }
+        },
+        data: {
+          title: 'Evento de donación - MxG'
         }
       })
 
@@ -407,6 +489,9 @@ angular.module('donacion', [
             templateUrl: "templates/centros/listado-centros.html",
             controller: "CentrosDonacionController",
           }
+        },
+        data: {
+          title: 'Centros de donación - MxG'
         }
       })
 
@@ -418,6 +503,9 @@ angular.module('donacion', [
             templateUrl: "templates/centros/detalle-centro.html",
             controller: "DetalleCentroController",
           }
+        },
+        data: {
+          title: 'Centro de donación - MxG'
         }
       })
 
@@ -429,6 +517,9 @@ angular.module('donacion', [
             templateUrl: "templates/solicitudes/crear-solicitud.html",
             controller: "CrearSolicitudDonacionController",
           }
+        },
+        data: {
+          title: 'Crear solicitud de donación - MxG'
         }
       })
       .state('dashboard.detalle-solicitud', {
@@ -439,8 +530,12 @@ angular.module('donacion', [
             templateUrl: "templates/solicitudes/detalle-solicitud.html",
             controller: "DetalleSolicitudController",
           }
+        },
+        data: {
+          title: 'Solicitud de donación - MxG'
         }
       })
+
       .state('dashboard.listado-solicitudes', {
         cache: false,
         url: "/listado-solicitudes",
@@ -449,6 +544,9 @@ angular.module('donacion', [
             templateUrl: "templates/solicitudes/listado-solicitudes.html",
             controller: "ListadoSolicitudesController",
           }
+        },
+        data: {
+          title: 'Solicitudes de donación - MxG'
         }
       })
   });
